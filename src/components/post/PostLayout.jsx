@@ -11,8 +11,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Fab from '@material-ui/core/Fab';
-import Icon from '@material-ui/core/Icon';  
-import NavigationIcon from '@material-ui/icons/Navigation';
+
 import EditRounded from '@material-ui/icons/EditRounded';
 function PostLayout(props){
   const [open, setOpen] = React.useState(false);
@@ -31,8 +30,6 @@ function PostLayout(props){
           <Fab color="primary" onClick={() => {setOpen(true);}}>
         <EditRounded/>
       </Fab>
-      
-           
       <Dialog
         open={open}
         onClose={handleClose}
