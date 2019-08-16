@@ -15,7 +15,8 @@ const theme = createMuiTheme({
   palette: {
       type: "dark",
       
-  }
+  },
+  
 });
 
 class App extends Component{

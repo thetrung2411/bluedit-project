@@ -16,9 +16,11 @@ function HomeAppBar(props) {
         <div>
             <AppBar position="static" className={classes.root}>
                 <Toolbar>
+                    <Link to = "/">
                     <IconButton classname = {classes.button}>
                         <HomeIcon/>
                     </IconButton>
+                    </Link> 
                     <Typography
                         variant="h5"
                     >

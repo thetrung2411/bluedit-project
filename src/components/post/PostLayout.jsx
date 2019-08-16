@@ -5,28 +5,21 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import {Typography, FormControl, FormControlLabel, IconButton} from '@material-ui/core';
 import { postLayoutStyles } from "./PostLayoutStyle";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
 import Fab from '@material-ui/core/Fab';
-
 import EditRounded from '@material-ui/icons/EditRounded';
+import AppBar from '../appBar/appBar';
 function PostLayout(props){
   const [open, setOpen] = React.useState(false);
   const {classes} = props;
-
-  function handleClickOpen() {
-    console.log("asdasdasd");
-    setOpen(true);
-  }
-
   function handleClose() {
     setOpen(false);
   }
     return (
         <div>
+          <AppBar/>
           <Fab color="primary" onClick={() => {setOpen(true);}}>
         <EditRounded/>
       </Fab>
