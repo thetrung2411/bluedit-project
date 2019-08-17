@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
 import { Route, BrowserRouter, Switch, Redirect} from 'react-router-dom';
-import Login from './components/login-register/Login';
-import Register from './components/login-register/Register';
+import login from './components/login-register/login';
+import register from './components/login-register/register';
 import Post from './components/post/PostLayout';
 import HomePage from './components/homepage/homePageLayout';
 import {
@@ -27,8 +27,8 @@ class App extends Component{
       <BrowserRouter>
         <div className="App">
             <Switch>
-              <Route path='/login' component = {Login}/>
-              <Route path='/register' component = {Register}/>
+              <Route path='/login' component = {login}/>
+              <Route path='/register' component = {register}/>
               <Route path='/post' component = {Post}/>
               <Route path='/home' component = {HomePage}/>
               <Redirect from ='/' to='/home'/>
