@@ -42,6 +42,11 @@ function HomeAppBar(props) {
                     </div>
                     <div className={classes.grow}></div>
                     <div>
+                        <Link to="/Report">
+                            <Button variant="contained" className = {classes.button}>Report</Button>
+                        </Link>
+                    </div>
+                    <div>
                     <Link to="/Login" className = {classes.noDecor}>
                         <Button variant="contained" className = {classes.button}>
                                 Login
