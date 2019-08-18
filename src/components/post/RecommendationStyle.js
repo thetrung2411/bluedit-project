@@ -1,3 +1,4 @@
+
 export const RecommendationStyles = theme => ({
     paper: {
         margin: "10px 8px 10px 8px",
@@ -9,7 +10,12 @@ export const RecommendationStyles = theme => ({
         paddingTop: '56.25%', // 16:9
       },
     grid: {
-        
-       
+        padding: "10px",
+    },
+    color: {
+        color: "green",
+    },
+    red: {
+        color:"red"
     }
 });

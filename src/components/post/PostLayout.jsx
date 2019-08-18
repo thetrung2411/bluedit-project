@@ -9,8 +9,11 @@ import { postLayoutStyles } from "./PostLayoutStyle";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Button from "@material-ui/core/Button";
 import Fab from '@material-ui/core/Fab';
+import Grid from "@material-ui/core/Grid";
 import EditRounded from '@material-ui/icons/EditRounded';
-import AppBar from '../appBar/appBar';
+import SignedInAppBar from '../appBar/AppBarWithAvatar';
+import PostItem from "../post/postItems";
+import RecommendationItem from "../post/Recommendation";
 function PostLayout(props){
   const [open, setOpen] = React.useState(false);
   const {classes} = props;
@@ -19,7 +22,7 @@ function PostLayout(props){
   }
     return (
         <div>
-          <AppBar/>
+          <SignedInAppBar/>
           <Fab color="primary" onClick={() => {setOpen(true);}}>
         <EditRounded/>
       </Fab>
@@ -68,6 +71,13 @@ function PostLayout(props){
         
         </DialogActions>
       </Dialog>
+      <Grid container spacing = {3} >
+            <Grid container xs={8}>
+            <Grid><PostItem/></Grid>
+            
+            </Grid>
+            <Grid item xs={4}><RecommendationItem/></Grid>
+            </Grid>
      </div>
     );
 }

@@ -46,10 +46,7 @@ export const appBarStyles = theme => ({
         alignItems: "center",
         justifyContent: "center"
     },
-    inputRoot: {
-        color: "black",
-        width: "100%"
-    },
+    
     inputInput: {
         paddingTop: theme.spacing.unit,
         paddingRight: theme.spacing.unit,
@@ -64,4 +61,5 @@ export const appBarStyles = theme => ({
             }
         }
     }
+    
 });

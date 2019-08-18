@@ -4,13 +4,15 @@ import {Card, CardHeader} from "@material-ui/core";
 import {RecommendationStyles} from "./RecommendationStyle";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Avatar from "@material-ui/core/Avatar";
-
+import ArrowDropUpOutlinedIcon from '@material-ui/icons/ArrowDropUpOutlined';
+import ArrowDropDownOutlinedIcon from '@material-ui/icons/ArrowDropDownOutlined';
+import IconButton from "@material-ui/core/IconButton";
 function RecommendationItem (props){
     const { classes } = props;
     return (
         <Card>
         <Grid cointainer className = {classes.grid}>
-        <Typography>Top user's post</Typography>
+        <Typography variant = 'h5'>Top user's post</Typography>
         <Card className = {classes.paper}>
             <CardHeader 
         avatar={
@@ -18,8 +20,12 @@ function RecommendationItem (props){
                   R
                 </Avatar>
               }
+        action={
+         <IconButton><ArrowDropUpOutlinedIcon fontSize="large" className = {classes.color}></ArrowDropUpOutlinedIcon></IconButton>
+        }
         titleTypographyProps={{align:"left"}}
         title = "Username"/>
+        
         </Card>
         <Grid> 
             <Card className = {classes.paper}>
@@ -29,6 +35,9 @@ function RecommendationItem (props){
                  T
                 </Avatar>
               }
+        action={
+                <IconButton><ArrowDropDownOutlinedIcon fontSize="large" className = {classes.red}></ArrowDropDownOutlinedIcon></IconButton>
+               }
         titleTypographyProps={{align:"left"}}
         title = "Thetrung2411"/>
         </Card> 
@@ -41,6 +50,9 @@ function RecommendationItem (props){
                  S
                 </Avatar>
               }
+        action={
+                <IconButton><ArrowDropUpOutlinedIcon fontSize="large" className = {classes.color}></ArrowDropUpOutlinedIcon></IconButton>
+               }
         titleTypographyProps={{align:"left"}}
         title = "SuddenlyGay"/>
         </Card> 
@@ -53,6 +65,9 @@ function RecommendationItem (props){
                  J
                 </Avatar>
               }
+        action={
+                <IconButton><ArrowDropUpOutlinedIcon fontSize="large" className = {classes.color}></ArrowDropUpOutlinedIcon></IconButton>
+               }
         titleTypographyProps={{align:"left"}}
         title = "Jotaro"/>
         </Card> 
@@ -65,6 +80,9 @@ function RecommendationItem (props){
                  P
                 </Avatar>
               }
+              action={
+                <IconButton><ArrowDropDownOutlinedIcon fontSize="large" className = {classes.red}></ArrowDropDownOutlinedIcon></IconButton>
+               }
         titleTypographyProps={{align:"left"}}
         title = "PhineasNFerb"/>
         </Card> 

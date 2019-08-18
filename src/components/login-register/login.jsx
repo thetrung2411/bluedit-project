@@ -86,6 +86,7 @@ class login extends Component {
                 {errors.general}
               </Typography>
             )}
+            <Link to ="/post">
             <Button
               type="submit"
               variant="contained"
@@ -94,6 +95,7 @@ class login extends Component {
             >
               Login
             </Button>
+            </Link>
             <br />
             <Typography variant="subtitle2">
               Don't have an account? Sign up <Link to="/register" className={classes.link}>here</Link>
