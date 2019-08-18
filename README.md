@@ -65,7 +65,9 @@ Using Codeship
 ### Deployment
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+
 Deployment on AWS Elastic Beanstalk:http://blueditproject-env.z62hecdwdv.ap-southeast-2.elasticbeanstalk.com
+
 Deployment on Heroku: https://asd-bluedit.herokuapp.com/
 
 ### `npm run build` fails to minify
