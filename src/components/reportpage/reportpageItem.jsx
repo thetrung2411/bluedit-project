@@ -46,16 +46,16 @@ export class Report extends Component {
                 return (
                     <div>
                         <Container maxWidth="sm">
-                        <Paper>
-                            <Table>
-                                <TableRow>
-                                    <TableCell align="left">{report.id}</TableCell>
-                                    <TableCell align="left">{report.type}</TableCell>
-                                    <TableCell align="left">{report.description}</TableCell>
-                                    <TableCell align="left"><Button onClick={() => this.handleDelete(index)}>Remove</Button></TableCell>
-                                </TableRow>
-                            </Table> 
-                        </Paper>
+                            <Paper>
+                                <Table>
+                                    <TableRow>
+                                        <TableCell align="left">{report.id}</TableCell>
+                                        <TableCell align="left">{report.type}</TableCell>
+                                        <TableCell align="left">{report.description}</TableCell>
+                                        <TableCell align="left"><Button onClick={() => this.handleDelete(index)}>Remove</Button></TableCell>
+                                    </TableRow>
+                                </Table> 
+                            </Paper>
                         </Container>
                         
                         
@@ -67,7 +67,18 @@ export class Report extends Component {
             reports = this.state.report.map((report, index) => {
                 if (report.description.includes(this.state.searchValue)) {
                     return (
-                        <div>{report.description}</div>
+                        <Container maxWidth="sm">
+                            <Paper>
+                                <Table>
+                                    <TableRow>
+                                        <TableCell align="left">{report.id}</TableCell>
+                                        <TableCell align="left">{report.type}</TableCell>
+                                        <TableCell align="left">{report.description}</TableCell>
+                                        <TableCell align="left"><Button onClick={() => this.handleDelete(index)}>Remove</Button></TableCell>
+                                    </TableRow>
+                                </Table> 
+                            </Paper>
+                        </Container>
                     )
                 }
             })
