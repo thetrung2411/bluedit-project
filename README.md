@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 ### DevOps/Pipeline
 
 
@@ -22,9 +22,7 @@ Using Github
 
 Using Codeship 
 
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+### Contiguos Deployment
 
 Deployment on AWS Elastic Beanstalk:http://blueditproject-env.z62hecdwdv.ap-southeast-2.elasticbeanstalk.com
 
@@ -68,6 +66,8 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
@@ -85,6 +85,10 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/an
 ### Making a Progressive Web App
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+
+### Deployment
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
 ### Advanced Configuration
 
