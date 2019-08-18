@@ -6,6 +6,7 @@ import register from './components/login-register/register';
 import Post from './components/post/PostLayout';
 import HomePage from './components/homepage/homePageLayout';
 import bookmark from './components/bookmark/BookmarkForm';
+import Report from './components/reportpage/reportpageItem';
 import {
   MuiThemeProvider,
   createMuiTheme,
@@ -33,6 +34,7 @@ class App extends Component{
               <Route path='/register' component = {register}/>
               <Route path='/post' component = {Post}/>
               <Route path='/home' component = {HomePage}/>
+              <Route path='/report' component = {Report} />
               <Redirect from ='/' to='/home'/>
             </Switch>
         </div>
