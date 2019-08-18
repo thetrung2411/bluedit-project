@@ -1,4 +1,35 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### DevOps/Pipeline
+
+
+### Communication
+
+Using Slack
+
+### Monitor 
+
+Using Papertrail
+
+### Non SQL database 
+
+Using Firebase - Firestore
+
+### Code flow management
+
+Using Github
+
+### Contiguous intergration
+
+Using Codeship 
+
+### Deployment
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+
+Deployment on AWS Elastic Beanstalk:http://blueditproject-env.z62hecdwdv.ap-southeast-2.elasticbeanstalk.com
+
+Deployment on Heroku: https://asd-bluedit.herokuapp.com/
+
 
 ## Available Scripts
 
@@ -58,17 +89,6 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/ma
 ### Advanced Configuration
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Contiguous intergration
-Using Codeship 
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-Deployment on AWS Elastic Beanstalk:http://blueditproject-env.z62hecdwdv.ap-southeast-2.elasticbeanstalk.com
-
-Deployment on Heroku: https://asd-bluedit.herokuapp.com/
 
 ### `npm run build` fails to minify
 
