@@ -50,6 +50,12 @@ function SignedInAppBar(props) {
                     </div>
 
                     <div>
+                        <Link to="/userpage" className= {classes.noDecor}>
+                            <Button variant="contained" className = {classes.button}>Userpage</Button>
+                        </Link>
+                    </div>
+
+                    <div>
                     <Avatar>R</Avatar>
                     </div>
                     <div>

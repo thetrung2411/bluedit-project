@@ -7,6 +7,7 @@ import userImage from "../../assets/hehe.png";
 import withStyles from "@material-ui/core/styles/withStyles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 
 const styles = {
     form: {
@@ -234,6 +235,7 @@ class userpage extends React.Component{
 
                     <tr>
                         <td>
+                        <Link to="/post" className= {classes.noDecor}>
                             <Button
                                 type="submit"
                                 variant="contained"
@@ -242,6 +244,7 @@ class userpage extends React.Component{
                                 >
                                 Home Page
                             </Button>
+                            </Link>
                         </td>
                     </tr>
 
@@ -260,7 +263,6 @@ class userpage extends React.Component{
                     </table>
                     </p>
                 </div>
-                
         )
     }
 }
