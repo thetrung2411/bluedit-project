@@ -56,10 +56,14 @@ function SignedInAppBar(props) {
                     </div>
 
                     <div>
+                    <Link to="/userpage" className= {classes.noDecor}>
                     <Avatar>R</Avatar>
+                    </Link>
                     </div>
                     <div>
+                    <Link to="/userpage" className= {classes.noDecor}>
                     <Typography align="right">Username</Typography>
+                    </Link>
                     </div>
                 </Toolbar>
             </AppBar>

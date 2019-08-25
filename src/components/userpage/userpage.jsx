@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import AppBar from "../appBar/appBar";
+import AppBarWithAvatar from "../appBar/AppBarWithAvatar";
 import Sidebar from "react-sidebar";
 
 import userImage from "../../assets/hehe.png";
@@ -113,7 +113,7 @@ class userpage extends React.Component{
                 </Sidebar>
 
 
-                <AppBar position="static"></AppBar>
+                <AppBarWithAvatar position="static" />
                 <h1 className = "">User Page</h1>
 
 
@@ -217,7 +217,7 @@ class userpage extends React.Component{
                         </td>
                     </tr>
                 </table>
-
+                <Link to="/homepage" className= {classes.noDecor}>
                 <Button
                     type="submit"
                     variant="contained"
@@ -226,7 +226,7 @@ class userpage extends React.Component{
                     >
                     Delete Account
                 </Button>
-
+                </Link>
                 <p align = "right">
                 <table>
                         <tr>
@@ -242,7 +242,7 @@ class userpage extends React.Component{
                                 color="primary"
                                 className={classes.button}
                                 >
-                                Home Page
+                                Post
                             </Button>
                             </Link>
                         </td>
@@ -250,14 +250,16 @@ class userpage extends React.Component{
 
                     <tr>
                         <td>
+                        <Link to="/homepage" className= {classes.noDecor}>
                             <Button
                                 type="submit"
                                 variant="contained"
                                 color="primary"
                                 className={classes.button}
                                 >
-                                Post
+                                Logout
                             </Button>
+                        </Link>
                         </td>
                     </tr>
                     </table>
