@@ -1,10 +1,12 @@
 const functions = require("firebase-functions");
 const app = require("express")();
-
-const { signup, login } = require("./handlers/users");
-
-//User route
+const {signup, login} = require("./handlers/users");
+const {post, getAllPosts} = require("./handlers/posts");
+const {comment, getAllComments} = require("./handlers/comments");
 app.post("/signup", signup);
 app.post("/login", login);
-
+app.post("/post", post);
+app.get("/getAllPosts", getAllPosts);
+app.post("/comment", comment);
+app.get("/getAllComments", getAllComments);
 exports.api = functions.https.onRequest(app);
