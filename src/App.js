@@ -15,6 +15,7 @@ import {
   createMuiTheme,
   CssBaseline
 } from "@material-ui/core";
+import searching from './components/search/searching';
 
 const theme = createMuiTheme({
   palette: {
@@ -42,6 +43,8 @@ class App extends Component{
               <Route path='/home' component = {HomePage}/>
               <Route path='/report' component = {Report} />
               <Route path='/userpage' component = {userpage}/>
+              <Route path='/search' component = {searching}/>
+
               <Redirect from ='/' to='/home'/>
             </Switch>
         </div>
