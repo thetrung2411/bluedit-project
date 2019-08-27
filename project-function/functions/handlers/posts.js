@@ -9,6 +9,7 @@ exports.post = (req,res) => {
     
       const newPost = {
         body: req.body.body,
+        userPosted: req.user.userName, 
         createdAt: new Date().toISOString() 
       };
       
@@ -23,6 +24,29 @@ exports.post = (req,res) => {
       });
 };
 
+exports.getPost = (req, res) => {
+    let postContent = {};
+    db.doc(`/posts/${req.params.postId}`).get()
+    .then(doc => {
+        if (!doc.exists){
+            return res.status(404).json({error: 'Post not found'});
+        }
+    postContent = doc.data();
+    postContent.postId = doc.id;
+    return db.collection('comments').where('postId', '==', req.params.postId).get();
+    })
+    .then(data => {
+        postContent.comments = [];
+        data.forEach(doc => {
+            postContent.comments.push(doc.data());
+        });
+    return res.json(postContent);
+    }) 
+    .catch((err) => {
+        console.log(err);
+        return res.status(500).json({error: 'Unexpected failure'});
+    });
+};
 
 
 exports.getAllPosts = (req, res) => {
