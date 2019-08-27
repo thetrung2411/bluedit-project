@@ -9,17 +9,24 @@ exports.comment = (req,res) => {
     
       const newComment = {
         body: req.body.body,
+        postID: req.params.postId,
+        userName: req.user.userName,
         createdAt: new Date().toISOString() 
       };
       
-      db.collection("comments")
-      .add(newComment)
-      .then((doc) => {
-        res.json({message: `document ${doc.id} created successfully`});
+      db.doc(`/posts/${req.params.postId}`).get()
+      .then(doc => {
+          if(!doc.exists){
+              return res.status(404).json({error: 'Post not found'});
+          }  
+          return  db.collection("comments").add(newComment);
+      })
+      .then(() => {
+        res.json(newComment);
       })
       .catch((err) => {
-        res.status(500).json({error: 'Unexpected failure'});
-        console.error(err);
+          console.log(err);
+          res.status(500).json({error: "Unexpected error"});
       });
 };
 
