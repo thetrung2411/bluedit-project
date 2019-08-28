@@ -5,7 +5,7 @@ import login from './components/login-register/login';
 import register from './components/login-register/register';
 import Post from './components/post/PostLayout';
 import HomePage from './components/homepage/homePageLayout';
-import bookmark from './components/bookmark/BookmarkForm';
+//import bookmark from './components/bookmark/BookmarkForm';
 import Report from './components/reportpage/reportpageItem';
 import userpage from './components/userpage/userpage';
 import {
@@ -22,6 +22,8 @@ const theme = createMuiTheme({
   
 });
 
+//              <Route path='/bookmark' component={bookmark}/>
+
 class App extends Component{
   render(){
     return (
@@ -30,7 +32,6 @@ class App extends Component{
       <BrowserRouter>
         <div className="App">
             <Switch>
-              <Route path='/bookmark' component={bookmark}/>
               <Route path='/login' component = {login}/>
               <Route path='/register' component = {register}/>
               <Route path='/post' component = {Post}/>
