@@ -38,6 +38,9 @@ const styles = {
   },
   progress: {
     position: "absolute"
+  },
+  link: {
+    color: "white"
   }
 };
 
@@ -74,7 +77,7 @@ class login extends Component {
         this.setState({
           loading: false
         });
-        this.props.history.push("/");
+        this.props.history.push("/post");
       })
       .catch(err => {
         this.setState({
