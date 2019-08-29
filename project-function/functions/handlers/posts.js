@@ -59,7 +59,8 @@ exports.getAllPosts = (req, res) => {
           posts.push({
             postId: doc.id,
             body: doc.data().body,
-            createdAt: doc.data().createdAt
+            createdAt: doc.data().createdAt,
+            userPosted: doc.data().userPosted
           });
         });
         return res.json(posts);

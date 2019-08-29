@@ -23,7 +23,6 @@ function PostLayout(props){
   }
     return (
         <div>
-          <SignedInAppBar/>
           <Fab color="primary" onClick={() => {setOpen(true);}}>
         <EditRounded/>
       </Fab>
@@ -72,13 +71,7 @@ function PostLayout(props){
         
         </DialogActions>
       </Dialog>
-      <Grid container spacing = {3} >
-            <Grid container xs={8}>
-            
-            
-            </Grid>
-            <Grid item xs={4}><RecommendationItem/></Grid>
-            </Grid>
+      
      </div>
     );
 }

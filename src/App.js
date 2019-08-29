@@ -5,6 +5,8 @@ import login from './components/login-register/login';
 import register from './components/login-register/register';
 import Post from './components/post/PostLayout';
 import HomePage from './components/homepage/homePageLayout';
+import {Provider} from 'react-redux';
+import store from './redux/store'; 
 //import bookmark from './components/bookmark/BookmarkForm';
 import Report from './components/reportpage/reportpageItem';
 import userpage from './components/userpage/userpage';
@@ -28,6 +30,7 @@ class App extends Component{
   render(){
     return (
       <MuiThemeProvider theme={theme}>
+      <Provider  store = {store}>
       <CssBaseline />
       <BrowserRouter>
         <div className="App">
@@ -42,6 +45,7 @@ class App extends Component{
             </Switch>
         </div>
       </BrowserRouter>
+      </Provider>
       </MuiThemeProvider>
     );
   }
