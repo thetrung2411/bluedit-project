@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosConfig from "../../axiosConfig";
 import {
   SET_USER,
   SET_ERRORS,
@@ -9,8 +9,26 @@ import {
 
 export const loginUser = (userData, history) => dispatch => {
   dispatch({ type: LOADING_UI });
-  axios
+  axiosConfig
     .post("/login", userData)
+    .then(res => {
+      setAuthourizationHeader(res.data.token);
+      dispatch(getUserData());
+      dispatch({ type: CLEAR_ERRORS });
+      history.push("/");
+    })
+    .catch(err => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
+
+export const registerUser = (userData, history) => dispatch => {
+  dispatch({ type: LOADING_UI });
+  axiosConfig
+    .post("/signup", userData)
     .then(res => {
       setAuthourizationHeader(res.data.token);
       dispatch(getUserData());
@@ -27,7 +45,7 @@ export const loginUser = (userData, history) => dispatch => {
 
 export const getUserData = () => dispatch => {
   dispatch({ type: LOADING_USER });
-  axios
+  axiosConfig
     .get("/user")
     .then(res => {
       dispatch({
@@ -41,5 +59,5 @@ export const getUserData = () => dispatch => {
 const setAuthourizationHeader = token => {
   const FBToken = `Bearer ${token}`;
   localStorage.setItem("FBToken", FBToken);
-  axios.defaults.headers.common["Authorization"] = FBToken;
+  axiosConfig.defaults.headers.common["Authorization"] = FBToken;
 };

@@ -2,16 +2,11 @@ import React, { Component } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import axios from "axios";
-<<<<<<< HEAD
 
 //Redux stuff
 import { connect } from "react-redux";
 import { loginUser } from "../../redux/actions/userActions";
 
-=======
-import axiosConfig from "../../axiosConfig"
->>>>>>> 78346b3db4bdd3b1797f40a5ac5cdd4455ff0db6
 //MUI import
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
