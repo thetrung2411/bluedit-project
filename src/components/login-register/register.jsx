@@ -3,7 +3,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
+import axiosConfig from "../../axiosConfig";
 //MUI import
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -73,7 +73,7 @@ export class register extends Component {
       confirmPassword: this.state.confirmPassword,
       userName: this.state.userName
     };
-    axios
+    axiosConfig
       .post("/signup", userData)
       .then(res => {
         console.log(res.data);

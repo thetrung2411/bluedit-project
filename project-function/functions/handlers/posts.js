@@ -9,7 +9,7 @@ exports.post = (req,res) => {
     
       const newPost = {
         body: req.body.body,
-        userPosted: req.user.userName, 
+        // userPosted: req.user.userName, 
         createdAt: new Date().toISOString() 
       };
       

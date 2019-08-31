@@ -29,8 +29,9 @@ const theme = createMuiTheme({
 class App extends Component{
   render(){
     return (
-      <MuiThemeProvider theme={theme}>
       <Provider  store = {store}>
+      <MuiThemeProvider theme={theme}>
+
       <CssBaseline />
       <BrowserRouter>
         <div className="App">
@@ -45,8 +46,9 @@ class App extends Component{
             </Switch>
         </div>
       </BrowserRouter>
-      </Provider>
+     
       </MuiThemeProvider>
+      </Provider>
     );
   }
 }

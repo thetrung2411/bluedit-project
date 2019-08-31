@@ -13,6 +13,7 @@ import imagePost from "../../assets/hehe.png";
 import CommentItem from "../comment/CommentItem";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+
 class PostItem extends Component {
   render(){
     dayjs.extend(relativeTime) 
@@ -31,7 +32,7 @@ class PostItem extends Component {
             <MoreIcon/>
           </IconButton>
         }
-        title = {userPosted}
+        // title = {userPosted}
         titleTypographyProps={{align:"left"}}
         subheaderTypographyProps={{align:"left"}}
         subheader= {dayjs(createdAt).fromNow()}/>

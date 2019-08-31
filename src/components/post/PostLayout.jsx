@@ -14,7 +14,7 @@ import EditRounded from '@material-ui/icons/EditRounded';
 import SignedInAppBar from '../appBar/AppBarWithAvatar';
 import PostItem from "../post/postItems";
 import RecommendationItem from "../post/Recommendation";
-
+import PostButton from "../post/PostButton";
 function PostLayout(props){
   const [open, setOpen] = React.useState(false);
   const {classes} = props;
@@ -24,7 +24,8 @@ function PostLayout(props){
     return (
         <div>
           <SignedInAppBar/>
-          <Fab color="primary" onClick={() => {setOpen(true);}}>
+          <PostButton/>
+          <Fab color="secondary " onClick={() => {setOpen(true);}}>
         <EditRounded/>
       </Fab>
       <Dialog
