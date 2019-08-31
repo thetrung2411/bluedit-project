@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import axiosConfig from "../../axiosConfig";
+
+//Redux stuff
+import { connect } from "react-redux";
+import { registerUser } from "../../redux/actions/userActions";
+ 
 //MUI import
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -62,6 +65,12 @@ export class register extends Component {
     });
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.UI.errors) {
+      this.setState({ errors: nextProps.UI.errors });
+    }
+  }
+
   handleSubmit = e => {
     e.preventDefault();
     this.setState({
@@ -73,26 +82,12 @@ export class register extends Component {
       confirmPassword: this.state.confirmPassword,
       userName: this.state.userName
     };
-    axiosConfig
-      .post("/signup", userData)
-      .then(res => {
-        console.log(res.data);
-        this.setState({
-          loading: false
-        });
-        this.props.history.push("/post");
-      })
-      .catch(err => {
-        this.setState({
-          errors: err.response.data,
-          loading: false
-        });
-      });
+    this.props.registerUser(userData, this.props.history);
   };
 
   render() {
-    const { classes } = this.props;
-    const { errors, loading } = this.state;
+    const { classes, UI: {loading} } = this.props;
+    const { errors } = this.state;
 
     return (
       <Grid container className={classes.form}>
@@ -162,6 +157,7 @@ export class register extends Component {
               variant="contained"
               color="primary"
               className={classes.button}
+              disabled={loading}
             >
               Submit
               {loading && (
@@ -191,7 +187,18 @@ export class register extends Component {
 }
 
 register.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired,
+  registerUser: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(register);
+const mapStateToProps = state =>({
+  user: state.user,
+  UI: state.UI
+})
+
+export default connect(
+  mapStateToProps,
+  { registerUser }
+)(withStyles(styles)(register));

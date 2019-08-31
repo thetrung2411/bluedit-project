@@ -105,3 +105,19 @@ exports.login = (req, res) => {
         .json({ general: "Wrong user detail, please try again" });
     });
 };
+
+exports.getCurrentUser = (req,res) =>{
+  let userData = {};
+  db.doc(`/users/${req.user.userName}`)
+    .get()
+    .then(doc =>{
+      if (doc.exists){
+        userData.userDetails = doc.data();
+      }
+      return res.json(userData);
+    })
+    .catch(err =>{
+      console.error(err);
+      return res.status(500).json({error: err.code})
+    })
+}
