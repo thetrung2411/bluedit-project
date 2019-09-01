@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -9,28 +9,45 @@ import { postLayoutStyles } from "./PostLayoutStyle";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Button from "@material-ui/core/Button";
 import Fab from '@material-ui/core/Fab';
-import Grid from "@material-ui/core/Grid";
 import EditRounded from '@material-ui/icons/EditRounded';
-import SignedInAppBar from '../appBar/AppBarWithAvatar';
-import PostItem from "../post/postItems";
-import RecommendationItem from "../post/Recommendation";
-import PostButton from "../post/PostButton";
-function PostLayout(props){
-  const [open, setOpen] = React.useState(false);
-  const {classes} = props;
-  function handleClose() {
-    setOpen(false);
+import {connect} from 'react-redux';
+import {post} from '../../redux/actions/postActions';
+import PropTypes from 'prop-types';
+
+
+class PostButton extends Component{
+  state = {
+    open: false,
+    body: '',
+    errors: {} 
+  };
+  handleOpen = () => {
+    this.setState({open: true});
+    console.log('clicked')
   }
+  handleClose = () => {
+    this.setState({open: false})
+  }
+  handleChange = (event) => {
+    this.setState({[event.target.name]: event.target.value})
+  }
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.props.post({body: this.state.body})
+    this.handleClose()
+  }
+
+  render(){
+    const {errors} = this.state;
+    const {classes, UI: {loading}} = this.props;
     return (
         <div>
-          <SignedInAppBar/>
-          <PostButton/>
-          <Fab color="secondary " onClick={() => {setOpen(true);}}>
+          <Fab color="primary" onClick={this.handleOpen}>
         <EditRounded/>
       </Fab>
       <Dialog
-        open={open}
-        onClose={handleClose}
+        open={this.state.open}
+        onClose={this.handleClose}
         aria-labelledby="responsive-dialog-title"
         className = {classes.paper}
       >
@@ -39,6 +56,7 @@ function PostLayout(props){
           <DialogContentText>
             To submit your post please enter the text field below
           </DialogContentText>
+                        <form onSubmit ={this.handleSubmit}>
                          <TextField
                          id="outlined-multiline-flexible"
                           label="Post here"
@@ -48,14 +66,19 @@ function PostLayout(props){
                           margin="none"
                           variant="outlined"
                           className = {classes.text}
+                          error = {errors.body ? true : false}
+                          name = "body"
+                          onChange = {this.handleChange}
+                          
                         />
+                        </form>
                     </DialogContent>
                     <DialogActions>
                     <Button
                         type="submit"
                         fullWidth
                         variant="contained"
-                        onClick={handleClose}
+                        onClick={this.handleClose}
                         color = "secondary"
                     >
                         Cancel
@@ -65,7 +88,8 @@ function PostLayout(props){
                         fullWidth
                         variant="contained"
                         color = "primary"
-                        onClick={handleClose}
+                        onClick={this.handleSubmit}
+
                     >
                         Submit
                     </Button>
@@ -73,14 +97,20 @@ function PostLayout(props){
         
         </DialogActions>
       </Dialog>
-      <Grid container spacing = {3} >
-            <Grid container xs={8}>
-            
-            
-            </Grid>
-            <Grid item xs={4}><RecommendationItem/></Grid>
-            </Grid>
+      
      </div>
-    );
+    )
 }
-export default withStyles (postLayoutStyles)(PostLayout);
+}
+PostButton.propTypes = {
+  post: PropTypes.func.isRequired,
+  UI: PropTypes.object.isRequired
+};
+
+const mapStateToProps = (state) => ({
+  UI: state.UI
+});
+const mapActionToProps = {
+  post
+};
+export default connect (mapStateToProps, mapActionToProps)(withStyles(postLayoutStyles)(PostButton));
