@@ -35,14 +35,62 @@ class userpage extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-          sidebarOpen: true
+            sidebarOpen: true,
+            firstName: "First Name",
+            lastName:"Last Name",
+            email:" Email",
+            location:"Location",
+            CreatAt:"20/08/2019",
         };
         this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
       }
     
-      onSetSidebarOpen(open) {
+    onSetSidebarOpen(open) {
         this.setState({ sidebarOpen: open });
       }
+
+    Edit() {
+        this.setState({
+            firstNameValue: "",
+        })
+    }
+
+
+    ChangeFirstname = e => {
+        this.setState({
+            firstName: e.target.value,
+        });
+      };
+
+      ChangeLastName = e => {
+        this.setState({
+            lastName: e.target.value,
+        });
+      };
+
+      ChangeEmail = e => {
+        this.setState({
+            email: e.target.value,
+        });
+      };
+
+      ChangeLocation = e => {
+        this.setState({
+            location: e.target.value,
+        });
+      };
+      
+    handleSubmit = e => {
+        this.setState({
+            firstName: "First Name",
+            lastName:"Last Nmae",
+            email:" Email",
+            location:"Location",
+            firstNameValue:""
+        })
+    };
+
+
 
 
 
@@ -50,7 +98,7 @@ class userpage extends React.Component{
     render()
     {
         const { classes } = this.props;
-        // const { errors } = this.state;
+        //const { errors } = this.state;
         
         return (
                 <div>
@@ -76,6 +124,7 @@ class userpage extends React.Component{
 
                     <tr>
                         <td>
+                            <Link to="/userpage" className= {classes.noDecor}>
                             <Button
                                 type="submit"
                                 variant="contained"
@@ -84,11 +133,13 @@ class userpage extends React.Component{
                                 >
                                 My profile
                             </Button>
+                            </Link>
                         </td>
                     </tr>
 
                     <tr>
                         <td>
+                        <Link to="/subscriptions" className= {classes.noDecor}>
                             <Button
                                 type="submit"
                                 variant="contained"
@@ -97,141 +148,9 @@ class userpage extends React.Component{
                                 >
                                 My Subscription
                             </Button>
+                            </Link>
                         </td>
                     </tr>
-                    </table>
-                
-                
-                }
-                    open={this.state.sidebarOpen}
-                    onSetOpen={this.onSetSidebarOpen}
-                    styles={{ sidebar: { background: "blue" } }}
-                >
-                <p align = "left">
-                <button className={classes.sidebarButton} onClick={() => this.onSetSidebarOpen(true) } >Open sidebar</button>
-                </p>
-                </Sidebar>
-
-
-                <AppBarWithAvatar position="static" />
-                <h1 className = "">User Page</h1>
-
-
-                <table align = "center">
-                    <tr>
-                        <td>
-                            <TextField
-                                id="firstName"
-                                name="firstName"
-                                type="firstName"
-                                label="First Name"
-                                className={classes.textField}
-                                fullWidth
-                            />
-                        </td>
-                        <td>
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                color="primary"
-                                className={classes.button}
-                                >
-                                Edit
-                            </Button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <TextField
-                                id="lastName"
-                                name="lastName"
-                                type="lastName"
-                                label="Last Name"
-                            />
-                        </td>
-                        <td>
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                color="primary"
-                                className={classes.button}
-                                >
-                                Edit
-                            </Button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <TextField
-                                id="email"
-                                name="email"
-                                type="email"
-                                label="Email"
-                            />
-                        </td>
-                        <td>
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                color="primary"
-                                className={classes.button}
-                                >
-                                Edit
-                            </Button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <TextField
-                                id="location"
-                                name="location"
-                                type="location"
-                                label="Location"
-                            />
-                        </td>
-                        <td>
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                color="primary"
-                                className={classes.button}
-                                >
-                                Edit
-                            </Button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <TextField
-                                id="createdAt"
-                                name="createdAt"
-                                type="createdAt"
-                                label="Created At"
-                            />
-                        </td>
-                        <td>
-                        </td>
-                    </tr>
-                </table>
-                <Link to="/homepage" className= {classes.noDecor}>
-                <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    className={classes.button}
-                    >
-                    Delete Account
-                </Button>
-                </Link>
-                <p align = "right">
-                <table>
-                        <tr>
-                            <b>Menu</b>
-                        </tr>
 
                     <tr>
                         <td>
@@ -261,9 +180,176 @@ class userpage extends React.Component{
                             </Button>
                         </Link>
                         </td>
-                    </tr>
+                    </tr>                    
                     </table>
-                    </p>
+                
+                
+                }
+                    open={this.state.sidebarOpen}
+                    onSetOpen={this.onSetSidebarOpen}
+                    styles={{ sidebar: { background: "blue" } }}
+                >
+                <p align = "left">
+                <button className={classes.sidebarButton} onClick={() => this.onSetSidebarOpen(true) } >Open sidebar</button>
+                </p>
+                </Sidebar>
+
+
+                <AppBarWithAvatar position="static" />
+                <h1 className = "">User Page</h1>
+                <h2 className = "">Edit Profile</h2>
+
+
+                <table align = "center">
+                    <tr>
+                        <td>
+                            <TextField
+                                id="firstName"
+                                name="firstName"
+                                type="firstName"
+                                //label = {this.state.firstName}//{this.state.firstName}//"First Name"
+                                value = {this.state.firstName}
+                                className={classes.textField}
+                                onChange={this.ChangeFirstname.bind(this)}
+                                
+                            />
+                        </td>
+                        <td>
+                            <TextField
+                                className={classes.textField}
+                                onChange={this.ChangeFirstname.bind(this)}
+                                // fullWidth
+                            />
+                        </td>
+                        {/* <td>
+                            <Button
+                                onClick={this.Edit}
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                className={classes.button}
+                                >
+                                Edit
+                            </Button>
+                        </td> */}
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <TextField
+                                id="lastName"
+                                name="lastName"
+                                type="lastName"
+                                // label={this.state.lastName}
+                                value = {this.state.lastName}
+                               
+                            />
+                        </td>
+                        <td>
+                            <TextField
+                                className={classes.textField}
+                                onChange={this.ChangeLastName.bind(this)}
+                                
+                            />
+                        </td>
+                        {/* <td>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                className={classes.button}
+                                >
+                                Edit
+                            </Button>
+                        </td> */}
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <TextField
+                                id="email"
+                                name="email"
+                                type="email"
+                                value = {this.state.email}
+                                className={classes.textField}
+                               
+                            />
+                        </td>
+                        <td>
+                            <TextField
+                                className={classes.textField}
+                                onChange={this.ChangeEmail.bind(this)}
+                               
+                            />
+                        </td>
+                        {/* <td>
+                            <Button
+                                onClick={this.Edit}
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                className={classes.button}
+                                >
+                                Edit
+                            </Button>
+                        </td> */}
+                        {/* </td> */}
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <TextField
+                                id="location"
+                                name="location"
+                                type="location"
+                                value={this.state.location}
+                               
+                            />
+                        </td>
+                        <td>
+                            <TextField
+                                className={classes.textField}
+                                onChange={this.ChangeLocation.bind(this)}
+                               
+                            />
+                        </td>
+                        <td>
+                            {/* <Button
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                className={classes.button}
+                                >
+                                Edit
+                            </Button> */}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <TextField
+                                id="createdAt"
+                                name="createdAt"
+                                type="createdAt"
+                                label="Created At"
+                                value={this.state.CreatAt}
+                            />
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+
+                <Link to="/homepage" className= {classes.noDecor}>
+                <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    >
+                    Delete Account
+                </Button>
+                </Link>
                 </div>
         )
     }

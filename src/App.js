@@ -8,6 +8,7 @@ import HomePage from './components/homepage/homePageLayout';
 import bookmark from './components/bookmark/BookmarkForm';
 import Report from './components/reportpage/reportpageItem';
 import userpage from './components/userpage/userpage';
+import subscriptions from './components/subscriptions/subscriptions';
 import {
   MuiThemeProvider,
   createMuiTheme,
@@ -37,6 +38,7 @@ class App extends Component{
               <Route path='/home' component = {HomePage}/>
               <Route path='/report' component = {Report} />
               <Route path='/userpage' component = {userpage}/>
+              <Route path='/subscriptions' component = {subscriptions}/>
               <Redirect from ='/' to='/home'/>
             </Switch>
         </div>

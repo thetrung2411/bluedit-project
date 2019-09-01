@@ -12,8 +12,27 @@ import { Link } from "react-router-dom";
 import {appBarStyles} from "./appBarStyles";
 import withStyles from "@material-ui/core/styles/withStyles";
 
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }    
+}
+
+
 function SignedInAppBar(props) {
     const { classes } = props;
+    
     return (
         <div>
             <AppBar position="static" className={classes.root}>
@@ -59,7 +78,20 @@ function SignedInAppBar(props) {
                     <Link to="/userpage" className= {classes.noDecor}>
                     <Avatar>R</Avatar>
                     </Link>
+                    {/* <div class="dropdown">
+                    <button onclick="myFunction()" class="dropbtn">
+                        <div><Avatar>R</Avatar></div>
+                        <div><Typography align="right">Username</Typography></div>
+                        
+                    </button>
+                    <div className={classes.button} id="myDropdown" class="dropdown-content">
+                        <a href="#Userpage">Userpage</a>
+                        <a href="#Bookmark">Bookmark</a>
+                        <a href="#Report">Report</a>
+                        <a href="#Logout">Logout</a>
+                    </div> */}
                     </div>
+
                     <div>
                     <Link to="/userpage" className= {classes.noDecor}>
                     <Typography align="right">Username</Typography>
