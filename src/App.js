@@ -15,6 +15,7 @@ import {
   createMuiTheme,
   CssBaseline
 } from "@material-ui/core";
+import { SET_AUTHENTICATED } from './redux/types';
 
 const theme = createMuiTheme({
   palette: {
@@ -24,7 +25,6 @@ const theme = createMuiTheme({
   
 });
 
-//              <Route path='/bookmark' component={bookmark}/>
 
 class App extends Component{
   render(){

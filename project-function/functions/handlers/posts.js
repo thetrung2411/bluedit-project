@@ -9,7 +9,7 @@ exports.post = (req,res) => {
     
       const newPost = {
         body: req.body.body,
-        // userPosted: req.user.userName, 
+        userPosted: req.user.userName, 
         createdAt: new Date().toISOString() 
       };
       
@@ -47,7 +47,6 @@ exports.getPost = (req, res) => {
         return res.status(500).json({error: 'Unexpected failure'});
     });
 };
-
 
 exports.getAllPosts = (req, res) => {
     db.collection("posts")

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -15,72 +15,41 @@ import SignedInAppBar from '../appBar/AppBarWithAvatar';
 import PostItem from "../post/postItems";
 import RecommendationItem from "../post/Recommendation";
 import PostButton from "../post/PostButton";
-function PostLayout(props){
-  const [open, setOpen] = React.useState(false);
-  const {classes} = props;
-  function handleClose() {
-    setOpen(false);
+import axiosConfig from "../../axiosConfig";
+import CircularProgress from "@material-ui/core/CircularProgress";
+class PostLayout extends Component {
+  state = {
+    post: null
+  };
+  componentDidMount() {
+    axiosConfig
+      .get("/getAllPosts")
+      .then(res => {
+        console.log(res.data);
+        this.setState({
+          post: res.data
+        });
+      })
+      .catch(err => console.log(err));
   }
+  render() {
+    let postMarkUp = this.state.post ? (
+      this.state.post.map(post => <PostItem post={post} />)
+    ) : (
+      <CircularProgress color="inherit" />
+    );
     return (
         <div>
           <SignedInAppBar/>
           <PostButton/>
-          <Fab color="secondary " onClick={() => {setOpen(true);}}>
-        <EditRounded/>
-      </Fab>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="responsive-dialog-title"
-        className = {classes.paper}
-      >
-        <DialogTitle id="responsive-dialog-title" align = "center">Post</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            To submit your post please enter the text field below
-          </DialogContentText>
-                         <TextField
-                         id="outlined-multiline-flexible"
-                          label="Post here"
-                          multiline
-                          rows = "7"
-                          rowsMax="1000"
-                          margin="none"
-                          variant="outlined"
-                          className = {classes.text}
-                        />
-                    </DialogContent>
-                    <DialogActions>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        onClick={handleClose}
-                        color = "secondary"
-                    >
-                        Cancel
-                    </Button>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color = "primary"
-                        onClick={handleClose}
-                    >
-                        Submit
-                    </Button>
-                    
-        
-        </DialogActions>
-      </Dialog>
       <Grid container spacing = {3} >
             <Grid container xs={8}>
-            
-            
+            {postMarkUp}
             </Grid>
             <Grid item xs={4}><RecommendationItem/></Grid>
             </Grid>
      </div>
     );
+}
 }
 export default withStyles (postLayoutStyles)(PostLayout);

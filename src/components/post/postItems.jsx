@@ -18,13 +18,14 @@ class PostItem extends Component {
   render(){
     dayjs.extend(relativeTime) 
     const {classes, post : {body, createdAt, userPosted}} = this.props;
+    
     return (
         <Grid className = {classes.grid}>
         <Card className = {classes.paper}>
             <CardHeader 
         avatar={
-                <Avatar>
-                  R
+                <Avatar >
+                  T
                 </Avatar>
               }
         action={
@@ -32,7 +33,7 @@ class PostItem extends Component {
             <MoreIcon/>
           </IconButton>
         }
-        // title = {userPosted}
+        title = {userPosted}
         titleTypographyProps={{align:"left"}}
         subheaderTypographyProps={{align:"left"}}
         subheader= {dayjs(createdAt).fromNow()}/>

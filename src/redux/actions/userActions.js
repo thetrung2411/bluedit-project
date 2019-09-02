@@ -15,7 +15,7 @@ export const loginUser = (userData, history) => dispatch => {
       setAuthourizationHeader(res.data.token);
       dispatch(getUserData());
       dispatch({ type: CLEAR_ERRORS });
-      history.push("/");
+      history.push("/post");
     })
     .catch(err => {
       dispatch({
