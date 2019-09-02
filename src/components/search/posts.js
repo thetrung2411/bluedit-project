@@ -3,7 +3,7 @@
    import React from 'react';
    import PropTypes from 'prop-types';
   
-   import Post from './movie';
+   import Post from './post';
   
   const Posts = props => (
     <ul className="posts">
@@ -15,8 +15,8 @@
     </ul>
   );
   
-  Movies.propTypes = {
-    movies: PropTypes.arrayOf(PropTypes.object)
+  Posts.propTypes = {
+    posts: PropTypes.arrayOf(PropTypes.object)
   };
   
    export default Posts;

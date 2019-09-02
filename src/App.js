@@ -7,6 +7,7 @@ import Post from './components/post/PostLayout';
 import HomePage from './components/homepage/homePageLayout';
 import {Provider} from 'react-redux';
 import store from './redux/store'; 
+import test from './components/search/test';
 //import bookmark from './components/bookmark/BookmarkForm';
 import Report from './components/reportpage/reportpageItem';
 import userpage from './components/userpage/userpage';

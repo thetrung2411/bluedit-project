@@ -14,7 +14,7 @@ const Post = props => (
     </div>
   );
   
-  Movie.propTypes = {
+  Post.propTypes = {
     id         : PropTypes.number.isRequired,
     title      : PropTypes.string.isRequired,
     poster_path: PropTypes.string

@@ -2,7 +2,7 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import AppBar from "../appBar/appBar";
 import Button from "@material-ui/core/Button";
-
+import { Link } from "react-router-dom";
 
 function searching(props) {
     
@@ -13,11 +13,11 @@ function searching(props) {
             <Grid>           
                                 
              
-            {/* <Link to="/test"> */}
-                        <Button onClick = "../search/test">
+             <Link to="/test">
+                        <Button>
                                 search
                         </Button>
-             {/* </Link> */}
+             </Link> 
              </Grid>
        </div>
     );
