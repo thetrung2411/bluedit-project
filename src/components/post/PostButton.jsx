@@ -11,8 +11,9 @@ import Button from "@material-ui/core/Button";
 import Fab from '@material-ui/core/Fab';
 import EditRounded from '@material-ui/icons/EditRounded';
 import {connect} from 'react-redux';
-import {post} from '../../redux/actions/postActions';
+import {post, getAllPosts} from '../../redux/actions/postActions';
 import PropTypes from 'prop-types';
+
 
 
 class PostButton extends Component{
@@ -45,7 +46,9 @@ class PostButton extends Component{
   }
   handleSubmit = (event) => {
     event.preventDefault();
+    this.props.getAllPosts();
     this.props.post({body: this.state.body})
+    
    
   }
 
@@ -122,6 +125,6 @@ const mapStateToProps = (state) => ({
   UI: state.UI
 });
 const mapActionToProps = {
-  post
+  post, getAllPosts
 };
 export default connect (mapStateToProps, mapActionToProps)(withStyles(postLayoutStyles)(PostButton));

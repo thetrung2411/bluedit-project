@@ -1,22 +1,16 @@
 import React, {Component} from 'react';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { postLayoutStyles } from "./PostLayoutStyle";
+import PropTypes from 'prop-types';
 import withStyles from "@material-ui/core/styles/withStyles";
-import Button from "@material-ui/core/Button";
-import Fab from '@material-ui/core/Fab';
 import Grid from "@material-ui/core/Grid";
-import EditRounded from '@material-ui/icons/EditRounded';
 import SignedInAppBar from '../appBar/AppBarWithAvatar';
 import PostItem from "../post/postItems";
 import RecommendationItem from "../post/Recommendation";
 import PostButton from "../post/PostButton";
 import axiosConfig from "../../axiosConfig";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import {connect} from "react-redux";
+import {postLayoutStyles} from "./PostLayoutStyle";
+import {getAllPosts} from "../../redux/actions/postActions";
 class PostLayout extends Component {
   state = {
     post: null
@@ -33,6 +27,7 @@ class PostLayout extends Component {
       .catch(err => console.log(err));
   }
   render() {
+    const {UI} = this.props;
     let postMarkUp = this.state.post ? (
       this.state.post.map(post => <PostItem post={post} />)
     ) : (
@@ -52,4 +47,17 @@ class PostLayout extends Component {
     );
 }
 }
-export default withStyles (postLayoutStyles)(PostLayout);
+PostLayout.propTypes = { 
+  getAllPosts: PropTypes.func.isRequired,
+  UI: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+  UI: state.UI
+})
+const mapActionToProps ={ 
+  getAllPosts
+}
+
+
+export default connect (mapStateToProps, mapActionToProps)(withStyles(postLayoutStyles)(PostLayout));
