@@ -37,13 +37,14 @@ class App extends Component{
       <BrowserRouter>
         <div className="App">
             <Switch>
-              <Route path='/login' component = {login}/>
+              <Route path='/Login' component = {login}/>
               <Route path='/register' component = {register}/>
               <Route path='/post' component = {Post}/>
               <Route path='/home' component = {HomePage}/>
               <Route path='/report' component = {Report} />
               <Route path='/userpage' component = {userpage}/>
               <Route path='/search' component = {searching}/>
+              <Route path='/test' component = {test}/> 
 
               <Redirect from ='/' to='/home'/>
             </Switch>
