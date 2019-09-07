@@ -1,4 +1,6 @@
-import React from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
@@ -9,55 +11,73 @@ import SearchIcon from "@material-ui/icons/Search";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
-import {appBarStyles} from "./appBarStyles";
+import { appBarStyles } from "./appBarStyles";
 import withStyles from "@material-ui/core/styles/withStyles";
 
-function SignedInAppBar(props) {
-    const { classes } = props;
-    return (
-        <div>
-            <AppBar position="static" className={classes.root}>
-                <Toolbar>
-                    <Link to = "/">
-                    <IconButton classname = {classes.button}>
-                        <HomeIcon/>
-                    </IconButton>
-                    </Link> 
-                    <Typography
-                        variant="h5"
-                    >
-                        Bluedit
-                    </Typography>
-                    <div/>
-                    <div className={classes.grow}></div>
-                    <div className={classes.search}>
-                        <div className = {classes.searchIcon}>
-                            <SearchIcon/>
-                        </div>
-                        <InputBase
-                            placeholder="Search…"
-                            classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput
-                            }}
-                        />
-                    </div>
-                    <div className={classes.grow}></div>
-                    <div>
-                        <Link to="/Report" className= {classes.noDecor}>
-                            <Button variant="contained" className = {classes.button}>Report</Button>
-                        </Link>
-                    </div>
+///redux
+import { connect } from "react-redux";
 
-                    <div>
-                    <Avatar>R</Avatar>
-                    </div>
-                    <div>
-                    <Typography align="right">Username</Typography>
-                    </div>
-                </Toolbar>
-            </AppBar>
-        </div>
+class SignedInAppBar extends Component {
+  render() {
+    const {
+      classes,
+      user: { userDetails }
+    } = this.props;
+
+    return (
+      <div>
+        <AppBar position="static" className={classes.root}>
+          <Toolbar>
+            <Link to="/">
+              <IconButton classname={classes.button}>
+                <HomeIcon />
+              </IconButton>
+            </Link>
+            <Typography variant="h5">Bluedit</Typography>
+            <div />
+            <div className={classes.grow}></div>
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput
+                }}
+              />
+            </div>
+            <div className={classes.grow}></div>
+            <div>
+              <Link to="/Report" className={classes.noDecor}>
+                <Button variant="contained" className={classes.button}>
+                  Report
+                </Button>
+              </Link>
+            </div>
+
+            <div>
+              <Avatar>R</Avatar>
+            </div>
+            <div>
+              <Typography align="right">{userDetails.userName}</Typography>
+            </div>
+          </Toolbar>
+        </AppBar>
+      </div>
     );
+  }
 }
-export default withStyles (appBarStyles)(SignedInAppBar);
+
+const mapStateToProps = state => ({
+  user: state.user
+});
+
+SignedInAppBar.propTypes = {
+  user: PropTypes.object.isRequired
+};
+
+export default connect(mapStateToProps)(
+  withStyles(appBarStyles)(SignedInAppBar)
+);
