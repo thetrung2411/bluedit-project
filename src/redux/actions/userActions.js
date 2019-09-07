@@ -45,7 +45,7 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 export const logoutUser = () => dispatch => {
-  localStorage.removeItem("FBIdToken");
+  localStorage.removeItem("FBToken");
   delete axiosConfig.defaults.headers.common["Authorization"];
   dispatch({ type: SET_UNAUTHENTICATED });
 };
