@@ -10,6 +10,7 @@
     "dayjs": "^1.8.16",
     "http-proxy-middleware": "^0.19.1",
     "js-beautify": "^1.10.2",
+    "jwt-decode": "^2.2.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-redux": "^7.1.1",
