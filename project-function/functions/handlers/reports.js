@@ -11,9 +11,9 @@ exports.getAllReports = (req, res) => {
             data.forEach(doc => {
                 reports.push({
                     reportId: doc.id,
-                    reportedDate: doc.data().reportedDate,
+                    reportedAt: doc.data().reportedDate,
                     type: doc.data().type,
-                    reportObject: doc.data().reportObject,
+                    objectId: doc.data().reportObject,
                     description: doc.data().description,
                     status: doc.data().status
                 });

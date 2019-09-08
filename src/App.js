@@ -63,7 +63,7 @@ class App extends Component {
                 <Route path='/home' component={HomePage} />
                 <Route path='/report' exact component={ReportPage} />
                 <Route path='/userpage' component={userpage} />
-                <Route path='/report/reportss' component={ReportDetail} />
+                <Route path='/report/ReportDetail' component={ReportDetail} />
                 <Redirect from='/' to='/home' />
               </Switch>
             </div>

@@ -1,11 +1,13 @@
 import React from 'react';
 import ReportTableHead from '../report/ReportTableHead';
+
 //material ui
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
+import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
 import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
 
 
@@ -17,13 +19,16 @@ const ReportTable = (props) => {
             return (
                 <TableBody>
                     <TableRow>
-                        <TableCell align="left">{report.id}</TableCell>
-                        <TableCell align="left">{report.date}</TableCell>
+                        <TableCell align="left">{report.reportId}</TableCell>
+                        <TableCell align="left">{report.reportedAt}</TableCell>
                         <TableCell align="left">{report.type}</TableCell>
                         <TableCell align="left">{report.objectId}</TableCell>
                         <TableCell align="left">{report.description}</TableCell>
                         <TableCell align="left">{report.status}</TableCell>
-                        <TableCell align="left"><Button onClick={() => props.handleDelete(index)}><DeleteForeverOutlinedIcon /></Button></TableCell>
+                        <TableCell align="left">
+                            <Button onClick={props.continueHandler}><VisibilityOutlinedIcon /></Button>
+                            <Button onClick={() => props.handleDelete(index)}><DeleteForeverOutlinedIcon /></Button>
+                        </TableCell>
                     </TableRow>
                 </TableBody>
             )
