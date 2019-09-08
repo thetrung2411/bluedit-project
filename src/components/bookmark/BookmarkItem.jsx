@@ -62,7 +62,13 @@ const rows = [
   ),
   BookmarkItem("Post01112", "Hasuek", "elcome to!", "01/02/2018", "10:46:33"),
 
-  BookmarkItem("P06112", "Lappe", "Welcome to Steam!", "11/30/2019", "23:16:32"),
+  BookmarkItem(
+    "P06112",
+    "Lappe",
+    "Welcome to Steam!",
+    "11/30/2019",
+    "23:16:32"
+  ),
 
   BookmarkItem(
     "P01222",
@@ -74,6 +80,7 @@ const rows = [
   BookmarkItem("P02182", "Juooll", "NWeeeeee!", "01/02/2018", "00:06:33")
 ];
 
+//sortingdown
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -84,6 +91,7 @@ function desc(a, b, orderBy) {
   return 0;
 }
 
+//sortingup
 function stableSort(array, cmp) {
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
@@ -94,12 +102,14 @@ function stableSort(array, cmp) {
   return stabilizedThis.map(el => el[0]);
 }
 
+//sortingmethod
 function getSorting(order, orderBy) {
   return order === "desc"
     ? (a, b) => desc(a, b, orderBy)
     : (a, b) => -desc(a, b, orderBy);
 }
 
+//header
 const headRows = [
   {
     id: "postID",
@@ -118,6 +128,7 @@ const headRows = [
   { id: "time", numeric: true, disablePadding: false, label: "Bookmark Time" }
 ];
 
+//headerstyle
 function EnhancedTableHead(props) {
   const {
     classes,
@@ -205,6 +216,7 @@ const useToolbarStyles = makeStyles(theme => ({
   }
 }));
 
+//headbar
 const EnhancedTableToolbar = props => {
   const classes = useToolbarStyles();
   const { numSelected } = props;

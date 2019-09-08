@@ -58,6 +58,14 @@ class SignedInAppBar extends Component {
             </div>
 
             <div>
+              <Link to="/Bookmark" className={classes.noDecor}>
+                <Button variant="contained" className={classes.button}>
+                  Bookmark
+                </Button>
+              </Link>
+            </div>
+
+            <div>
               <Avatar>R</Avatar>
             </div>
             <div>
