@@ -14,10 +14,10 @@ app.post("/login", login);
 app.get("/user", FBAuth, getCurrentUser);
 
 //Post
-app.post("/post", post);
+app.post("/post", FBAuth, post);
 app.get("/getAllPosts", getAllPosts);
 app.get("/post/:postId", getPost);
-app.post("/post/:postId/comment", comment);
+app.post("/post/:postId/comment", FBAuth, comment);
 app.get("/getAllComments", getAllComments);
 
 //Report

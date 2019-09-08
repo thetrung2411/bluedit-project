@@ -5,7 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import RecommendationItem from "../post/Recommendation";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import axiosConfig from "../../axiosConfig";
-import axios from "axios";
+
 class homePageLayout extends Component {
   state = {
     post: null

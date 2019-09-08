@@ -11,8 +11,9 @@ import Button from "@material-ui/core/Button";
 import Fab from '@material-ui/core/Fab';
 import EditRounded from '@material-ui/icons/EditRounded';
 import {connect} from 'react-redux';
-import {post} from '../../redux/actions/postActions';
+import {post, getAllPosts} from '../../redux/actions/postActions';
 import PropTypes from 'prop-types';
+
 
 
 class PostButton extends Component{
@@ -21,11 +22,23 @@ class PostButton extends Component{
     body: '',
     errors: {} 
   };
+  componentWillReceiveProps(nextProps){
+    if (nextProps.UI.errors){
+      this.setState({
+        errors: nextProps.UI.errors
+      });
+    }
+    if (!nextProps.UI.errors && !nextProps.UI.loading){
+      this.setState({body: ''});
+      this.handleClose();
+    }
+  }
   handleOpen = () => {
     this.setState({open: true});
     console.log('clicked')
   }
   handleClose = () => {
+    // this.props.clearErrors();
     this.setState({open: false})
   }
   handleChange = (event) => {
@@ -33,8 +46,10 @@ class PostButton extends Component{
   }
   handleSubmit = (event) => {
     event.preventDefault();
+    this.props.getAllPosts();
     this.props.post({body: this.state.body})
-    this.handleClose()
+    
+   
   }
 
   render(){
@@ -66,10 +81,10 @@ class PostButton extends Component{
                           margin="none"
                           variant="outlined"
                           className = {classes.text}
+                          helperText ={errors.body}
                           error = {errors.body ? true : false}
                           name = "body"
                           onChange = {this.handleChange}
-                          
                         />
                         </form>
                     </DialogContent>
@@ -89,7 +104,6 @@ class PostButton extends Component{
                         variant="contained"
                         color = "primary"
                         onClick={this.handleSubmit}
-
                     >
                         Submit
                     </Button>
@@ -111,6 +125,6 @@ const mapStateToProps = (state) => ({
   UI: state.UI
 });
 const mapActionToProps = {
-  post
+  post, getAllPosts
 };
 export default connect (mapStateToProps, mapActionToProps)(withStyles(postLayoutStyles)(PostButton));
