@@ -30,7 +30,7 @@ const theme = createMuiTheme({
   
 });
 
-//fix: refresh page cause redux lost user details
+//fixed problem: when refresh page, the redux state is wiped out
 //get the token from local storage 
 const authToken = localStorage.FBToken;
 if(authToken){
@@ -40,6 +40,7 @@ if(authToken){
     store.dispatch(logoutUser());
     window.location.href = "/login";
   }else{
+    //if the token is yet to expire, re-get the user data
     store.dispatch({type: SET_AUTHENTICATED});
     axiosConfig.defaults.headers.common['Authorization'] = authToken;
     store.dispatch(getUserData());
