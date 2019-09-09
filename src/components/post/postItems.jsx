@@ -18,7 +18,7 @@ class PostItem extends Component {
   render(){
     dayjs.extend(relativeTime) 
     const {classes, post : {body, createdAt, userPosted}} = this.props;
-    
+
     return (
         <Grid className = {classes.grid}>
         <Card className = {classes.paper}>

@@ -12,24 +12,15 @@ import {connect} from "react-redux";
 import {postLayoutStyles} from "./PostLayoutStyle";
 import {getAllPosts} from "../../redux/actions/postActions";
 class PostLayout extends Component {
-  state = {
-    post: null
-  };
+  
   componentDidMount() {
-    axiosConfig
-      .get("/getAllPosts")
-      .then(res => {
-        console.log(res.data);
-        this.setState({
-          post: res.data
-        });
-      })
-      .catch(err => console.log(err));
+   this.props.getAllPosts();
   }
+  
   render() {
-    const {UI} = this.props;
-    let postMarkUp = this.state.post ? (
-      this.state.post.map(post => <PostItem post={post} />)
+    const {posts, loading} = this.props.post;
+    let postMarkUp = !loading ? (
+      posts.map(post => <PostItem post={post} />)
     ) : (
       <CircularProgress color="inherit" />
     );
@@ -49,15 +40,16 @@ class PostLayout extends Component {
 }
 PostLayout.propTypes = { 
   getAllPosts: PropTypes.func.isRequired,
-  UI: PropTypes.object.isRequired
+  UI: PropTypes.object.isRequired,
+  post: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
-  UI: state.UI
+  UI: state.UI, 
+  post: state.post
 })
 const mapActionToProps ={ 
   getAllPosts
 }
-
 
 export default connect (mapStateToProps, mapActionToProps)(withStyles(postLayoutStyles)(PostLayout));

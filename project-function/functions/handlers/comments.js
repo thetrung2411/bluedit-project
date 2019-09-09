@@ -6,7 +6,6 @@ exports.comment = (req,res) => {
     if(req.body.body.trim() === ''){
         return res.status(400).json({body: 'Comment cannot be empty'});
       }
-    
       const newComment = {
         body: req.body.body,
         postID: req.params.postId,

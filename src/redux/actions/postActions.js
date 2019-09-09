@@ -35,10 +35,12 @@ export const post = (newPost) => (dispatch) => {
       });
       dispatch({type: CLEAR_ERRORS});
     })
+    .then(() => {dispatch(getAllPosts())})
     .catch(err => {
       dispatch({
         type: SET_ERRORS,
         payload: err.response.data
       })
     })
+    
 }

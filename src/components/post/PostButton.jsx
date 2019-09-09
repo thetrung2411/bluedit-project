@@ -18,10 +18,11 @@ import PropTypes from 'prop-types';
 
 class PostButton extends Component{
   state = {
-    open: false,
-    body: '',
-    errors: {} 
-  };
+      open: false,
+      body: '',
+      errors: {} 
+    };
+
   componentWillReceiveProps(nextProps){
     if (nextProps.UI.errors){
       this.setState({
@@ -33,6 +34,7 @@ class PostButton extends Component{
       this.handleClose();
     }
   }
+ 
   handleOpen = () => {
     this.setState({open: true});
     console.log('clicked')
@@ -46,10 +48,8 @@ class PostButton extends Component{
   }
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.getAllPosts();
-    this.props.post({body: this.state.body})
-    
-   
+    this.props.post({body: this.state.body});
+
   }
 
   render(){
