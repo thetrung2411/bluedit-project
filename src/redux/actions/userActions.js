@@ -4,7 +4,8 @@ import {
   SET_ERRORS,
   CLEAR_ERRORS,
   LOADING_UI,
-  LOADING_USER
+  LOADING_USER,
+  SET_UNAUTHENTICATED
 } from "../types";
 
 export const loginUser = (userData, history) => dispatch => {
@@ -41,6 +42,12 @@ export const registerUser = (userData, history) => dispatch => {
         payload: err.response.data
       });
     });
+};
+
+export const logoutUser = () => dispatch => {
+  localStorage.removeItem("FBToken");
+  delete axiosConfig.defaults.headers.common["Authorization"];
+  dispatch({ type: SET_UNAUTHENTICATED });
 };
 
 export const getUserData = () => dispatch => {

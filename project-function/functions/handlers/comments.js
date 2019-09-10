@@ -18,7 +18,10 @@ exports.comment = (req,res) => {
           if(!doc.exists){
               return res.status(404).json({error: 'Post not found'});
           }  
-          return  db.collection("comments").add(newComment);
+          return doc.ref.update({commentCount: doc.data().commentCount +1 });
+      })
+      .then(() => {
+        return db.collection('comments').add(newComment);
       })
       .then(() => {
         res.json(newComment);
@@ -28,7 +31,6 @@ exports.comment = (req,res) => {
           res.status(500).json({error: "Unexpected error"});
       });
 };
-
 
 
 exports.getAllComments = (req, res) => {

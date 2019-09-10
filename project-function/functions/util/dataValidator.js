@@ -51,3 +51,13 @@ exports.validateLoginData = data => {
     valid: Object.keys(errors).length === 0 ? true : false
   };
 };
+//Validate post content
+exports.validatePostData = data => {
+  let errors = {};
+  if(isEmpty(data.body)) errors.body = "Must not be empty";
+  
+  return {
+    errors,
+    valid: Object.keys(errors).length === 0 ? true : false
+  };
+}
