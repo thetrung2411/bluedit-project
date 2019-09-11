@@ -1,4 +1,6 @@
-import React from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
@@ -9,97 +11,98 @@ import SearchIcon from "@material-ui/icons/Search";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
-import {appBarStyles} from "./appBarStyles";
+import { appBarStyles } from "./appBarStyles";
 import withStyles from "@material-ui/core/styles/withStyles";
 
-function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
+///redux
+import { connect } from "react-redux";
+import { logoutUser } from "../../redux/actions/userActions";
 
-window.onclick = function(event) {
-    if (!event.target.matches('.dropbtn')) {
-      var dropdowns = document.getElementsByClassName("dropdown-content");
-      var i;
-      for (i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show')) {
-          openDropdown.classList.remove('show');
-        }
-      }
-    }    
-}
+class SignedInAppBar extends Component {
+  handleLogout = () => {
+    this.props.logoutUser();
+  };
 
+  render() {
+    const {
+      classes,
+      user: { userDetails }
+    } = this.props;
 
-function SignedInAppBar(props) {
-    const { classes } = props;
-    
     return (
-        <div>
-            <AppBar position="static" className={classes.root}>
-                <Toolbar>
-                    <Link to = "/">
-                    <IconButton classname = {classes.button}>
-                        <HomeIcon/>
-                    </IconButton>
-                    </Link> 
-                    <Typography
-                        variant="h5"
-                    >
-                        Bluedit
-                    </Typography>
-                    <div/>
-                    <div className={classes.grow}></div>
-                    <div className={classes.search}>
-                        <div className = {classes.searchIcon}>
-                            <SearchIcon/>
-                        </div>
-                        <InputBase
-                            placeholder="Search…"
-                            classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput
-                            }}
-                        />
-                    </div>
-                    <div className={classes.grow}></div>
-                    <div>
-                        <Link to="/Report" className= {classes.noDecor}>
-                            <Button variant="contained" className = {classes.button}>Report</Button>
-                        </Link>
-                    </div>
+      <div>
+        <AppBar position="static" className={classes.root}>
+          <Toolbar>
+            <Link to="/">
+              <IconButton classname={classes.button}>
+                <HomeIcon />
+              </IconButton>
+            </Link>
+            <Typography variant="h5">Bluedit</Typography>
+            <div />
+            <div className={classes.grow}></div>
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput
+                }}
+              />
+            </div>
+            <div className={classes.grow}></div>
+            <div>
+              <Link to="/home" className={classes.noDecor}>
+                <Button
+                  variant="contained"
+                  className={classes.button}
+                  onClick={this.handleLogout}
+                >
+                  Logout
+                </Button>
+              </Link>
 
-                    <div>
-                        <Link to="/userpage" className= {classes.noDecor}>
-                            <Button variant="contained" className = {classes.button}>Userpage</Button>
-                        </Link>
-                    </div>
+              <Link to="/Report" className={classes.noDecor}>
+                <Button variant="contained" className={classes.button}>
+                  Report
+                </Button>
+              </Link>
+            </div>
 
-                    <div>
-                    <Link to="/userpage" className= {classes.noDecor}>
-                    <Avatar>R</Avatar>
-                    </Link>
-                    {/* <div class="dropdown">
-                    <button onclick="myFunction()" class="dropbtn">
-                        <div><Avatar>R</Avatar></div>
-                        <div><Typography align="right">Username</Typography></div>
-                        
-                    </button>
-                    <div className={classes.button} id="myDropdown" class="dropdown-content">
-                        <a href="#Userpage">Userpage</a>
-                        <a href="#Bookmark">Bookmark</a>
-                        <a href="#Report">Report</a>
-                        <a href="#Logout">Logout</a>
-                    </div> */}
-                    </div>
-
-                    <div>
-                    <Link to="/userpage" className= {classes.noDecor}>
-                    <Typography align="right">Username</Typography>
-                    </Link>
-                    </div>
-                </Toolbar>
-            </AppBar>
-        </div>
+            <div>
+              <Link to="/userpage" className={classes.noDecor}>
+                <Avatar>R</Avatar>
+              </Link>
+            </div>
+            <div>
+              <Link to="/userpage" className={classes.noDecor}>
+                <Typography align="right">{userDetails.userName}</Typography>
+              </Link>
+            </div>
+          </Toolbar>
+        </AppBar>
+      </div>
     );
+  }
 }
-export default withStyles (appBarStyles)(SignedInAppBar);
+
+const mapActionToProps = {
+  logoutUser
+};
+
+const mapStateToProps = state => ({
+  user: state.user
+});
+
+SignedInAppBar.propTypes = {
+  user: PropTypes.object.isRequired,
+  logoutUser: PropTypes.func.isRequired
+};
+
+export default connect(
+  mapStateToProps,
+  mapActionToProps
+)(withStyles(appBarStyles)(SignedInAppBar));

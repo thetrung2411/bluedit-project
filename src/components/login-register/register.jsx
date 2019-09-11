@@ -3,15 +3,26 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
+//Redux stuff
+import { connect } from "react-redux";
+import { registerUser } from "../../redux/actions/userActions";
+ 
 //MUI import
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const styles = {
+  typography: {
+    useNextVariants: true
+  },
   form: {
     textAlign: "center"
+  },
+  image: {
+    margin: "20px auto 20px auto"
   },
   pageTitle: {
     margin: "10px auto 10px auto"
@@ -21,12 +32,15 @@ const styles = {
   },
   button: {
     marginTop: 20,
-    marginBottom: 20
+    position: "relative"
   },
   customError: {
     color: "red",
     fontSize: "0.8rem",
     marginTop: 10
+  },
+  progress: {
+    position: "absolute"
   },
   link: {
     color: "white"
@@ -34,13 +48,16 @@ const styles = {
 };
 
 export class register extends Component {
-  state = {
-    email: "",
-    password: "",
-    confirmPassword: "",
-    userName: "",
-    errors: {}
-  };
+  constructor() {
+    super();
+    this.state = {
+      email: "",
+      password: "",
+      confirmPassword: "",
+      userName: "",
+      errors: {}
+    };
+  }
 
   handleChange = e => {
     this.setState({
@@ -48,10 +65,28 @@ export class register extends Component {
     });
   };
 
-  handleSubmit = e => {};
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.UI.errors) {
+      this.setState({ errors: nextProps.UI.errors });
+    }
+  }
+
+  handleSubmit = e => {
+    e.preventDefault();
+    this.setState({
+      loading: true
+    });
+    const userData = {
+      email: this.state.email,
+      password: this.state.password,
+      confirmPassword: this.state.confirmPassword,
+      userName: this.state.userName
+    };
+    this.props.registerUser(userData, this.props.history);
+  };
 
   render() {
-    const { classes } = this.props;
+    const { classes, UI: {loading} } = this.props;
     const { errors } = this.state;
 
     return (
@@ -70,6 +105,8 @@ export class register extends Component {
               type="email"
               label="Email"
               className={classes.textField}
+              helperText={errors.email}
+              error={errors.email ? true : false}
               value={this.state.email}
               onChange={this.handleChange}
               fullWidth
@@ -79,6 +116,9 @@ export class register extends Component {
               name="password"
               type="password"
               label="Password"
+              className={classes.textField}
+              helperText={errors.password}
+              error={errors.password ? true : false}
               value={this.state.password}
               onChange={this.handleChange}
               fullWidth
@@ -89,6 +129,8 @@ export class register extends Component {
               type="password"
               label="Re-enter your password"
               className={classes.textField}
+              helperText={errors.confirmPassword}
+              error={errors.confirmPassword ? true : false}
               value={this.state.confirmPassword}
               onChange={this.handleChange}
               fullWidth
@@ -98,6 +140,9 @@ export class register extends Component {
               name="userName"
               type="userName"
               label="Enter your user name (User name cannot be change)"
+              className={classes.textField}
+              helperText={errors.userName}
+              error={errors.userName ? true : false}
               value={this.state.userName}
               onChange={this.handleChange}
               fullWidth
@@ -112,8 +157,12 @@ export class register extends Component {
               variant="contained"
               color="primary"
               className={classes.button}
+              disabled={loading}
             >
               Submit
+              {loading && (
+                <CircularProgress size={30} className={classes.progress} />
+              )}
             </Button>
             <br />
             <Typography variant="subtitle2">
@@ -138,7 +187,18 @@ export class register extends Component {
 }
 
 register.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired,
+  registerUser: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(register);
+const mapStateToProps = state =>({
+  user: state.user,
+  UI: state.UI
+})
+
+export default connect(
+  mapStateToProps,
+  { registerUser }
+)(withStyles(styles)(register));

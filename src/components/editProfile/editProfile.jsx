@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import AppBarWithAvatar from "../appBar/AppBarWithAvatar";
 import Sidebar from "react-sidebar";
-
+import PropTypes from "prop-types";
 import userImage from "../../assets/hehe.png";
 
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -10,7 +10,7 @@ import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
-import { getUserData } from "../../redux/actions/userActions";
+import { changeUserData } from "../../redux/actions/userActions";//getUserData//changeUserData
 
 const styles = {
     form: {
@@ -31,36 +31,48 @@ const styles = {
         backgroundImage: `../../assets/UserpageAssets/bgImage.jpg`
         }
   };
+  
 
-class userpage extends React.Component{
+class editProfile extends React.Component{
 
     constructor(props) {
         super(props);
         this.state = {
-            sidebarOpen: true,
-            userName: "UserName",
-            email:" Email",
-            location:"Location",
-            CreatAt:"20/08/2019",
+            userName: "",
+            bio: "",
+            location:"",
         };
-        // this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
+
       }
-    
-    // onSetSidebarOpen(open) {
-    //     this.setState({ sidebarOpen: open });
-    //   }
 
+      handleChange = e => {
+        this.setState({
+          [e.target.name]: e.target.value
+        });
+      };
 
+      handleSubmit = e => {
+        //e.preventDefault();
+        this.setState({
+          loading: true
+        });
+        const userData = {
+          //password: this.state.password,
+          userName: this.state.userName,
+          bio: this.state.bio,
+          location: this.state.location
+        };
+        // this.props.changeUserData(userData, this.props.history);
+        this.props.changeUserData();
+      };
 
     render()
     {
-        const { classes, user: { userDetails } } = this.props;
-        //const { errors } = this.state;
+        const { classes, UI: {loading} } = this.props;
         
         return (
                 <div>
-
-
+                {/* <form noValidate onSubmit={this.handleSubmit}> */}
                 <table align = "center">
                     <tr>
                         <td>
@@ -71,23 +83,8 @@ class userpage extends React.Component{
                                 id="userName"
                                 name="userName"
                                 type="userName"
-                                value = {userDetails.userName}
-                                className={classes.textField}
-                                fullWidth
-                            />
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            Email:
-                        </td>
-                        <td>
-                            <TextField
-                                id="email"
-                                name="email"
-                                type="email"
-                                value = {userDetails.email}//{this.state.email}
+                                value = {this.state.userName}
+                                onChange={this.handleChange}
                                 className={classes.textField}
                                 fullWidth
                             />
@@ -103,7 +100,8 @@ class userpage extends React.Component{
                                 id="location"
                                 name="location"
                                 type="location"
-                                value= {userDetails.location}//{this.state.location}
+                                value= {this.state.location}
+                                onChange={this.handleChange}
                                 className={classes.textField}
                                 fullWidth
                             />
@@ -112,60 +110,60 @@ class userpage extends React.Component{
 
                     <tr>
                         <td>
-                            Creat At:
+                            Bio:
                         </td>
                         <td>
                             <TextField
-                                id="createdAt"
-                                name="createdAt"
-                                type="createdAt"
-                                value= {userDetails.createdAt}
+                                id="bio"
+                                name="bio"
+                                type="bio"
+                                value = {this.state.bio}
+                                onChange={this.handleChange}
                                 className={classes.textField}
                                 fullWidth
                             />
                         </td>
                     </tr>
+
                     <tr>
-                        <td>
-                        <Link to="/editProfile" className= {classes.noDecor}>
+                        <Link to="/userpage" className= {classes.noDecor}>
                             <Button
                                 type="submit"
                                 variant="contained"
                                 color="primary"
+                                disabled={loading}
                                 className={classes.button}
+                                onClick={this.handleSubmit}
                                 >
-                                Edit
+                                Save
                             </Button>
-                            </Link>
-                        </td>
-                        <td>
-                            <Link to="/homepage" className= {classes.noDecor}>
-                                <Button
-                                    type="submit"
-                                    variant="contained"
-                                    color="primary"
-                                    className={classes.button}
-                                    >
-                                    Delete Account
-                                </Button>
-                            </Link>
-                        </td>
+                        </Link>
                     </tr>
                 </table>
+                {/* </form> */}
                 </div>
         )
     }
 }
 
+editProfile.propTypes = {
+    classes: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
+    UI: PropTypes.object.isRequired,
+    changeUserData: PropTypes.func.isRequired
+  };
+
 const mapStateToProps = state => ({
-    user: state.user
+    user: state.user,
+    UI: state.UI
   });
 
-const mapActionsToProps = {
-    getUserData
-};
+// const mapActionsToProps = {
+//     changeUserData
+// };
 
 export default connect(
     mapStateToProps,
-    mapActionsToProps
-  )(withStyles(styles)(userpage));
+    { changeUserData }
+    //mapActionsToProps
+  )(withStyles(styles)(editProfile));
