@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
-
 import jwtDecode from "jwt-decode";
 import axiosConfig from "./axiosConfig"
 import {logoutUser, getUserData} from "./redux/actions/userActions"
-
 import { Route, BrowserRouter, Switch, Redirect} from 'react-router-dom';
 import login from './components/login-register/login';
 import register from './components/login-register/register';

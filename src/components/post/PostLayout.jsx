@@ -12,7 +12,7 @@ import { PostLayoutStyles } from "./PostLayoutStyle";
 import { getAllPosts } from "../../redux/actions/postActions";
 import { Redirect } from "react-router-dom";
 
-class PostLayout extends Component {
+export class PostLayout extends Component {
   
   componentDidMount() {
    this.props.getAllPosts();

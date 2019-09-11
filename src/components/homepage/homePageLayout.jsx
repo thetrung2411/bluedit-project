@@ -6,7 +6,7 @@ import RecommendationItem from "../post/Recommendation";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import axiosConfig from "../../axiosConfig";
 
-class HomePageLayout extends Component {
+export class HomePageLayout extends Component {
   state = {
     post: null
   };
