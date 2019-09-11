@@ -37,12 +37,10 @@ class PostItems extends Component {
         titleTypographyProps={{align:"left"}}
         subheaderTypographyProps={{align:"left"}}
         subheader= {dayjs(createdAt).fromNow()}/>
-        {/* <CardMedia className ={classes.media} image = {imagePost}/> */}
         <CardContent>
         <Typography align = "justify"> {body}
         </Typography>
         </CardContent>
-        {/* <CardContent><Typography color="secondary" align="left">1,5k upvotes</Typography></CardContent> */}
         <CardActions > 
         <Typography>{upvoteCount}</Typography>
         <Fab size="small" className ={classes.fab} ><ThumbUpAltRoundedIcon/></Fab>

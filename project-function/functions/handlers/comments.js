@@ -8,7 +8,7 @@ exports.comment = (req,res) => {
       }
       const newComment = {
         body: req.body.body,
-        postID: req.params.postId,
+        postId: req.params.postId,
         userName: req.user.userName,
         createdAt: new Date().toISOString() 
       };

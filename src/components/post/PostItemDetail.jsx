@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import TextField from '@material-ui/core/TextField';
+import CommentField from "../comment/CommentField";
 import {PostLayoutStyles } from "./PostLayoutStyle";
 import ThumbUpAltRoundedIcon from '@material-ui/icons/ThumbUpAltRounded';
 import ThumbDownRoundedIcon from '@material-ui/icons/ThumbDownRounded';
@@ -64,6 +64,7 @@ class PostItemDetail extends Component {
         <Fab size="small" className ={classes.fab} ><ThumbUpAltRoundedIcon/></Fab>
         <Fab size="small" className ={classes.fab} ><ThumbDownRoundedIcon/></Fab>
         </CardActions>
+        <CommentField postId = {postId}> </CommentField>
         <CommentItem comments={comments}></CommentItem>
         </Card>); 
     return (
