@@ -23,7 +23,7 @@ import Avatar from "@material-ui/core/Avatar";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import IconButton from "@material-ui/core/IconButton";
 import {Typography, Grid, CardMedia} from "@material-ui/core";
-class PostItemDetail extends Component {
+export class PostItemDetail extends Component {
     state = {
         open: false
     }

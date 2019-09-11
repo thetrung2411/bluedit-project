@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {postComment} from '../../redux/actions/commentActions';
 import Button from "@material-ui/core/Button";
-class CommentField extends Component{
+export class CommentField extends Component{
     state = {
         body: '',
         errors: {} 

@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 
 
 
-class PostButton extends Component{
+export class PostButton extends Component{
   state = {
       open: false,
       body: '',

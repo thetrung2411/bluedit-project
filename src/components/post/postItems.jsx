@@ -14,7 +14,7 @@ import imagePost from "../../assets/hehe.png";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import PostItemDetail from "./PostItemDetail";
-class PostItems extends Component {
+export class PostItems extends Component {
   render(){
     dayjs.extend(relativeTime) 
     const {classes, post : {body, createdAt, userPosted, commentCount, upvoteCount, postId}} = this.props;
