@@ -52,7 +52,7 @@ class editProfile extends React.Component{
       };
 
       handleSubmit = e => {
-        //e.preventDefault();
+        e.preventDefault();
         this.setState({
           loading: true
         });
@@ -62,9 +62,13 @@ class editProfile extends React.Component{
           bio: this.state.bio,
           location: this.state.location
         };
-        // this.props.changeUserData(userData, this.props.history);
-        this.props.changeUserData();
+        this.props.changeUserData(userData, this.props.history);
+        //this.props.changeUserData();
       };
+
+      handleDeleteAccount = e =>{
+        //this.props.deleteAccount();
+      }
 
     render()
     {

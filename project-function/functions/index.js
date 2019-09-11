@@ -1,6 +1,6 @@
 const functions = require("firebase-functions");
 const app = require("express")();
-const {signup, login, getCurrentUser} = require("./handlers/users");
+const {signup, login, getCurrentUser, changeUserDetail, deleteUser} = require("./handlers/users");
 const {post, getAllPosts, getPost} = require("./handlers/posts");
 const {comment, getAllComments} = require("./handlers/comments");
 const FBAuth = require("./util/fbAuth");
@@ -10,7 +10,8 @@ app.use(cors());
 //Login, SignUp
 app.post("/signup", signup);
 app.post("/login", login);
-app.get("/user", FBAuth, getCurrentUser);
+app.get("/user", FBAuth, getCurrentUser, deleteUser);
+app.post("/editProfile", changeUserDetail);
 
 //Post
 app.post("/post", FBAuth, post);

@@ -121,3 +121,51 @@ exports.getCurrentUser = (req,res) =>{
       return res.status(500).json({error: err.code})
     })
 }
+
+exports.changeUserDetail = (req,res) =>{
+
+  const user = {
+    userName: req.body.userName,
+    bio: req.body.bio,
+    location: req.body.location
+  };
+
+  let userData = {};
+  db.doc(`/users/${req.user.userName}`)
+    .get()
+    .then(doc =>{
+      if (doc.exists){
+        userData.userDetails = user.data();
+      }
+      return res.json(userData);
+    })
+    .catch(err =>{
+      console.error(err);
+      return res.status(500).json({error: err.code})
+    })
+  
+  // var currentuser = db.auth().currentUser;
+
+  // currentuser.updateProfile(
+  //             {
+  //               userName: user.userName,
+  //               bio: user.bio,
+  //               location: user.location
+  //             }
+  //           )
+  //           .then()
+  //           .catch(err =>{
+  //             console.error(err);
+  //             return res.status(500).json({error: err.code})
+  //           })
+}
+
+exports.deleteUser = (req,res) =>{
+  var user = firebase.auth().currentUser;
+
+  user.delete().then(function() {
+    // User deleted.
+  }).catch(function(error) {
+    // An error happened.
+  });
+}

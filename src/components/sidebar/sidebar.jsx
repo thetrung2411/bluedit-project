@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
+import { getUserData } from "../../redux/actions/userActions";
 
 const styles = {
     form: {
@@ -36,7 +37,7 @@ class sidebar extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            sidebarOpen: true,
+            sidebarOpen: false,
         };
         this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
       }

@@ -1,11 +1,5 @@
 import React, { Component } from "react";
-import AppBar from "../appBar/appBar";
 import AppBarWithAvatar from "../appBar/AppBarWithAvatar";
-import PostItems from "../post/PostItems";
-import Grid from "@material-ui/core/Grid";
-import RecommendationItem from "../post/Recommendation";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import axiosConfig from "../../axiosConfig";
 import Sidebar from "../sidebar/sidebar";
 import Userpage from "./userpage";
 
