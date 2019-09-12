@@ -1,16 +1,20 @@
 const { db, admin } = require("../util/admin");
 const config = require("../util/config");
 const firebase = require("firebase");
+const {
+  validatePostData
+} = require("../util/dataValidator");
 
 exports.post = (req, res) => {
   if (req.body.body.trim() === '') {
     return res.status(400).json({ body: 'Post cannot be empty' });
   }
-
   const newPost = {
     body: req.body.body,
     userPosted: req.user.userName,
-    createdAt: new Date().toISOString()
+    createdAt: new Date().toISOString(),
+    upvoteCount: 0,
+    commentCount: 0
   };
 
   db.collection('posts')
@@ -35,9 +39,9 @@ exports.getPost = (req, res) => {
       postContent.postId = doc.id;
       return db.collection('comments').where('postId', '==', req.params.postId).get();
     })
-    .then(data => {
+    .then((data) => {
       postContent.comments = [];
-      data.forEach(doc => {
+      data.forEach((doc) => {
         postContent.comments.push(doc.data());
       });
       return res.json(postContent);
@@ -58,8 +62,10 @@ exports.getAllPosts = (req, res) => {
         posts.push({
           postId: doc.id,
           body: doc.data().body,
+          commentCount: doc.data().commentCount,
+          upvoteCount: doc.data().upvoteCount,
           createdAt: doc.data().createdAt,
-          userPosted: doc.data().userPosted
+          userPosted: doc.data().userPosted,
         });
       });
       return res.json(posts);
