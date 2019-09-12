@@ -45,22 +45,7 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 export const changeUserData = (userData, history) => dispatch => {
-  dispatch({ type: SET_USER });
-  axiosConfig
-    .post("/editProfile", userData)
-    .then(res => {
-      setAuthourizationHeader(res.data.token);
-      dispatch(getUserData());
-      dispatch({ type: CLEAR_ERRORS });
-      history.push("/userpage");
-    })
-    .catch(err => {
-      dispatch({
-        type: SET_ERRORS,
-        payload: err.response.data
-      });
-      console.log(err)
-    });
+
 };
 
 export const logoutUser = () => dispatch => {

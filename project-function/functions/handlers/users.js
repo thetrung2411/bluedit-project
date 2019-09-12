@@ -130,34 +130,34 @@ exports.changeUserDetail = (req,res) =>{
     location: req.body.location
   };
 
-  let userData = {};
-  db.doc(`/users/${req.user.userName}`)
-    .get()
-    .then(doc =>{
-      if (doc.exists){
-        userData.userDetails = user.data();
-      }
-      return res.json(userData);
-    })
-    .catch(err =>{
-      console.error(err);
-      return res.status(500).json({error: err.code})
-    })
+  // let userData = {};
+  // db.doc(`/users/${req.user.userName}`)
+  //   .get()
+  //   .then(doc =>{
+  //     if (doc.exists){
+  //       userData.userDetails = user.data();
+  //     }
+  //     return res.json(userData);
+  //   })
+  //   .catch(err =>{
+  //     console.error(err);
+  //     return res.status(500).json({error: err.code})
+  //   })
   
-  // var currentuser = db.auth().currentUser;
+  var currentuser = db.auth().currentUser;
 
-  // currentuser.updateProfile(
-  //             {
-  //               userName: user.userName,
-  //               bio: user.bio,
-  //               location: user.location
-  //             }
-  //           )
-  //           .then()
-  //           .catch(err =>{
-  //             console.error(err);
-  //             return res.status(500).json({error: err.code})
-  //           })
+  currentuser.updateProfile(
+              {
+                userName: user.userName,
+                bio: user.bio,
+                location: user.location
+              }
+            )
+            .then()
+            .catch(err =>{
+              console.error(err);
+              return res.status(500).json({error: err.code})
+            })
 }
 
 exports.deleteUser = (req,res) =>{

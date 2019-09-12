@@ -76,7 +76,6 @@ class editProfile extends React.Component{
         
         return (
                 <div>
-                {/* <form noValidate onSubmit={this.handleSubmit}> */}
                 <table align = "center">
                     <tr>
                         <td>
@@ -144,7 +143,6 @@ class editProfile extends React.Component{
                         </Link>
                     </tr>
                 </table>
-                {/* </form> */}
                 </div>
         )
     }

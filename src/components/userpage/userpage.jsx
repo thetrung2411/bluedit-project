@@ -54,7 +54,7 @@ class userpage extends React.Component{
 
     render()
     {
-        const { classes, user: { userDetails } } = this.props;
+        const { classes, user: { userDetails = {} } } = this.props;
         //const { errors } = this.state;
         
         return (

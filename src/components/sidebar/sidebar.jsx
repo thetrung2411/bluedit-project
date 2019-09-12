@@ -50,7 +50,7 @@ class sidebar extends React.Component{
 
     render()
     {
-        const { classes, user: { userDetails } } = this.props;
+        const { classes, user: { userDetails = {} } } = this.props;
         
         return (
                 <div>

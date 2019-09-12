@@ -26,7 +26,7 @@ class SignedInAppBar extends Component {
   render() {
     const {
       classes,
-      user: { userDetails }
+      user: { userDetails = {} }
     } = this.props;
 
     return (
