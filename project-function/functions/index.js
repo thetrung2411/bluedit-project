@@ -5,7 +5,11 @@ const { post, getAllPosts, getPost } = require("./handlers/posts");
 const { comment, getAllComments } = require("./handlers/comments");
 const FBAuth = require("./util/fbAuth");
 const cors = require("cors");
-const { getAllReports, getReport } = require("./handlers/reports");
+const {
+  getAllReports,
+  getReport,
+  changeReportStatus
+} = require("./handlers/reports");
 
 app.use(cors());
 //Login, SignUp
@@ -23,5 +27,6 @@ app.get("/getAllComments", getAllComments);
 //Report
 app.get("/getAllReports", getAllReports);
 app.get("/getReport/:reportId", getReport);
+app.post("/changeStatus/:reportId", changeReportStatus);
 
 exports.api = functions.https.onRequest(app);

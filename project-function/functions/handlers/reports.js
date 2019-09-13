@@ -40,3 +40,21 @@ exports.getAllReports = (req, res) => {
     })
     .catch(err => console.error(err));
 };
+
+exports.changeReportStatus = (req, res) => {
+  db.doc(`/reports/${req.params.reportId}`)
+    .get()
+    .then(doc => {
+      if (!doc.exists) {
+        return res.status(404).json({ error: "Report not found" });
+      }
+      return doc.ref.update({ status: "processed" });
+    })
+    .then(() => {
+      res.json({ message: "Status changed successfully" });
+    })
+    .catch(err => {
+      console.log(err);
+      return res.status(500).json({ error: err.code });
+    });
+};
