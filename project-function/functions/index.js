@@ -8,7 +8,8 @@ const cors = require("cors");
 const {
   getAllReports,
   getReport,
-  changeReportStatus
+  changeReportStatus,
+  deleteReport
 } = require("./handlers/reports");
 
 app.use(cors());
@@ -28,5 +29,6 @@ app.get("/getAllComments", getAllComments);
 app.get("/getAllReports", getAllReports);
 app.get("/getReport/:reportId", getReport);
 app.post("/changeStatus/:reportId", changeReportStatus);
+app.delete("/deleteReport/:reportId", deleteReport);
 
 exports.api = functions.https.onRequest(app);

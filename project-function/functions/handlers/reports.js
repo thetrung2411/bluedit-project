@@ -58,3 +58,23 @@ exports.changeReportStatus = (req, res) => {
       return res.status(500).json({ error: err.code });
     });
 };
+
+exports.deleteReport = (req, res) => {
+  const document = db.doc(`/reports/${req.params.reportId}`);
+  document
+    .get()
+    .then(doc => {
+      if (!doc.exists) {
+        return res.status(404).json({ error: "Report not found" });
+      } else {
+        return document.delete();
+      }
+    })
+    .then(() => {
+      res.json({ message: "Report delete successfully" });
+    })
+    .catch(err => {
+      console.error(err);
+      return res.status(500).json({ error: err.code });
+    });
+};

@@ -25,7 +25,7 @@ const ReportTable = props => {
             <TableCell align="left">{report.status}</TableCell>
             <TableCell align="left">
               <ReportDialog report={report} />
-              <Button onClick={() => props.handleDelete(index)}>
+              <Button onClick={() => props.handleDelete(report.reportId)}>
                 <DeleteForeverOutlinedIcon />
               </Button>
             </TableCell>

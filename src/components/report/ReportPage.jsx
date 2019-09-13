@@ -28,12 +28,20 @@ export class ReportPage extends Component {
       .catch(err => console.log(err));
   }
 
-  handleDelete = index => {
-    let tempArr = this.state.reports.slice();
-    tempArr.splice(index, 1);
-    this.setState({
-      reports: tempArr
-    });
+  handleDelete = reportId => {
+    axiosConfig
+      .delete(`/deleteReport/${reportId}`)
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => console.log(err));
+
+    window.location.reload();
+    //let tempArr = this.state.reports.slice();
+    //tempArr.splice(index, 1);
+    //this.setState({
+    //  reports: tempArr
+    //});
   };
 
   handleSort = sortKey => {
