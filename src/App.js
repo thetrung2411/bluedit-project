@@ -58,25 +58,9 @@ class App extends Component {
               <Switch>
                 <Route path='/login' component={login} />
                 <Route path='/register' component={register} />
-                <Route path='/post' component={Post} />
-                <Route path='/home' component={HomePage} />
-                <Route path='/report' exact component={ReportPage} />
-                <Route path='/userpage' component={userpage} />
-                <Route path='/report/ReportDetail' component={ReportDetail} />
-                <Redirect from='/' to='/home' />
-              </Switch>
-            </div>
-          </BrowserRouter>
-
-          <CssBaseline />
-          <BrowserRouter>
-            <div className="App">
-              <Switch>
-                <Route path='/login' component={login} />
-                <Route path='/register' component={register} />
                 <Route path='/post' component={PostLayout} />
                 <Route path='/home' component={HomePageLayout} />
-                <Route path='/report' component={Report} />
+                <Route path='/report' component={ReportPage} />
                 <Route path='/userpage' component={userpage} />
                 <Redirect from='/' to='/home' />
               </Switch>
