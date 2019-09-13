@@ -23,20 +23,9 @@
       this.searchPost(query);
     }
     
-    // getPopularPost() {
-    //   const url = `https://api.themoviedb.org/3/movie/popular?api_key=cfe422613b250f702980a3bbf9e90716`;
-      
-    //   fetch (url)
-    //     .then(response => response.json())
-    //     .then(data => {
-    //       this.setState({
-    //         posts: data.results
-    //       })
-    //     });
-    // }
-    
     searchPost(query) {
-      const url = `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=cfe422613b250f702980a3bbf9e90716`;
+      const url = `https://renfi-69a94.firebaseio.com`;
+      // `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=cfe422613b250f702980a3bbf9e90716`;
       
       fetch (url)
         .then(response => response.json())
@@ -46,11 +35,7 @@
           })
         });
     }
-    
-    // componentDidMount() {
-    //   this.getPopularPosts();
-    //
-    
+       
     render() {
       const { posts, query } = this.state;
       const isSearched = query => item => !query || item.title.toLowerCase().includes(query.toLowerCase());
@@ -64,5 +49,4 @@
     }
   }
   
-  //ReactDOM.render(<Searchh/>, document.getElementById('root'));
   export default Searchh;
