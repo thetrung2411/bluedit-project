@@ -14,7 +14,7 @@ function HomeAppBar(props) {
     const { classes } = props;
     return (
         <div>
-            <AppBar position="static" className={classes.root}>
+            <AppBar position="static" className={classes.root} >
                 <Toolbar>
                     <Link to = "/">
                     <IconButton classname = {classes.button}>
