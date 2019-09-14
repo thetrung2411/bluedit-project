@@ -1,9 +1,8 @@
 import React from "react";
 import { configure, shallow, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import { Router } from "react-router-dom";
 
-import ReportPage, { ReportPage as TestClass } from "./ReportPage";
+import { ReportPage as TestClass } from "./ReportPage";
 import SearchReport from "./SearchReport";
 import ReportTable from "./ReportTable";
 import ReportDialog from "./ReportDialog";
