@@ -5,7 +5,9 @@ import axiosConfig from "./axiosConfig"
 import {logoutUser, getUserData} from "./redux/actions/userActions"
 import { Route, BrowserRouter, Switch, Redirect} from 'react-router-dom';
 import login from './components/login-register/login';
-import register from './components/login-register/register';
+import register from './components/login-register/register'; 
+import test from './components/search/test';
+import searching from './components/search/searching';
 import PostLayout from './components/post/PostLayout';
 import HomePageLayout from './components/homepage/homePageLayout';
 import {Provider} from 'react-redux';
@@ -61,6 +63,9 @@ class App extends Component{
               <Route path='/home' component = {HomePageLayout}/>
               <Route path='/report' component = {Report} />
               <Route path='/userpage' component = {userpage}/>
+              <Route path='/searching' component = {searching}/>
+              <Route path='/test' component = {test}/>
+
               <Redirect from ='/' to='/home'/>
             </Switch>
         </div>

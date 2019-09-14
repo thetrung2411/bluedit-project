@@ -59,3 +59,17 @@ export const post = (newPost) => (dispatch) => {
     })
     
 }
+
+export const SearchPost = (postId) => (dispatch) => {
+  dispatch({type: LOADING_UI});
+  axiosConfig.get(`/post/${postId}`)
+  .then(res => {
+    dispatch ({
+      type:GET_POST,
+      payload:res.data
+    });
+    dispatch({type: STOP_LOADING_UI})
+  })
+  .catch (err => console.log(err));
+
+}

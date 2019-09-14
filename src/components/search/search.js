@@ -9,7 +9,7 @@
   );
   
   Search.propTypes = {
-    query      : PropTypes.string.isRequired,
+    array      : PropTypes.string.isRequired,
     onInput    : PropTypes.func.isRequired,
     placeholder: PropTypes.string
   };

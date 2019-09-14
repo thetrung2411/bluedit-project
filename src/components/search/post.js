@@ -8,16 +8,16 @@ const Post = props => (
       <figure>
         {/* <img src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${props.poster_path}`} /> */}
         <figcaption>
-          <h2 className="post__title">{props.title}</h2>
+          <h2 className="body">{props.body}</h2>
         </figcaption>
       </figure>
     </div>
   );
   
   Post.propTypes = {
-    id         : PropTypes.number.isRequired,
-    title      : PropTypes.string.isRequired,
-    poster_path: PropTypes.string
+    postID         : PropTypes.string.isRequired,
+    body      : PropTypes.string.isRequired,
+    //poster_path: PropTypes.string
   };  
    export default Post;
   

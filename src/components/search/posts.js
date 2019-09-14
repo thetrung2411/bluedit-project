@@ -8,7 +8,7 @@
   const Posts = props => (
     <ul className="posts">
       {props.posts.map(post => (
-        <li key={post.id}>
+        <li key={post.postId}>
           <Post {...post} />
         </li>
       ))}
