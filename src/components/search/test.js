@@ -9,23 +9,23 @@
       
       this.state = {
         posts: [],
-        query: ''
+        array: ''
       };
       
       this.onInput = this.onInput.bind(this);
     }
     
-    onInput(query) {
+    onInput(array) {
       this.setState({
-        query
+        array
       });
       
-      this.searchPost(query);
+      this.searchPost(array);
     }
     
-    searchPost(query) {
+    searchPost(array) {
       
-      const url = `https://us-central1-renfi-69a94.cloudfunctions.net/api/post?query=${query}`;
+      const url = `https://us-central1-renfi-69a94.cloudfunctions.net/api/post?query=${array}`;
       // https://api.themoviedb.org/3/search/movie?query=${query}&api_key=cfe422613b250f702980a3bbf9e90716`;
       
       fetch (url)
@@ -38,13 +38,13 @@
     }
        
     render() {
-      const { posts, query } = this.state;
-      const isSearched = query => item => !query || item.title.toLowerCase().includes(query.toLowerCase());
+      const { posts, array } = this.state;
+      const isSearched = array => item => !array || item.title.toLowerCase().includes(array.toLowerCase());
       
       return (
         <div className="Search">
-          <Search query={query} onInput={this.onInput} placeholder="Search for Post …" />
-          <Posts posts={posts.filter(isSearched(query))} />
+          <Search array={array} onInput={this.onInput} placeholder="Search for Post …" />
+          <Posts posts={posts.filter(isSearched(array))} />
         </div>
       );
     }
