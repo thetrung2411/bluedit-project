@@ -7,7 +7,7 @@ import { Route, BrowserRouter, Switch, Redirect} from 'react-router-dom';
 import login from './components/login-register/login';
 import register from './components/login-register/register';
 import PostLayout from './components/post/PostLayout';
-import HomePageLayout from './components/homepage/HomePageLayout';
+import HomePageLayout from './components/homepage/homePageLayout';
 import {Provider} from 'react-redux';
 import store from './redux/store'; 
 //import bookmark from './components/bookmark/BookmarkForm';

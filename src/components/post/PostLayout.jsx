@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Grid from "@material-ui/core/Grid";
 import SignedInAppBar from "../appBar/AppBarWithAvatar";
-import PostItems from "./PostItems";
+import PostItems from "./postItems";
 import RecommendationItem from "../post/Recommendation";
 import PostButton from "../post/PostButton";
 import CircularProgress from "@material-ui/core/CircularProgress";
