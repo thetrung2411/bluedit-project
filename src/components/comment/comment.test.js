@@ -4,6 +4,7 @@ import CommentField from './CommentField';
 import CommentItem from './CommentItem';
 import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
+import { PostLayout } from '../post/PostLayout';
 const mockStore = configureMockStore();
 const store = mockStore({});
 
@@ -17,6 +18,7 @@ describe('CommentItem Component Test', () => {
     test('Should render without errors', () => {
         const component = shallow(<Provider store ={store}><CommentItem/></Provider>);
         expect(component.find(CommentItem).length).toBe(1);
-
     })
 })
+
+
