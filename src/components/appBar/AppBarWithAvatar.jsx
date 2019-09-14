@@ -16,8 +16,13 @@ import withStyles from "@material-ui/core/styles/withStyles";
 
 ///redux
 import { connect } from "react-redux";
+import { logoutUser } from "../../redux/actions/userActions";
 
 class SignedInAppBar extends Component {
+  handleLogout = () => {
+    this.props.logoutUser();
+  };
+
   render() {
     const {
       classes,
@@ -50,6 +55,16 @@ class SignedInAppBar extends Component {
             </div>
             <div className={classes.grow}></div>
             <div>
+              <Link to="/home" className={classes.noDecor}>
+                <Button
+                  variant="contained"
+                  className={classes.button}
+                  onClick={this.handleLogout}
+                >
+                  Logout
+                </Button>
+              </Link>
+
               <Link to="/Report" className={classes.noDecor}>
                 <Button variant="contained" className={classes.button}>
                   Report
@@ -70,14 +85,20 @@ class SignedInAppBar extends Component {
   }
 }
 
+const mapActionToProps = {
+  logoutUser
+};
+
 const mapStateToProps = state => ({
   user: state.user
 });
 
 SignedInAppBar.propTypes = {
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
+  logoutUser: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps)(
-  withStyles(appBarStyles)(SignedInAppBar)
-);
+export default connect(
+  mapStateToProps,
+  mapActionToProps
+)(withStyles(appBarStyles)(SignedInAppBar));

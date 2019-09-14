@@ -33,12 +33,12 @@ export const appBarStyles = theme => ({
         marginRight: 10,
         width: "100%",
         [theme.breakpoints.up("sm")]: {
-            marginLeft: theme.spacing.unit,
+            marginLeft: theme.spacing(0),
             width: "auto"
         }
     },
     searchIcon: {
-        width: theme.spacing.unit * 9,
+        width: theme.spacing(9),
         height: "100%",
         position: "absolute",
         pointerEvents: "none",
@@ -48,10 +48,10 @@ export const appBarStyles = theme => ({
     },
     
     inputInput: {
-        paddingTop: theme.spacing.unit,
-        paddingRight: theme.spacing.unit,
-        paddingBottom: theme.spacing.unit,
-        paddingLeft: theme.spacing.unit * 10,
+        paddingTop: theme.spacing(0),
+        paddingRight: theme.spacing(0),
+        paddingBottom: theme.spacing(0),
+        paddingLeft: theme.spacing(10),
         transition: theme.transitions.create("width"),
         width: "100%",
         [theme.breakpoints.up("sm")]: {

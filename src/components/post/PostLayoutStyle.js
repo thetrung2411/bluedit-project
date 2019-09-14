@@ -1,6 +1,6 @@
 
 
-export const postLayoutStyles = theme => ({
+export const PostLayoutStyles = theme => ({
     background: {
         width: "100vw",
         height: "100vh",

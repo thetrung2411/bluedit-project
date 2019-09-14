@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import AppBar from "../appBar/appBar";
-import PostItem from "../post/postItems";
+import PostItems from "../post/PostItems";
 import Grid from "@material-ui/core/Grid";
 import RecommendationItem from "../post/Recommendation";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import axiosConfig from "../../axiosConfig";
-import axios from "axios";
-class homePageLayout extends Component {
+
+export class HomePageLayout extends Component {
   state = {
     post: null
   };
@@ -23,7 +23,7 @@ class homePageLayout extends Component {
   }
   render() {
     let postMarkUp = this.state.post ? (
-      this.state.post.map(post => <PostItem post={post} />)
+      this.state.post.map(post => <PostItems post={post} />)
     ) : (
       <CircularProgress color="inherit" />
     );
@@ -42,4 +42,4 @@ class homePageLayout extends Component {
     );
   }
 }
-export default homePageLayout;
+export default HomePageLayout;

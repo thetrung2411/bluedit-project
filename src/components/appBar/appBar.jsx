@@ -10,12 +10,11 @@ import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import {appBarStyles} from "./appBarStyles";
 import withStyles from "@material-ui/core/styles/withStyles";
-
 function HomeAppBar(props) {
     const { classes } = props;
     return (
         <div>
-            <AppBar position="static" className={classes.root}>
+            <AppBar position="static" className={classes.root} >
                 <Toolbar>
                     <Link to = "/">
                     <IconButton classname = {classes.button}>
@@ -30,10 +29,8 @@ function HomeAppBar(props) {
                     <div/>
                     <div className={classes.grow}></div>
                     <div className={classes.search}>
-                    <Link to="/search" className = {classes.noDecor}>
                         <div className = {classes.searchIcon}>
                             <SearchIcon/>
-                        
                         </div>
                         <InputBase
                             placeholder="Search…"
@@ -42,7 +39,6 @@ function HomeAppBar(props) {
                                 input: classes.inputInput
                             }}
                         />
-                        </Link>
                     </div>
                     <div className={classes.grow}></div>
                     <div>
