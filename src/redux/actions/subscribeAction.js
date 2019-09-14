@@ -12,9 +12,14 @@ import {
 
 
   export const getSubscribe = () => dispatch => {
+    dispatch({type: LOADING_DATA});
     axiosConfig
       .get("/allSubscribe")
       .then(res => {
+        dispatch(
+          {
+          payload: res.data
       })
+    })
       .catch(err => console.log(err));
   };

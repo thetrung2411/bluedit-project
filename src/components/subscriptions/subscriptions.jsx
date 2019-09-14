@@ -42,10 +42,12 @@ const styles = {
 
 export class subscriptions extends Component {
     state = {//this.props.getSubscribe(),//[]
-        subscriptions: [ 
-        {id: "1", userName: "User1", subscriptionsType: "Persnoal"},
-        {id: "2", userName: "User2", subscriptionsType: "Persnoal"},
-        {id: "3", userName: "User3", subscriptionsType: "Persnoal"}],
+        subscriptions: 
+        [ 
+            {id: "1", userName: "User1", subscriptionsType: "Persnoal"},
+            {id: "2", userName: "User2", subscriptionsType: "Persnoal"},
+            {id: "3", userName: "User3", subscriptionsType: "Persnoal"}
+        ],
         searchValue: '',
         sidebarOpen: true
     }
@@ -67,9 +69,17 @@ export class subscriptions extends Component {
         })
     }
 
+    // componentDidMount() {
+    //     //this.props.getPost(this.props.postId)
+    //     this.setState({
+    //         subscriptions: this.state.getSubscribe
+    //     })
+    // }
+    
+
     render() {
 
-        //const { classes, UI: {loading} } = this.props;
+        const { classes } = this.props;
 
         let subscriptions = (<div>subscriptions</div>);//subscriptions//this.props.getSubscribe()
         subscriptions = this.state.subscriptions.map((subscriptions, index) => {
@@ -123,7 +133,7 @@ subscriptions.propTypes = {
     //classes: subscriptions.object.isRequired,
     //user: subscriptions.object.isRequired,
     //UI: subscriptions.object.isRequired,
-    //getSubscribe: subscriptions.func.isRequired
+    // getSubscribe: subscriptions.func.isRequired
   };
   
   const mapStateToProps = state =>({
@@ -131,26 +141,11 @@ subscriptions.propTypes = {
     UI: state.UI,
     subscriptions : state.getSubscribe
   })
+const mapActionsToProps = {
+    getSubscribe
+};
 
 export default connect(
     mapStateToProps,
-    {getSubscribe}
+    mapActionsToProps
  ) (withStyles(styles)(subscriptions));
-
-
-
-//  [
-    // {id: "1", Username: "User1", SubscriptionsType: "Persnoal"},
-    // {id: "2", Username: "User2", SubscriptionsType: "Persnoal"},
-    // {id: "3", Username: "User3", SubscriptionsType: "Persnoal"},
-    // {id: "4", Username: "User4", SubscriptionsType: "Persnoal"},
-    // {id: "5", Username: "User5", SubscriptionsType: "Persnoal"},
-    // {id: "6", Username: "User6", SubscriptionsType: "Business"},
-    // {id: "7", Username: "User7", SubscriptionsType: "Persnoal"},
-    // {id: "8", Username: "User8", SubscriptionsType: "Persnoal"},
-    // {id: "9", Username: "User9", SubscriptionsType: "Persnoal"},
-    // {id: "10", Username: "User10", SubscriptionsType: "Persnoal"},
-    // {id: "11", Username: "User11", SubscriptionsType: "Persnoal"},
-    // {id: "12", Username: "User12", SubscriptionsType: "Persnoal"},
-
-// ]

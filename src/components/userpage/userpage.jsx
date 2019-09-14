@@ -90,7 +90,25 @@ class userpage extends React.Component{
                                 id="email"
                                 name="email"
                                 type="email"
-                                value = {userDetails.email}//{this.state.email}
+                                value = {userDetails.email}
+                                className={classes.textField}
+                                fullWidth
+                            />
+                        </td>
+                    </tr>
+                    </tbody>
+
+                    <tbody>
+                    <tr>
+                        <td>
+                            Full Name:
+                        </td>
+                        <td>
+                            <TextField
+                                id="fullName"
+                                name="fullName"
+                                type="fullName"
+                                value = {userDetails.fullName}
                                 className={classes.textField}
                                 fullWidth
                             />
@@ -123,10 +141,64 @@ class userpage extends React.Component{
                         </td>
                         <td>
                             <TextField
-                                id="location"
-                                name="location"
-                                type="location"
-                                value= {userDetails.bio}//{this.state.location}
+                                id="Bio"
+                                name="Bio"
+                                type="Bio"
+                                value= {userDetails.bio}
+                                className={classes.textField}
+                                fullWidth
+                            />
+                        </td>
+                    </tr>
+                    </tbody>
+
+                    <tbody>
+                    <tr>
+                        <td>
+                            Date of Birth:
+                        </td>
+                        <td>
+                            <TextField
+                                id="dateOfBirth"
+                                name="dateOfBirth"
+                                type="dateOfBirth"
+                                value= {userDetails.dateOfBirth}
+                                className={classes.textField}
+                                fullWidth
+                            />
+                        </td>
+                    </tr>
+                    </tbody>
+
+                    <tbody>
+                    <tr>
+                        <td>
+                            Phone Number:
+                        </td>
+                        <td>
+                            <TextField
+                                id="phoneNumber"
+                                name="phoneNumber"
+                                type="phoneNumber"
+                                value= {userDetails.phoneNumber}
+                                className={classes.textField}
+                                fullWidth
+                            />
+                        </td>
+                    </tr>
+                    </tbody>
+
+                    <tbody>
+                    <tr>
+                        <td>
+                            Gender:
+                        </td>
+                        <td>
+                            <TextField
+                                id="gender"
+                                name="gender"
+                                type="gender"
+                                value= {userDetails.gender}
                                 className={classes.textField}
                                 fullWidth
                             />

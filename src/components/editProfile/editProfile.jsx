@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import AppBarWithAvatar from "../appBar/AppBarWithAvatar";
 import Sidebar from "react-sidebar";
 import PropTypes from "prop-types";
 import userImage from "../../assets/hehe.png";
@@ -10,7 +9,7 @@ import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
-import { changeUserData } from "../../redux/actions/userActions";//getUserData//changeUserData
+import { changeUserData } from "../../redux/actions/userActions";
 
 
 const styles = {
@@ -39,9 +38,12 @@ class editProfile extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            //userName: "",
             bio: "",
             location:"",
+            gender:"",
+            phoneNumber:"",
+            dateOfBirth:"",
+            fullName:""
         };
 
       }
@@ -52,25 +54,17 @@ class editProfile extends React.Component{
         });
       };
 
-
-
-
       handleSubmit = e => {
-        //e.preventDefault();
-        // this.setState({
-        //   loading: true
-        // });
         const userData = {
-          //password: this.state.password,
-          //userName: this.state.userName,
           bio: this.state.bio,
-          location: this.state.location
+          location: this.state.location,
+          gender:this.state.gender,
+          phoneNumber:this.state.phoneNumber,
+          dateOfBirth:this.state.dateOfBirth,
+          fullName:this.state.fullName
         };
         this.props.changeUserData(userData);
-        // console.log(userData);
       };
-
-
 
       handleDeleteAccount = e =>{
         //this.props.deleteAccount();
@@ -84,20 +78,20 @@ class editProfile extends React.Component{
                 <div>
                 <table align = "center">
                     <tr>
-                        {/* <td>
-                            User Name:
-                        </td> */}
-                        {/* <td>
+                        <td>
+                            Full Name:
+                        </td> 
+                        <td>
                             <TextField
-                                id="userName"
-                                name="userName"
-                                type="userName"
-                                value = {this.state.userName}
+                                id="fullName"
+                                name="fullName"
+                                type="fullName"
+                                value = {this.state.fullName}
                                 onChange={this.handleChange}
                                 className={classes.textField}
                                 fullWidth
                             />
-                        </td> */}
+                        </td>
                     </tr>
 
                     <tr>
@@ -119,6 +113,23 @@ class editProfile extends React.Component{
 
                     <tr>
                         <td>
+                            Date of Birth:
+                        </td>
+                        <td>
+                            <TextField
+                                id="dateOfBirth"
+                                name="dateOfBirth"
+                                type="dateOfBirth"
+                                value = {this.state.dateOfBirth}
+                                onChange={this.handleChange}
+                                className={classes.textField}
+                                fullWidth
+                            />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
                             Bio:
                         </td>
                         <td>
@@ -127,6 +138,40 @@ class editProfile extends React.Component{
                                 name="bio"
                                 type="bio"
                                 value = {this.state.bio}
+                                onChange={this.handleChange}
+                                className={classes.textField}
+                                fullWidth
+                            />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Phone Number:
+                        </td>
+                        <td>
+                            <TextField
+                                id="phoneNumber"
+                                name="phoneNumber"
+                                type="phoneNumber"
+                                value = {this.state.phoneNumber}
+                                onChange={this.handleChange}
+                                className={classes.textField}
+                                fullWidth
+                            />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Gender:
+                        </td>
+                        <td>
+                            <TextField
+                                id="gender"
+                                name="gender"
+                                type="gender"
+                                value = {this.state.gender}
                                 onChange={this.handleChange}
                                 className={classes.textField}
                                 fullWidth
@@ -165,10 +210,6 @@ const mapStateToProps = state => ({
     user: state.user,
     UI: state.UI
   });
-
-// const mapActionsToProps = {
-//     changeUserData
-// };
 
 export default connect(
     mapStateToProps,
