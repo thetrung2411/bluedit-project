@@ -121,12 +121,7 @@ export default class ReportDialog extends React.Component {
         <Button onClick={this.handleOpen}>
           <VisibilityOutlinedIcon />
         </Button>
-        <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
-          maxWidth="md"
-          fullWidth="true"
-        >
+        <Dialog open={this.state.open} onClose={this.handleClose} maxWidth="md">
           <DialogContent>{report}</DialogContent>
         </Dialog>
       </Fragment>
