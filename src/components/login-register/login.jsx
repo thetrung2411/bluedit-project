@@ -47,7 +47,7 @@ const styles = {
   }
 };
 
-class login extends Component {
+export class login extends Component {
   state = {
     email: "",
     password: "",
