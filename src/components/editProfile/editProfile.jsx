@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { changeUserData } from "../../redux/actions/userActions";//getUserData//changeUserData
 
+
 const styles = {
     form: {
       textAlign: "center"
@@ -51,20 +52,24 @@ class editProfile extends React.Component{
         });
       };
 
+
+
+
       handleSubmit = e => {
-        e.preventDefault();
-        this.setState({
-          loading: true
-        });
+        //e.preventDefault();
+        // this.setState({
+        //   loading: true
+        // });
         const userData = {
           //password: this.state.password,
           userName: this.state.userName,
           bio: this.state.bio,
           location: this.state.location
         };
-        this.props.changeUserData(userData, this.props.history);
-        //this.props.changeUserData();
+        this.props.changeUserData(userData);
       };
+
+
 
       handleDeleteAccount = e =>{
         //this.props.deleteAccount();
@@ -167,5 +172,5 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps,
     { changeUserData }
-    //mapActionsToProps
+    // mapActionsToProps
   )(withStyles(styles)(editProfile));

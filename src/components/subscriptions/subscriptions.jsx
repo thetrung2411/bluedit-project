@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import AppBarWithAvatar from "../appBar/AppBarWithAvatar";
+import PropTypes from "prop-types";
 import Sidebar from "react-sidebar";
 
 import userImage from "../../assets/hehe.png";
@@ -14,9 +15,9 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
-
+import { connect } from "react-redux";
+import { getSubscribe } from "../../redux/actions/subscribeAction";
 
 const styles = {
     form: {
@@ -40,22 +41,11 @@ const styles = {
   };
 
 export class subscriptions extends Component {
-    state = {
-        subscriptions: [
-            {id: "1", Username: "User1", SubscriptionsType: "Persnoal"},
-            {id: "2", Username: "User2", SubscriptionsType: "Persnoal"},
-            {id: "3", Username: "User3", SubscriptionsType: "Persnoal"},
-            {id: "4", Username: "User4", SubscriptionsType: "Persnoal"},
-            {id: "5", Username: "User5", SubscriptionsType: "Persnoal"},
-            {id: "6", Username: "User6", SubscriptionsType: "Business"},
-            {id: "7", Username: "User7", SubscriptionsType: "Persnoal"},
-            {id: "8", Username: "User8", SubscriptionsType: "Persnoal"},
-            {id: "9", Username: "User9", SubscriptionsType: "Persnoal"},
-            {id: "10", Username: "User10", SubscriptionsType: "Persnoal"},
-            {id: "11", Username: "User11", SubscriptionsType: "Persnoal"},
-            {id: "12", Username: "User12", SubscriptionsType: "Persnoal"},
-
-        ],
+    state = {//this.props.getSubscribe(),//[]
+        subscriptions: [ 
+        {id: "1", userName: "User1", subscriptionsType: "Persnoal"},
+        {id: "2", userName: "User2", subscriptionsType: "Persnoal"},
+        {id: "3", userName: "User3", subscriptionsType: "Persnoal"}],
         searchValue: '',
         sidebarOpen: true
     }
@@ -79,18 +69,16 @@ export class subscriptions extends Component {
 
     render() {
 
+        //const { classes, UI: {loading} } = this.props;
 
-
-
-        let subscriptions = (<div>subscriptions</div>);
-            subscriptions = this.state.subscriptions.map((subscriptions, index) => {
+        let subscriptions = (<div>subscriptions</div>);//subscriptions//this.props.getSubscribe()
+        subscriptions = this.state.subscriptions.map((subscriptions, index) => {
                 return (
                     <div>
                         <Table>
                             <TableRow>
-                                <TableCell align="Center">{subscriptions.id}</TableCell>
-                                <TableCell align="Center">{subscriptions.Username}</TableCell>
-                                <TableCell align="Center">{subscriptions.SubscriptionsType}</TableCell>
+                                <TableCell align="Center">{subscriptions.userName}</TableCell>
+                                <TableCell align="Center">{subscriptions.subscriptionsType}</TableCell>
                                 <TableCell align="Center"><Button onClick={() => this.handleDelete(index)}>Unsubscribe</Button></TableCell>
                                 </TableRow>
                         </Table> 
@@ -106,7 +94,6 @@ export class subscriptions extends Component {
                     <h1>Subscriptions</h1>
                     <Table>
                     <TableRow>
-                        <TableCell align="Center">User ID</TableCell>
                         <TableCell align="Center">Username</TableCell>
                         <TableCell align="Center">Subscriptions Type</TableCell>
                         <TableCell align="Center">Unsubscribe</TableCell>
@@ -114,8 +101,56 @@ export class subscriptions extends Component {
                      </Table> 
                 </div>
                 {subscriptions}
+
+                <div>
+                    <h1>All User</h1>
+                    <Table>
+                    <TableRow>
+                        <TableCell align="Center">Username</TableCell>
+                        <TableCell align="Center">Subscriptions Type</TableCell>
+                        <TableCell align="Center">Subscribe</TableCell>
+                    </TableRow>
+                     </Table> 
+                </div>
+                {/* {allUsers} */}
             </div>
+
         );
     }
 }
-export default withStyles(styles)(subscriptions);
+
+subscriptions.propTypes = {
+    //classes: subscriptions.object.isRequired,
+    //user: subscriptions.object.isRequired,
+    //UI: subscriptions.object.isRequired,
+    //getSubscribe: subscriptions.func.isRequired
+  };
+  
+  const mapStateToProps = state =>({
+    user: state.user,
+    UI: state.UI,
+    subscriptions : state.getSubscribe
+  })
+
+export default connect(
+    mapStateToProps,
+    {getSubscribe}
+ ) (withStyles(styles)(subscriptions));
+
+
+
+//  [
+    // {id: "1", Username: "User1", SubscriptionsType: "Persnoal"},
+    // {id: "2", Username: "User2", SubscriptionsType: "Persnoal"},
+    // {id: "3", Username: "User3", SubscriptionsType: "Persnoal"},
+    // {id: "4", Username: "User4", SubscriptionsType: "Persnoal"},
+    // {id: "5", Username: "User5", SubscriptionsType: "Persnoal"},
+    // {id: "6", Username: "User6", SubscriptionsType: "Business"},
+    // {id: "7", Username: "User7", SubscriptionsType: "Persnoal"},
+    // {id: "8", Username: "User8", SubscriptionsType: "Persnoal"},
+    // {id: "9", Username: "User9", SubscriptionsType: "Persnoal"},
+    // {id: "10", Username: "User10", SubscriptionsType: "Persnoal"},
+    // {id: "11", Username: "User11", SubscriptionsType: "Persnoal"},
+    // {id: "12", Username: "User12", SubscriptionsType: "Persnoal"},
+
+// ]

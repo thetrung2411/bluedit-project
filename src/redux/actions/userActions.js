@@ -44,8 +44,14 @@ export const registerUser = (userData, history) => dispatch => {
     });
 };
 
-export const changeUserData = (userData, history) => dispatch => {
-
+export const changeUserData = (userData) => dispatch =>{
+  dispatch({ type: LOADING_USER });
+  axiosConfig
+    .post("/editProfile", userData)
+    .then(res => {
+      dispatch(getUserData());
+    })
+    .catch(err => console.log(err));
 };
 
 export const logoutUser = () => dispatch => {

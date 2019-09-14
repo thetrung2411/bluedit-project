@@ -7,7 +7,8 @@ firebase.initializeApp(config);
 
 const {
   validateSignupData,
-  validateLoginData
+  validateLoginData,
+  reduceUserDetails
 } = require("../util/dataValidator");
 
 exports.signup = (req, res) => {
@@ -122,50 +123,52 @@ exports.getCurrentUser = (req,res) =>{
     })
 }
 
-exports.changeUserDetail = (req,res) =>{
-
-  const user = {
+exports.editProfile = (req,res) =>{
+  // let userData = {};
+  const newUserProfile = {
     userName: req.body.userName,
     bio: req.body.bio,
     location: req.body.location
   };
 
-  // let userData = {};
-  // db.doc(`/users/${req.user.userName}`)
-  //   .get()
-  //   .then(doc =>{
-  //     if (doc.exists){
-  //       userData.userDetails = user.data();
-  //     }
-  //     return res.json(userData);
-  //   })
-  //   .catch(err =>{
-  //     console.error(err);
-  //     return res.status(500).json({error: err.code})
-  //   })
-  
-  var currentuser = db.auth().currentUser;
 
-  currentuser.updateProfile(
-              {
-                userName: user.userName,
-                bio: user.bio,
-                location: user.location
-              }
-            )
-            .then()
-            .catch(err =>{
-              console.error(err);
-              return res.status(500).json({error: err.code})
-            })
+  //let userDetails = req.body;//reduceUserDetails(req.body);
+
+  db.doc(`/users/${req.user.handle}`)
+    .update(newUserProfile)
+    .then(() => {
+      return res.json({ message: 'Details added successfully' });
+    })
+    .catch((err) => {
+      console.error(err);
+      return res.status(500).json({ error: err.code });
+    });
+
+  // db.collection('users').doc(req.user.userName).update(
+  //             {
+  //               userName: newUserProfile.userName,
+  //               bio: newUserProfile.bio,
+  //               location: newUserProfile.location
+  //             }
+  //           )
+  //           .then(doc =>{
+  //               // if (doc.exists){
+  //               //   userData.userDetails = doc.data();
+  //               // }
+  //               // return res.json(userData);
+  //             })
+  //           .catch(err =>{
+  //             console.error(err);
+  //             return res.status(500).json({error: err.code})
+  //           })
 }
+//
+// exports.deleteUser = (req,res) =>{
+//   var user = firebase.auth().currentUser;
 
-exports.deleteUser = (req,res) =>{
-  var user = firebase.auth().currentUser;
-
-  user.delete().then(function() {
-    // User deleted.
-  }).catch(function(error) {
-    // An error happened.
-  });
-}
+//   user.delete().then(function() {
+//     // User deleted.
+//   }).catch(function(error) {
+//     // An error happened.
+//   });
+// }
