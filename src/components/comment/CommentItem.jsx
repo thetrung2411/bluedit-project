@@ -6,7 +6,6 @@ import Fab from "@material-ui/core/Fab";
 import {CommentItemStyles} from "./CommentItemStyles";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Avatar from "@material-ui/core/Avatar";
-import TextField from "@material-ui/core/TextField";
 import PropTypes from 'prop-types';
 export class CommentItem extends Component{
     render(){
