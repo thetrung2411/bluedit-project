@@ -64,10 +64,6 @@ export class ReportPage extends Component {
     });
   };
 
-  continueHandler = () => {
-    this.props.history.push("/report/ReportDetail");
-  };
-
   render() {
     let reports = this.state.searchValue
       ? this.state.reports.filter(report => {
@@ -87,7 +83,6 @@ export class ReportPage extends Component {
         reports={reports}
         handleSort={this.handleSort}
         handleDelete={this.handleDelete}
-        continueHandler={this.continueHandler}
       />
     ) : (
       <CircularProgress />
