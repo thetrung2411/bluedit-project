@@ -55,6 +55,14 @@ class SignedInAppBar extends Component {
             </div>
             <div className={classes.grow}></div>
             <div>
+              {userDetails.isAdmin ? (
+                <Link to="/Report" className={classes.noDecor}>
+                  <Button variant="contained" className={classes.button}>
+                    Report
+                  </Button>
+                </Link>
+              ) : null}
+
               <Link to="/home" className={classes.noDecor}>
                 <Button
                   variant="contained"
@@ -62,12 +70,6 @@ class SignedInAppBar extends Component {
                   onClick={this.handleLogout}
                 >
                   Logout
-                </Button>
-              </Link>
-
-              <Link to="/Report" className={classes.noDecor}>
-                <Button variant="contained" className={classes.button}>
-                  Report
                 </Button>
               </Link>
             </div>
