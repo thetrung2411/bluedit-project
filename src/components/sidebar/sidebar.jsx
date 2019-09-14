@@ -58,10 +58,13 @@ class sidebar extends React.Component{
                 <Sidebar
                     sidebar={
                     <table>
+                        <tbody>
                         <tr>
-                            <h1>Sidebar</h1>
+                            <h1 input>Sidebar</h1>
                         </tr>
+                        </tbody>
 
+                        <tbody>
                         <tr>
                             <p>
                             <img style={{width: '90px', height: '90px'}} src={userImage} alt="userImage" />;
@@ -72,7 +75,9 @@ class sidebar extends React.Component{
                             <h3>{userDetails.bio}</h3>
                             </p>
                         </tr>
+                        </tbody>
 
+                    <tbody>
                     <tr>
                         <td>
                             <Link to="/userpage" className= {classes.noDecor}>
@@ -87,7 +92,9 @@ class sidebar extends React.Component{
                             </Link>
                         </td>
                     </tr>
+                    </tbody>
 
+                    <tbody>
                     <tr>
                         <td>
                         <Link to="/subscriptions" className= {classes.noDecor}>
@@ -102,7 +109,9 @@ class sidebar extends React.Component{
                             </Link>
                         </td>
                     </tr>
+                    </tbody>
 
+                    <tbody>
                     <tr>
                         <td>
                         <Link to="/post" className= {classes.noDecor}>
@@ -117,7 +126,9 @@ class sidebar extends React.Component{
                             </Link>
                         </td>
                     </tr>
+                    </tbody>
 
+                    <tbody>
                     <tr>
                         <td>
                         <Link to="/homepage" className= {classes.noDecor}>
@@ -131,7 +142,8 @@ class sidebar extends React.Component{
                             </Button>
                         </Link>
                         </td>
-                    </tr>                    
+                    </tr>     
+                    </tbody>               
                     </table>
                 
                 

@@ -62,6 +62,7 @@ class userpage extends React.Component{
 
 
                 <table align = "center">
+                    <tbody>
                     <tr>
                         <td>
                             User Name:
@@ -77,7 +78,9 @@ class userpage extends React.Component{
                             />
                         </td>
                     </tr>
+                    </tbody>
 
+                    <tbody>
                     <tr>
                         <td>
                             Email:
@@ -93,7 +96,9 @@ class userpage extends React.Component{
                             />
                         </td>
                     </tr>
+                    </tbody>
 
+                    <tbody>
                     <tr>
                         <td>
                             Location:
@@ -109,7 +114,9 @@ class userpage extends React.Component{
                             />
                         </td>
                     </tr>
+                    </tbody>
 
+                    <tbody>
                     <tr>
                         <td>
                             Creat At:
@@ -125,6 +132,9 @@ class userpage extends React.Component{
                             />
                         </td>
                     </tr>
+                    </tbody>
+
+                    <tbody>
                     <tr>
                         <td>
                         <Link to="/editProfile" className= {classes.noDecor}>
@@ -151,6 +161,7 @@ class userpage extends React.Component{
                             </Link>
                         </td>
                     </tr>
+                    </tbody>
                 </table>
                 </div>
         )
