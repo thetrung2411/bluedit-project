@@ -2,6 +2,7 @@ const { db, admin } = require("../util/admin");
 const config = require("../util/config");
 const firebase = require("firebase");
 
+//Get single report
 exports.getReport = (req, res) => {
   let reportData = {};
   db.doc(`/reports/${req.params.reportId}`)
@@ -20,6 +21,7 @@ exports.getReport = (req, res) => {
     });
 };
 
+//Get all reports
 exports.getAllReports = (req, res) => {
   db.collection("reports")
     .orderBy("reportedDate", "desc")
@@ -41,6 +43,7 @@ exports.getAllReports = (req, res) => {
     .catch(err => console.error(err));
 };
 
+//Set report status to 'processed'
 exports.changeReportStatus = (req, res) => {
   db.doc(`/reports/${req.params.reportId}`)
     .get()
@@ -59,6 +62,7 @@ exports.changeReportStatus = (req, res) => {
     });
 };
 
+//Delete single report
 exports.deleteReport = (req, res) => {
   const document = db.doc(`/reports/${req.params.reportId}`);
   document

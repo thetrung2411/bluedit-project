@@ -60,7 +60,7 @@ export default class ReportDialog extends React.Component {
 
     //Show reported content
     let content = this.state.content ? (
-      <Card>
+      <Card maxWidth="md">
         <CardHeader
           avatar={<Avatar>R</Avatar>}
           action={
@@ -94,8 +94,6 @@ export default class ReportDialog extends React.Component {
             <tr>Status: {this.props.report.status}</tr>
             <tr>Content: {content}</tr>
           </DialogContentText>
-        </DialogContent>
-        <DialogContent>
           <FormControlLabel
             control={
               this.props.report.status === "processed" ? (
@@ -109,13 +107,13 @@ export default class ReportDialog extends React.Component {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={this.handleClose} color="primary">
-            OK
+          <Button onClick={this.handleClose} color="secondary">
+            Back
           </Button>
         </DialogActions>
       </div>
     ) : (
-      <p>404 NOT FOUND</p>
+      <p>REPORT NOT FOUND</p>
     );
 
     return (
@@ -126,7 +124,7 @@ export default class ReportDialog extends React.Component {
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
-          maxWidth="sm"
+          maxWidth="md"
           fullWidth="true"
         >
           <DialogContent>{report}</DialogContent>

@@ -9,11 +9,10 @@ import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 //import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
 import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined";
-import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
 
 const ReportTable = props => {
   const allReports = props.reports.length ? (
-    props.reports.map((report, index) => {
+    props.reports.map(report => {
       return (
         <TableBody>
           <TableRow>

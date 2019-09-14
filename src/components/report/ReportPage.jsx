@@ -37,11 +37,6 @@ export class ReportPage extends Component {
       .catch(err => console.log(err));
 
     window.location.reload();
-    //let tempArr = this.state.reports.slice();
-    //tempArr.splice(index, 1);
-    //this.setState({
-    //  reports: tempArr
-    //});
   };
 
   handleSort = sortKey => {
