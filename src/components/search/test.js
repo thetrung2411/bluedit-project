@@ -25,7 +25,7 @@
     
     searchPost(array) {
       
-      const url = `https://us-central1-renfi-69a94.cloudfunctions.net/api/post?query=${array}`;
+      const url = `https://us-central1-renfi-69a94.cloudfunctions.net/api/post?array=${array}`;
       // https://api.themoviedb.org/3/search/movie?query=${query}&api_key=cfe422613b250f702980a3bbf9e90716`;
       
       fetch (url)
