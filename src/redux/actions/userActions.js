@@ -48,10 +48,12 @@ export const changeUserData = (userData) => dispatch =>{
   dispatch({ type: LOADING_USER });
   axiosConfig
     .post("/editProfile", userData)
-    .then(res => {
+    .then(() => {
       dispatch(getUserData());
-    })
-    .catch(err => console.log(err));
+    },
+    console.log(userData)
+    )
+    .catch(err => console.log("edit error"));
 };
 
 export const logoutUser = () => dispatch => {

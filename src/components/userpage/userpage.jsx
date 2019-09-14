@@ -119,6 +119,24 @@ class userpage extends React.Component{
                     <tbody>
                     <tr>
                         <td>
+                            Bio:
+                        </td>
+                        <td>
+                            <TextField
+                                id="location"
+                                name="location"
+                                type="location"
+                                value= {userDetails.bio}//{this.state.location}
+                                className={classes.textField}
+                                fullWidth
+                            />
+                        </td>
+                    </tr>
+                    </tbody>
+
+                    <tbody>
+                    <tr>
+                        <td>
                             Creat At:
                         </td>
                         <td>

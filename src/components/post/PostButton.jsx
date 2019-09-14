@@ -14,6 +14,8 @@ import {connect} from 'react-redux';
 import {post, getAllPosts} from '../../redux/actions/postActions';
 import PropTypes from 'prop-types';
 
+
+
 export class PostButton extends Component{
   state = {
       open: false,

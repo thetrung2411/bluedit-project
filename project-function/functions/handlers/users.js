@@ -124,51 +124,14 @@ exports.getCurrentUser = (req,res) =>{
 }
 
 exports.editProfile = (req,res) =>{
-  // let userData = {};
-  const newUserProfile = {
-    userName: req.body.userName,
-    bio: req.body.bio,
-    location: req.body.location
-  };
 
-
-  //let userDetails = req.body;//reduceUserDetails(req.body);
-
-  db.doc(`/users/${req.user.handle}`)
-    .update(newUserProfile)
+  db.doc(`/users/${req.user.userName}`)
+    .update(req.body)
     .then(() => {
-      return res.json({ message: 'Details added successfully' });
+      return res.json({ message: 'profile edit successfully' });
     })
     .catch((err) => {
       console.error(err);
       return res.status(500).json({ error: err.code });
     });
-
-  // db.collection('users').doc(req.user.userName).update(
-  //             {
-  //               userName: newUserProfile.userName,
-  //               bio: newUserProfile.bio,
-  //               location: newUserProfile.location
-  //             }
-  //           )
-  //           .then(doc =>{
-  //               // if (doc.exists){
-  //               //   userData.userDetails = doc.data();
-  //               // }
-  //               // return res.json(userData);
-  //             })
-  //           .catch(err =>{
-  //             console.error(err);
-  //             return res.status(500).json({error: err.code})
-  //           })
 }
-//
-// exports.deleteUser = (req,res) =>{
-//   var user = firebase.auth().currentUser;
-
-//   user.delete().then(function() {
-//     // User deleted.
-//   }).catch(function(error) {
-//     // An error happened.
-//   });
-// }

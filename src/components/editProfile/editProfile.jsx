@@ -39,7 +39,7 @@ class editProfile extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            userName: "",
+            //userName: "",
             bio: "",
             location:"",
         };
@@ -62,11 +62,12 @@ class editProfile extends React.Component{
         // });
         const userData = {
           //password: this.state.password,
-          userName: this.state.userName,
+          //userName: this.state.userName,
           bio: this.state.bio,
           location: this.state.location
         };
         this.props.changeUserData(userData);
+        // console.log(userData);
       };
 
 
@@ -83,10 +84,10 @@ class editProfile extends React.Component{
                 <div>
                 <table align = "center">
                     <tr>
-                        <td>
+                        {/* <td>
                             User Name:
-                        </td>
-                        <td>
+                        </td> */}
+                        {/* <td>
                             <TextField
                                 id="userName"
                                 name="userName"
@@ -96,7 +97,7 @@ class editProfile extends React.Component{
                                 className={classes.textField}
                                 fullWidth
                             />
-                        </td>
+                        </td> */}
                     </tr>
 
                     <tr>
@@ -172,5 +173,5 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps,
     { changeUserData }
-    // mapActionsToProps
   )(withStyles(styles)(editProfile));
+  //
