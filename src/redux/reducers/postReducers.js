@@ -3,10 +3,8 @@ import {
     POST_POST,
     LOADING_DATA,
     POST_COMMENT,
-<<<<<<< HEAD
     POST_BOOKMARK,
-=======
->>>>>>> master
+
     GET_POST,
 
 } from "../types"
@@ -51,7 +49,6 @@ export default function (state = initialState, action){
                     comments: [action.payload, ...state.post.comments]
                 }
             }
-<<<<<<< HEAD
             case POST_BOOKMARK:
                 return{
                     ...state,
@@ -60,9 +57,7 @@ export default function (state = initialState, action){
                         bookmarks: [action.payload, ...state.post.bookmarks]
                     }
                 }
-            
-=======
->>>>>>> master
+
         default:
             return state;
 }

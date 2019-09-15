@@ -63,7 +63,6 @@ class SignedInAppBar extends Component {
                 </Link>
               ) : null}
 
-<<<<<<< HEAD
                 <Link to="/bookmark" className={classes.noDecor}>
                 <Button
                   variant="contained"
@@ -74,8 +73,6 @@ class SignedInAppBar extends Component {
                 </Button>
               </Link>
 
-=======
->>>>>>> master
               <Link to="/home" className={classes.noDecor}>
                 <Button
                   variant="contained"

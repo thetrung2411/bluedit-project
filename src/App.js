@@ -10,11 +10,7 @@ import PostLayout from './components/post/PostLayout';
 import HomePageLayout from './components/homepage/HomePageLayout';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-<<<<<<< HEAD
 import bookmark from './components/bookmark/BookmarkPage';
-=======
-//import bookmark from './components/bookmark/BookmarkForm';
->>>>>>> master
 import ReportPage from './components/report/ReportPage';
 import ReportDetail from './components/report/ReportDetail';
 import userpage from './components/userpage/userpage';
@@ -66,10 +62,7 @@ class App extends Component {
                 <Route path='/home' component={HomePageLayout} />
                 <Route path='/report' component={ReportPage} />
                 <Route path='/userpage' component={userpage} />
-<<<<<<< HEAD
                 <Route path='/bookmark' component={bookmark} />
-=======
->>>>>>> master
                 <Redirect from='/' to='/home' />
               </Switch>
             </div>
