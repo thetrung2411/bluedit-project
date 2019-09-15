@@ -5,12 +5,17 @@ const {post, getAllPosts, getPost} = require("./handlers/posts");
 const {comment, getAllComments} = require("./handlers/comments");
 const FBAuth = require("./util/fbAuth");
 const cors = require("cors");
+<<<<<<< HEAD
+const {  getAllReports,  getReport,  changeReportStatus,  deleteReport} = require("./handlers/reports");
+const {bookmark,getAllBookmarks,getBookmark,deleteBookmark} = require("./handlers/bookmarks");
+=======
 const {
   getAllReports,
   getReport,
   changeReportStatus,
   deleteReport
 } = require("./handlers/reports");
+>>>>>>> master
 
 app.use(cors());
 //User route
@@ -32,4 +37,9 @@ app.get("/getReport/:reportId", getReport);
 app.post("/changeStatus/:reportId", changeReportStatus);
 app.delete("/deleteReport/:reportId", deleteReport);
 
+//Bookmark
+app.post("/bookmark", FBAuth, bookmark);
+app.get("/getAllBookmarks", getAllBookmarks);
+app.get("/getBookmark/:bookmarkid", getBookmark);
+app.delete("/deleteBookmark/:bookmarkid", deleteBookmark);
 exports.api = functions.https.onRequest(app);

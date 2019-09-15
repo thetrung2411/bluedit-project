@@ -63,6 +63,16 @@ class SignedInAppBar extends Component {
                 </Link>
               ) : null}
 
+                <Link to="/bookmark" className={classes.noDecor}>
+                <Button
+                  variant="contained"
+                  className={classes.button}
+                  onClick={this.handleLogout}
+                >
+                  Bookmark
+                </Button>
+              </Link>
+
               <Link to="/home" className={classes.noDecor}>
                 <Button
                   variant="contained"

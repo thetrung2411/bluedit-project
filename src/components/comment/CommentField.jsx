@@ -22,7 +22,10 @@ export class CommentField extends Component{
     }
     handleSubmit = (event) => {
         event.preventDefault();
+        console.log(this.props.postId)
+        console.log(this.state.body)
         this.props.postComment(this.props.postId, {body: this.state.body});
+
     }
   render(){
       const {classes, authenticated} = this.props;
