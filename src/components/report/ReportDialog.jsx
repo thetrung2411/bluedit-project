@@ -17,6 +17,7 @@ import Avatar from "@material-ui/core/Avatar";
 //MUI Icon
 import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined";
 import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
+import AlertDialog from "./AlertDialog";
 
 export default class ReportDialog extends React.Component {
   state = {

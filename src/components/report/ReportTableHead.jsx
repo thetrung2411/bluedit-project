@@ -8,8 +8,12 @@ const ReportTableHead = props => {
   const head = props.reports.length ? (
     <TableHead>
       <TableRow>
-        <TableCell onClick={() => props.handleSort("id")}>Report ID</TableCell>
-        <TableCell onClick={() => props.handleSort("date")}>Date</TableCell>
+        <TableCell onClick={() => props.handleSort("reportId")}>
+          Report ID
+        </TableCell>
+        <TableCell onClick={() => props.handleSort("reportedAt")}>
+          Date
+        </TableCell>
         <TableCell onClick={() => props.handleSort("type")}>Type</TableCell>
         <TableCell onClick={() => props.handleSort("objectId")}>
           Object ID

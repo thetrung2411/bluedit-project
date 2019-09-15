@@ -1,6 +1,7 @@
 import React from "react";
 import ReportTableHead from "../report/ReportTableHead";
 import ReportDialog from "../report/ReportDialog";
+import AlertDialog from "../report/AlertDialog";
 //material ui
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -24,9 +25,11 @@ const ReportTable = props => {
             <TableCell align="left">{report.status}</TableCell>
             <TableCell align="left">
               <ReportDialog report={report} />
-              <Button onClick={() => props.handleDelete(report.reportId)}>
-                <DeleteForeverOutlinedIcon />
-              </Button>
+              <AlertDialog
+                action={"delete"}
+                reportId={report.reportId}
+                handleDelete={props.handleDelete}
+              />
             </TableCell>
           </TableRow>
         </TableBody>
