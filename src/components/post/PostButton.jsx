@@ -36,7 +36,6 @@ export class PostButton extends Component{
   handleOpen = () => {
     this.setState({open: true});
     console.log('clicked')
-
   }
   handleClose = () => {
     // this.props.clearErrors();

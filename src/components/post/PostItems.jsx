@@ -14,8 +14,6 @@ import imagePost from "../../assets/hehe.png";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import PostItemDetail from "./PostItemDetail";
-
-import Addbookmark from "../bookmark/Addbookmark";
 export class PostItems extends Component {
   render() {
     dayjs.extend(relativeTime)
@@ -48,8 +46,8 @@ export class PostItems extends Component {
             <Fab size="small" className={classes.fab} ><ThumbUpAltRoundedIcon /></Fab>
             <Fab size="small" className={classes.fab} ><ThumbDownRoundedIcon /></Fab>
             <Typography>{commentCount} comments</Typography>
+
             <PostItemDetail postId={postId} userPosted={userPosted} />
-            <Addbookmark />
           </CardActions>
         </Card>
       </Grid>
