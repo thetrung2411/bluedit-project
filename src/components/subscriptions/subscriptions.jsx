@@ -18,6 +18,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Container from '@material-ui/core/Container';
 import { connect } from "react-redux";
 import { getSubscribe } from "../../redux/actions/subscribeAction";
+import axiosConfig from "../../axiosConfig";
+
 
 const styles = {
     form: {
@@ -41,19 +43,10 @@ const styles = {
   };
 
 export class subscriptions extends Component {
-    state = {//this.props.getSubscribe(),//[]
-        subscriptions: 
-        [ 
-            {id: "1", userName: "User1", subscriptionsType: "Persnoal"},
-            {id: "2", userName: "User2", subscriptionsType: "Persnoal"},
-            {id: "3", userName: "User3", subscriptionsType: "Persnoal"}
-        ],
-        searchValue: '',
-        sidebarOpen: true
+    state = {
+        subscriptions: [],
+        allUser: []
     }
-    onSetSidebarOpen(open) {
-        this.setState({ sidebarOpen: open });
-      }
 
     handleChange = (e) => {
         this.setState({
@@ -69,32 +62,82 @@ export class subscriptions extends Component {
         })
     }
 
-    // componentDidMount() {
-    //     //this.props.getPost(this.props.postId)
-    //     this.setState({
-    //         subscriptions: this.state.getSubscribe
-    //     })
-    // }
+    handleDeleteUser = (index) => {
+        let tempArr = this.state.allUser.slice();
+        tempArr.splice(index, 1);
+        this.setState({
+            allUser: tempArr
+        })
+    }
+
+    componentDidMount() 
+    {
+        axiosConfig
+        .get("/allSubscribe")
+        .then(res => {
+            console.log(res.data);
+            this.setState({
+                subscriptions: res.data
+            });
+        })
+        .catch(err => console.log(err));
+
+
+        axiosConfig
+        .get("/allUsers")
+        .then(res => {
+            console.log(res.data);
+            this.setState({
+                allUser: res.data
+            });
+        })
+        .catch(err => console.log(err));
+    }
     
 
     render() {
 
         const { classes } = this.props;
 
-        let subscriptions = (<div>subscriptions</div>);//subscriptions//this.props.getSubscribe()
-        subscriptions = this.state.subscriptions.map((subscriptions, index) => {
+        let subscription = (<div>subscriptions</div>);
+
+        subscription = this.state.subscriptions.map((subscriptions, index) => {
                 return (
                     <div>
                         <Table>
                             <TableRow>
                                 <TableCell align="Center">{subscriptions.userName}</TableCell>
                                 <TableCell align="Center">{subscriptions.subscriptionsType}</TableCell>
+                                <TableCell align="Center">{subscriptions.subscribeAt}</TableCell>
                                 <TableCell align="Center"><Button onClick={() => this.handleDelete(index)}>Unsubscribe</Button></TableCell>
                                 </TableRow>
                         </Table> 
                 </div>
                 )
             })
+
+
+            // let allUsers = (<div>allUser</div>);
+
+            // allUsers = this.state.allUser.map((allUser, index) => {
+            //         return (
+            //             <div>
+            //                 <Table>
+            //                     <TableRow>
+            //                         <TableCell align="Center">{allUser.userName}</TableCell>
+            //                         <TableCell align="Center">{allUser.email}</TableCell>
+            //                         <TableCell align="Center">{allUser.location}</TableCell>
+            //                         <TableCell align="Center">{allUser.bio}</TableCell>
+            //                         <TableCell align="Center">{allUser.dateOfBirth}</TableCell>
+            //                         <TableCell align="Center">{allUser.phoneNumber}</TableCell>
+            //                         <TableCell align="Center">{allUser.gender}</TableCell>
+            //                         <TableCell align="Center">{allUser.createdAt}</TableCell>
+            //                         <TableCell align="Center"><Button onClick={() => this.handleDeleteUser(index)}>Subscribe</Button></TableCell>
+            //                         </TableRow>
+            //                 </Table> 
+            //         </div>
+            //         )
+            //     })
             
 
         return(
@@ -106,21 +149,28 @@ export class subscriptions extends Component {
                     <TableRow>
                         <TableCell align="Center">Username</TableCell>
                         <TableCell align="Center">Subscriptions Type</TableCell>
+                        <TableCell align="Center">subscribeAt</TableCell>
                         <TableCell align="Center">Unsubscribe</TableCell>
                     </TableRow>
                      </Table> 
                 </div>
-                {subscriptions}
+                {subscription}
 
                 <div>
-                    <h1>All User</h1>
+                    {/* <h1>All User</h1>
                     <Table>
                     <TableRow>
                         <TableCell align="Center">Username</TableCell>
-                        <TableCell align="Center">Subscriptions Type</TableCell>
+                        <TableCell align="Center">Email</TableCell>
+                        <TableCell align="Center">Location</TableCell>
+                        <TableCell align="Center">BIO</TableCell>
+                        <TableCell align="Center">Date of Birth</TableCell>
+                        <TableCell align="Center">Phone Number</TableCell>
+                        <TableCell align="Center">Gender</TableCell>
+                        <TableCell align="Center">CreatedAt</TableCell>
                         <TableCell align="Center">Subscribe</TableCell>
                     </TableRow>
-                     </Table> 
+                     </Table>  */}
                 </div>
                 {/* {allUsers} */}
             </div>

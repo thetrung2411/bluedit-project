@@ -135,3 +135,30 @@ exports.editProfile = (req,res) =>{
       return res.status(500).json({ error: err.code });
     });
 }
+
+exports.getAllUsers = (req,res) =>{
+  db.collection("users")
+  .orderBy("userName","desc")
+  .get()
+  .then(
+    data => {
+    let user = [];
+    data.forEach(doc => {
+      user.push({
+        email: doc.data().email,
+        createdAt: doc.data().createdAt,
+        location: doc.data().location,
+        userName: doc.data().userName,
+        phoneNumber: doc.data().phoneNumber,
+        gender: doc.data().gender,
+        dateOfBirth: doc.data().dateOfBirth,
+      });
+    
+    });
+    return res.json(user);
+}
+  )
+  .catch(err =>{        
+    console.error(err);
+  })
+}

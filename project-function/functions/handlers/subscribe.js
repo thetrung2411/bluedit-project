@@ -7,32 +7,25 @@ const {
 
 
 exports.getAllSubscribe = (req,res) =>{
-    //let subscribe = {};
     db.collection("Subscribe")
-    .doc(req.user.userName)
-    .getCollection()
-      .then(doc =>{
-        // return res.json(subscribe);
-      })
-      .catch(err =>{
-        console.error(err);
-        // return res.status(500).json({error: err.code})
-      })
+    .orderBy("subscribeAt","desc")
+    .get()
+    .then(
+      data => {
+      let subscribe = [];
+      data.forEach(doc => {
+        subscribe.push({
+          subscribeAt: doc.data().subscribeAt,
+          subscriber: doc.data().subscriber,
+          subscriptionsType: doc.data().subscriptionsType,
+          userName: doc.data().userName
+        });
+      
+      });
+      return res.json(subscribe);
   }
-
-exports.unSubscribe = (req, res) => {
-  db.collection("Subscribe")
-  .doc(req.user.userName)
-  .collection("User1")
-  .get()
-    .then(doc =>{
-      if (!doc.exists) {
-        return res.status(404).json({ error: "Not found" });
-      } else {
-        return document.delete();
-      }
-    })
-    .catch(err =>{
+    )
+    .catch(err =>{        
       console.error(err);
     })
-}
+  }
