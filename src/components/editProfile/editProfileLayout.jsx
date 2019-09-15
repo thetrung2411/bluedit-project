@@ -13,11 +13,11 @@ export class editProfileLayout extends Component {
   render() {
     return (
       <div>
-        <Sidebar />
-        <AppBarWithAvatar />
+        {<Sidebar />}
+        {<AppBarWithAvatar />}
         <h1 className = "">User Page</h1>
         <h2 className = "">Edit Profile</h2>
-        <EditProfile />
+        {<EditProfile />}
       </div>
     );
   }
