@@ -126,6 +126,7 @@ exports.changeUserPassword = (req, res) => {
 
 exports.getCurrentUser = (req, res) => {
   let userData = {};
+  //get user detail based on the userName taken from FBAuth
   db.doc(`/users/${req.user.userName}`)
     .get()
     .then(doc => {
