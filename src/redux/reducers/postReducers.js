@@ -1,7 +1,11 @@
 import {
     GET_POSTS,
     POST_POST,
-    LOADING_DATA
+    LOADING_DATA,
+    POST_COMMENT,
+    POST_BOOKMARK,
+    GET_POST,
+
 } from "../types"
 const initialState = {
     posts: [],
@@ -16,11 +20,17 @@ export default function (state = initialState, action){
                 ...state,
                 loading: true
             };
+
         case GET_POSTS:
             return{
                 ...state,
                 posts: action.payload,
                 loading: false
+            };
+        case GET_POST:
+            return{
+                ...state,
+                post: action.payload
             };
         case POST_POST:
             return{
@@ -30,6 +40,23 @@ export default function (state = initialState, action){
                     ...state.posts
                 ]
             }
+        case POST_COMMENT:
+            return{
+                ...state,
+                post:{
+                    ...state.post,
+                    comments: [action.payload, ...state.post.comments]
+                }
+            }
+            case POST_BOOKMARK:
+                return{
+                    ...state,
+                    post:{
+                        ...state.post,
+                        bookmarks: [action.payload, ...state.post.bookmarks]
+                    }
+                }
+            
         default:
             return state;
 }

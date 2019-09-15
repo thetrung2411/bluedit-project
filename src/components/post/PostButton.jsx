@@ -5,7 +5,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { postLayoutStyles } from "./PostLayoutStyle";
+import {PostLayoutStyles } from "./PostLayoutStyle";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Button from "@material-ui/core/Button";
 import Fab from '@material-ui/core/Fab';
@@ -14,14 +14,13 @@ import {connect} from 'react-redux';
 import {post, getAllPosts} from '../../redux/actions/postActions';
 import PropTypes from 'prop-types';
 
-
-
-class PostButton extends Component{
+export class PostButton extends Component{
   state = {
-    open: false,
-    body: '',
-    errors: {} 
-  };
+      open: false,
+      body: '',
+      errors: {} 
+    };
+
   componentWillReceiveProps(nextProps){
     if (nextProps.UI.errors){
       this.setState({
@@ -33,9 +32,11 @@ class PostButton extends Component{
       this.handleClose();
     }
   }
+ 
   handleOpen = () => {
     this.setState({open: true});
     console.log('clicked')
+
   }
   handleClose = () => {
     // this.props.clearErrors();
@@ -46,10 +47,8 @@ class PostButton extends Component{
   }
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.getAllPosts();
-    this.props.post({body: this.state.body})
-    
-   
+    this.props.post({body: this.state.body});
+
   }
 
   render(){
@@ -127,4 +126,4 @@ const mapStateToProps = (state) => ({
 const mapActionToProps = {
   post, getAllPosts
 };
-export default connect (mapStateToProps, mapActionToProps)(withStyles(postLayoutStyles)(PostButton));
+export default connect (mapStateToProps, mapActionToProps)(withStyles(PostLayoutStyles)(PostButton));
