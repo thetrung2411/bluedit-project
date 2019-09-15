@@ -28,7 +28,7 @@ describe('PostButton Component Test', () => {
             }
         )
     })
-    test('Should handle GET_POSTS', () => {
+    test('Should return GET_POSTS state', () => {
         expect(postReducers({},{
             type: types.GET_POSTS,     
         })).toEqual({
@@ -36,14 +36,14 @@ describe('PostButton Component Test', () => {
             loading: false
         })
     })
-    test('Should handle GET_POST', () => {
+    test('Should return GET_POST state', () => {
         expect(postReducers({},{
             type: types.GET_POST,     
         })).toEqual({
             post: undefined,
         })
     })
-    test('Should handle POST_POST', () => {
+    test('Should return POST_POST state', () => {
         expect(postReducers(undefined,{
             type: types.POST_POST,     
         })).toEqual({
@@ -57,7 +57,6 @@ describe('PostItemDetail Component Test', () => {
     test('Should render without errors', () => {
         const component = shallow(<Provider store ={store}><PostItemDetail/></Provider>);
         expect(component.find(PostItemDetail).length).toBe(1);
-
     })
 })
 
