@@ -55,14 +55,6 @@ class SignedInAppBar extends Component {
             </div>
             <div className={classes.grow}></div>
             <div>
-              {userDetails.isAdmin ? (
-                <Link to="/Report" className={classes.noDecor}>
-                  <Button variant="contained" className={classes.button}>
-                    Report
-                  </Button>
-                </Link>
-              ) : null}
-
               <Link to="/home" className={classes.noDecor}>
                 <Button
                   variant="contained"
@@ -72,7 +64,6 @@ class SignedInAppBar extends Component {
                   Logout
                 </Button>
               </Link>
-<<<<<<< HEAD
 
               <Link to="/Report" className={classes.noDecor}>
                 <Button variant="contained" className={classes.button}>
@@ -91,8 +82,6 @@ class SignedInAppBar extends Component {
                   Subscriptions
                 </Button>
               </Link>
-=======
->>>>>>> d542cb92dae2ae69e725465a57d293adbf4ee482
             </div>
 
             <div>
