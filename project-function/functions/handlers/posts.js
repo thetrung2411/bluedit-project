@@ -68,7 +68,7 @@ exports.getPost1 = (req, res) => {
       data.forEach((doc) => {
         postContent1.bookmarks.push(doc.data());
       });
-      return res.json(bookmarks);
+      return res.json(postContent1);
     })
     .catch((err) => {
       console.log(err);
@@ -91,8 +91,28 @@ exports.getAllPosts = (req, res) => {
           createdAt: doc.data().createdAt,
           userPosted: doc.data().userPosted,
         });
+        return res.json(posts);
+      })
+      .catch(err => console.error(err));
+  })};
+
+exports.searchPost = (req, res) => {
+  db.collection("posts")
+    .where("body", '==', req.params.body)
+    .get()
+    .then(data => {
+      let posts = [];
+      data.forEach(doc => {
+        posts.push({
+          postId: doc.id,
+          body: doc.data().body,
+          commentCount: doc.data().commentCount,
+          upvoteCount: doc.data().upvoteCount,
+          createdAt: doc.data().createdAt,
+          userPosted: doc.data().userPosted,
+        });
       });
       return res.json(posts);
     })
     .catch(err => console.error(err));
-};
+}
