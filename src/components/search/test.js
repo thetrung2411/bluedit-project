@@ -10,6 +10,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { connect } from "react-redux";
 import { PostLayoutStyles } from "../../components/post/PostLayoutStyle";
 import { SearchPost } from "../../redux/actions/postActions";
+import axiosConfig from "../../axiosConfig";
 //import { Redirect } from "react-router-dom";
 //import Search from './search';
 //import { Link } from "react-router-dom";
@@ -32,9 +33,19 @@ import { SearchPost } from "../../redux/actions/postActions";
          body: event.target.value
        });
       }
-    componentDidMount(body) {
-      this.props.SearchPost(body);
-    }
+    componentDidMount() {
+      this.props.SearchPost(this.state.body);
+      axiosConfig
+      .get("/SearchPost")
+      .then(res => {
+        console.log(res.data);
+        this.setState({
+          post: res.data
+        });
+      })
+      .catch(err => console.log(err));
+      
+  }
     
      
       
