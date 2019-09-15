@@ -8,6 +8,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Avatar from "@material-ui/core/Avatar";
 import TextField from "@material-ui/core/TextField";
 import PropTypes from 'prop-types';
+import dayjs from 'dayjs';
 export class CommentItem extends Component{
     render(){
         const {comments, classes} = this.props;
@@ -29,7 +30,7 @@ export class CommentItem extends Component{
         titleTypographyProps={{align:"left"}}
         title = {userPosted}
         subheaderTypographyProps={{align:"left"}}
-        subheader={createdAt}/>
+        subheader={dayjs(createdAt).fromNow()}/>
         <CardContent>
         <Typography align = "justify"> {body}
         </Typography>

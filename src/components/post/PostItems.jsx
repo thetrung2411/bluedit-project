@@ -28,6 +28,7 @@ export class PostItems extends Component {
                 <Avatar >
                   T
                 </Avatar>
+<<<<<<< HEAD
               }
         action={
           <IconButton aria-label="settings">
@@ -50,6 +51,29 @@ export class PostItems extends Component {
         <PostItemDetail postId = {postId} userPosted = {userPosted}/>
         {/* <Fab size="small" className ={classes.fab} ><BookmarksIcon/></Fab> */}
         </CardActions>
+=======
+            }
+            action={
+              <IconButton aria-label="settings">
+                <MoreIcon />
+              </IconButton>
+            }
+            title={userPosted}
+            titleTypographyProps={{ align: "left" }}
+            subheaderTypographyProps={{ align: "left" }}
+            subheader={dayjs(createdAt).fromNow()} />
+          <CardContent>
+            <Typography align="justify"> {body}
+            </Typography>
+          </CardContent>
+          <CardActions >
+            <Typography>{upvoteCount}</Typography>
+            <Fab size="small" className={classes.fab} ><ThumbUpAltRoundedIcon /></Fab>
+            <Fab size="small" className={classes.fab} ><ThumbDownRoundedIcon /></Fab>
+            <Typography>{commentCount} comments</Typography>
+            <PostItemDetail postId={postId} userPosted={userPosted} openDialog={this.props.openDialog}/>
+          </CardActions>
+>>>>>>> 3f611197104d695fbe21b839976dca49c3142674
         </Card>
         </Grid>
     );

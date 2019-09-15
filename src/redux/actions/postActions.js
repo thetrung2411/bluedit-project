@@ -32,8 +32,8 @@ export const getPost = (postId) => (dispatch) => {
     axiosConfig.get(`/post/${postId}`)
     .then(res => {
       dispatch ({
-        type:GET_POST,
-        payload:res.data
+        type: GET_POST,
+        payload: res.data
       });
       dispatch({type: STOP_LOADING_UI})
     })
