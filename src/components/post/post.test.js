@@ -8,19 +8,13 @@ import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
 import postReducers from "../../redux/reducers/postReducers";
 import * as types from "../../redux/types";
-import * as actions from "../../redux/actions/postActions";
 import thunk from "redux-thunk"
-import moxios from 'moxios';
+
 const mockStore = configureMockStore([thunk]);
 const store = mockStore({});
 
 describe('PostButton Component Test', () => {
-    beforeEach(function() {
-        moxios.install();
-    });
-    afterEach(function() {
-        moxios.uninstall();
-    });
+    
     test('Should render without errors', () => {
         const component = shallow(<Provider store ={store}><PostButton/></Provider>);
         expect(component.find(PostButton).length).toBe(1);
