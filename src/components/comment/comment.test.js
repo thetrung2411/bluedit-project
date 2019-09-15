@@ -4,12 +4,7 @@ import CommentField from './CommentField';
 import CommentItem from './CommentItem';
 import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
-<<<<<<< HEAD
 import { PostLayout } from '../post/PostLayout';
-=======
-import postReducers from "../../redux/reducers/postReducers";
-import * as types from "../../redux/types";
->>>>>>> 3f611197104d695fbe21b839976dca49c3142674
 const mockStore = configureMockStore();
 const store = mockStore({});
 

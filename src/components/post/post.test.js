@@ -14,42 +14,6 @@ describe('PostButton Component Test', () => {
         const component = shallow(<Provider store ={store}><PostButton/></Provider>);
         expect(component.find(PostButton).length).toBe(1);
     })
-<<<<<<< HEAD
-=======
-    test('Should return initial state', () => {
-        expect(postReducers(undefined, {})).toEqual(
-            {
-                    posts: [],
-                    post: {},
-                    loading: false
-            }
-        )
-    })
-    test('Should return GET_POSTS state', () => {
-        expect(postReducers({},{
-            type: types.GET_POSTS,     
-        })).toEqual({
-            posts: undefined,
-            loading: false
-        })
-    })
-    test('Should return GET_POST state', () => {
-        expect(postReducers({},{
-            type: types.GET_POST,     
-        })).toEqual({
-            post: undefined,
-        })
-    })
-    test('Should return POST_POST state', () => {
-        expect(postReducers(undefined,{
-            type: types.POST_POST,     
-        })).toEqual({
-                posts: [undefined],
-                post: {},
-                loading: false
-        })
-    })
->>>>>>> 3f611197104d695fbe21b839976dca49c3142674
 })
 describe('PostItemDetail Component Test', () => {
     test('Should render without errors', () => {
