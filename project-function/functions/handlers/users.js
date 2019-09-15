@@ -7,7 +7,7 @@ firebase.initializeApp(config);
 
 const {
   validateSignupData,
-  validateLoginData,
+  validateLoginData
 } = require("../util/dataValidator");
 
 exports.signup = (req, res) => {
@@ -106,21 +106,41 @@ exports.login = (req, res) => {
     });
 };
 
-exports.getCurrentUser = (req,res) =>{
+exports.changeUserPassword = (req, res) => {
+  let userData = req.body;
+  //change user password by using data from request
+  admin
+    .auth()
+    .updateUser(req.user.uid, {
+      password: userData.newPassword
+    })
+    //response with a message in case of success or return an error
+    .then(() => {
+      return res.json({ message: "Change password successfully" });
+    })
+    .catch(err => {
+      console.error(err);
+      return res.status(500).json({ error: err.code });
+    });
+};
+
+exports.getCurrentUser = (req, res) => {
   let userData = {};
+  //get user detail based on the userName taken from FBAuth
   db.doc(`/users/${req.user.userName}`)
     .get()
-    .then(doc =>{
-      if (doc.exists){
+    .then(doc => {
+      if (doc.exists) {
         userData.userDetails = doc.data();
       }
       return res.json(userData);
     })
-    .catch(err =>{
+    .catch(err => {
       console.error(err);
-      return res.status(500).json({error: err.code})
-    })
-}
+      return res.status(500).json({ error: err.code });
+    });
+};
+
 
 exports.editProfile = (req,res) =>{
   db.doc(`/users/${req.user.userName}`)

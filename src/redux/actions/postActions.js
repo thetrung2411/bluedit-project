@@ -9,7 +9,6 @@ import {
   GET_POST
 } from "../types";
 import axiosConfig from '../../axiosConfig';
-
 export const getAllPosts = () => (dispatch) => {
   dispatch({type: LOADING_DATA});
   axiosConfig.get('/getAllPosts')
@@ -58,4 +57,5 @@ export const post = (newPost) => (dispatch) => {
         payload: err.response.data
       })
     })
+    
 }

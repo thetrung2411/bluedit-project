@@ -44,18 +44,6 @@ export const registerUser = (userData, history) => dispatch => {
     });
 };
 
-export const changeUserData = (userData) => dispatch =>{
-  dispatch({ type: LOADING_USER });
-  axiosConfig
-    .post("/editProfile", userData)
-    .then(() => {
-      dispatch(getUserData());
-    },
-    console.log(userData)
-    )
-    .catch(err => console.log("edit error"));
-};
-
 export const logoutUser = () => dispatch => {
   localStorage.removeItem("FBToken");
   delete axiosConfig.defaults.headers.common["Authorization"];
@@ -79,4 +67,16 @@ const setAuthourizationHeader = token => {
   const FBToken = `Bearer ${token}`;
   localStorage.setItem("FBToken", FBToken);
   axiosConfig.defaults.headers.common["Authorization"] = FBToken;
+};
+
+export const changeUserData = (userData) => dispatch =>{
+  dispatch({ type: LOADING_USER });
+  axiosConfig
+    .post("/editProfile", userData)
+    .then(() => {
+      dispatch(getUserData());
+    },
+    console.log(userData)
+    )
+    .catch(err => console.log("edit error"));
 };

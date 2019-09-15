@@ -26,7 +26,7 @@ class SignedInAppBar extends Component {
   render() {
     const {
       classes,
-      user: { userDetails = {} }
+      user: { userDetails }
     } = this.props;
 
     return (
@@ -55,6 +55,14 @@ class SignedInAppBar extends Component {
             </div>
             <div className={classes.grow}></div>
             <div>
+              {userDetails.isAdmin ? (
+                <Link to="/Report" className={classes.noDecor}>
+                  <Button variant="contained" className={classes.button}>
+                    Report
+                  </Button>
+                </Link>
+              ) : null}
+
               <Link to="/home" className={classes.noDecor}>
                 <Button
                   variant="contained"
@@ -64,35 +72,13 @@ class SignedInAppBar extends Component {
                   Logout
                 </Button>
               </Link>
-
-              <Link to="/Report" className={classes.noDecor}>
-                <Button variant="contained" className={classes.button}>
-                  Report
-                </Button>
-              </Link>
-
-              <Link to="/userpage" className={classes.noDecor}>
-                <Button variant="contained" className={classes.button}>
-                  Userpage
-                </Button>
-              </Link>
-
-              <Link to="/subscriptions" className={classes.noDecor}>
-                <Button variant="contained" className={classes.button}>
-                  Subscriptions
-                </Button>
-              </Link>
             </div>
 
             <div>
-              <Link to="/userpage" className={classes.noDecor}>
-                <Avatar>R</Avatar>
-              </Link>
+              <Avatar>R</Avatar>
             </div>
             <div>
-              <Link to="/userpage" className={classes.noDecor}>
-                <Typography align="right">{userDetails.userName}</Typography>
-              </Link>
+              <Typography align="right">{userDetails.userName}</Typography>
             </div>
           </Toolbar>
         </AppBar>
