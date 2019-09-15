@@ -8,7 +8,6 @@ firebase.initializeApp(config);
 const {
   validateSignupData,
   validateLoginData,
-  reduceUserDetails
 } = require("../util/dataValidator");
 
 exports.signup = (req, res) => {
@@ -124,7 +123,6 @@ exports.getCurrentUser = (req,res) =>{
 }
 
 exports.editProfile = (req,res) =>{
-
   db.doc(`/users/${req.user.userName}`)
     .update(req.body)
     .then(() => {
@@ -137,28 +135,29 @@ exports.editProfile = (req,res) =>{
 }
 
 exports.getAllUsers = (req,res) =>{
-  db.collection("users")
-  .orderBy("userName","desc")
-  .get()
-  .then(
-    data => {
-    let user = [];
-    data.forEach(doc => {
-      user.push({
-        email: doc.data().email,
-        createdAt: doc.data().createdAt,
-        location: doc.data().location,
-        userName: doc.data().userName,
-        phoneNumber: doc.data().phoneNumber,
-        gender: doc.data().gender,
-        dateOfBirth: doc.data().dateOfBirth,
+  db
+    .collection("users")
+    .orderBy("userName","desc")
+    .get()
+    .then(
+      data => {
+      let user = [];
+      data.forEach(doc => {
+        user.push({
+          email: doc.data().email,
+          createdAt: doc.data().createdAt,
+          location: doc.data().location,
+          userName: doc.data().userName,
+          phoneNumber: doc.data().phoneNumber,
+          gender: doc.data().gender,
+          dateOfBirth: doc.data().dateOfBirth,
+        });
+      
       });
-    
-    });
-    return res.json(user);
-}
-  )
-  .catch(err =>{        
-    console.error(err);
-  })
+      return res.json(user);
+    }
+    )
+    .catch(err =>{        
+      console.error(err);
+    })
 }

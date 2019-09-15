@@ -15,12 +15,12 @@ exports.getAllSubscribe = (req,res) =>{
       let subscribe = [];
       data.forEach(doc => {
         subscribe.push({
+          subscribeID: doc.id,
           subscribeAt: doc.data().subscribeAt,
           subscriber: doc.data().subscriber,
           subscriptionsType: doc.data().subscriptionsType,
           userName: doc.data().userName
         });
-      
       });
       return res.json(subscribe);
   }
@@ -28,4 +28,28 @@ exports.getAllSubscribe = (req,res) =>{
     .catch(err =>{        
       console.error(err);
     })
-  }
+}
+
+
+exports.unSubscribe = (req, res) => {
+  db
+    .doc(`/users/${req.params.userName}`)
+    .get()
+    .then(doc => {
+      if (!doc.exists) {
+        return res.status(404).json({ error: "Not Subscribe" });
+      } else {
+        return document.delete();
+      }
+    })
+    .then(() => {
+      res.json({ message: "UnSubscribe successfully" });
+    })
+    .catch(err => {
+      console.error(err);
+      return res.status(500).json({ error: err.code });
+    });
+};
+
+////.collection("Subscribe")
+    //.doc(req.params.subscribeID)

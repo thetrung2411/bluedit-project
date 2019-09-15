@@ -66,9 +66,6 @@ class editProfile extends React.Component{
         this.props.changeUserData(userData);
       };
 
-      handleDeleteAccount = e =>{
-        //this.props.deleteAccount();
-      }
 
     render()
     {
@@ -77,6 +74,7 @@ class editProfile extends React.Component{
         return (
                 <div>
                 <table align = "center">
+                    <tbody>
                     <tr>
                         <td>
                             Full Name:
@@ -93,7 +91,9 @@ class editProfile extends React.Component{
                             />
                         </td>
                     </tr>
+                    </tbody>
 
+                    <tbody>
                     <tr>
                         <td>
                             Location:
@@ -110,7 +110,9 @@ class editProfile extends React.Component{
                             />
                         </td>
                     </tr>
+                    </tbody>
 
+                    <tbody>
                     <tr>
                         <td>
                             Date of Birth:
@@ -127,7 +129,8 @@ class editProfile extends React.Component{
                             />
                         </td>
                     </tr>
-
+                    </tbody>
+                    <tbody>
                     <tr>
                         <td>
                             Bio:
@@ -144,7 +147,9 @@ class editProfile extends React.Component{
                             />
                         </td>
                     </tr>
+                    </tbody>
 
+                    <tbody>
                     <tr>
                         <td>
                             Phone Number:
@@ -161,7 +166,8 @@ class editProfile extends React.Component{
                             />
                         </td>
                     </tr>
-
+                    </tbody>
+                    <tbody>
                     <tr>
                         <td>
                             Gender:
@@ -178,7 +184,8 @@ class editProfile extends React.Component{
                             />
                         </td>
                     </tr>
-
+                    </tbody>
+                    <tbody>
                     <tr>
                         <Link to="/userpage" className= {classes.noDecor}>
                             <Button
@@ -193,6 +200,7 @@ class editProfile extends React.Component{
                             </Button>
                         </Link>
                     </tr>
+                    </tbody>
                 </table>
                 </div>
         )

@@ -76,6 +76,12 @@ class SignedInAppBar extends Component {
                   Userpage
                 </Button>
               </Link>
+
+              <Link to="/subscriptions" className={classes.noDecor}>
+                <Button variant="contained" className={classes.button}>
+                  Subscriptions
+                </Button>
+              </Link>
             </div>
 
             <div>

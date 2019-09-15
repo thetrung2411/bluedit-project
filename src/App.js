@@ -12,7 +12,6 @@ import {Provider} from 'react-redux';
 import store from './redux/store'; 
 //import bookmark from './components/bookmark/BookmarkForm';
 import Report from './components/reportpage/reportpageItem';
-import userpage from './components/userpage/userpage';
 import subscriptions from './components/subscriptions/subscriptions';
 import {
   MuiThemeProvider,
@@ -63,7 +62,6 @@ class App extends Component{
               <Route path='/post' component = {PostLayout}/>
               <Route path='/home' component = {HomePageLayout}/>
               <Route path='/report' component = {Report} />
-              {/* <Route path='/userpage' component = {userpage}/> */}
               <Route path='/subscriptions' component = {subscriptions}/>
               <Route path='/userpage' component = {userpageLauout}/>
               <Route path='/editProfile' component = {editProfileLayout}/>
