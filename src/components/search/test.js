@@ -3,39 +3,37 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Grid from "@material-ui/core/Grid";
-import SignedInAppBar from "../appBar/AppBarWithAvatar";
+import AppBar from "../appBar/appBar";
 import PostItems from "../post/postItems";
-import RecommendationItem from "../post/Recommendation";
-import PostButton from "../post/PostButton";
+//import RecommendationItem from "../post/Recommendation";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { connect } from "react-redux";
 import { PostLayoutStyles } from "../../components/post/PostLayoutStyle";
 import { SearchPost } from "../../redux/actions/postActions";
-import { Redirect } from "react-router-dom";
-import Search from './search';
-import { Link } from "react-router-dom";
-
-import Posts from './posts';
+//import { Redirect } from "react-router-dom";
+//import Search from './search';
+//import { Link } from "react-router-dom";
+//import Posts from './posts';
 
   class Searchh extends Component {
     constructor(props) {
       super(props);
       
       this.state = {
-        posts: [],
-        query: '',
-        post: null
+        //posts: [],
+        body: "",
+        //post: null
       };    
-        this.onInput = this.onInput.bind(this);
+        //this.onInput = this.onInput.bind(this);
 
     }
-      onInput(query) {
+      onInput(event) {
        this.setState({
-         query
+         body: event.target.value
        });
       }
-    componentDidMount(query) {
-      this.props.SearchPost(query);
+    componentDidMount(body) {
+      this.props.SearchPost(body);
     }
     
      
@@ -58,17 +56,18 @@ import Posts from './posts';
        
     render() {
       //const { posts, query } = this.state;
-      const isSearched = query => item => !query || item.title.toLowerCase().includes(query.toLowerCase());
-      const {posts, query} = this.props.post;
-      let postMarkUp = this.state.post ? (
-        this.state.post.map(post => <PostItems post={post} />)
+      //const isSearched = query => item => !query || item.title.toLowerCase().includes(query.toLowerCase());
+      const {posts, loading} = this.props.post;
+      let postMarkUp = !loading ? (
+        posts.map(post => <PostItems post={post} />)
       ) : (
         <CircularProgress color="inherit" />
       );
       return (
         <div>
-          <Search query={query} onInput={this.onInput} placeholder="Search for Post …" />
-         <Posts posts={posts.filter(isSearched(query))} />  
+          <AppBar />
+          <input type = "text" id= "body" onChange={this.onInput.bind(this)} placeholder="Search for Post …" />
+         {/* <Posts posts={posts.filter(isSearched(query))} />   */}
           <Grid>
             {postMarkUp}
           </Grid>

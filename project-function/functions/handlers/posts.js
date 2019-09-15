@@ -75,7 +75,7 @@ exports.getAllPosts = (req, res) => {
 
 exports.SearchPost = (req, res) => {
   db.collection("posts")
-    .where("body" = req.params.query)
+    .where("body" = req.params.body)
     .get()
     .then(data => {
       let posts = [];
