@@ -6,7 +6,7 @@ import ThumbDownRoundedIcon from '@material-ui/icons/ThumbDownRounded';
 import QuestionAnswerRounded from '@material-ui/icons/QuestionAnswerRounded'
 import IconButton from "@material-ui/core/IconButton";
 import Fab from "@material-ui/core/Fab";
-import {PostItemStyles} from "./postItemsStyles";
+import {PostItemStyles} from "./PostItemsStyles";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Avatar from "@material-ui/core/Avatar";

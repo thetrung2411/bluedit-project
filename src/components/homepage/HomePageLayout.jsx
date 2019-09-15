@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AppBar from "../appBar/appBar";
-import PostItems from "../post/postItems";
+import PostItems from "../post/PostItems";
 import Grid from "@material-ui/core/Grid";
 import RecommendationItem from "../post/Recommendation";
 import CircularProgress from "@material-ui/core/CircularProgress";

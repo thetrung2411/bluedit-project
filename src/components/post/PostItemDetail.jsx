@@ -10,7 +10,7 @@ import CommentItem from '../comment/CommentItem';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import {connect} from 'react-redux';
 import {getPost} from '../../redux/actions/postActions';
-import { PostItemStyles } from './postItemsStyles';
+import { PostItemStyles } from './PostItemsStyles';
 import Fab from '@material-ui/core/Fab';
 import QuestionAnswerRounded from '@material-ui/icons/QuestionAnswerRounded'
 import Dialog from '@material-ui/core/Dialog';
