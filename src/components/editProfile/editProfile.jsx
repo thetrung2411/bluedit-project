@@ -223,4 +223,3 @@ export default connect(
     mapStateToProps,
     { changeUserData }
   )(withStyles(styles)(editProfile));
-  //
