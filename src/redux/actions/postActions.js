@@ -60,9 +60,9 @@ export const post = (newPost) => (dispatch) => {
     
 }
 
-export const SearchPost = (postId) => (dispatch) => {
+export const SearchPost = (query) => (dispatch) => {
   dispatch({type: LOADING_UI});
-  axiosConfig.get(`/post/${postId}`)
+  axiosConfig.get(`/SearchPost/${query}`)
   .then(res => {
     dispatch ({
       type:GET_POST,
