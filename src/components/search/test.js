@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Grid from "@material-ui/core/Grid";
 import AppBar from "../appBar/appBar";
-import PostItems from "../post/postItems";
+import PostItems from "../post/PostItems";
 //import RecommendationItem from "../post/Recommendation";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { connect } from "react-redux";

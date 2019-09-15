@@ -9,7 +9,7 @@ import register from './components/login-register/register';
 import test from './components/search/test';
 import searching from './components/search/searching';
 import PostLayout from './components/post/PostLayout';
-import HomePageLayout from './components/homepage/homePageLayout';
+import HomePageLayout from './components/homepage/HomePageLayout';
 import {Provider} from 'react-redux';
 import store from './redux/store'; 
 //import bookmark from './components/bookmark/BookmarkForm';
