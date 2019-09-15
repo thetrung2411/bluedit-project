@@ -46,8 +46,7 @@ export class PostItems extends Component {
             <Fab size="small" className={classes.fab} ><ThumbUpAltRoundedIcon /></Fab>
             <Fab size="small" className={classes.fab} ><ThumbDownRoundedIcon /></Fab>
             <Typography>{commentCount} comments</Typography>
-
-            <PostItemDetail postId={postId} userPosted={userPosted} />
+            <PostItemDetail postId={postId} userPosted={userPosted} openDialog={this.props.openDialog}/>
           </CardActions>
         </Card>
       </Grid>
