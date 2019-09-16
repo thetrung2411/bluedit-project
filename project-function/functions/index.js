@@ -15,6 +15,11 @@ app.post("/login", login);
 app.get("/user", FBAuth, getCurrentUser);
 app.post("/changePassword", FBAuth, changeUserPassword);
 
+app.post("/editProfile", FBAuth, editProfile);
+app.get("/allSubscribe", getAllSubscribe);
+app.get("/allUsers", getAllUsers);
+app.post("/unSubscribe", unSubscribe);
+
 //Post
 app.post("/post", FBAuth, post);
 app.get("/getAllPosts", getAllPosts);
