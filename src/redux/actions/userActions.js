@@ -68,3 +68,15 @@ const setAuthourizationHeader = token => {
   localStorage.setItem("FBToken", FBToken);
   axiosConfig.defaults.headers.common["Authorization"] = FBToken;
 };
+
+export const changeUserData = (userData) => dispatch =>{
+  dispatch({ type: LOADING_USER });
+  axiosConfig
+    .post("/editProfile", userData)
+    .then(() => {
+      dispatch(getUserData());
+    },
+    console.log(userData)
+    )
+    .catch(err => console.log("edit error"));
+};
