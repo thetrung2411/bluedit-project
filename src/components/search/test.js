@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Grid from "@material-ui/core/Grid";
 import AppBar from "../appBar/appBar";
-import PostItems from "../post/PostItems";
+import SearchItems from "./SearchItems";
 //import RecommendationItem from "../post/Recommendation";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { connect } from "react-redux";
@@ -23,7 +23,7 @@ import axiosConfig from "../../axiosConfig";
       this.state = {
         //posts: [],
         body: "",
-        //post: null
+        post: null
       };    
         //this.onInput = this.onInput.bind(this);
 
@@ -34,9 +34,9 @@ import axiosConfig from "../../axiosConfig";
        });
       }
     componentDidMount() {
-      this.props.SearchPost(this.state.body);
+      //this.props.SearchPost(this.state.body);
       axiosConfig
-      .get("/SearchPost")
+      .get("/getAllPosts")
       .then(res => {
         console.log(res.data);
         this.setState({
@@ -66,39 +66,42 @@ import axiosConfig from "../../axiosConfig";
     // }
        
     render() {
-      //const { posts, query } = this.state;
-      //const isSearched = query => item => !query || item.title.toLowerCase().includes(query.toLowerCase());
-      const {posts, loading} = this.props.post;
-      let postMarkUp = !loading ? (
-        posts.map(post => <PostItems post={post} />)
+      const { body } = this.state;
+      const isSearched = body => item => !body || item.title.toLowerCase().includes(body.toLowerCase());
+      //const {posts, loading} = this.props.post;
+      let postMarkUp = this.state.post ? (
+        this.state.post.map(post => <SearchItems post={post}/>)
       ) : (
         <CircularProgress color="inherit" />
       );
+      
       return (
         <div>
           <AppBar />
+          {/* <Grid> */}          
+            <h1>{body}</h1>
           <input type = "text" id= "body" onChange={this.onInput.bind(this)} placeholder="Search for Post …" />
          {/* <Posts posts={posts.filter(isSearched(query))} />   */}
-          <Grid>
+          {/* </Grid> */}
             {postMarkUp}
-          </Grid>
+          {/* </Grid></Grid> */}
         </div>
 
         
       );
     }
   }
-  Searchh.propTypes = {
-    SearchPost: PropTypes.func.isRequired,
-    post: PropTypes.object.isRequired,
-  }
+  // Searchh.propTypes = {
+  //   SearchPost: PropTypes.func.isRequired,
+  //   post: PropTypes.object.isRequired,
+  // }
   
-  const mapStateToProps = (state) => ({
-    post: state.post,
-  })
-  const mapActionToProps ={ 
-    SearchPost
-  }
+  // const mapStateToProps = (state) => ({
+  //   post: state.post,
+  // })
+  // const mapActionToProps ={ 
+  //   SearchPost
+  // }
   
-  export default connect (mapStateToProps, mapActionToProps)(withStyles(PostLayoutStyles)(Searchh));
-   //export default Searchh;
+  // export default connect (mapStateToProps, mapActionToProps)(withStyles(PostLayoutStyles)(Searchh));
+   export default Searchh;
