@@ -51,15 +51,15 @@ export const changePassword = (userData, history) => dispatch => {
   axiosConfig
     .post("/changePassword", userData)
     .then(res => {
-      dispatch({ type: CLEAR_MESSAGES})
+      dispatch({ type: CLEAR_MESSAGES });
       dispatch({ type: CLEAR_ERRORS });
       dispatch({
         type: SET_MESSAGES,
         payload: res.data.general
-      })
+      });
     })
     .catch(err => {
-      dispatch({ type: CLEAR_MESSAGES})
+      dispatch({ type: CLEAR_MESSAGES });
       dispatch({
         type: SET_ERRORS,
         payload: err.response.data
@@ -67,10 +67,14 @@ export const changePassword = (userData, history) => dispatch => {
     });
 };
 
+export const clearMessages = () => dispatch =>{
+  dispatch({ type: CLEAR_MESSAGES });
+}
+
 export const logoutUser = () => dispatch => {
   localStorage.removeItem("FBToken");
   delete axiosConfig.defaults.headers.common["Authorization"];
-  dispatch({ type: CLEAR_MESSAGES})
+  dispatch({ type: CLEAR_MESSAGES });
   dispatch({ type: SET_UNAUTHENTICATED });
 };
 

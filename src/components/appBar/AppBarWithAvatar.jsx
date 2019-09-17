@@ -16,12 +16,16 @@ import withStyles from "@material-ui/core/styles/withStyles";
 
 ///redux
 import { connect } from "react-redux";
-import { logoutUser } from "../../redux/actions/userActions";
+import { logoutUser, clearMessages } from "../../redux/actions/userActions";
 
 class SignedInAppBar extends Component {
   handleLogout = () => {
     this.props.logoutUser();
   };
+
+  handleClear = () =>{
+    this.props.clearMessages();
+  }
 
   render() {
     const {
@@ -76,6 +80,7 @@ class SignedInAppBar extends Component {
                 <Button
                   variant="contained"
                   className={classes.button}
+                  onClick={this.handleClear}
                 >
                   Account
                 </Button>
@@ -105,7 +110,8 @@ class SignedInAppBar extends Component {
 }
 
 const mapActionToProps = {
-  logoutUser
+  logoutUser,
+  clearMessages
 };
 
 const mapStateToProps = state => ({
