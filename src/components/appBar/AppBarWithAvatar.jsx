@@ -63,7 +63,7 @@ class SignedInAppBar extends Component {
                 </Link>
               ) : null}
 
-                <Link to="/bookmark" className={classes.noDecor}>
+              <Link to="/bookmark" className={classes.noDecor}>
                 <Button
                   variant="contained"
                   className={classes.button}
@@ -72,7 +72,14 @@ class SignedInAppBar extends Component {
                   Bookmark
                 </Button>
               </Link>
-
+              <Link to="/accountManagement" className={classes.noDecor}>
+                <Button
+                  variant="contained"
+                  className={classes.button}
+                >
+                  Account
+                </Button>
+              </Link>
               <Link to="/home" className={classes.noDecor}>
                 <Button
                   variant="contained"

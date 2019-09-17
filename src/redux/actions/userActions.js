@@ -44,6 +44,21 @@ export const registerUser = (userData, history) => dispatch => {
     });
 };
 
+export const changePassword = userData => dispatch => {
+  dispatch({ type: LOADING_UI });
+  axiosConfig
+    .post("/changePassword", userData)
+    .then(res => {
+      dispatch({ type: CLEAR_ERRORS });
+    })
+    .catch(err => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
+
 export const logoutUser = () => dispatch => {
   localStorage.removeItem("FBToken");
   delete axiosConfig.defaults.headers.common["Authorization"];
