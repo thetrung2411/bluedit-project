@@ -28,19 +28,25 @@ const styles = {
     fontSize: "0.8rem",
     marginTop: 10
   },
+  customMessage: {
+    color: "green",
+    fontSize: "0.8rem",
+    marginTop: 10
+  },
   progress: {
     position: "absolute"
   },
   textField: {
     margin: "10px auto 10px auto"
-  }
+  },
 };
 
 class ChangePassword extends Component {
   state = {
     newPassword: "",
     confirmPassword: "",
-    errors: {}
+    errors: {},
+    message: ""
   };
 
   handleChange = e => {
@@ -62,13 +68,13 @@ class ChangePassword extends Component {
       confirmPassword: this.state.confirmPassword
     };
     //console.log(userData)
-    this.props.changePassword(userData);
+    this.props.changePassword(userData, this.props.history);
   };
 
   render() {
     const {
       classes,
-      UI: { loading }
+      UI: { loading, message }
     } = this.props;
 
     const { errors } = this.state;
@@ -78,7 +84,9 @@ class ChangePassword extends Component {
         <Typography variant="h6" className={classes.pageTitle}>
           Change Password
         </Typography>
-        <small>Enter your new password</small>
+        <small>
+          Enter your new password
+        </small>
         <form noValidate onSubmit={this.handleSubmit}>
           <TextField
             id="newPassword"
@@ -107,6 +115,11 @@ class ChangePassword extends Component {
           {errors.general && (
             <Typography variant="body2" className={classes.customError}>
               {errors.general}
+            </Typography>
+          )}
+          {message && (
+            <Typography variant="body2" className={classes.customMessage}>
+              {message}
             </Typography>
           )}
           <Button

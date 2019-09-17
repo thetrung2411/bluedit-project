@@ -1,6 +1,10 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import SignedInAppBar from "../appBar/AppBarWithAvatar";
 import ChangePassword from "./ChangePassword"
+import { Redirect } from "react-router-dom";
+
+import { connect } from "react-redux";
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import Grid from "@material-ui/core/Grid";
@@ -21,6 +25,8 @@ const styles = {
 class accountManagement extends Component {
   render() {
     const { classes } = this.props;
+
+    //if (!authenticated) return <Redirect to="/login"/>
 
     return (
       <div>

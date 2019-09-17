@@ -5,7 +5,8 @@ import {
   CLEAR_ERRORS,
   LOADING_UI,
   LOADING_USER,
-  SET_UNAUTHENTICATED
+  SET_UNAUTHENTICATED,
+  SET_MESSAGES
 } from "../types";
 
 export const loginUser = (userData, history) => dispatch => {
@@ -44,12 +45,16 @@ export const registerUser = (userData, history) => dispatch => {
     });
 };
 
-export const changePassword = userData => dispatch => {
+export const changePassword = (userData, history) => dispatch => {
   dispatch({ type: LOADING_UI });
   axiosConfig
     .post("/changePassword", userData)
     .then(res => {
       dispatch({ type: CLEAR_ERRORS });
+      dispatch({
+        type: SET_MESSAGES,
+        payload: res.data.general
+      })
     })
     .catch(err => {
       dispatch({
