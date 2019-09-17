@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 //Redux stuff
 import { connect } from "react-redux";
 import { registerUser } from "../../redux/actions/userActions";
- 
+
 //MUI import
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -48,16 +49,13 @@ const styles = {
 };
 
 export class register extends Component {
-  constructor() {
-    super();
-    this.state = {
-      email: "",
-      password: "",
-      confirmPassword: "",
-      userName: "",
-      errors: {}
-    };
-  }
+  state = {
+    email: "",
+    password: "",
+    confirmPassword: "",
+    userName: "",
+    errors: {}
+  };
 
   handleChange = e => {
     this.setState({
@@ -86,8 +84,14 @@ export class register extends Component {
   };
 
   render() {
-    const { classes, UI: {loading} } = this.props;
+    const {
+      user: {authenticated},
+      classes,
+      UI: { loading }
+    } = this.props;
     const { errors } = this.state;
+
+    if (authenticated) return <Redirect to="/post"/>
 
     return (
       <Grid container className={classes.form}>
@@ -193,10 +197,10 @@ register.propTypes = {
   registerUser: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state =>({
+const mapStateToProps = state => ({
   user: state.user,
   UI: state.UI
-})
+});
 
 export default connect(
   mapStateToProps,
