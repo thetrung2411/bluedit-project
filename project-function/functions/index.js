@@ -33,7 +33,7 @@ app.post("/bookmark", FBAuth, bookmark);
 app.get("/getAllBookmarks", getAllBookmarks);
 app.get("/getBookmark/:bookmarkid", getBookmark);
 app.delete("/deleteBookmark/:bookmarkid", deleteBookmark);
-app.get("/SearchPost/:body", SearchPost);
+//app.get("/SearchPost/:body", SearchPost);
 
 exports.api = functions.https.onRequest(app);
 

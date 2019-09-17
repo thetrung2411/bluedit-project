@@ -7,7 +7,8 @@ firebase.initializeApp(config);
 
 const {
   validateSignupData,
-  validateLoginData
+  validateLoginData,
+  validateNewPasswordData
 } = require("../util/dataValidator");
 
 exports.signup = (req, res) => {
@@ -107,7 +108,14 @@ exports.login = (req, res) => {
 };
 
 exports.changeUserPassword = (req, res) => {
-  let userData = req.body;
+  let userData = {
+    newPassword: req.body.newPassword,
+    confirmPassword: req.body.confirmPassword
+  }
+
+  const {valid, errors} = validateNewPasswordData(userData);
+  if (!valid) return res.status(400).json(errors)
+  
   //change user password by using data from request
   admin
     .auth()
