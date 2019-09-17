@@ -124,11 +124,11 @@ exports.changeUserPassword = (req, res) => {
     })
     //response with a message in case of success or return an error
     .then(() => {
-      return res.json({ message: "Change password successfully" });
+      return res.json({ general: "Change password successfully" });
     })
     .catch(err => {
       console.error(err);
-      return res.status(500).json({ error: err.code });
+      return res.status(500).json({ general: "Something went wrong, please try again" });
     });
 };
 
