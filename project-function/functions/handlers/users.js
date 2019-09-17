@@ -7,7 +7,8 @@ firebase.initializeApp(config);
 
 const {
   validateSignupData,
-  validateLoginData
+  validateLoginData,
+  validateNewPasswordData
 } = require("../util/dataValidator");
 
 exports.signup = (req, res) => {
@@ -107,7 +108,14 @@ exports.login = (req, res) => {
 };
 
 exports.changeUserPassword = (req, res) => {
-  let userData = req.body;
+  let userData = {
+    newPassword: req.body.newPassword,
+    confirmPassword: req.body.confirmPassword
+  }
+
+  const {valid, errors} = validateNewPasswordData(userData);
+  if (!valid) return res.status(400).json(errors)
+  
   //change user password by using data from request
   admin
     .auth()
@@ -116,11 +124,11 @@ exports.changeUserPassword = (req, res) => {
     })
     //response with a message in case of success or return an error
     .then(() => {
-      return res.json({ message: "Change password successfully" });
+      return res.json({ general: "Change password successfully" });
     })
     .catch(err => {
       console.error(err);
-      return res.status(500).json({ error: err.code });
+      return res.status(500).json({ general: "Something went wrong, please try again" });
     });
 };
 

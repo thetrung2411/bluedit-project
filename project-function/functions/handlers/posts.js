@@ -1,13 +1,11 @@
 const { db, admin } = require("../util/admin");
 const config = require("../util/config");
 const firebase = require("firebase");
-const {
-  validatePostData
-} = require("../util/dataValidator");
+const { validatePostData } = require("../util/dataValidator");
 
 exports.post = (req, res) => {
-  if (req.body.body.trim() === '') {
-    return res.status(400).json({ body: 'Post cannot be empty' });
+  if (req.body.body.trim() === "") {
+    return res.status(400).json({ body: "Post cannot be empty" });
   }
   const newPost = {
     body: req.body.body,
@@ -17,62 +15,70 @@ exports.post = (req, res) => {
     commentCount: 0
   };
 
-  db.collection('posts')
+  db.collection("posts")
     .add(newPost)
-    .then((doc) => {
+    .then(doc => {
       res.json({ message: `document ${doc.id} created successfully` });
     })
-    .catch((err) => {
-      res.status(500).json({ error: 'Unexpected failure' });
+    .catch(err => {
+      res.status(500).json({ error: "Unexpected failure" });
       console.error(err);
     });
 };
 
 exports.getPost = (req, res) => {
   let postContent = {};
-  db.doc(`/posts/${req.params.postId}`).get()
+  db.doc(`/posts/${req.params.postId}`)
+    .get()
     .then(doc => {
       if (!doc.exists) {
-        return res.status(404).json({ error: 'Post not found' });
+        return res.status(404).json({ error: "Post not found" });
       }
       postContent = doc.data();
       postContent.postId = doc.id;
-      return db.collection('comments').where('postId', '==', req.params.postId).get();
+      return db
+        .collection("comments")
+        .where("postId", "==", req.params.postId)
+        .get();
     })
-    .then((data) => {
+    .then(data => {
       postContent.comments = [];
-      data.forEach((doc) => {
+      data.forEach(doc => {
         postContent.comments.push(doc.data());
       });
       return res.json(postContent);
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
-      return res.status(500).json({ error: 'Unexpected failure' });
+      return res.status(500).json({ error: "Unexpected failure" });
     });
 };
 
 exports.getPost1 = (req, res) => {
   let postContent1 = {};
-  db.doc(`/posts/${req.params.postId}`).get()
+  db.doc(`/posts/${req.params.postId}`)
+    .get()
     .then(doc => {
       if (!doc.exists) {
-        return res.status(404).json({ error: 'Post not found' });
+        return res.status(404).json({ error: "Post not found" });
       }
       postContent1 = doc.data();
       postContent1.postId = doc.id;
-      return db.collection('bookmarks').where('postId', '==', req.params.postId).get();
+      return db
+        .collection("bookmarks")
+        .where("postId", "==", req.params.postId)
+        .get();
     })
-    .then((data) => {
+    .then(data => {
       postContent1.bookmarks = [];
-      data.forEach((doc) => {
+      data.forEach(doc => {
         postContent1.bookmarks.push(doc.data());
       });
       return res.json(postContent1);
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
-      return res.status(500).json({ error: 'Unexpected failure' });
+      return res.status(500).json({ error: "Unexpected failure" });
     });
 };
 
@@ -89,16 +95,17 @@ exports.getAllPosts = (req, res) => {
           commentCount: doc.data().commentCount,
           upvoteCount: doc.data().upvoteCount,
           createdAt: doc.data().createdAt,
-          userPosted: doc.data().userPosted,
+          userPosted: doc.data().userPosted
         });
-        return res.json(posts);
-      })
-      .catch(err => console.error(err));
-  })};
+      });
+      return res.json(posts);
+    })
+    .catch(err => console.error(err));
+};
 
 exports.searchPost = (req, res) => {
   db.collection("posts")
-    .where("body", '==', req.params.body)
+    .where("body", "==", req.params.body)
     .get()
     .then(data => {
       let posts = [];
@@ -109,10 +116,10 @@ exports.searchPost = (req, res) => {
           commentCount: doc.data().commentCount,
           upvoteCount: doc.data().upvoteCount,
           createdAt: doc.data().createdAt,
-          userPosted: doc.data().userPosted,
+          userPosted: doc.data().userPosted
         });
       });
       return res.json(posts);
     })
     .catch(err => console.error(err));
-}
+};
