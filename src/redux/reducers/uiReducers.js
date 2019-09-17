@@ -3,7 +3,8 @@ import {
   CLEAR_ERRORS,
   LOADING_UI,
   STOP_LOADING_UI,
-  SET_MESSAGES
+  SET_MESSAGES,
+  CLEAR_MESSAGES
 } from "../types";
 const initialState = {
   loading: false,
@@ -30,8 +31,13 @@ export default function(state = initialState, action) {
         ...state,
         loading: false,
         message: action.payload,
-        errors: null
       };
+    case CLEAR_MESSAGES:
+      return{
+        ...state,
+        loading: false,
+        message: null
+      }
     case LOADING_UI:
       return {
         ...state,

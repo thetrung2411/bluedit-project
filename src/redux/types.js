@@ -5,6 +5,7 @@ export const STOP_LOADING_UI = 'STOP_LOADING_UI';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const LOADING_DATA = 'LOADING_DATA';
 export const SET_MESSAGES = 'SET_MESSAGES';
+export const CLEAR_MESSAGES = 'CLEAR_MESSAGES';
 //Comment reducer types
 export const POST_COMMENT = 'POST_COMMENT';
 //Post reducer types

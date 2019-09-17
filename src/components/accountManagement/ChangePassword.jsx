@@ -38,7 +38,7 @@ const styles = {
   },
   textField: {
     margin: "10px auto 10px auto"
-  },
+  }
 };
 
 class ChangePassword extends Component {
@@ -58,7 +58,10 @@ class ChangePassword extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.UI.errors) {
       this.setState({ errors: nextProps.UI.errors });
-    }
+    } else this.setState({ errors: {} });
+    if (nextProps.UI.message) {
+      this.setState({ message: nextProps.UI.message });
+    } else this.setState({ message: "" });
   }
 
   handleSubmit = e => {
@@ -74,19 +77,17 @@ class ChangePassword extends Component {
   render() {
     const {
       classes,
-      UI: { loading, message }
+      UI: { loading }
     } = this.props;
 
-    const { errors } = this.state;
+    const { errors, message } = this.state;
 
     return (
       <div>
         <Typography variant="h6" className={classes.pageTitle}>
           Change Password
         </Typography>
-        <small>
-          Enter your new password
-        </small>
+        <small>Enter your new password</small>
         <form noValidate onSubmit={this.handleSubmit}>
           <TextField
             id="newPassword"
