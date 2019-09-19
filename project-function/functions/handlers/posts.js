@@ -28,6 +28,50 @@ exports.post = (req, res) => {
     });
 };
 
+exports.deletePost = (req, res) => {
+  const document = db.doc(`/posts/${req.params.postId}`);
+  document
+    .get()
+    .then((doc) => {
+      if (!doc.exists) {
+        return res.status(404).json({ error: 'Post not found' });
+      }
+      if (doc.data().userPosted !== req.user.userName) {
+        return res.status(403).json({ error: 'Unauthorized' });
+      } else {
+        return document.delete();
+      }
+    })
+    .then(() => {
+      res.json({ message: 'Post deleted successfully' });
+    })
+    .catch((err) => {
+      console.error(err);
+      return res.status(500).json({ error: err.code });
+    });
+};
+
+exports.getAllPosts = (req, res) => {
+  db.collection("posts")
+    .orderBy("createdAt", "desc")
+    .get()
+    .then(data => {
+      let posts = [];
+      data.forEach(doc => {
+        posts.push({
+          postId: doc.id,
+          body: doc.data().body,
+          commentCount: doc.data().commentCount,
+          upvoteCount: doc.data().upvoteCount,
+          createdAt: doc.data().createdAt,
+          userPosted: doc.data().userPosted,
+        });
+      });
+        return res.json(posts);
+      })
+      .catch(err => console.error(err));
+  };
+
 exports.getPost = (req, res) => {
   let postContent = {};
   db.doc(`/posts/${req.params.postId}`).get()
@@ -76,25 +120,7 @@ exports.getPost1 = (req, res) => {
     });
 };
 
-exports.getAllPosts = (req, res) => {
-  db.collection("posts")
-    .orderBy("createdAt", "desc")
-    .get()
-    .then(data => {
-      let posts = [];
-      data.forEach(doc => {
-        posts.push({
-          postId: doc.id,
-          body: doc.data().body,
-          commentCount: doc.data().commentCount,
-          upvoteCount: doc.data().upvoteCount,
-          createdAt: doc.data().createdAt,
-          userPosted: doc.data().userPosted,
-        });
-        return res.json(posts);
-      })
-      .catch(err => console.error(err));
-  })};
+
 
 exports.searchPost = (req, res) => {
   db.collection("posts")

@@ -31,7 +31,29 @@ exports.comment = (req,res) => {
           res.status(500).json({error: "Unexpected error"});
       });
 };
-
+exports.deleteComment = (req, res) => {
+  const document = db.doc(`comments/${req.params.commentId}`)
+  document
+  .get()
+  .then(doc => {
+      if (!doc.exists){
+          return res.status(404).json({error: "Comment not found"})
+      }
+      if (doc.data().userPosted !== req.user.userName){
+        return res.status(403).json({error: 'Unauthorized'})
+      }
+      else{
+        return document.delete();
+      }
+  })
+  .then(() =>{
+    res.json({message: 'Comment deleted sucessfully'})
+  })
+  .catch((err) => {
+    console.error(err);
+    return res.status(500).json({ error: err.code });
+  });
+}
 
 exports.getAllComments = (req, res) => {
     db.collection("comments")

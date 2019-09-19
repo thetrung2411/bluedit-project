@@ -4,10 +4,10 @@ import {
     LOADING_DATA,
     POST_COMMENT,
     POST_BOOKMARK,
-
     GET_POST,
-
+    DELETE_POST,
 } from "../types"
+
 const initialState = {
     posts: [],
     post: {},
@@ -21,7 +21,14 @@ export default function (state = initialState, action){
                 ...state,
                 loading: true
             };
-
+        case DELETE_POST:
+            let index = state.posts.findIndex(
+                    (post) => post.postId === action.payload.postId
+                );
+            state.posts.splice(index, 1);
+            return{
+                ...state,
+            }
         case GET_POSTS:
             return{
                 ...state,
@@ -57,7 +64,6 @@ export default function (state = initialState, action){
                         bookmarks: [action.payload, ...state.post.bookmarks]
                     }
                 }
-
         default:
             return state;
 }

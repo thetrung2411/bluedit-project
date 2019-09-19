@@ -9,7 +9,10 @@ export const PostItemStyles = theme => ({
         paddingTop: '56.25%', 
       },
     grid: {
-        
        
+    },
+
+    menuItemDelete: {
+        backgroundColor: "#e03f42"
     }
 });

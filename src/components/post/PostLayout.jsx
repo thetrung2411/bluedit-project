@@ -20,14 +20,14 @@ export class PostLayout extends Component {
   
   render() {
     const {posts, loading} = this.props.post;
-    const {
-      UI,
-      user: { authenticated }
+    const {userDetails} = this.props.user;
+    const {userName} = this.props.user.userDetails;
+    const {UI, user: { authenticated }
     } = this.props;
-
+    const {user} = this.props;
     if (!authenticated) return <Redirect to="/home"/>
     let postMarkUp = !loading ? (
-      posts.map(post => <PostItems post={post} />)
+      posts.map(post => <PostItems userName = {userName} user={user} userDetails={userDetails} post={post} key={post.postId}/>)
     ) : (
       <CircularProgress color="inherit" />
     );

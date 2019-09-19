@@ -4,23 +4,27 @@ import { Card, CardHeader, CardContent, CardActions } from "@material-ui/core";
 import ThumbUpAltRoundedIcon from '@material-ui/icons/ThumbUpAltRounded';
 import ThumbDownRoundedIcon from '@material-ui/icons/ThumbDownRounded';
 import QuestionAnswerRounded from '@material-ui/icons/QuestionAnswerRounded'
-import IconButton from "@material-ui/core/IconButton";
+
 import Fab from "@material-ui/core/Fab";
 import { PostItemStyles } from "./PostItemsStyles";
-import MoreIcon from "@material-ui/icons/MoreVert";
+
 import withStyles from "@material-ui/core/styles/withStyles";
 import Avatar from "@material-ui/core/Avatar";
 import imagePost from "../../assets/hehe.png";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import PostItemDetail from "./PostItemDetail";
+import PostMenu from "./PostMenu";
+import PropTypes from 'prop-types'
 export class PostItems extends Component {
+
   render() {
     dayjs.extend(relativeTime)
-    const { classes, post: { body, createdAt, userPosted, commentCount, upvoteCount, postId } } = this.props;
-
+    const { classes, post: { body, createdAt, userPosted, commentCount, upvoteCount, postId }, post} = this.props;
+    const {userName} = this.props;
     return (
       <Grid className={classes.grid}>
+       
         <Card className={classes.paper}>
           <CardHeader
             avatar={
@@ -29,9 +33,7 @@ export class PostItems extends Component {
                 </Avatar>
             }
             action={
-              <IconButton aria-label="settings">
-                <MoreIcon />
-              </IconButton>
+              <PostMenu userName ={userName} userPosted={userPosted} postId = {postId} post={post}/>
             }
             title={userPosted}
             titleTypographyProps={{ align: "left" }}
@@ -46,11 +48,21 @@ export class PostItems extends Component {
             <Fab size="small" className={classes.fab} ><ThumbUpAltRoundedIcon /></Fab>
             <Fab size="small" className={classes.fab} ><ThumbDownRoundedIcon /></Fab>
             <Typography>{commentCount} comments</Typography>
-            <PostItemDetail postId={postId} userPosted={userPosted} openDialog={this.props.openDialog}/>
+            <PostItemDetail userName ={userName} post={post} postId={postId} userPosted={userPosted} openDialog={this.props.openDialog}/>
+           
           </CardActions>
         </Card>
       </Grid>
     );
   }
+}
+PostItemDetail.propTypes = {
+  getPost: PropTypes.func.isRequired,
+  postId: PropTypes.string.isRequired,
+  userPosted: PropTypes.string.isRequired,
+  userDetails: PropTypes.object.isRequired,
+  post: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired
 }
 export default withStyles(PostItemStyles)(PostItems);

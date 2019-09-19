@@ -32,7 +32,7 @@ export class HomePageLayout extends Component {
     if (authenticated) return <Redirect to="/post"/>
 
     let postMarkUp = this.state.post ? (
-      this.state.post.map(post => <PostItems post={post} />)
+      this.state.post.map(post => <PostItems post={post} key={post.postId}/>)
     ) : (
       <CircularProgress color="inherit" />
     );
