@@ -4,11 +4,17 @@ const firebase = require("firebase");
 
 exports.bookmark = (req, res) => {
   const newBookmark = {
-    createdAt: new Date().toISOString(),
+    /*     createdAt: new Date().toISOString(),
     postheader: req.body,
     postId: req.params.postId,
-    userId: req.user.userName,
-    userPosted: req.params.userPosted
+    userName: req.user.userName,
+    userPosted: req.params.userPosted */
+
+    createdAt: new Date().toISOString(),
+    postheader: "abcabcabc",
+    postId: "wVr66mnV6aZ3y7naJ22D",
+    userPosted: "lokkwing",
+    userName: req.user.userName
   };
   db.collection("bookmarks")
     .add(newBookmark)
@@ -16,8 +22,7 @@ exports.bookmark = (req, res) => {
       res.json({ message: `document ${doc.id} created successfully` });
     })
     .catch(err => {
-      console.log(err);
-      res.status(500).json({ error: "Unexpected error" });
+      res.status(500).json({ error: "Unexpected failure" });
     });
 };
 
@@ -51,32 +56,13 @@ exports.getAllBookmarks = (req, res) => {
           createdAt: doc.data().createdAt,
           postId: doc.data().postId,
           postheader: doc.data().postheader,
-          userid: doc.data().userid,
-          username: doc.data().username,
-          status: doc.data().status
+          userName: doc.data().userName,
+          userPosted: doc.data().userPosted
         });
       });
       return res.json(bookmarks);
     })
     .catch(err => console.error(err));
-};
-
-exports.changeBookmarkStatus = (req, res) => {
-  db.doc(`/bookmarks/${req.params.bookmarkid}`)
-    .get()
-    .then(doc => {
-      if (!doc.exists) {
-        return res.status(404).json({ error: "Bookmark not found" });
-      }
-      return doc.ref.update({ status: "processed" });
-    })
-    .then(() => {
-      res.json({ message: "Status changed successfully" });
-    })
-    .catch(err => {
-      console.log(err);
-      return res.status(500).json({ error: err.code });
-    });
 };
 
 exports.deleteBookmark = (req, res) => {

@@ -9,8 +9,8 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
-import { postBookmark } from "../../redux/actions/bookmarkAction";
 import PropTypes from "prop-types";
+import axiosConfig from "../../axiosConfig";
 
 export class Addbookmark extends Component {
   state = {
@@ -36,15 +36,19 @@ export class Addbookmark extends Component {
     // this.props.clearErrors();
     this.setState({ open: false });
   };
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+
   handleSubmit = event => {
-    event.preventDefault();
-    this.props.postBookmark(this.props.postId, { user: this.props.userPosted });
     console.log(new Date().toISOString());
     console.log(this.props.postId);
     console.log(this.props.userPosted);
+    axiosConfig
+      .post("/bookmark")
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log(err));
+    this.setState({ open: false });
+    alert("A new Bookmark was created");
   };
 
   render() {
@@ -98,7 +102,6 @@ export class Addbookmark extends Component {
   }
 }
 Addbookmark.propTypes = {
-  postBookmark: PropTypes.func.isRequired,
   bookmark: PropTypes.func.isRequired,
   UI: PropTypes.object.isRequired,
   postId: PropTypes.string.isRequired,
@@ -111,10 +114,5 @@ const mapStateToProps = state => ({
   authenticated: state.user.authenticated,
   user: state.user
 });
-const mapActionToProps = {
-  postBookmark
-};
-export default connect(
-  mapStateToProps,
-  mapActionToProps
-)(Addbookmark);
+
+export default connect(mapStateToProps)(Addbookmark);

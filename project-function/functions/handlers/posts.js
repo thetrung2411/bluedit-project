@@ -54,34 +54,6 @@ exports.getPost = (req, res) => {
     });
 };
 
-exports.getPost1 = (req, res) => {
-  let postContent1 = {};
-  db.doc(`/posts/${req.params.postId}`)
-    .get()
-    .then(doc => {
-      if (!doc.exists) {
-        return res.status(404).json({ error: "Post not found" });
-      }
-      postContent1 = doc.data();
-      postContent1.postId = doc.id;
-      return db
-        .collection("bookmarks")
-        .where("postId", "==", req.params.postId)
-        .get();
-    })
-    .then(data => {
-      postContent1.bookmarks = [];
-      data.forEach(doc => {
-        postContent1.bookmarks.push(doc.data());
-      });
-      return res.json(postContent1);
-    })
-    .catch(err => {
-      console.log(err);
-      return res.status(500).json({ error: "Unexpected failure" });
-    });
-};
-
 exports.getAllPosts = (req, res) => {
   db.collection("posts")
     .orderBy("createdAt", "desc")

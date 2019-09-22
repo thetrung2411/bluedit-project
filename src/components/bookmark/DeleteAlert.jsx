@@ -7,6 +7,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Switch from "@material-ui/core/Switch";
 import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined";
+import axiosConfig from "../../axiosConfig";
 
 export default function DeleteAlert(props) {
   const [open, setOpen] = React.useState(false);
@@ -18,6 +19,18 @@ export default function DeleteAlert(props) {
   function handleClose() {
     setOpen(false);
   }
+  function handleDelete() {
+    handleDelete = event => {
+      axiosConfig
+        .delete("/deleteBookmark")
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => console.log(err));
+      setOpen(false);
+      alert("Bookmark was deleted");
+    };
+  }
   const action = props.action;
   const bookmarkId = props.bookmarkId;
   let title = "";
@@ -25,11 +38,15 @@ export default function DeleteAlert(props) {
   if (action === "delete") {
     title = "Delete bookmark?";
     content = "This action will delete the located bookmark";
+    console.log(bookmarkId);
+    console.log(props.bookmarkId);
+    console.log(bookmarkId);
+    console.log(props.action);
+    console.log(action);
   }
   if (action === "setProcessed") {
     title = "Set as Processed?";
-    content =
-      "The bookmark was deleting.";
+    content = "The bookmark was deleting.";
   }
 
   return (
@@ -58,11 +75,7 @@ export default function DeleteAlert(props) {
           <Button onClick={handleClose} color="primary">
             Cancle
           </Button>
-          <Button
-            onClick={() => props.handleDelete(bookmarkId)}
-            color="secondary"
-            autoFocus
-          >
+          <Button onClick={() => handleDelete()} color="secondary" autoFocus>
             Confirm
           </Button>
         </DialogActions>
