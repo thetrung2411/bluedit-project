@@ -7,7 +7,8 @@ import {
   LOADING_DATA,
   GET_POSTS,
   GET_POST, 
-  DELETE_POST
+  DELETE_POST, 
+  EDIT_POST
 } from "../types";
 import axiosConfig from '../../axiosConfig';
 export const getAllPosts = () => (dispatch) => {
@@ -41,6 +42,24 @@ export const getPost = (postId) => (dispatch) => {
 
 }
 
+export const editPost = (postId, body) => (dispatch) => {
+    dispatch({type:LOADING_UI});
+    axiosConfig.post(`/post/${postId}/edit`, body)
+    .then(res => {
+        dispatch({
+          type: EDIT_POST,
+          payload: res.data
+        })
+        dispatch({type: CLEAR_ERRORS})
+    })
+    .then(() => {dispatch(getAllPosts())})
+    .catch(err => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data
+      })
+    })
+}
 export const deletePost = (postId) => (dispatch) => {
   axiosConfig.delete(`post/${postId}`)
   .then(() => {

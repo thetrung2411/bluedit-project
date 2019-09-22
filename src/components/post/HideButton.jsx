@@ -26,7 +26,7 @@ class DeleteButton extends Component{
       this.setState({openDialog: true});
     }
     handleClose = () => {
-
+        
       this.setState({openDialog: false})
     }
     handleDeletePost = () => {
@@ -44,7 +44,7 @@ class DeleteButton extends Component{
       return (
             <div>
               <MenuItem selected classes={{ selected: classes.menuItemDelete }} onClick={this.handleOpen} >
-              <ListItemIcon ><Delete/></ListItemIcon> <ListItemText primary="Delete" />
+              <ListItemIcon ><Delete/></ListItemIcon> <ListItemText primary="Delete Post" />
           </MenuItem>
           <Dialog
             open={this.state.openDialog}

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -8,71 +7,58 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import {PostLayoutStyles } from "./PostLayoutStyle";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Button from "@material-ui/core/Button";
-import Fab from '@material-ui/core/Fab';
-import EditRounded from '@material-ui/icons/EditRounded';
 import {connect} from 'react-redux';
-import {post, getAllPosts} from '../../redux/actions/postActions';
+import {editPost} from '../../redux/actions/postActions';
+import {editComment} from '../../redux/actions/commentActions';
 import PropTypes from 'prop-types';
-
-export class PostButton extends Component{
-  state = {
-      open: false,
-      body: '',
-      errors: {} 
-    };
-
-  componentWillReceiveProps(nextProps){
-    if (nextProps.UI.errors){
-      this.setState({
-        errors: nextProps.UI.errors
-      });
+import MenuItem from '@material-ui/core/MenuItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Create from '@material-ui/icons/Create';
+import TextField from '@material-ui/core/TextField';
+class EditButton extends Component{
+    state = {
+        open: false,
+        body: this.props.body,
+        errors: {} 
+      };
+    handleOpen = () => {
+      this.setState({open: true});
     }
-    if (!nextProps.UI.errors && !nextProps.UI.loading){
-      this.setState({body: ''});
-      this.handleClose();
+    handleClose = () => {
+        
+      this.setState({open: false})
     }
-  }
- 
-  handleOpen = () => {
-    this.setState({open: true});
-
-  }
-  handleClose = () => {
-    // this.props.clearErrors();
-    this.setState({open: false})
-  }
-  handleChange = (event) => {
-    this.setState({[event.target.name]: event.target.value})
-  }
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.props.post({body: this.state.body});
-
-  }
-
-  render(){
-    const {errors} = this.state;
-    const {classes} = this.props;
-    return (
-        <div>
-          <Fab color="primary" onClick={this.handleOpen}>
-        <EditRounded/>
-      </Fab>
-      <Dialog
+    handleChange = (event) => {
+        this.setState({[event.target.name]: event.target.value})
+      }
+      handleSubmit = (event) => {
+        event.preventDefault();
+        this.props.editPost(this.props.postId, {body: this.state.body});
+      }
+    render(){
+      const {errors} = this.state;
+      const {classes} = this.props;
+      return (
+            <div>
+              <MenuItem selected classes={{ selected: classes.menuItemDelete }} onClick={this.handleOpen} >
+              <ListItemIcon ><Create/></ListItemIcon> <ListItemText primary="Edit" />
+          </MenuItem>
+          <Dialog
         open={this.state.open}
         onClose={this.handleClose}
         aria-labelledby="responsive-dialog-title"
         className = {classes.paper}
       >
-        <DialogTitle id="responsive-dialog-title" align = "center">Post</DialogTitle>
+        <DialogTitle id="responsive-dialog-title" align = "center">Edit</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To submit your post please enter the text field below
+            To edit your post/comment please change the text field below 
           </DialogContentText>
                         <form onSubmit ={this.handleSubmit}>
                          <TextField
                          id="outlined-multiline-flexible"
-                          label="Post here"
+                          label="Edit post here"
                           multiline
                           rows = "7"
                           rowsMax="1000"
@@ -83,7 +69,7 @@ export class PostButton extends Component{
                           error = {errors.body ? true : false}
                           name = "body"
                           onChange = {this.handleChange}
-                          
+                          value = {this.state.body}
                         />
                         </form>
                     </DialogContent>
@@ -111,19 +97,23 @@ export class PostButton extends Component{
         </DialogActions>
       </Dialog>
       
-     </div>
-    )
+         </div>
+        )
+    }    
 }
-}
-PostButton.propTypes = {
-  post: PropTypes.func.isRequired,
-  UI: PropTypes.object.isRequired
-};
 
-const mapStateToProps = (state) => ({
-  UI: state.UI
-});
-const mapActionToProps = {
-  post, getAllPosts
+EditButton.propTypes = {
+    deleteComment: PropTypes.func.isRequired,
+    editPost: PropTypes.func.isRequired,
+    post: PropTypes.object.isRequired,
+    postId: PropTypes.string.isRequired
 };
-export default connect (mapStateToProps, mapActionToProps)(withStyles(PostLayoutStyles)(PostButton));
+const mapStateToProps = (state) => ({
+    UI: state.UI,
+    post: state.post.post,
+})
+  const mapActionToProps ={ 
+   editPost
+  }
+  
+export default connect(mapStateToProps,mapActionToProps)(withStyles(PostLayoutStyles)(EditButton));

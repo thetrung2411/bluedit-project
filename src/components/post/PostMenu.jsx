@@ -7,7 +7,7 @@ import RemoveRedEye from '@material-ui/icons/RemoveRedEye';
 import React, { Component } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import MoreIcon from "@material-ui/icons/MoreVert";
-
+import EditButton from "./EditButton";
 class PostMenu extends Component {
     state = {
         anchorEl: null,
@@ -20,10 +20,13 @@ class PostMenu extends Component {
         this.setState({open: false})
       }
     render(){
-        const {post: {userPosted, postId }, userName} = this.props;
+        const {postId , userName, commentId, userPosted, body } = this.props;
         const deleteButton = userPosted === userName ? (
-       <DeleteButton postId={postId} />
+       <DeleteButton commentId={commentId} postId={postId} />
      ) : null;
+     const editButton = userPosted === userName ? (
+      <EditButton body={body} postId={postId} ></EditButton>
+    ) : null;
         return(
             <div>
         <IconButton aria-label="settings" onClick={this.handleClick}>
@@ -38,8 +41,9 @@ class PostMenu extends Component {
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         transformOrigin={{ vertical: "top", horizontal: "center" }}
       >
-       {deleteButton}
+        {deleteButton}
         <MenuItem  onClick={this.handleClose}><ListItemIcon ><RemoveRedEye/></ListItemIcon><ListItemText primary="Hide" /></MenuItem>
+        {editButton}
       </Menu>
             </div>
         )

@@ -28,11 +28,11 @@ export class CommentField extends Component{
 
     }
   render(){
-      const {classes, authenticated} = this.props;
+      const {authenticated} = this.props;
       const errors = this.state.errors;
       const commentFieldMarkUp = authenticated ? (
           <form onSubmit = {this.handleSubmit}>
-    <TextField rowsMax="1000" fullWidth = "true" variant="outlined" label="Comment here" multiline
+    <TextField rowsMax="1000" fullWidth variant="outlined" label="Comment here" multiline
     onChange = {this.handleChange}
     name = "body"
     error = {errors.body ? true : false}
@@ -54,7 +54,6 @@ return commentFieldMarkUp;
 CommentField.propTypes = {
     postComment: PropTypes.func.isRequired,
     UI: PropTypes.object.isRequired,
-    classes: PropTypes.object.isRequired,
     postId: PropTypes.string.isRequired,
     authenticated: PropTypes.bool.isRequired
 }

@@ -4,8 +4,10 @@ import {
     LOADING_DATA,
     POST_COMMENT,
     POST_BOOKMARK,
+    DELETE_COMMENT,
     GET_POST,
     DELETE_POST,
+    EDIT_POST
 } from "../types"
 
 const initialState = {
@@ -48,6 +50,14 @@ export default function (state = initialState, action){
                     ...state.posts
                 ]
             }
+        case EDIT_POST:
+            return{
+                ...state,
+                posts: [
+                    action.payload,
+                    ...state.posts
+                ]
+            }
         case POST_COMMENT:
             return{
                 ...state,
@@ -56,7 +66,15 @@ export default function (state = initialState, action){
                     comments: [action.payload, ...state.post.comments]
                 }
             }
-            case POST_BOOKMARK:
+        case DELETE_COMMENT:
+            index = state.posts.post.comments.findIndex(
+                (comment) => comment.commentId === action.commentId && comment.postId === action.payload
+            )
+            state.posts.post.comments.splice(index,1)
+            return{
+                ...state
+            }
+        case POST_BOOKMARK:
                 return{
                     ...state,
                     post:{

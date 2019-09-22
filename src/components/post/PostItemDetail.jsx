@@ -38,7 +38,7 @@ export class PostItemDetail extends Component {
         
     }   
     render(){ 
-        const {classes, post: {postId, body, createdAt, commentCount, userPosted, upvoteCount, comments}, UI: {loading}, userName, post} = this.props;
+        const {classes, post: {postId, body, createdAt, userPosted, upvoteCount, comments}, UI: {loading}, userName, post} = this.props;
        
        const dialogMarkUp = loading ? (<CircularProgress/>) : (<Card className = {classes.paper}>
             <CardHeader 
@@ -48,7 +48,8 @@ export class PostItemDetail extends Component {
                 </Avatar>
               }
         action={
-            <PostMenu userName ={userName} userPosted={userPosted} postId = {postId} post={post}/>
+            <PostMenu body={body} userName ={userName} userPosted={userPosted} postId = {postId} post={post}/>
+            
         }
         title = {userPosted}
         titleTypographyProps={{align:"left"}}
@@ -64,8 +65,8 @@ export class PostItemDetail extends Component {
         <Fab size="small" className ={classes.fab} ><ThumbUpAltRoundedIcon/></Fab>
         <Fab size="small" className ={classes.fab} ><ThumbDownRoundedIcon/></Fab>
         </CardActions>
-        <CommentField postId = {postId}> </CommentField>
-        <CommentItem comments={comments}></CommentItem>
+        <CommentField postId = {postId} post={post}> </CommentField>
+        <CommentItem userName={userName} postId = {postId} comments={comments} key={postId}></CommentItem>
         </Card>); 
     return (
         <Fragment>
@@ -76,7 +77,7 @@ export class PostItemDetail extends Component {
         aria-labelledby="responsive-dialog-title"
         className = {classes.paper}
         maxWidth = "sm"
-        fullWidth = "true"
+        fullWidth
       >
         <DialogContent>{dialogMarkUp}</DialogContent>
         </Dialog>
@@ -87,9 +88,6 @@ export class PostItemDetail extends Component {
 }
 
 PostItemDetail.propTypes = {
-    getPost: PropTypes.func.isRequired,
-    postId: PropTypes.string.isRequired,
-    userPosted: PropTypes.string.isRequired,
     post: PropTypes.object.isRequired,
     UI: PropTypes.object.isRequired
 }

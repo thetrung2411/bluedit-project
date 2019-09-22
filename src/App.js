@@ -16,6 +16,7 @@ import bookmark from './components/bookmark/BookmarkPage';
 import ReportPage from './components/report/ReportPage';
 import ReportDetail from './components/report/ReportDetail';
 import userpage from './components/userpage/userpage';
+import accountManagement from './components/accountManagement/accountManagement';
 import {
   MuiThemeProvider,
   createMuiTheme,
@@ -60,6 +61,7 @@ class App extends Component {
               <Switch>
                 <Route path='/login' component={login} />
                 <Route path='/register' component={register} />
+                <Route path='/accountManagement' component={accountManagement}/>
                 <Route path='/post' component={PostLayout} />
                 <Route path='/home' component={HomePageLayout} />
                 <Route path='/report' component={ReportPage} />

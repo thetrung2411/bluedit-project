@@ -12,7 +12,6 @@ exports.comment = (req,res) => {
         userPosted: req.user.userName,
         createdAt: new Date().toISOString() 
       };
-      
       db.doc(`/posts/${req.params.postId}`).get()
       .then(doc => {
           if(!doc.exists){
@@ -22,6 +21,9 @@ exports.comment = (req,res) => {
       })
       .then(() => {
         return db.collection('comments').add(newComment);
+      })
+      .then(ref => {
+        return db.collection('comments').doc(ref.id).update({commentId: ref.id})
       })
       .then(() => {
         res.json(newComment);

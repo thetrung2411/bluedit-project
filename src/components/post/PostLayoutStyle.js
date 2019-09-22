@@ -1,5 +1,3 @@
-
-
 export const PostLayoutStyles = theme => ({
     background: {
         width: "100vw",

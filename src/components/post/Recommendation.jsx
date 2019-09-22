@@ -11,7 +11,7 @@ function RecommendationItem (props){
     const { classes } = props;
     return (
         <Card>
-        <Grid cointainer className = {classes.grid}>
+        <Grid container className = {classes.grid}>
         <Typography variant = 'h5'>Top user's post</Typography>
         <Card className = {classes.paper}>
             <CardHeader 

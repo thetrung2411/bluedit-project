@@ -17,12 +17,12 @@ export class PostLayout extends Component {
   componentDidMount() {
    this.props.getAllPosts();
   }
-  
+ 
   render() {
     const {posts, loading} = this.props.post;
     const {userDetails} = this.props.user;
     const {userName} = this.props.user.userDetails;
-    const {UI, user: { authenticated }
+    const { user: { authenticated }
     } = this.props;
     const {user} = this.props;
     if (!authenticated) return <Redirect to="/home"/>
@@ -36,7 +36,7 @@ export class PostLayout extends Component {
         <SignedInAppBar />
         <PostButton />
         <Grid container spacing={3}>
-          <Grid container xs={8}>
+          <Grid item xs={8}>
             {postMarkUp}
           </Grid>
           <Grid item xs={4}>

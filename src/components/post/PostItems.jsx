@@ -3,14 +3,10 @@ import { Typography, Grid, CardMedia } from "@material-ui/core";
 import { Card, CardHeader, CardContent, CardActions } from "@material-ui/core";
 import ThumbUpAltRoundedIcon from '@material-ui/icons/ThumbUpAltRounded';
 import ThumbDownRoundedIcon from '@material-ui/icons/ThumbDownRounded';
-import QuestionAnswerRounded from '@material-ui/icons/QuestionAnswerRounded'
-
 import Fab from "@material-ui/core/Fab";
 import { PostItemStyles } from "./PostItemsStyles";
-
 import withStyles from "@material-ui/core/styles/withStyles";
 import Avatar from "@material-ui/core/Avatar";
-import imagePost from "../../assets/hehe.png";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import PostItemDetail from "./PostItemDetail";
@@ -33,7 +29,7 @@ export class PostItems extends Component {
                 </Avatar>
             }
             action={
-              <PostMenu userName ={userName} userPosted={userPosted} postId = {postId} post={post}/>
+              <PostMenu body={body} userName ={userName} userPosted={userPosted} postId = {postId} post={post}/>
             }
             title={userPosted}
             titleTypographyProps={{ align: "left" }}
@@ -49,7 +45,6 @@ export class PostItems extends Component {
             <Fab size="small" className={classes.fab} ><ThumbDownRoundedIcon /></Fab>
             <Typography>{commentCount} comments</Typography>
             <PostItemDetail userName ={userName} post={post} postId={postId} userPosted={userPosted} openDialog={this.props.openDialog}/>
-           
           </CardActions>
         </Card>
       </Grid>
@@ -57,12 +52,8 @@ export class PostItems extends Component {
   }
 }
 PostItemDetail.propTypes = {
-  getPost: PropTypes.func.isRequired,
   postId: PropTypes.string.isRequired,
   userPosted: PropTypes.string.isRequired,
-  userDetails: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
-  UI: PropTypes.object.isRequired
 }
 export default withStyles(PostItemStyles)(PostItems);

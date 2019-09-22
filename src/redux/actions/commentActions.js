@@ -1,6 +1,6 @@
-import {SET_ERRORS, POST_COMMENT, CLEAR_ERRORS} from "../types";
+import {SET_ERRORS, POST_COMMENT, CLEAR_ERRORS, DELETE_POST} from "../types";
 import axiosConfig from "../../axiosConfig";
-
+import {getPost} from "./postActions";
 export const postComment = (postId, commentBody) => (dispatch) => {
     axiosConfig.post(`/post/${postId}/comment`, commentBody)
     .then(res => {
@@ -17,3 +17,18 @@ export const postComment = (postId, commentBody) => (dispatch) => {
         })
     })
 }
+
+export const deleteComment = (postId, commentId) => (dispatch) => {
+    axiosConfig.delete(`/post/${postId}/comment/${commentId}`)
+    .then(() => {
+            dispatch({
+                type: DELETE_POST, 
+                payload: postId,
+                comment: commentId
+            });
+            })
+            .then(() => {dispatch(getPost(postId))})
+            .catch((err) => console.log(err));
+        
+    }
+
