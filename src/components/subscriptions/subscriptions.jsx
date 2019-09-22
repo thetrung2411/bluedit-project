@@ -12,32 +12,32 @@ import TableRow from '@material-ui/core/TableRow';
 import { connect } from "react-redux";
 import { getSubscribe, unSubscribe } from "../../redux/actions/subscribeAction";
 import axiosConfig from "../../axiosConfig";
+import Sidebar from "../sidebar/sidebar";
 
 
 const styles = {
-    form: {
-      textAlign: "center"
+    tableSubscribe: {
+        // marginLeft: '0.8rem'
     },
-    textField: {
-        textAlign: "center",
-        margin: "20px auto 10px auto"
+    subscribe: {
+        marginLeft: 5,
+        padding: 5,
+        lineHeight: '50px',
+        color: 'green'
     },
-    button: {
-      marginTop: 20,
-      marginBottom: 20
-    },
-    sidebarButton: {
-        marginTop: 90
-    },
-    root: {
-        backgroundImage: `../../assets/UserpageAssets/bgImage.jpg`
-        }
+    unSubscribe: {
+        marginLeft: 5,
+        padding: 5,
+        lineHeight: '50px',
+        color: 'red'
+    }
 
   };
 
 export class subscriptions extends Component {
     state = {
-        subscriptions: []
+        subscriptions: [],
+        allUsers: []//{userName: "User1"},{userName: "User2"},{userName: "User3"},{userName: "User4"},{userName: "User5"}
     }
 
     componentDidMount() 
@@ -51,6 +51,17 @@ export class subscriptions extends Component {
             });
         })
         .catch(err => console.log(err));
+
+        axiosConfig
+        .get("/allUsers")
+        .then(res => {
+            console.log(res.data);
+            this.setState({
+                allUsers: res.data
+            });
+        })
+        .catch(err => console.log(err));
+
         // subscriptions: this.state.getSubscribe()
     }
 
@@ -60,46 +71,85 @@ export class subscriptions extends Component {
         this.setState({
             subscriptions: tempArr
         })
-        //this.state.unSubscribe();
+
+        let subscribeUser = this.state.allUsers.slice();
+        subscribeUser.splice(index, 1);
+        this.setState({
+            allUsers: subscribeUser
+        })
+        //this.state.unSubscribe(this.props.subscribeID);
     }
     
 
     render() {
 
-        const { classes } = this.props;
+        const { classes, subscribeID, userName} = this.props;
 
-        let subscription = (<div>subscriptions</div>);
+        let subscription = (<div style={{ width: '50%', textAlign: 'left', margin: '0 auto' }}>subscriptions</div>);
+        let allUser = (<div style={{ width: '50%', textAlign: 'left', margin: '0 auto' }}>allUsers</div>);
 
         subscription = this.state.subscriptions.map((subscriptions, index) => {
                 return (
-                    <div>
-                        <Table>
+                    <div style={{ width: '50%', textAlign: 'left', margin: '0 auto' }}>
+                        <Table className={classes.tableSubscribe}>
                             <TableRow>
-                                <TableCell align="Center">{subscriptions.userName}</TableCell>
-                                <TableCell align="Center">{subscriptions.subscriptionsType}</TableCell>
-                                <TableCell align="Center">{subscriptions.subscribeAt}</TableCell>
-                                <TableCell align="Center"><Button onClick={() => this.handleDelete(index)}>Unsubscribe</Button></TableCell>
+                                <TableCell align="left">{subscriptions.userName}</TableCell>
+                                <TableCell align="center">{subscriptions.subscribeAt}</TableCell>
+                                <TableCell align="right" ><Button className={classes.unSubscribe} onClick={() => this.handleDelete(index)}>Unsubscribe</Button></TableCell>
                             </TableRow>
                         </Table> 
-                </div>
+                    </div>
+                )
+            })
+
+        allUser = this.state.allUsers.map((allUsers, index) => {
+                return (
+                    <div style={{ width: '50%', textAlign: 'left', margin: '0 auto' }}>
+                        <Table>
+                            <TableRow>
+                                <TableCell align="left">{allUsers.userName}</TableCell>
+                                <TableCell align="right"><Button className={classes.subscribe} onClick={() => this.handleDelete(index)}>Subscribe</Button></TableCell>
+                            </TableRow>
+                        </Table> 
+                    </div>
                 )
             })
 
         return(
             <div>
+                <Sidebar />
                 <AppBarWithAvatar />
                 <div>
-                    <h1>Manage Subscriptions</h1>
+                    <div style={{ width: '50%', textAlign: 'left', margin: '0 auto' }}>
+                    <h1>Manage Subscriptions: </h1>
                     <Table>
                     <TableRow>
-                        <TableCell align="Center">Username</TableCell>
-                        <TableCell align="Center">Subscriptions Type</TableCell>
-                        <TableCell align="Center">subscribeAt</TableCell>
-                        <TableCell align="Center">Unsubscribe</TableCell>
+                        <TableCell align="left">Username</TableCell>
+                        <TableCell align="center">subscribeAt</TableCell>
+                        <TableCell align="right">Unsubscribe</TableCell>
                     </TableRow>
                     </Table> 
+                    </div>
+                    {subscription}
                 </div>
-                {subscription}
+
+                <div> 
+                    <h1>     </h1>
+                </div>
+
+                <div>
+                    <div style={{ width: '50%', textAlign: 'left', margin: '0 auto' }}>
+                    <h1>View All User: </h1>
+                    <Table>
+                    <TableRow>
+                        <TableCell align="left">Username</TableCell>
+                        <TableCell align="right">Subscribe</TableCell>
+                    </TableRow>
+                    </Table> 
+                    </div>
+                    {allUser}
+                </div>
+ 
             </div>
 
         );
