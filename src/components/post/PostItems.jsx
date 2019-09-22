@@ -13,6 +13,24 @@ import PostItemDetail from "./PostItemDetail";
 import PostMenu from "./PostMenu";
 import PropTypes from 'prop-types'
 export class PostItems extends Component {
+  
+    renderSubscribe = () => {
+      const { classes, post: { subscribe } } = this.props;
+      if (subscribe) {
+        return (
+          <Button className={classes.unSubscribe} onClick={() => this.handleSubscribe()}>Unsubscribe</Button>
+        )
+      }
+      
+      return (
+        <Button className={classes.subscribe} onClick={() => this.handleSubscribe()}>Subscribe</Button>
+      )
+    }
+
+    handleSubscribe = () => {
+      const { post: { postId, subscribe } } = this.props;
+      //this.props.postSubscribe({ subscribe, postId })
+    }
 
   render() {
     dayjs.extend(relativeTime)
@@ -31,7 +49,12 @@ export class PostItems extends Component {
             action={
               <PostMenu body={body} userName ={userName} userPosted={userPosted} postId = {postId} post={post}/>
             }
-            title={userPosted}
+            title={
+              <div>
+              {userPosted} 
+              {this.renderSubscribe()}
+              </div>
+            }
             titleTypographyProps={{ align: "left" }}
             subheaderTypographyProps={{ align: "left" }}
             subheader={dayjs(createdAt).fromNow()} />
