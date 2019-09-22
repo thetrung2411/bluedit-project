@@ -10,6 +10,7 @@ import Avatar from "@material-ui/core/Avatar";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import PostItemDetail from "./PostItemDetail";
+import Button from "@material-ui/core/Button";
 import PostMenu from "./PostMenu";
 import PropTypes from 'prop-types'
 export class PostItems extends Component {
