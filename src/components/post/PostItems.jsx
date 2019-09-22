@@ -14,7 +14,8 @@ import imagePost from "../../assets/hehe.png";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import PostItemDetail from "./PostItemDetail";
-import Addbookmark from "../bookmark/Addbookmark";
+import AddBookmark from "../bookmark/Addbookmark";
+
 export class PostItems extends Component {
   render() {
     dayjs.extend(relativeTime);
@@ -30,10 +31,10 @@ export class PostItems extends Component {
             avatar={<Avatar>T</Avatar>}
             action={
               <IconButton aria-label="settings">
-                <Addbookmark
+                <AddBookmark
                   postId={postId}
                   userPosted={userPosted}
-                ></Addbookmark>
+                ></AddBookmark>
               </IconButton>
             }
             title={userPosted}

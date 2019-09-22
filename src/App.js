@@ -5,7 +5,9 @@ import axiosConfig from "./axiosConfig"
 import { logoutUser, getUserData } from "./redux/actions/userActions"
 import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
 import login from './components/login-register/login';
-import register from './components/login-register/register';
+import register from './components/login-register/register'; 
+import test from './components/search/test';
+import searching from './components/search/searching';
 import PostLayout from './components/post/PostLayout';
 import HomePageLayout from './components/homepage/HomePageLayout';
 import { Provider } from 'react-redux';
@@ -14,6 +16,7 @@ import bookmark from './components/bookmark/BookmarkPage';
 import ReportPage from './components/report/ReportPage';
 import ReportDetail from './components/report/ReportDetail';
 import userpage from './components/userpage/userpage';
+import accountManagement from './components/accountManagement/accountManagement';
 import {
   MuiThemeProvider,
   createMuiTheme,
@@ -58,16 +61,18 @@ class App extends Component {
               <Switch>
                 <Route path='/login' component={login} />
                 <Route path='/register' component={register} />
+                <Route path='/accountManagement' component={accountManagement}/>
                 <Route path='/post' component={PostLayout} />
                 <Route path='/home' component={HomePageLayout} />
                 <Route path='/report' component={ReportPage} />
                 <Route path='/userpage' component={userpage} />
                 <Route path='/bookmark' component={bookmark} />
+                <Route path='/searching' component = {searching}/>
+                <Route path='/test' component = {test}/>
                 <Redirect from='/' to='/home' />
               </Switch>
             </div>
           </BrowserRouter>
-
         </MuiThemeProvider>
       </Provider>
     );

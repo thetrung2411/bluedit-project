@@ -18,6 +18,19 @@ const isEmail = email => {
   else return false;
 };
 
+//validate new password details
+exports.validateNewPasswordData = data => {
+  let errors = {};
+
+  if (isEmpty(data.newPassword)) errors.newPassword = "Must not be empty";
+  if (data.newPassword !== data.confirmPassword)
+    errors.confirmPassword = "Password must match";
+  return {
+    errors,
+    valid: Object.keys(errors).length === 0 ? true : false
+  }
+};
+
 //Validate signup details
 exports.validateSignupData = data => {
   let errors = {};
@@ -54,10 +67,10 @@ exports.validateLoginData = data => {
 //Validate post content
 exports.validatePostData = data => {
   let errors = {};
-  if(isEmpty(data.body)) errors.body = "Must not be empty";
-  
+  if (isEmpty(data.body)) errors.body = "Must not be empty";
+
   return {
     errors,
     valid: Object.keys(errors).length === 0 ? true : false
   };
-}
+};

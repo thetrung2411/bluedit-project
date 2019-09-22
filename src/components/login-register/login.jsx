@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 //Redux stuff
 import { connect } from "react-redux";
@@ -51,8 +52,7 @@ export class login extends Component {
   state = {
     email: "",
     password: "",
-    errors: {},
-    loading: false
+    errors: {}
   };
 
   handleChange = e => {
@@ -66,7 +66,7 @@ export class login extends Component {
       this.setState({ errors: nextProps.UI.errors });
     }
   }
-  
+
   handleSubmit = e => {
     e.preventDefault();
     const userData = {
@@ -78,8 +78,14 @@ export class login extends Component {
   };
 
   render() {
-    const { classes, UI: {loading} } = this.props;
+    const {
+      user: { authenticated },
+      classes,
+      UI: { loading }
+    } = this.props;
     const { errors } = this.state;
+
+    if (authenticated) return <Redirect to="/post"/>
 
     return (
       <Grid container className={classes.form}>
