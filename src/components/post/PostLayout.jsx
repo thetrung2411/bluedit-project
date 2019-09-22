@@ -13,19 +13,18 @@ import { getAllPosts } from "../../redux/actions/postActions";
 import { Redirect } from "react-router-dom";
 
 export class PostLayout extends Component {
-  
   componentDidMount() {
-   this.props.getAllPosts();
+    this.props.getAllPosts();
   }
-  
+
   render() {
-    const {posts, loading} = this.props.post;
+    const { posts, loading } = this.props.post;
     const {
       UI,
       user: { authenticated }
     } = this.props;
 
-    if (!authenticated) return <Redirect to="/home"/>
+    if (!authenticated) return <Redirect to="/home" />;
     let postMarkUp = !loading ? (
       posts.map(post => <PostItems post={post} />)
     ) : (
@@ -52,15 +51,18 @@ PostLayout.propTypes = {
   UI: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired
-}
+};
 
-const mapStateToProps = (state) => ({
-  UI: state.UI, 
+const mapStateToProps = state => ({
+  UI: state.UI,
   post: state.post,
   user: state.user
-})
-const mapActionToProps ={ 
+});
+const mapActionToProps = {
   getAllPosts
-}
+};
 
-export default connect (mapStateToProps, mapActionToProps)(withStyles(PostLayoutStyles)(PostLayout));
+export default connect(
+  mapStateToProps,
+  mapActionToProps
+)(withStyles(PostLayoutStyles)(PostLayout));
