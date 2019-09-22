@@ -4,23 +4,20 @@ const firebase = require("firebase");
 
 exports.bookmark = (req, res) => {
   const newBookmark = {
-        createdAt: new Date().toISOString(),
-        postheader: req.body,
-        postId: req.params.postId,
-        userId: req.user.userid,
-        username: req.user.userName
+    createdAt: new Date().toISOString(),
+    postheader: req.body,
+    postId: req.params.postId,
+    userPosted: req.params.userPosted
   };
-  db.doc(`/bookmarks/${req.params.postId}`).get()
-  .then(() => {
-    return db.collection('bookmarks').add(newBookmark);
-  })
-  .then(() => {
-    res.json(newBookmark);
-  })
-  .catch((err) => {
+  db.collection("bookmarks")
+    .add(newBookmark)
+    .then(doc => {
+      res.json({ message: `document ${doc.id} created successfully` });
+    })
+    .catch(err => {
       console.log(err);
-      res.status(500).json({error: "Unexpected error"});
-  });
+      res.status(500).json({ error: "Unexpected error" });
+    });
 };
 
 exports.getBookmark = (req, res) => {
