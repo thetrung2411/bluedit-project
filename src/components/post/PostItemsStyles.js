@@ -11,5 +11,19 @@ export const PostItemStyles = theme => ({
     grid: {
         
        
+    },
+    subscribe: {
+        display: 'inlineBlock',
+        marginLeft: 5,
+        padding: 5,
+        background: 'black',
+        color: 'green'
+    },
+    unSubscribe: {
+        display: 'inlineBlock',
+        marginLeft: 5,
+        padding: 5,
+        background: 'black',
+        color: 'red'
     }
 });

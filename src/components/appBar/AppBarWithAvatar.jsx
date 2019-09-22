@@ -76,6 +76,19 @@ class SignedInAppBar extends Component {
                   Bookmark
                 </Button>
               </Link>
+
+              <Link to="/userpage" className={classes.noDecor}>
+                <Button variant="contained" className={classes.button}>
+                  Userpage
+                </Button>
+              </Link>
+
+              <Link to="/subscriptions" className={classes.noDecor}>
+                <Button variant="contained" className={classes.button}>
+                  Subscriptions
+                </Button>
+              </Link>
+
               <Link to="/accountManagement" className={classes.noDecor}>
                 <Button
                   variant="contained"

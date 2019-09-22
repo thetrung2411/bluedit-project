@@ -14,7 +14,28 @@ import imagePost from "../../assets/hehe.png";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import PostItemDetail from "./PostItemDetail";
+import Button from "@material-ui/core/Button";
 export class PostItems extends Component {
+
+    renderSubscribe = () => {
+      const { classes, post: { subscribe } } = this.props;
+      if (subscribe) {
+        return (
+          <Button className={classes.unSubscribe} onClick={() => this.handleSubscribe()}>Unsubscribe</Button>
+        )
+      }
+      
+      return (
+        <Button className={classes.subscribe} onClick={() => this.handleSubscribe()}>Subscribe</Button>
+      )
+    }
+
+    handleSubscribe = () => {
+      const { post: { postId, subscribe } } = this.props;
+      //this.props.postSubscribe({ subscribe, postId })
+    }
+
+
   render() {
     dayjs.extend(relativeTime)
     const { classes, post: { body, createdAt, userPosted, commentCount, upvoteCount, postId } } = this.props;
@@ -33,7 +54,12 @@ export class PostItems extends Component {
                 <MoreIcon />
               </IconButton>
             }
-            title={userPosted}
+            title={
+              <div>
+              {userPosted} 
+              {this.renderSubscribe()}
+              </div>
+            }
             titleTypographyProps={{ align: "left" }}
             subheaderTypographyProps={{ align: "left" }}
             subheader={dayjs(createdAt).fromNow()} />
