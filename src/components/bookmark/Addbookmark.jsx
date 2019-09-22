@@ -65,7 +65,7 @@ export class Addbookmark extends Component {
           aria-labelledby="responsive-dialog-title"
         >
           <DialogTitle id="responsive-dialog-title" align="center">
-            Post
+            Bookmark this
           </DialogTitle>
           <DialogContent>
             <DialogContentText>

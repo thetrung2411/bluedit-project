@@ -7,6 +7,7 @@ exports.bookmark = (req, res) => {
     createdAt: new Date().toISOString(),
     postheader: req.body,
     postId: req.params.postId,
+    userId: req.user.userName,
     userPosted: req.params.userPosted
   };
   db.collection("bookmarks")
