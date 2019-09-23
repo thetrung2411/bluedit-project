@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
+import Menu from "@material-ui/core/Menu";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import InputBase from "@material-ui/core/InputBase";
@@ -23,9 +24,9 @@ class SignedInAppBar extends Component {
     this.props.logoutUser();
   };
 
-  handleClear = () =>{
+  handleClear = () => {
     this.props.clearMessages();
-  }
+  };
 
   render() {
     const {
@@ -60,11 +61,18 @@ class SignedInAppBar extends Component {
             <div className={classes.grow}></div>
             <div>
               {userDetails.isAdmin ? (
-                <Link to="/Report" className={classes.noDecor}>
-                  <Button variant="contained" className={classes.button}>
-                    Report
-                  </Button>
-                </Link>
+                <div>
+                  <Link to="/Report" className={classes.noDecor}>
+                    <Button variant="contained" className={classes.button}>
+                      Report
+                    </Button>
+                  </Link>
+                  <Link to="/Ads" className={classes.noDecor}>
+                    <Button variant="contained" className={classes.button}>
+                      Advertisement
+                    </Button>
+                  </Link>
+                </div>
               ) : null}
 
               <Link to="/bookmark" className={classes.noDecor}>
