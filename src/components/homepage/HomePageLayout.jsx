@@ -5,28 +5,24 @@ import Grid from "@material-ui/core/Grid";
 import RecommendationItem from "../post/Recommendation";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import axiosConfig from "../../axiosConfig";
+import { connect } from 'react-redux';
+import { getAllPosts } from '../../redux/actions/postActions';
 
 export class HomePageLayout extends Component {
   state = {
     post: null
   };
   componentDidMount() {
-    axiosConfig
-      .get("/getAllPosts")
-      .then(res => {
-        console.log(res.data);
-        this.setState({
-          post: res.data
-        });
-      })
-      .catch(err => console.log(err));
+    this.props.getAllPosts();
   }
   render() {
-    let postMarkUp = this.state.post ? (
-      this.state.post.map(post => <PostItems post={post} />)
-    ) : (
-      <CircularProgress color="inherit" />
-    );
+
+    const { post, posts } = this.props;
+    let postMarkUp = post.length ? (
+      post.map(item => <PostItems post={item} />)
+    ) : posts.length ? (
+      posts.map(item => <PostItems post={item} />)
+    ) : <CircularProgress color="inherit" />;
     return (
       <div>
         <AppBar />
@@ -42,4 +38,20 @@ export class HomePageLayout extends Component {
     );
   }
 }
-export default HomePageLayout;
+
+const mapStateToProps = state => {
+  console.log('state', state)
+  return {
+    post: state.post.post,
+    posts: state.post.posts,
+  };
+};
+
+const mapActionsToProps = {
+  getAllPosts
+};
+
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(HomePageLayout);

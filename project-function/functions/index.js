@@ -18,5 +18,5 @@ app.get("/getAllPosts", getAllPosts);
 app.get("/post/:postId", getPost);
 app.post("/post/:postId/comment", FBAuth, comment);
 app.get("/getAllComments", getAllComments);
-app.get("/SearchPost/:body", SearchPost);
+app.get("/searchPost", SearchPost);
 exports.api = functions.https.onRequest(app);
