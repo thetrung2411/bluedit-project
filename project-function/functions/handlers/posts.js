@@ -74,31 +74,51 @@ exports.getAllPosts = (req, res) => {
 };
 
 exports.SearchPost = (req, res) => {
-  if (req.query.name && !req.query.body) {
-    db.collection("posts")
-      .where("userPosted", '==', req.query.name)
-      .get()
-      .then(data => {
-        let posts = [];
-        data.forEach(doc => {
-          posts.push({
-            postId: doc.id,
-            body: doc.data().body,
-            commentCount: doc.data().commentCount,
-            upvoteCount: doc.data().upvoteCount,
-            createdAt: doc.data().createdAt,
-            userPosted: doc.data().userPosted,
-          });
-        });
-        return res.json(posts);
-      })
-      .catch(err => console.error(err));
-  }
-
-  if (req.query.body && req.query.name) {
+  console.log(999999, req)
+  if (req.query.body) {
     db.collection("posts")
       .where("body", '==', req.query.body)
-      .where("userPosted", '==', req.query.name)
+      .get()
+      .then(data => {
+        let posts = [];
+        data.forEach(doc => {
+          posts.push({
+            postId: doc.id,
+            body: doc.data().body,
+            commentCount: doc.data().commentCount,
+            upvoteCount: doc.data().upvoteCount,
+            createdAt: doc.data().createdAt,
+            userPosted: doc.data().userPosted,
+          });
+        });
+        return res.json(posts);
+      })
+      .catch(err => console.error(err));
+  }
+  if (req.query.fbname) {
+    db.collection("posts")
+      .where("userPosted", '==', req.query.fbname)
+      .get()
+      .then(data => {
+        let posts = [];
+        data.forEach(doc => {
+          posts.push({
+            postId: doc.id,
+            body: doc.data().body,
+            commentCount: doc.data().commentCount,
+            upvoteCount: doc.data().upvoteCount,
+            createdAt: doc.data().createdAt,
+            userPosted: doc.data().userPosted,
+          });
+        });
+        return res.json(posts);
+      })
+      .catch(err => console.error(err));
+  }
+  if (req.query.fbname && req.query.body) {
+    db.collection("posts")
+      .where("userPosted", '==', req.query.fbname)
+      .where("body", '==', req.query.body)
       .get()
       .then(data => {
         let posts = [];
@@ -118,25 +138,6 @@ exports.SearchPost = (req, res) => {
   }
 
 
-
-  db.collection("posts")
-    .where("body", '==', req.query.body)
-    .get()
-    .then(data => {
-      let posts = [];
-      data.forEach(doc => {
-        posts.push({
-          postId: doc.id,
-          body: doc.data().body,
-          commentCount: doc.data().commentCount,
-          upvoteCount: doc.data().upvoteCount,
-          createdAt: doc.data().createdAt,
-          userPosted: doc.data().userPosted,
-        });
-      });
-      return res.json(posts);
-    })
-    .catch(err => console.error(err));
 
 
 

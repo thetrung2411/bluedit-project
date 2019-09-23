@@ -36,7 +36,10 @@ export class HomeAppBar extends React.Component {
 
     searchHand = () => {
         const { value, name } = this.state;
-        this.props.SearchPost('' + value, '' + name);
+        if (!value && !name) {
+            return;
+        }
+        this.props.SearchPost(value.replace(/(^\s*)|(\s*$)/g, ""), name.replace(/(^\s*)|(\s*$)/g, ""));
     }
     render() {
         const { classes } = this.props;
