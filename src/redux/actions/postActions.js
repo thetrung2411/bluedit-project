@@ -64,8 +64,8 @@ export const post = (newPost) => (dispatch) => {
 export const SearchPost = (body, name) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   var sql = (body && name) ?
-    `body=${body}&name=${name}` :
-    (name) ? `name=${name}` :
+    `body=${body}&userPosted=${name}` :
+    (name) ? `userPosted=${name}` :
       (body) ? `body=${body}` : '';
   console.log('sql', sql)
   console.log('body', body)
