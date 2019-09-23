@@ -12,7 +12,7 @@ import { appBarStyles } from "./appBarStyles";
 import withStyles from "@material-ui/core/styles/withStyles";
 import axiosConfig from "../../axiosConfig";
 import { connect } from 'react-redux';
-import { SearchPost } from "../../redux/actions/postActions";
+import { SearchPost,BlackPost } from "../../redux/actions/postActions";
 
 
 
@@ -20,6 +20,7 @@ export class HomeAppBar extends React.Component {
     state = {
         value: "",
         name: "",
+        blackname: "",
     };
 
     inputchange1 = (e) => {
@@ -34,6 +35,12 @@ export class HomeAppBar extends React.Component {
         });
     }
 
+    inputchange3 = (e) => {
+        this.setState({
+            blackname: e.target.value
+        });
+    }
+
     searchHand = () => {
         const { value, name } = this.state;
         if (!value && !name) {
@@ -41,6 +48,17 @@ export class HomeAppBar extends React.Component {
         }
         this.props.SearchPost(value.replace(/(^\s*)|(\s*$)/g, ""), name.replace(/(^\s*)|(\s*$)/g, ""));
     }
+
+    blacknameHand = () => {
+        const { blackname } = this.state;
+        if (!blackname) {
+            return;
+        }
+        this.props.BlackPost(blackname.replace(/(^\s*)|(\s*$)/g, ""));
+    }
+
+
+
     render() {
         const { classes } = this.props;
         return (
@@ -80,6 +98,21 @@ export class HomeAppBar extends React.Component {
                                 Search
                         </Button>
                         </div>
+                        <div className={classes.search}>
+                            <InputBase
+                                placeholder="input black name"
+                                classes={{
+                                    root: classes.inputRoot,
+                                    input: classes.inputInput
+                                }}
+                                onChange={(e) => this.inputchange3(e)}
+                            />
+                            <Button variant="contained" onClick={() => this.blacknameHand()}>
+                                Black
+                        </Button>
+                        </div>
+
+
                         <div className={classes.grow}></div>
                         <div>
                             <Link to="/Login" className={classes.noDecor}>
@@ -101,7 +134,8 @@ const mapStateToProps = state => ({
 });
 
 const mapActionsToProps = {
-    SearchPost
+    SearchPost,
+    BlackPost
 };
 
 export default connect(

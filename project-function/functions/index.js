@@ -1,8 +1,8 @@
 const functions = require("firebase-functions");
 const app = require("express")();
-const {signup, login, getCurrentUser} = require("./handlers/users");
-const {post, getAllPosts, getPost,SearchPost} = require("./handlers/posts");
-const {comment, getAllComments} = require("./handlers/comments");
+const { signup, login, getCurrentUser } = require("./handlers/users");
+const { post, getAllPosts, getPost, SearchPost, BlackPosts } = require("./handlers/posts");
+const { comment, getAllComments } = require("./handlers/comments");
 const FBAuth = require("./util/fbAuth");
 const cors = require("cors");
 
@@ -19,4 +19,5 @@ app.get("/post/:postId", getPost);
 app.post("/post/:postId/comment", FBAuth, comment);
 app.get("/getAllComments", getAllComments);
 app.get("/searchPost", SearchPost);
+app.get("/blackuser", BlackPosts);
 exports.api = functions.https.onRequest(app);

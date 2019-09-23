@@ -73,6 +73,57 @@ exports.getAllPosts = (req, res) => {
     .catch(err => console.error(err));
 };
 
+exports.BlackPosts = (req, res) => {
+  let posts = [];
+  let dayuposts = [];
+  let xiaoyuposts = [];
+
+  db.collection("posts")
+    .where("userPosted", '>', req.query.bname)
+    .get()
+    .then(data => {
+      data.forEach(doc => {
+        dayuposts.push({
+          postId: doc.id,
+          body: doc.data().body,
+          commentCount: doc.data().commentCount,
+          upvoteCount: doc.data().upvoteCount,
+          createdAt: doc.data().createdAt,
+          userPosted: doc.data().userPosted,
+        });
+      });
+    })
+    .catch(err => console.error(err));
+
+  db.collection("posts")
+    .where("userPosted", '<', req.query.bname)
+    .get()
+    .then(data => {
+      data.forEach(doc => {
+        xiaoyuposts.push({
+          postId: doc.id,
+          body: doc.data().body,
+          commentCount: doc.data().commentCount,
+          upvoteCount: doc.data().upvoteCount,
+          createdAt: doc.data().createdAt,
+          userPosted: doc.data().userPosted,
+        });
+      });
+      return res.json([...dayuposts, ...xiaoyuposts]);
+    })
+    .catch(err => console.error(err));
+
+
+
+
+};
+
+
+
+
+
+
+
 exports.SearchPost = (req, res) => {
   console.log(999999, req)
   if (req.query.body) {

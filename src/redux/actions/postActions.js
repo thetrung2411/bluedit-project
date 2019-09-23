@@ -81,3 +81,18 @@ export const SearchPost = (body, name) => (dispatch) => {
     .catch(err => console.log(err));
 
 }
+
+export const BlackPost = (bname) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  axiosConfig.get(`/blackuser?bname=${bname}`)
+    .then(res => {
+      console.log('ser,', res)
+      dispatch({
+        type: GET_POST,
+        payload: res.data
+      });
+      dispatch({ type: STOP_LOADING_UI })
+    })
+    .catch(err => console.log(err));
+
+}
