@@ -5,6 +5,7 @@ import {
     POST_COMMENT,
     POST_BOOKMARK,
     DELETE_COMMENT,
+    EDIT_COMMENT,
     GET_POST,
     DELETE_POST,
     EDIT_POST
@@ -74,6 +75,14 @@ export default function (state = initialState, action){
             return{
                 ...state
             }
+        case EDIT_COMMENT:
+                return{
+                    ...state,
+                    post:{
+                        ...state.post,
+                        comments: [action.payload, ...state.post.comments]
+                    }
+                } 
         case POST_BOOKMARK:
                 return{
                     ...state,

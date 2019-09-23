@@ -2,7 +2,7 @@ const functions = require("firebase-functions");
 const app = require("express")();
 const {signup, login, getCurrentUser,changeUserPassword} = require("./handlers/users");
 const {post, getAllPosts, getPost,SearchPost, deletePost, editPost} = require("./handlers/posts");
-const {comment, getAllComments, deleteComment} = require("./handlers/comments");
+const {comment, getAllComments, deleteComment, editComment} = require("./handlers/comments");
 const FBAuth = require("./util/fbAuth");
 const cors = require("cors");
 const {  getAllReports,  getReport,  changeReportStatus,  deleteReport} = require("./handlers/reports");
@@ -19,7 +19,7 @@ app.post("/changePassword", FBAuth, changeUserPassword);
 app.post("/post/:postId/comment", FBAuth, comment);
 app.get("/getAllComments", getAllComments);
 app.delete("/post/:postId/comment/:commentId", FBAuth, deleteComment);
-
+app.post("/post/:postId/comment/:commentId/edit", FBAuth, editComment);
 //Post
 app.post("/post", FBAuth, post);
 app.post("/post/:postId/edit", FBAuth, editPost)

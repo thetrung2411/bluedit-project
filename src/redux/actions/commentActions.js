@@ -1,4 +1,4 @@
-import {SET_ERRORS, POST_COMMENT, CLEAR_ERRORS, DELETE_POST} from "../types";
+import {SET_ERRORS, POST_COMMENT, CLEAR_ERRORS, DELETE_POST, LOADING_UI, EDIT_COMMENT} from "../types";
 import axiosConfig from "../../axiosConfig";
 import {getPost} from "./postActions";
 export const postComment = (postId, commentBody) => (dispatch) => {
@@ -17,7 +17,24 @@ export const postComment = (postId, commentBody) => (dispatch) => {
         })
     })
 }
-
+export const editComment = (postId, commentId, body) => (dispatch) => {
+    dispatch({type: LOADING_UI});
+    axiosConfig.post(`/post/${postId}/comment/${commentId}/edit`, body)
+    .then(res => {
+        dispatch({
+          type: EDIT_COMMENT,
+          payload: res.data
+        })
+        dispatch({type: CLEAR_ERRORS})
+    })  
+    .catch(err => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data
+      })
+    })
+    .then(() => {dispatch(getPost(postId))})
+}
 export const deleteComment = (postId, commentId) => (dispatch) => {
     axiosConfig.delete(`/post/${postId}/comment/${commentId}`)
     .then(() => {

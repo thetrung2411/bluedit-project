@@ -1,6 +1,4 @@
-const { db, admin } = require("../util/admin");
-const config = require("../util/config");
-const firebase = require("firebase");
+const { db} = require("../util/admin");
 
 exports.comment = (req,res) => {
     if(req.body.body.trim() === ''){
@@ -33,6 +31,22 @@ exports.comment = (req,res) => {
           res.status(500).json({error: "Unexpected error"});
       });
 };
+exports.editComment = (req, res) => {
+  if(req.body.body.trim() === ''){
+    return res.status(400).json({body: 'Comment cannot be empty'});
+  }
+  console.log(req.params.commentId)
+  db.doc(`/comments/${req.params.commentId}`)
+  .update({body: req.body.body})
+  .then(() => {
+    res.json({ message: 'Comment updated successfully' });
+  })
+  .catch((err) => {
+      console.error(err);
+      return res.status(500).json({ error: err.code });
+    });
+}
+
 exports.deleteComment = (req, res) => {
   const document = db.doc(`comments/${req.params.commentId}`)
   document

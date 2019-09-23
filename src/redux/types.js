@@ -9,6 +9,7 @@ export const CLEAR_MESSAGES = 'CLEAR_MESSAGES';
 //Comment reducer types
 export const POST_COMMENT = 'POST_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
+export const EDIT_COMMENT = 'EDIT_COMMENT';
 //Post reducer types
 export const GET_POSTS = 'GET_POSTS';
 export const GET_POST = 'GET_POST';

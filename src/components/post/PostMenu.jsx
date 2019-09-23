@@ -25,7 +25,7 @@ class PostMenu extends Component {
        <DeleteButton commentId={commentId} postId={postId} />
      ) : null;
      const editButton = userPosted === userName ? (
-      <EditButton body={body} postId={postId} ></EditButton>
+      <EditButton body={body} postId={postId}  commentId={commentId}></EditButton>
     ) : null;
         return(
             <div>
