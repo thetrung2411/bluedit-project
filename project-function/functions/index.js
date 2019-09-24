@@ -1,12 +1,40 @@
 const functions = require("firebase-functions");
 const app = require("express")();
-const {signup, login, getCurrentUser,changeUserPassword} = require("./handlers/users");
-const {post, getAllPosts, getPost,SearchPost, deletePost, editPost} = require("./handlers/posts");
-const {comment, getAllComments, deleteComment, editComment} = require("./handlers/comments");
+const {
+  signup,
+  login,
+  getCurrentUser,
+  changeUserPassword,
+  disableUser
+} = require("./handlers/users");
+const {
+  post,
+  getAllPosts,
+  getPost,
+  SearchPost,
+  deletePost,
+  editPost
+} = require("./handlers/posts");
+const {
+  comment,
+  getAllComments,
+  deleteComment,
+  editComment
+} = require("./handlers/comments");
 const FBAuth = require("./util/fbAuth");
 const cors = require("cors");
-const {  getAllReports,  getReport,  changeReportStatus,  deleteReport} = require("./handlers/reports");
-const {bookmark,getAllBookmarks,getBookmark,deleteBookmark} = require("./handlers/bookmarks");
+const {
+  getAllReports,
+  getReport,
+  changeReportStatus,
+  deleteReport
+} = require("./handlers/reports");
+const {
+  bookmark,
+  getAllBookmarks,
+  getBookmark,
+  deleteBookmark
+} = require("./handlers/bookmarks");
 
 app.use(cors());
 //User route
@@ -14,6 +42,7 @@ app.post("/signup", signup);
 app.post("/login", login);
 app.get("/user", FBAuth, getCurrentUser);
 app.post("/changePassword", FBAuth, changeUserPassword);
+app.post("/disableUser", FBAuth, disableUser);
 
 //Comment
 app.post("/post/:postId/comment", FBAuth, comment);
@@ -22,10 +51,10 @@ app.delete("/post/:postId/comment/:commentId", FBAuth, deleteComment);
 app.post("/post/:postId/comment/:commentId/edit", FBAuth, editComment);
 //Post
 app.post("/post", FBAuth, post);
-app.post("/post/:postId/edit", FBAuth, editPost)
+app.post("/post/:postId/edit", FBAuth, editPost);
 app.get("/getAllPosts", getAllPosts);
 app.get("/post/:postId", getPost);
-app.delete("/post/:postId", FBAuth, deletePost)
+app.delete("/post/:postId", FBAuth, deletePost);
 
 //Report
 app.get("/getAllReports", getAllReports);
@@ -41,4 +70,3 @@ app.delete("/deleteBookmark/:bookmarkid", deleteBookmark);
 //app.get("/SearchPost/:body", SearchPost);
 
 exports.api = functions.https.onRequest(app);
-

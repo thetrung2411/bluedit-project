@@ -101,7 +101,11 @@ exports.login = (req, res) => {
     //catch any errors and response with a general message
     .catch(err => {
       console.error(err);
-      return res
+      if (err.code === "auth/user-disabled" )
+        return res
+        .status(403)
+        .json({ general: "Account has been disable, please contact Admin" });
+      else return res
         .status(403)
         .json({ general: "Wrong user detail, please try again" });
     });
