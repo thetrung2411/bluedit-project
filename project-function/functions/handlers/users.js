@@ -101,7 +101,11 @@ exports.login = (req, res) => {
     //catch any errors and response with a general message
     .catch(err => {
       console.error(err);
-      return res
+      if (err.code === "auth/user-disabled" )
+        return res
+        .status(403)
+        .json({ general: "Account has been disable, please contact Admin" });
+      else return res
         .status(403)
         .json({ general: "Wrong user detail, please try again" });
     });
@@ -111,11 +115,11 @@ exports.changeUserPassword = (req, res) => {
   let userData = {
     newPassword: req.body.newPassword,
     confirmPassword: req.body.confirmPassword
-  }
+  };
 
-  const {valid, errors} = validateNewPasswordData(userData);
-  if (!valid) return res.status(400).json(errors)
-  
+  const { valid, errors } = validateNewPasswordData(userData);
+  if (!valid) return res.status(400).json(errors);
+
   //change user password by using data from request
   admin
     .auth()
@@ -128,7 +132,26 @@ exports.changeUserPassword = (req, res) => {
     })
     .catch(err => {
       console.error(err);
-      return res.status(500).json({ general: "Something went wrong, please try again" });
+      return res
+        .status(500)
+        .json({ general: "Something went wrong, please try again" });
+    });
+};
+
+exports.disableUser = (req, res) => {
+  admin
+    .auth()
+    .updateUser(req.user.uid, {
+      disabled: true
+    })
+    .then(() => {
+      return res.json({ general: "User disabled successfully" });
+    })
+    .catch(err => {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ general: "Something went wrong, please try again" });
     });
 };
 

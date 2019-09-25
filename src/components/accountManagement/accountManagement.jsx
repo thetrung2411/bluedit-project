@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import SignedInAppBar from "../appBar/AppBarWithAvatar";
 import ChangePassword from "./ChangePassword"
+import DisableAccount from "./DisableAccount"
 import { Redirect } from "react-router-dom";
 
 import { connect } from "react-redux";
@@ -38,6 +39,8 @@ class accountManagement extends Component {
               Account Management
             </Typography>
             <ChangePassword/>
+            <br/>
+            <DisableAccount history={this.props.history}/>
           </Grid>
           <Grid item sm />
         </Grid>
