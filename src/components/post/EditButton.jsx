@@ -24,7 +24,7 @@ class EditButton extends Component{
         errors: {},
         disabled: false
       };
-      componentWillReceiveProps(nextProps){
+    componentWillReceiveProps(nextProps){
         if (nextProps.UI.errors){
           this.setState({
             errors: nextProps.UI.errors
@@ -42,18 +42,23 @@ class EditButton extends Component{
       this.setState({open: false})
     }
     handleChange = (event) => {
-        this.setState({[event.target.name]: event.target.value})
-        if(this.state.body.trim() === '' ){
-          this.setState({disabled: true})
+        this.setState({[event.target.name]: event.target.value}, function(){
+          if(this.state.body.trim() === '' ){
+            this.setState({disabled: true})
+          }
+          else
+          {
+          this.setState({disabled: false})
         }
-        else
-        {
-        this.setState({disabled: false})
-      }
+          
+        })
+        
+        
     }
       handleSubmit = (event) => {
         event.preventDefault();
         if(this.props.commentId === undefined){
+          
         this.props.editPost(this.props.postId, {body: this.state.body});
        }
         else {

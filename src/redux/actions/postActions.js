@@ -8,7 +8,9 @@ import {
   GET_POSTS,
   GET_POST, 
   DELETE_POST, 
-  EDIT_POST
+  EDIT_POST,
+  HIDE_POST,
+  A_POST
 } from "../types";
 import axiosConfig from '../../axiosConfig';
 export const getAllPosts = () => (dispatch) => {
@@ -65,12 +67,26 @@ export const deletePost = (postId) => (dispatch) => {
   .then(() => {
     dispatch({
       type: DELETE_POST, 
-      payload: postId});
+      payload: postId
+    });
   })
   .then(() => {dispatch(getAllPosts())})
   .catch((err) => console.log(err));
 }
 
+export const hidePost = (postId) => (dispatch) => {
+  axiosConfig.post(`/post/${postId}/setHidden`)
+  .then(() => {
+    dispatch({
+      type: HIDE_POST,
+      payload: postId
+    })
+  })
+  .then(() => {dispatch(getAllPosts())})
+  .catch(err => {
+     console.log(err)
+     })
+}
 export const post = (newPost) => (dispatch) => {
     dispatch({type: LOADING_UI});
     axiosConfig.post('/post', newPost)

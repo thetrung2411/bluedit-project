@@ -8,14 +8,15 @@ import {PostLayoutStyles } from "./PostLayoutStyle";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Button from "@material-ui/core/Button";
 import {connect} from 'react-redux';
-import {deletePost} from '../../redux/actions/postActions';
+import {hidePost} from '../../redux/actions/postActions';
 import {deleteComment} from '../../redux/actions/commentActions';
 import PropTypes from 'prop-types';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Delete from '@material-ui/icons/Delete';
-class DeleteButton extends Component{
+import Visibility from '@material-ui/icons/Visibility'
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+class HideButton extends Component{
     state = {
         openDialog: false,
         body: '',
@@ -29,23 +30,25 @@ class DeleteButton extends Component{
         
       this.setState({openDialog: false})
     }
-    handleDeletePost = () => {
-        if(this.props.commentId === undefined){
-        this.props.deletePost(this.props.postId);
-        }
-        else
-        {
-        this.props.deleteComment(this.props.postId, this.props.commentId)
-        }
+    handleHidePost = () => {
+        // if(this.props.commentId === undefined){
+        this.props.hidePost(this.props.postId)
+        // }
+        // else
+        // {
+        // this.props.deleteComment(this.props.postId, this.props.commentId)
+        // }
         this.handleClose();
     }
     render(){
-      const {classes} = this.props;
-      return (
+      const {classes, hidden} = this.props;
+      
+        let hideItem = !hidden ? <MenuItem  onClick={this.handleOpen}><ListItemIcon ><Visibility/></ListItemIcon><ListItemText primary="Hide" /></MenuItem> : 
+        <MenuItem  onClick={this.handleOpen}><ListItemIcon ><VisibilityOff/></ListItemIcon><ListItemText primary="Unhide" /></MenuItem>
+      
+        return (
             <div>
-              <MenuItem selected classes={{ selected: classes.menuItemDelete }} onClick={this.handleOpen} >
-              <ListItemIcon ><Delete/></ListItemIcon> <ListItemText primary="Delete Post" />
-          </MenuItem>
+             {hideItem}
           <Dialog
             open={this.state.openDialog}
             aria-labelledby="responsive-dialog-title"
@@ -53,11 +56,11 @@ class DeleteButton extends Component{
             <DialogTitle id="responsive-dialog-title" align = "center">Alert</DialogTitle>
             <DialogContent>
               <DialogContentText>
-                Are you sure you want to delete this item?
+                Do you want to hide this item?{this.props.postId}
               </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                        <Button variant = "contained" color = "secondary" onClick={this.handleDeletePost}>
+                        <Button variant = "contained" color = "secondary" onClick={this.handleHidePost}>
                            Yes
                         </Button>
                         <Button type="submit" variant="contained" color = "primary" onClick={this.handleClose}>
@@ -71,9 +74,9 @@ class DeleteButton extends Component{
     }    
 }
 
-DeleteButton.propTypes = {
+HideButton.propTypes = {
     deleteComment: PropTypes.func.isRequired,
-    deletePost: PropTypes.func.isRequired,
+    hidePost: PropTypes.func.isRequired,
     classes: PropTypes.object.isRequired,
     post: PropTypes.object.isRequired,
     postId: PropTypes.string.isRequired
@@ -83,7 +86,7 @@ const mapStateToProps = (state) => ({
     post: state.post.post,
 })
   const mapActionToProps ={ 
-   deletePost, deleteComment
+   hidePost, deleteComment
   }
   
-export default connect(mapStateToProps,mapActionToProps)(withStyles(PostLayoutStyles)(DeleteButton));
+export default connect(mapStateToProps,mapActionToProps)(withStyles(PostLayoutStyles)(HideButton));

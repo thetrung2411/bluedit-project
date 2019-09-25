@@ -35,11 +35,13 @@ export class PostItems extends Component {
 
   render() {
     dayjs.extend(relativeTime)
-    const { classes, post: { body, createdAt, userPosted, commentCount, upvoteCount, postId }, post} = this.props;
+    const { classes, post: {hidden, body, createdAt, userPosted, commentCount, upvoteCount, postId }, post} = this.props;
     const {userName} = this.props;
+    if(hidden === true && userName !== userPosted){
+      return (<br></br>)
+    }
     return (
       <Grid className={classes.grid}>
-       
         <Card className={classes.paper}>
           <CardHeader
             avatar={
@@ -48,7 +50,7 @@ export class PostItems extends Component {
                 </Avatar>
             }
             action={
-              <PostMenu body={body} userName ={userName} userPosted={userPosted} postId = {postId} post={post}/>
+              <PostMenu hidden={hidden} body={body} userName ={userName} userPosted={userPosted} postId = {postId} post={post}/>
             }
             title={
               <div>
@@ -73,6 +75,9 @@ export class PostItems extends Component {
         </Card>
       </Grid>
     );
+               
+   
+    
   }
 }
 PostItemDetail.propTypes = {

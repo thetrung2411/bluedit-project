@@ -1,5 +1,4 @@
-const { db, admin } = require("../util/admin");
-const config = require("../util/config");
+const { db} = require("../util/admin");
 
 exports.post = (req, res) => {
   if (req.body.body.trim() === "") {
@@ -9,8 +8,8 @@ exports.post = (req, res) => {
     body: req.body.body,
     userPosted: req.user.userName,
     createdAt: new Date().toISOString(),
-    upvoteCount: 0,
-    commentCount: 0
+    commentCount: 0,
+    hidden: false,
   };
   db.collection("posts")
     .add(newPost)
@@ -57,10 +56,10 @@ exports.getAllPosts = (req, res) => {
           postId: doc.id,
           body: doc.data().body,
           commentCount: doc.data().commentCount,
-          upvoteCount: doc.data().upvoteCount,
+          hidden: doc.data().hidden,
           createdAt: doc.data().createdAt,
           userPosted: doc.data().userPosted,
-        });
+        });       
       });
         return res.json(posts);
       })
@@ -110,7 +109,17 @@ exports.editPost = (req, res) => {
       return res.status(500).json({ error: err.code });
     });
 }
-
+exports.setHidden = (req, res) => {
+  db.doc(`/posts/${req.params.postId}`)
+  .update({hidden: true})
+  .then(() => {
+    res.json({message: 'Post is now hidden'});
+  })
+  .catch((err)=> {
+    console.error(err);
+    return res.status(500).json({error: err.code});
+  })
+}
 exports.getPost1 = (req, res) => {
   let postContent1 = {};
   db.doc(`/posts/${req.params.postId}`)
@@ -139,26 +148,6 @@ exports.getPost1 = (req, res) => {
     });
 };
 
-exports.getAllPosts = (req, res) => {
-  db.collection("posts")
-    .orderBy("createdAt", "desc")
-    .get()
-    .then(data => {
-      let posts = [];
-      data.forEach(doc => {
-        posts.push({
-          postId: doc.id,
-          body: doc.data().body,
-          commentCount: doc.data().commentCount,
-          upvoteCount: doc.data().upvoteCount,
-          createdAt: doc.data().createdAt,
-          userPosted: doc.data().userPosted
-        });
-      });
-      return res.json(posts);
-    })
-    .catch(err => console.error(err));
-};
 
 exports.searchPost = (req, res) => {
   db.collection("posts")

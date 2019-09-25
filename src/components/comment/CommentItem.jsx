@@ -1,8 +1,6 @@
 import React, {Component} from "react";
 import {Typography, Grid} from "@material-ui/core";
 import {Card, CardHeader, CardContent} from "@material-ui/core";
-import UpIcon from "@material-ui/icons/ArrowUpwardTwoTone";
-import Fab from "@material-ui/core/Fab";
 import {CommentItemStyles} from "./CommentItemStyles";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Avatar from "@material-ui/core/Avatar";

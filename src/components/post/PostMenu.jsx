@@ -1,9 +1,6 @@
 import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
 import DeleteButton from "./DeleteButton";
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import RemoveRedEye from '@material-ui/icons/RemoveRedEye';
+import HideButton from "./HideButton";
 import React, { Component } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import MoreIcon from "@material-ui/icons/MoreVert";
@@ -20,7 +17,7 @@ class PostMenu extends Component {
         this.setState({open: false})
       }
     render(){
-        const {postId , userName, commentId, userPosted, body } = this.props;
+        const {postId , userName, commentId, userPosted, body, hidden } = this.props;
         const deleteButton = userPosted === userName ? (
        <DeleteButton commentId={commentId} postId={postId} />
      ) : null;
@@ -42,7 +39,7 @@ class PostMenu extends Component {
         transformOrigin={{ vertical: "top", horizontal: "center" }}
       >
         {deleteButton}
-        <MenuItem  onClick={this.handleClose}><ListItemIcon ><RemoveRedEye/></ListItemIcon><ListItemText primary="Hide" /></MenuItem>
+        <HideButton hidden={hidden} postId = {postId}/>
         {editButton}
       </Menu>
             </div>

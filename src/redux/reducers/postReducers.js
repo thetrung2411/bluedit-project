@@ -8,7 +8,8 @@ import {
     EDIT_COMMENT,
     GET_POST,
     DELETE_POST,
-    EDIT_POST
+    EDIT_POST,
+    HIDE_POST
 } from "../types"
 
 const initialState = {
@@ -30,6 +31,14 @@ export default function (state = initialState, action){
                 );
             state.posts.splice(index, 1);
             return{
+                ...state,
+            }
+        case HIDE_POST: 
+            let pos = state.posts.findIndex(
+                (post) => post.postId === action.payload.postId
+            );
+            state.posts.splice(pos, 1)
+            return {
                 ...state,
             }
         case GET_POSTS:
@@ -75,6 +84,7 @@ export default function (state = initialState, action){
             return{
                 ...state
             }
+        
         case EDIT_COMMENT:
                 return{
                     ...state,

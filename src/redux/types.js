@@ -16,6 +16,8 @@ export const GET_POST = 'GET_POST';
 export const POST_POST = 'POST_POST';
 export const DELETE_POST = 'DELETE_POST';
 export const EDIT_POST = 'EDIT_POST';
+export const HIDE_POST = 'HIDE_POST';
+export const A_POST = 'A_POST';
 //User reducer types
 export const SET_AUTHENTICATED = "SET_AUTHENTICATED";
 export const SET_UNAUTHENTICATED = "SET_UNAUTHENTICATED";
