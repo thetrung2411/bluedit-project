@@ -10,7 +10,6 @@ import {
   DELETE_POST, 
   EDIT_POST,
   HIDE_POST,
-  A_POST
 } from "../types";
 import axiosConfig from '../../axiosConfig';
 export const getAllPosts = () => (dispatch) => {
