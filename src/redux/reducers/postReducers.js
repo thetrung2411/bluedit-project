@@ -34,13 +34,13 @@ export default function (state = initialState, action){
                 ...state,
             }
         case HIDE_POST: 
-            let pos = state.posts.findIndex(
-                (post) => post.postId === action.payload.postId
-            );
-            state.posts.splice(pos, 1)
-            return {
-                ...state,
-            }
+        return{
+            ...state,
+            posts: [
+                action.payload,
+                ...state.posts
+            ]
+        }
         case GET_POSTS:
             return{
                 ...state,

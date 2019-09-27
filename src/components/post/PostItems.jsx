@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Typography, Grid, CardMedia } from "@material-ui/core";
+import { Typography, Grid} from "@material-ui/core";
 import { Card, CardHeader, CardContent, CardActions } from "@material-ui/core";
 import ThumbUpAltRoundedIcon from '@material-ui/icons/ThumbUpAltRounded';
 import ThumbDownRoundedIcon from '@material-ui/icons/ThumbDownRounded';
@@ -12,9 +12,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import PostItemDetail from "./PostItemDetail";
 import Button from "@material-ui/core/Button";
 import PostMenu from "./PostMenu";
-import PropTypes from 'prop-types'
 export class PostItems extends Component {
-  
     renderSubscribe = () => {
       const { classes, post: { subscribe } } = this.props;
       if (subscribe) {
@@ -32,13 +30,13 @@ export class PostItems extends Component {
       const { post: { postId, subscribe } } = this.props;
       //this.props.postSubscribe({ subscribe, postId })
     }
-
+    
   render() {
     dayjs.extend(relativeTime)
     const { classes, post: {hidden, body, createdAt, userPosted, commentCount, upvoteCount, postId }, post} = this.props;
     const {userName} = this.props;
     if(hidden === true && userName !== userPosted){
-      return (<br></br>)
+      return (null)
     }
     return (
       <Grid className={classes.grid}>
@@ -70,19 +68,12 @@ export class PostItems extends Component {
             <Fab size="small" className={classes.fab} ><ThumbUpAltRoundedIcon /></Fab>
             <Fab size="small" className={classes.fab} ><ThumbDownRoundedIcon /></Fab>
             <Typography>{commentCount} comments</Typography>
-            <PostItemDetail userName ={userName} post={post} postId={postId} userPosted={userPosted} openDialog={this.props.openDialog}/>
+            <PostItemDetail hidden={hidden} userName ={userName} post={post} postId={postId} userPosted={userPosted} openDialog={this.props.openDialog}/>
           </CardActions>
         </Card>
       </Grid>
     );
-               
-   
-    
   }
 }
-PostItemDetail.propTypes = {
-  postId: PropTypes.string.isRequired,
-  userPosted: PropTypes.string.isRequired,
-  post: PropTypes.object.isRequired,
-}
+
 export default withStyles(PostItemStyles)(PostItems);

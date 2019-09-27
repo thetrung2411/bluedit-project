@@ -24,7 +24,6 @@ export const PostLayoutStyles = theme => ({
         flexDirection: "column",
         alignItems: "center",
         padding: `${theme.spacing(2)}px ${theme.spacing(3)}px ${theme.spacing(3)}px`,
-        backgroundColor: "green"
     },
     avatar: {
         margin: theme.spacing.unit,

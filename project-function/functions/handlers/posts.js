@@ -109,7 +109,20 @@ exports.editPost = (req, res) => {
       return res.status(500).json({ error: err.code });
     });
 }
-exports.setHidden = (req, res) => {
+
+exports.unhidePost = (req, res) => {
+  db.doc(`/posts/${req.params.postId}`)
+  .update({hidden: false})
+  .then(() => {
+    res.json({message: 'Post is now unhidden'});
+  })
+  .catch((err)=> {
+    console.error(err);
+    return res.status(500).json({error: err.code});
+  })
+}
+
+exports.hidePost = (req, res) => {
   db.doc(`/posts/${req.params.postId}`)
   .update({hidden: true})
   .then(() => {
@@ -120,6 +133,7 @@ exports.setHidden = (req, res) => {
     return res.status(500).json({error: err.code});
   })
 }
+
 exports.getPost1 = (req, res) => {
   let postContent1 = {};
   db.doc(`/posts/${req.params.postId}`)

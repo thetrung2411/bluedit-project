@@ -29,14 +29,12 @@ class DeleteButton extends Component{
 
       this.setState({openDialog: false})
     }
-    handleDeletePost = () => {
-        if(this.props.commentId === undefined){
-        this.props.deletePost(this.props.postId);
-        }
+    handleDelete = () => {
+        if(this.props.commentId === undefined)
+        this.props.deletePost(this.props.postId); 
         else
-        {
         this.props.deleteComment(this.props.postId, this.props.commentId)
-        }
+        
         this.handleClose();
     }
     render(){
@@ -57,7 +55,7 @@ class DeleteButton extends Component{
               </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                        <Button variant = "contained" color = "secondary" onClick={this.handleDeletePost}>
+                        <Button variant = "contained" color = "secondary" onClick={this.handleDelete}>
                            Yes
                         </Button>
                         <Button type="submit" variant="contained" color = "primary" onClick={this.handleClose}>

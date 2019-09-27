@@ -50,15 +50,11 @@ class EditButton extends Component{
           {
           this.setState({disabled: false})
         }
-          
         })
-        
-        
     }
       handleSubmit = (event) => {
         event.preventDefault();
         if(this.props.commentId === undefined){
-          
         this.props.editPost(this.props.postId, {body: this.state.body});
        }
         else {

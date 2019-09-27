@@ -8,8 +8,8 @@ import {PostLayoutStyles } from "./PostLayoutStyle";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Button from "@material-ui/core/Button";
 import {connect} from 'react-redux';
-import {hidePost} from '../../redux/actions/postActions';
-import {deleteComment} from '../../redux/actions/commentActions';
+import {hidePost, unhidePost} from '../../redux/actions/postActions';
+import {hideComment, unhideComment} from '../../redux/actions/commentActions';
 import PropTypes from 'prop-types';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -19,36 +19,34 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 class HideButton extends Component{
     state = {
         openDialog: false,
-        body: '',
-        errors: {} 
       };
-
     handleOpen = () => {
       this.setState({openDialog: true});
     }
     handleClose = () => {
-        
       this.setState({openDialog: false})
     }
-    handleHidePost = () => {
-        // if(this.props.commentId === undefined){
-        this.props.hidePost(this.props.postId)
-        // }
-        // else
-        // {
-        // this.props.deleteComment(this.props.postId, this.props.commentId)
-        // }
-        this.handleClose();
-    }
-    render(){
-      const {classes, hidden} = this.props;
+  handleHide = () => {
+      if(this.props.commentId === undefined)
+        !this.props.hidden ? this.props.hidePost(this.props.postId) : this.props.unhidePost(this.props.postId)
+      else
+        !this.props.commentHide ? this.props.hideComment(this.props.postId, this.props.commentId) : this.props.unhideComment(this.props.postId, this.props.commentId) 
       
-        let hideItem = !hidden ? <MenuItem  onClick={this.handleOpen}><ListItemIcon ><Visibility/></ListItemIcon><ListItemText primary="Hide" /></MenuItem> : 
-        <MenuItem  onClick={this.handleOpen}><ListItemIcon ><VisibilityOff/></ListItemIcon><ListItemText primary="Unhide" /></MenuItem>
+      this.handleClose();
+  }
+    render(){
+      const {hidden, commentHide} = this.props;
+      let visibilityButton;
+      let hideItem = <MenuItem  onClick={this.handleOpen}><ListItemIcon ><Visibility/></ListItemIcon><ListItemText primary="Hide" /></MenuItem>;
+      let unhideItem = <MenuItem  onClick={this.handleOpen}><ListItemIcon ><VisibilityOff/></ListItemIcon><ListItemText primary="Unhide" /></MenuItem>;
+      if(this.props.commentId === undefined)
+         visibilityButton = (!hidden) ? hideItem : unhideItem
+      else
+        visibilityButton = (!commentHide) ? hideItem : unhideItem
       
         return (
             <div>
-             {hideItem}
+             {visibilityButton}
           <Dialog
             open={this.state.openDialog}
             aria-labelledby="responsive-dialog-title"
@@ -56,11 +54,11 @@ class HideButton extends Component{
             <DialogTitle id="responsive-dialog-title" align = "center">Alert</DialogTitle>
             <DialogContent>
               <DialogContentText>
-                Do you want to hide this item?{this.props.postId}
+                Do you want to hide this item?
               </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                        <Button variant = "contained" color = "secondary" onClick={this.handleHidePost}>
+                        <Button variant = "contained" color = "secondary" onClick={this.handleHide}>
                            Yes
                         </Button>
                         <Button type="submit" variant="contained" color = "primary" onClick={this.handleClose}>
@@ -75,8 +73,10 @@ class HideButton extends Component{
 }
 
 HideButton.propTypes = {
-    deleteComment: PropTypes.func.isRequired,
+    hideComment: PropTypes.func.isRequired,
+    unhideComment: PropTypes.func.isRequired,
     hidePost: PropTypes.func.isRequired,
+    unhidePost: PropTypes.func.isRequired,
     classes: PropTypes.object.isRequired,
     post: PropTypes.object.isRequired,
     postId: PropTypes.string.isRequired
@@ -86,7 +86,7 @@ const mapStateToProps = (state) => ({
     post: state.post.post,
 })
   const mapActionToProps ={ 
-   hidePost, deleteComment
+   hidePost, hideComment, unhideComment, unhidePost
   }
   
 export default connect(mapStateToProps,mapActionToProps)(withStyles(PostLayoutStyles)(HideButton));

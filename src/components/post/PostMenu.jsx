@@ -17,12 +17,15 @@ class PostMenu extends Component {
         this.setState({open: false})
       }
     render(){
-        const {postId , userName, commentId, userPosted, body, hidden } = this.props;
+        const {postId , userName, commentId, userPosted, body, hidden, commentHide } = this.props;
         const deleteButton = userPosted === userName ? (
        <DeleteButton commentId={commentId} postId={postId} />
      ) : null;
-     const editButton = userPosted === userName ? (
+       const editButton = userPosted === userName ? (
       <EditButton body={body} postId={postId}  commentId={commentId}></EditButton>
+    ) : null;
+       const hideButton = userPosted === userName ? (
+      <HideButton commentHide={commentHide} hidden={hidden} postId = {postId} commentId={commentId}/>
     ) : null;
         return(
             <div>
@@ -39,7 +42,7 @@ class PostMenu extends Component {
         transformOrigin={{ vertical: "top", horizontal: "center" }}
       >
         {deleteButton}
-        <HideButton hidden={hidden} postId = {postId}/>
+       {hideButton}
         {editButton}
       </Menu>
             </div>

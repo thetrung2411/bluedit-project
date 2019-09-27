@@ -13,7 +13,9 @@ export class CommentItem extends Component{
     return (
         <Grid className = {classes.grid}>
             {comments.map((comment) => {
-                const {body, createdAt, userPosted, commentId} = comment;
+                const {body, createdAt, userPosted, commentId, hidden} = comment;
+                if(hidden === true && userPosted !== userName)
+                {return null}
                 return (
                       <Card className = {classes.paper}>
             <CardHeader 
@@ -23,7 +25,7 @@ export class CommentItem extends Component{
                 </Avatar>
               }
         action={
-            <PostMenu body={body} commentId ={commentId} userName ={userName} userPosted={userPosted} postId = {postId} post={post}/>
+            <PostMenu commentHide={hidden} body={body} commentId ={commentId} userName ={userName} userPosted={userPosted} postId = {postId} post={post}/>
         }
         titleTypographyProps={{align:"left"}}
         title = {userPosted}
@@ -35,7 +37,6 @@ export class CommentItem extends Component{
         </CardContent>
         </Card>
         )})}
-      
         </Grid>
     );
 }    

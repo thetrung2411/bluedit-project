@@ -74,8 +74,22 @@ export const deletePost = (postId) => (dispatch) => {
 }
 
 export const hidePost = (postId) => (dispatch) => {
-  axiosConfig.post(`/post/${postId}/setHidden`)
-  .then(() => {
+  axiosConfig.post(`/post/${postId}/hide`) 
+  .then(res => {
+    dispatch({
+      type: HIDE_POST,
+      payload: postId
+    })
+  })
+  .then(() => {dispatch(getAllPosts())})
+  .catch(err => {
+     console.log(err)
+     })
+}
+
+export const unhidePost = (postId) => (dispatch) => {
+  axiosConfig.post(`/post/${postId}/unhide`) 
+  .then(res => {
     dispatch({
       type: HIDE_POST,
       payload: postId

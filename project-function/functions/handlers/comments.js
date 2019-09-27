@@ -8,6 +8,7 @@ exports.comment = (req,res) => {
         body: req.body.body,
         postId: req.params.postId,
         userPosted: req.user.userName,
+        hidden: false,
         createdAt: new Date().toISOString() 
       };
       db.doc(`/posts/${req.params.postId}`).get()
@@ -88,3 +89,28 @@ exports.getAllComments = (req, res) => {
       })
       .catch(err => console.error(err));
   };
+
+  exports.unhideComment = (req, res) => {
+    db.doc(`comments/${req.params.commentId}`)
+    .update({hidden: false})
+    .then(() => {
+      res.json({message: 'Comment is now unhidden'});
+    })
+    .catch((err)=> {
+      console.error(err);
+      return res.status(500).json({error: err.code});
+    })
+  }
+  
+  exports.hideComment = (req, res) => {
+    db.doc(`/comments/${req.params.commentId}`)
+    .update({hidden: true})
+    .then(() => {
+      res.json({message: 'Comment is now hidden'});
+    })
+    .catch((err)=> {
+      console.error(err);
+      return res.status(500).json({error: err.code});
+    })
+  }
+  
