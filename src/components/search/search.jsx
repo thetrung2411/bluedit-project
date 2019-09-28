@@ -9,7 +9,7 @@
  import Toolbar from "@material-ui/core/Toolbar";
  import Typography from "@material-ui/core/Typography";
  import { Link } from "react-router-dom";
- import { appBarStyles } from "./appBarStyles";
+ import { appBarStyles } from "../appBar/appBarStyles";
  import withStyles from "@material-ui/core/styles/withStyles";
  import axiosConfig from "../../axiosConfig";
  import { connect } from 'react-redux';
@@ -17,7 +17,7 @@
  
  
  
- export class seatch extends React.Component {
+ export class search extends React.Component {
      state = {
          value: "",
          name: "",
@@ -109,7 +109,7 @@
                                  onChange={(e) => this.inputchange3(e)}
                              />
                              <Button variant="contained" onClick={() => this.blacknameHand()}>
-                                 Black
+                                 Block
                          </Button>
                          </div>
  
@@ -118,7 +118,7 @@
                          <div>
                              <Link to="/Login" className={classes.noDecor}>
                                  <Button variant="contained" className={classes.button}>
-                                     Login
+                                     HomePage
                          </Button>
                              </Link>
                          </div>

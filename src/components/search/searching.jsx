@@ -54,4 +54,4 @@ const mapActionsToProps = {
 export default connect(
   mapStateToProps,
   mapActionsToProps
-)(HomePageLayout);
+)(Searching);
