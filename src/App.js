@@ -7,7 +7,7 @@ import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
 import login from './components/login-register/login';
 import register from './components/login-register/register'; 
 import test from './components/search/test';
-import searching from './components/search/Searching';
+import searching from './components/search/searching';
 import PostLayout from './components/post/PostLayout';
 import HomePageLayout from './components/homepage/HomePageLayout';
 import { Provider } from 'react-redux';

@@ -8,7 +8,7 @@ import axiosConfig from "../../axiosConfig";
 import { connect } from 'react-redux';
 import { getAllPosts } from '../../redux/actions/postActions';
 
-export class Searching extends Component {
+export class searching extends Component {
   state = {
     post: null
   };
@@ -54,4 +54,4 @@ const mapActionsToProps = {
 export default connect(
   mapStateToProps,
   mapActionsToProps
-)(Searching);
+)(searching);
