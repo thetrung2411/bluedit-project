@@ -7,7 +7,7 @@ import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
 import login from './components/login-register/login';
 import register from './components/login-register/register'; 
 import test from './components/search/test';
-import searching from './components/search/searching';
+import searching from './components/search/Searching';
 import PostLayout from './components/post/PostLayout';
 import HomePageLayout from './components/homepage/HomePageLayout';
 import { Provider } from 'react-redux';
@@ -17,9 +17,12 @@ import ReportPage from './components/report/ReportPage';
 import ReportDetail from './components/report/ReportDetail';
 import userpage from './components/userpage/userpage';
 import accountManagement from './components/accountManagement/accountManagement';
+<<<<<<< HEAD
 import subscriptions from './components/subscriptions/subscriptions';
 import { userpageLauout } from './components/userpage/userpageLayout';
 import { editProfileLayout } from './components/editProfile/editProfileLayout';
+=======
+>>>>>>> 6b7bac7e40a536dfead5d4ac07fe6bf180237586
 import {
   MuiThemeProvider,
   createMuiTheme,
@@ -68,9 +71,13 @@ class App extends Component {
                 <Route path='/post' component={PostLayout} />
                 <Route path='/home' component={HomePageLayout} />
                 <Route path='/report' component={ReportPage} />
+<<<<<<< HEAD
                 <Route path='/subscriptions' component = {subscriptions}/>
                 <Route path='/userpage' component = {userpageLauout}/>
                 <Route path='/editProfile' component = {editProfileLayout}/>
+=======
+                <Route path='/userpage' component={userpage} />
+>>>>>>> 6b7bac7e40a536dfead5d4ac07fe6bf180237586
                 <Route path='/bookmark' component={bookmark} />
                 <Route path='/searching' component = {searching}/>
                 <Route path='/test' component = {test}/>

@@ -43,6 +43,7 @@ export const getPost = (postId) => (dispatch) => {
 
 }
 
+<<<<<<< HEAD
 export const editPost = (postId, body) => (dispatch) => {
     dispatch({type:LOADING_UI});
     axiosConfig.post(`/post/${postId}/edit`, body)
@@ -52,6 +53,17 @@ export const editPost = (postId, body) => (dispatch) => {
           payload: res.data
         })
         dispatch({type: CLEAR_ERRORS})
+=======
+export const post = (newPost) => (dispatch) => {
+    dispatch({type: LOADING_UI});
+    axiosConfig.post('/post', newPost)
+    .then(res => {
+      dispatch({
+        type: POST_POST,
+        payload: res.data 
+      });
+      dispatch({type: CLEAR_ERRORS});
+>>>>>>> 6b7bac7e40a536dfead5d4ac07fe6bf180237586
     })
     .then(() => {dispatch(getAllPosts())})
     .catch(err => {
@@ -60,6 +72,7 @@ export const editPost = (postId, body) => (dispatch) => {
         payload: err.response.data
       })
     })
+<<<<<<< HEAD
 }
 export const deletePost = (postId) => (dispatch) => {
   axiosConfig.delete(`post/${postId}`)
@@ -71,6 +84,9 @@ export const deletePost = (postId) => (dispatch) => {
   })
   .then(() => {dispatch(getAllPosts())})
   .catch((err) => console.log(err));
+=======
+    
+>>>>>>> 6b7bac7e40a536dfead5d4ac07fe6bf180237586
 }
 
 export const hidePost = (postId) => (dispatch) => {

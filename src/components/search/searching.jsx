@@ -1,12 +1,14 @@
 import React, { Component } from "react";
+import AppBar from "./search";
+import PostItems from "../post/PostItems";
 import Grid from "@material-ui/core/Grid";
-import AppBar from "../appBar/appBar";
-import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
-import PostItem from "../post/PostItems";
+import RecommendationItem from "../post/Recommendation";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import axiosConfig from "../../axiosConfig";
+import { connect } from 'react-redux';
+import { getAllPosts } from '../../redux/actions/postActions';
 
+<<<<<<< HEAD
 class searching extends Component {
     state = {
       post: null
@@ -42,9 +44,52 @@ class searching extends Component {
             </Link> 
               {postMarkUp}
             </Grid>
-          </Grid>
-        </div>
-      );
-    }
+=======
+export class Searching extends Component {
+  state = {
+    post: null
+  };
+  componentDidMount() {
+    this.props.getAllPosts();
   }
-export default searching;
+  render() {
+
+    const { post, posts } = this.props;
+    let postMarkUp = post.length ? (
+      post.map(item => <PostItems post={item} />)
+    ) : posts.length ? (
+      posts.map(item => <PostItems post={item} />)
+    ) : <CircularProgress color="inherit" />;
+    return (
+      <div>
+        <AppBar />
+        <Grid container spacing={3}>
+          <Grid item xs={8}>
+            {postMarkUp}
+          </Grid>
+          <Grid item xs={4}>
+            <RecommendationItem />
+>>>>>>> 6b7bac7e40a536dfead5d4ac07fe6bf180237586
+          </Grid>
+        </Grid>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  console.log('state', state)
+  return {
+    post: state.post.post,
+    posts: state.post.posts,
+  };
+};
+
+const mapActionsToProps = {
+  getAllPosts
+};
+
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(Searching);

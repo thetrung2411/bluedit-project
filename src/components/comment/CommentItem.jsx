@@ -6,7 +6,10 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Avatar from "@material-ui/core/Avatar";
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
+<<<<<<< HEAD
 import PostMenu from '../post/PostMenu';
+=======
+>>>>>>> 6b7bac7e40a536dfead5d4ac07fe6bf180237586
 export class CommentItem extends Component{
     render(){
         const {comments, classes, postId, post, userName} = this.props;

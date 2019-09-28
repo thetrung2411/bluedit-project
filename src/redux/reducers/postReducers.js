@@ -4,8 +4,12 @@ import {
     LOADING_DATA,
     POST_COMMENT,
     POST_BOOKMARK,
+<<<<<<< HEAD
     DELETE_COMMENT,
     EDIT_COMMENT,
+=======
+
+>>>>>>> 6b7bac7e40a536dfead5d4ac07fe6bf180237586
     GET_POST,
     DELETE_POST,
     EDIT_POST,
@@ -76,6 +80,7 @@ export default function (state = initialState, action){
                     comments: [action.payload, ...state.post.comments]
                 }
             }
+<<<<<<< HEAD
         case DELETE_COMMENT:
             index = state.posts.post.comments.findIndex(
                 (comment) => comment.commentId === action.commentId && comment.postId === action.payload
@@ -93,6 +98,9 @@ export default function (state = initialState, action){
                     }
                 } 
         case POST_BOOKMARK:
+=======
+            case POST_BOOKMARK:
+>>>>>>> 6b7bac7e40a536dfead5d4ac07fe6bf180237586
                 return{
                     ...state,
                     post:{
@@ -100,6 +108,10 @@ export default function (state = initialState, action){
                         bookmarks: [action.payload, ...state.post.bookmarks]
                     }
                 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6b7bac7e40a536dfead5d4ac07fe6bf180237586
         default:
             return state;
 }
