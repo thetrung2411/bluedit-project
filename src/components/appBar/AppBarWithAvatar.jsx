@@ -47,9 +47,7 @@ class SignedInAppBar extends Component {
     } = this.props;
       return(
           <div>
-      {/* <IconButton aria-label="settings" onClick={this.handleClick}>
-          <List/>
-      </IconButton>
+      
       <Menu
       id="simple-menu"
       anchorEl={this.state.anchorEl}
@@ -58,8 +56,45 @@ class SignedInAppBar extends Component {
       getContentAnchorEl={null}
       anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       transformOrigin={{ vertical: "top", horizontal: "center" }}
+      
     >
-    </Menu> */}
+       <Link to="/post" className={classes.noDecor}>
+             <MenuItem   >     
+                  Your page
+             </MenuItem>
+              </Link>
+      <Link to="/bookmark" className={classes.noDecor}>
+      <MenuItem>
+                  Bookmark
+        </MenuItem>
+        </Link>
+        <Link to="/userpage" className={classes.noDecor}>
+        <MenuItem>
+                  Userpage
+              </MenuItem>
+        </Link>
+            {userDetails.isAdmin ? (<Link to="/Report" className={classes.noDecor}>
+              <MenuItem>
+                    Report
+                </MenuItem>
+                </Link>
+              ) : null}
+              <Link to="/subscriptions" className={classes.noDecor}>
+                <MenuItem>
+                Subscriptions
+              </MenuItem>
+              </Link>
+              <Link to="/accountManagement" className={classes.noDecor}>
+            <MenuItem onClick={this.handleClear}> 
+               Account
+              </MenuItem>
+              </Link>
+
+            <MenuItem   onClick={this.handleLogout}>     
+                  Logout
+             </MenuItem>
+    </Menu>
+
       <div>
         <AppBar position="static" className={classes.root}>
           <Toolbar>
@@ -85,58 +120,14 @@ class SignedInAppBar extends Component {
             </div>
             <div className={classes.grow}></div>
             <div>
-              {userDetails.isAdmin ? (
-                <Link to="/Report" className={classes.noDecor}>
-                  <Button variant="contained" className={classes.button}>
-                    Report
-                  </Button>
-                </Link>
-              ) : null}
-
-              <Link to="/bookmark" className={classes.noDecor}>
-                <Button
-                  variant="contained"
-                  className={classes.button}
-                  onClick={this.handleLogout}
-                >
-                  Bookmark
-                </Button>
-              </Link>
-              
-              <Link to="/userpage" className={classes.noDecor}>
-                <Button variant="contained" className={classes.button}>
-                  Userpage
-                </Button>
-              </Link>
-
-              <Link to="/subscriptions" className={classes.noDecor}>
-                <Button variant="contained" className={classes.button}>
-                  Subscriptions
-                </Button>
-              </Link>
-              
-              <Link to="/accountManagement" className={classes.noDecor}>
-                <Button
-                  variant="contained"
-                  className={classes.button}
-                  onClick={this.handleClear}
-                >
-                  Account
-                </Button>
-              </Link>
-              <Link to="/home" className={classes.noDecor}>
-                <Button
-                  variant="contained"
-                  className={classes.button}
-                  onClick={this.handleLogout}
-                >
-                  Logout
-                </Button>
-              </Link>
+            
+              <IconButton aria-label="settings" onClick={this.handleClick}>
+          <List/>
+      </IconButton>
             </div>
 
             <div>
-              <Avatar>R</Avatar>
+              <Avatar>{String(userDetails.userName).charAt(0)}</Avatar>
             </div>
             <div>
               <Typography align="right">{userDetails.userName}</Typography>

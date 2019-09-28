@@ -21,7 +21,7 @@ export class CommentItem extends Component{
             <CardHeader 
         avatar={
                 <Avatar>
-                 T
+                {String(userPosted).charAt(0)}
                 </Avatar>
               }
         action={

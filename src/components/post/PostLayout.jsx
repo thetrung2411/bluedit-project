@@ -40,7 +40,7 @@ export class PostLayout extends Component {
             {postMarkUp}
           </Grid>
           <Grid item xs={4}>
-            <RecommendationItem />
+            {/* <RecommendationItem /> */}
           </Grid>
         </Grid>
       </div>

@@ -21,6 +21,9 @@ class DeleteButton extends Component{
         body: '',
         errors: {} 
       };
+    componentWillReceiveProps(nextProps){
+        
+    }
 
     handleOpen = () => {
       this.setState({openDialog: true});

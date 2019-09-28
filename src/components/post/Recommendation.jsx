@@ -5,7 +5,6 @@ import {RecommendationStyles} from "./RecommendationStyle";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Avatar from "@material-ui/core/Avatar";
 import ArrowDropUpOutlinedIcon from '@material-ui/icons/ArrowDropUpOutlined';
-import ArrowDropDownOutlinedIcon from '@material-ui/icons/ArrowDropDownOutlined';
 import IconButton from "@material-ui/core/IconButton";
 function RecommendationItem (props){
     const { classes } = props;
@@ -27,21 +26,7 @@ function RecommendationItem (props){
         title = "Username"/>
         
         </Card>
-        <Grid> 
-            <Card className = {classes.paper}>
-            <CardHeader 
-        avatar={
-                <Avatar>
-                 T
-                </Avatar>
-              }
-        action={
-                <IconButton><ArrowDropDownOutlinedIcon fontSize="large" className = {classes.red}></ArrowDropDownOutlinedIcon></IconButton>
-               }
-        titleTypographyProps={{align:"left"}}
-        title = "Thetrung2411"/>
-        </Card> 
-        </Grid>
+        
         <Grid> 
             <Card className = {classes.paper}>
             <CardHeader 
@@ -72,21 +57,7 @@ function RecommendationItem (props){
         title = "Jotaro"/>
         </Card> 
         </Grid>
-        <Grid> 
-            <Card className = {classes.paper}>
-            <CardHeader 
-        avatar={
-                <Avatar>
-                 P
-                </Avatar>
-              }
-              action={
-                <IconButton><ArrowDropDownOutlinedIcon fontSize="large" className = {classes.red}></ArrowDropDownOutlinedIcon></IconButton>
-               }
-        titleTypographyProps={{align:"left"}}
-        title = "PhineasNFerb"/>
-        </Card> 
-        </Grid> 
+        
        </Grid>
        </Card>
     );

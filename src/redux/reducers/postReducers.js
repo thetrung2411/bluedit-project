@@ -34,7 +34,7 @@ export default function (state = initialState, action){
                 ...state,
             }
         case HIDE_POST: 
-        return{
+        return{   
             ...state,
             posts: [
                 action.payload,
@@ -84,7 +84,6 @@ export default function (state = initialState, action){
             return{
                 ...state
             }
-        
         case EDIT_COMMENT:
                 return{
                     ...state,
