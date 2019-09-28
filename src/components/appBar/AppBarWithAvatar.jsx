@@ -120,48 +120,10 @@ class SignedInAppBar extends Component {
             </div>
             <div className={classes.grow}></div>
             <div>
-<<<<<<< HEAD
             
               <IconButton aria-label="settings" onClick={this.handleClick}>
           <List/>
       </IconButton>
-=======
-              {userDetails.isAdmin ? (
-                <Link to="/Report" className={classes.noDecor}>
-                  <Button variant="contained" className={classes.button}>
-                    Report
-                  </Button>
-                </Link>
-              ) : null}
-
-              <Link to="/bookmark" className={classes.noDecor}>
-                <Button
-                  variant="contained"
-                  className={classes.button}
-                  onClick={this.handleLogout}
-                >
-                  Bookmark
-                </Button>
-              </Link>
-              <Link to="/accountManagement" className={classes.noDecor}>
-                <Button
-                  variant="contained"
-                  className={classes.button}
-                  onClick={this.handleClear}
-                >
-                  Account
-                </Button>
-              </Link>
-              <Link to="/home" className={classes.noDecor}>
-                <Button
-                  variant="contained"
-                  className={classes.button}
-                  onClick={this.handleLogout}
-                >
-                  Logout
-                </Button>
-              </Link>
->>>>>>> 6b7bac7e40a536dfead5d4ac07fe6bf180237586
             </div>
 
             <div>

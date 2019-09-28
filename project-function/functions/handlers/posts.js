@@ -1,11 +1,4 @@
-<<<<<<< HEAD
 const { db} = require("../util/admin");
-=======
-const { db, admin } = require("../util/admin");
-const config = require("../util/config");
-const firebase = require("firebase");
-const { validatePostData } = require("../util/dataValidator");
->>>>>>> 6b7bac7e40a536dfead5d4ac07fe6bf180237586
 
 exports.post = (req, res) => {
   if (req.body.body.trim() === "") {
@@ -18,10 +11,6 @@ exports.post = (req, res) => {
     commentCount: 0,
     hidden: false,
   };
-<<<<<<< HEAD
-=======
-
->>>>>>> 6b7bac7e40a536dfead5d4ac07fe6bf180237586
   db.collection("posts")
     .add(newPost)
     .then(doc => {
@@ -33,23 +22,14 @@ exports.post = (req, res) => {
     });
 };
 
-<<<<<<< HEAD
 exports.deletePost = (req, res) => {
   const document = db.doc(`/posts/${req.params.postId}`);
   document
     .get()
     .then((doc) => {
-=======
-exports.getPost = (req, res) => {
-  let postContent = {};
-  db.doc(`/posts/${req.params.postId}`)
-    .get()
-    .then(doc => {
->>>>>>> 6b7bac7e40a536dfead5d4ac07fe6bf180237586
       if (!doc.exists) {
         return res.status(404).json({ error: "Post not found" });
       }
-<<<<<<< HEAD
       if (doc.data().userPosted !== req.user.userName) {
         return res.status(403).json({ error: 'Unauthorized' });
       } else {
@@ -62,53 +42,6 @@ exports.getPost = (req, res) => {
     .catch((err) => {
       console.error(err);
       return res.status(500).json({ error: err.code });
-=======
-      postContent = doc.data();
-      postContent.postId = doc.id;
-      return db
-        .collection("comments")
-        .where("postId", "==", req.params.postId)
-        .get();
-    })
-    .then(data => {
-      postContent.comments = [];
-      data.forEach(doc => {
-        postContent.comments.push(doc.data());
-      });
-      return res.json(postContent);
-    })
-    .catch(err => {
-      console.log(err);
-      return res.status(500).json({ error: "Unexpected failure" });
-    });
-};
-
-exports.getPost1 = (req, res) => {
-  let postContent1 = {};
-  db.doc(`/posts/${req.params.postId}`)
-    .get()
-    .then(doc => {
-      if (!doc.exists) {
-        return res.status(404).json({ error: "Post not found" });
-      }
-      postContent1 = doc.data();
-      postContent1.postId = doc.id;
-      return db
-        .collection("bookmarks")
-        .where("postId", "==", req.params.postId)
-        .get();
-    })
-    .then(data => {
-      postContent1.bookmarks = [];
-      data.forEach(doc => {
-        postContent1.bookmarks.push(doc.data());
-      });
-      return res.json(postContent1);
-    })
-    .catch(err => {
-      console.log(err);
-      return res.status(500).json({ error: "Unexpected failure" });
->>>>>>> 6b7bac7e40a536dfead5d4ac07fe6bf180237586
     });
 };
 
@@ -125,13 +58,8 @@ exports.getAllPosts = (req, res) => {
           commentCount: doc.data().commentCount,
           hidden: doc.data().hidden,
           createdAt: doc.data().createdAt,
-<<<<<<< HEAD
           userPosted: doc.data().userPosted,
         });       
-=======
-          userPosted: doc.data().userPosted
-        });
->>>>>>> 6b7bac7e40a536dfead5d4ac07fe6bf180237586
       });
         return res.json(posts);
       })
@@ -235,28 +163,51 @@ exports.getPost1 = (req, res) => {
 };
 
 
-exports.searchPost = (req, res) => {
+
+exports.BlackPosts = (req, res) => {
+  let posts = [];
+  let dayuposts = [];
+  let xiaoyuposts = [];
+
   db.collection("posts")
-    .where("body", "==", req.params.body)
+    .where("userPosted", '>', req.query.bname)
     .get()
     .then(data => {
-      let posts = [];
       data.forEach(doc => {
-        posts.push({
+        dayuposts.push({
           postId: doc.id,
           body: doc.data().body,
           commentCount: doc.data().commentCount,
           upvoteCount: doc.data().upvoteCount,
           createdAt: doc.data().createdAt,
-          userPosted: doc.data().userPosted
+          userPosted: doc.data().userPosted,
         });
       });
-      return res.json(posts);
     })
     .catch(err => console.error(err));
+
+  db.collection("posts")
+    .where("userPosted", '<', req.query.bname)
+    .get()
+    .then(data => {
+      data.forEach(doc => {
+        xiaoyuposts.push({
+          postId: doc.id,
+          body: doc.data().body,
+          commentCount: doc.data().commentCount,
+          upvoteCount: doc.data().upvoteCount,
+          createdAt: doc.data().createdAt,
+          userPosted: doc.data().userPosted,
+        });
+      });
+      return res.json([...dayuposts, ...xiaoyuposts]);
+    })
+    .catch(err => console.error(err));
+
+
+
+
 };
-<<<<<<< HEAD
-=======
 
 
 exports.SearchPost = (req, res) => {
@@ -323,9 +274,4 @@ exports.SearchPost = (req, res) => {
       .catch(err => console.error(err));
   }
 
-
-
-
-
 };
->>>>>>> 6b7bac7e40a536dfead5d4ac07fe6bf180237586

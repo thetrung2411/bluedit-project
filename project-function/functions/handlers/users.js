@@ -115,19 +115,11 @@ exports.changeUserPassword = (req, res) => {
   let userData = {
     newPassword: req.body.newPassword,
     confirmPassword: req.body.confirmPassword
-<<<<<<< HEAD
   };
 
   const { valid, errors } = validateNewPasswordData(userData);
   if (!valid) return res.status(400).json(errors);
 
-=======
-  }
-
-  const {valid, errors} = validateNewPasswordData(userData);
-  if (!valid) return res.status(400).json(errors)
-  
->>>>>>> 6b7bac7e40a536dfead5d4ac07fe6bf180237586
   //change user password by using data from request
   admin
     .auth()
@@ -140,7 +132,6 @@ exports.changeUserPassword = (req, res) => {
     })
     .catch(err => {
       console.error(err);
-<<<<<<< HEAD
       return res
         .status(500)
         .json({ general: "Something went wrong, please try again" });
@@ -161,9 +152,6 @@ exports.disableUser = (req, res) => {
       return res
         .status(500)
         .json({ general: "Something went wrong, please try again" });
-=======
-      return res.status(500).json({ general: "Something went wrong, please try again" });
->>>>>>> 6b7bac7e40a536dfead5d4ac07fe6bf180237586
     });
 };
 
@@ -179,7 +167,6 @@ exports.getCurrentUser = (req, res) => {
       return res.json(userData);
     })
     .catch(err => {
-<<<<<<< HEAD
       console.error(err);
       return res.status(500).json({ error: err.code });
     });
@@ -224,9 +211,3 @@ exports.getAllUsers = (req,res) =>{
       console.error(err);
     })
 }
-=======
-      console.error(err);
-      return res.status(500).json({ error: err.code });
-    });
-};
->>>>>>> 6b7bac7e40a536dfead5d4ac07fe6bf180237586

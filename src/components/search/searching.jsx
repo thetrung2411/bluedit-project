@@ -8,43 +8,6 @@ import axiosConfig from "../../axiosConfig";
 import { connect } from 'react-redux';
 import { getAllPosts } from '../../redux/actions/postActions';
 
-<<<<<<< HEAD
-class searching extends Component {
-    state = {
-      post: null
-    };
-    componentDidMount() {
-      axiosConfig
-        .get("/getAllPosts")
-        .then(res => {
-          console.log(res.data);
-          this.setState({
-            post: res.data
-          });
-        })
-        .catch(err => console.log(err));
-    }
-    
-    render() {
-      let postMarkUp = this.state.post ? (
-        this.state.post.map(post => <PostItem post={post} />)
-      ) : (
-        <CircularProgress color="inherit" />
-      );
-      return (
-        <div>
-          <AppBar />
-          <Grid container spacing={3}>
-            
-            <Grid>
-            <Link to="/test">
-                        <Button>
-                                search
-                        </Button>
-            </Link> 
-              {postMarkUp}
-            </Grid>
-=======
 export class Searching extends Component {
   state = {
     post: null
@@ -69,7 +32,6 @@ export class Searching extends Component {
           </Grid>
           <Grid item xs={4}>
             <RecommendationItem />
->>>>>>> 6b7bac7e40a536dfead5d4ac07fe6bf180237586
           </Grid>
         </Grid>
       </div>
