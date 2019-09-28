@@ -8,7 +8,7 @@ import dayjs from 'dayjs';
 import CommentItem from '../comment/CommentItem';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import {connect} from 'react-redux';
-import {getPost,clearErrors} from '../../redux/actions/postActions';
+import {getPost} from '../../redux/actions/postActions';
 import { PostItemStyles } from './PostItemsStyles';
 import Fab from '@material-ui/core/Fab';
 import QuestionAnswerRounded from '@material-ui/icons/QuestionAnswerRounded'
@@ -33,7 +33,6 @@ export class PostItemDetail extends Component {
     }
     handleClose = () => {
         this.setState ({open: false});
-        
     }   
     render(){ 
         const {classes, post: {postId, body, createdAt, userPosted, upvoteCount, comments}, UI: {loading}, userName, post, hidden} = this.props;

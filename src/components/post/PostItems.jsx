@@ -75,4 +75,5 @@ export class PostItems extends Component {
     );
   }
 }
+
 export default withStyles(PostItemStyles)(PostItems);

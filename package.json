@@ -8,6 +8,10 @@
     "axios": "^0.19.0",
     "cors": "^2.8.5",
     "dayjs": "^1.8.16",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "firebase-admin": "^8.4.0",
+    "firebase-functions": "^3.2.0",
     "http-proxy-middleware": "^0.19.1",
     "js-beautify": "^1.10.2",
     "jwt-decode": "^2.2.0",
@@ -17,6 +21,7 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.0",
     "react-sidebar": "^3.0.2",
+    "react-test-renderer": "^16.9.0",
     "redux": "^4.0.4",
     "redux-mock-store": "^1.5.3",
     "redux-thunk": "^2.3.0"
