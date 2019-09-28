@@ -14,10 +14,12 @@ export default function DeleteAlert(props) {
 
   function handleClickOpen() {
     setOpen(true);
+    console.log(props.bookmarkId);
   }
 
   function handleClose() {
     setOpen(false);
+    console.log(props.bookmarkId);
   }
   function handleDelete() {
     handleDelete = event => {
@@ -25,24 +27,22 @@ export default function DeleteAlert(props) {
         .delete("/deleteBookmark")
         .then(res => {
           console.log(res);
+          alert("Bookmark was deleted");
+          setOpen(false);
         })
         .catch(err => console.log(err));
-      setOpen(false);
-      alert("Bookmark was deleted");
     };
   }
   const action = props.action;
   const bookmarkId = props.bookmarkId;
+  console.log(props.bookmarkId);
+  console.log(bookmarkId);
   let title = "";
   let content = "";
+
   if (action === "delete") {
     title = "Delete bookmark?";
     content = "This action will delete the located bookmark";
-    console.log(bookmarkId);
-    console.log(props.bookmarkId);
-    console.log(bookmarkId);
-    console.log(props.action);
-    console.log(action);
   }
   if (action === "setProcessed") {
     title = "Set as Processed?";
@@ -75,7 +75,11 @@ export default function DeleteAlert(props) {
           <Button onClick={handleClose} color="primary">
             Cancle
           </Button>
-          <Button onClick={() => handleDelete()} color="secondary" autoFocus>
+          <Button
+            onClick={() => handleDelete(bookmarkId)}
+            color="secondary"
+            autoFocus
+          >
             Confirm
           </Button>
         </DialogActions>

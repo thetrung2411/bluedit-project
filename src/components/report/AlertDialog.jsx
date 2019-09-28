@@ -13,15 +13,20 @@ export default function AlertDialog(props) {
 
   function handleClickOpen() {
     setOpen(true);
+    console.log(props.reportId);
   }
 
   function handleClose() {
     setOpen(false);
+    console.log(props.reportId);
   }
   const action = props.action;
   const reportId = props.reportId;
+  console.log(props.reportId);
+  console.log(reportId);
   let title = "";
   let content = "";
+
   if (action === "delete") {
     title = "Delete report?";
     content = "This will permanently delete all data at this location.";

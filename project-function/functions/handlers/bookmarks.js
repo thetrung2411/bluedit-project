@@ -81,6 +81,7 @@ exports.deleteBookmark = (req, res) => {
     })
     .catch(err => {
       console.error(err);
+      alert("An error was occur" & err);
       return res.status(500).json({ error: err.code });
     });
 };

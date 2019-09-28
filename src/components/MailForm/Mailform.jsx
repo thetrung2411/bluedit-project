@@ -50,13 +50,20 @@ class Mailform extends React.Component {
   };
 
   handleSubmit = e => {
-    const userData = {
-      bio: this.state.bio,
-      location: this.state.location,
-      gender: this.state.gender,
-      phoneNumber: this.state.phoneNumber,
-      dateOfBirth: this.state.dateOfBirth,
-      userName: this.state.userName
+    // const userData = {
+    //   bio: this.state.bio,
+    //   location: this.state.location,
+    //   gender: this.state.gender,
+    //   phoneNumber: this.state.phoneNumber,
+    //   dateOfBirth: this.state.dateOfBirth,
+    //   userName: this.state.userName
+    axiosConfig
+      .post("/bookmark")
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log(err));
+    this.setState({ open: false });
     };
   };
 

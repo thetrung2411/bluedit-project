@@ -38,9 +38,6 @@ export class Addbookmark extends Component {
   };
 
   handleSubmit = event => {
-    console.log(new Date().toISOString());
-    console.log(this.props.postId);
-    console.log(this.props.userPosted);
     axiosConfig
       .post("/bookmark")
       .then(res => {
@@ -48,7 +45,6 @@ export class Addbookmark extends Component {
       })
       .catch(err => console.log(err));
     this.setState({ open: false });
-    alert("A new Bookmark was created");
   };
 
   render() {
