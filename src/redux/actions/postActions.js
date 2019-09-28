@@ -141,7 +141,7 @@ export const SearchPost = (body, name) => (dispatch) => {
 
 }
 
-export const BlackPost = (bname) => (dispatch) => {
+export const BlockPost = (bname) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axiosConfig.get(`/blackuser?bname=${bname}`)
     .then(res => {

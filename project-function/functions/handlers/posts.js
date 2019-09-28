@@ -165,7 +165,7 @@ exports.getPost1 = (req, res) => {
 
 
 
-exports.BlackPosts = (req, res) => {
+exports.BlockPosts = (req, res) => {
   let posts = [];
   let dayuposts = [];
   let xiaoyuposts = [];

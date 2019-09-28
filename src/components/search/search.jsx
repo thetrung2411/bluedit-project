@@ -13,7 +13,7 @@
  import withStyles from "@material-ui/core/styles/withStyles";
  import axiosConfig from "../../axiosConfig";
  import { connect } from 'react-redux';
- import { SearchPost,BlackPost } from "../../redux/actions/postActions";
+ import { SearchPost,BlockPost } from "../../redux/actions/postActions";
  
  
  
@@ -21,7 +21,7 @@
      state = {
          value: "",
          name: "",
-         blackname: "",
+         blockname: "",
      };
  
      inputchange1 = (e) => {
@@ -38,7 +38,7 @@
  
      inputchange3 = (e) => {
          this.setState({
-             blackname: e.target.value
+             blockname: e.target.value
          });
      }
  
@@ -50,12 +50,12 @@
          this.props.SearchPost(value.replace(/(^\s*)|(\s*$)/g, ""), name.replace(/(^\s*)|(\s*$)/g, ""));
      }
  
-     blacknameHand = () => {
-         const { blackname } = this.state;
-         if (!blackname) {
+     blocknameHand = () => {
+         const { blockname } = this.state;
+         if (!blockname) {
              return;
          }
-         this.props.BlackPost(blackname.replace(/(^\s*)|(\s*$)/g, ""));
+         this.props.BlockPost(blockname.replace(/(^\s*)|(\s*$)/g, ""));
      }
  
  
@@ -108,7 +108,7 @@
                                  }}
                                  onChange={(e) => this.inputchange3(e)}
                              />
-                             <Button variant="contained" onClick={() => this.blacknameHand()}>
+                             <Button variant="contained" onClick={() => this.blocknameHand()}>
                                  Block
                          </Button>
                          </div>
@@ -136,7 +136,7 @@
  
  const mapActionsToProps = {
      SearchPost,
-     BlackPost
+     BlockPost
  };
  
  export default connect(
