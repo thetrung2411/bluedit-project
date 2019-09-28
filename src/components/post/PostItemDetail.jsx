@@ -1,6 +1,5 @@
 import React, {Component, Fragment} from 'react';
 import CommentField from "../comment/CommentField";
-import {PostLayoutStyles } from "./PostLayoutStyle";
 import ThumbUpAltRoundedIcon from '@material-ui/icons/ThumbUpAltRounded';
 import ThumbDownRoundedIcon from '@material-ui/icons/ThumbDownRounded';
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -9,7 +8,7 @@ import dayjs from 'dayjs';
 import CommentItem from '../comment/CommentItem';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import {connect} from 'react-redux';
-import {getPost,clearErrors} from '../../redux/actions/postActions';
+import {getPost} from '../../redux/actions/postActions';
 import { PostItemStyles } from './PostItemsStyles';
 import Fab from '@material-ui/core/Fab';
 import QuestionAnswerRounded from '@material-ui/icons/QuestionAnswerRounded'
@@ -18,7 +17,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import {Card, CardHeader, CardContent, CardActions} from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import PostMenu from "./PostMenu";
-import {Typography, Grid, CardMedia} from "@material-ui/core";
+import {Typography} from "@material-ui/core";
 export class PostItemDetail extends Component {
     state = {
         open: false
@@ -29,27 +28,24 @@ export class PostItemDetail extends Component {
        }
     }
     handleOpen = () => {
-        console.log(this.props.postId)
         this.props.getPost(this.props.postId);
         this.setState ({open: true});
     }
     handleClose = () => {
         this.setState ({open: false});
-        
     }   
     render(){ 
-        const {classes, post: {postId, body, createdAt, userPosted, upvoteCount, comments}, UI: {loading}, userName, post} = this.props;
-       
+        const {classes, post: {postId, body, createdAt, userPosted, upvoteCount, comments}, UI: {loading}, userName, post, hidden} = this.props;
+        
        const dialogMarkUp = loading ? (<CircularProgress/>) : (<Card className = {classes.paper}>
             <CardHeader 
         avatar={
                 <Avatar >
-                  T
+                 {String(userPosted).charAt(0)}
                 </Avatar>
               }
         action={
-            <PostMenu body={body} userName ={userName} userPosted={userPosted} postId = {postId} post={post}/>
-            
+            <PostMenu hidden={hidden} body={body} userName ={userName} userPosted={userPosted} postId = {postId} post={post}/> 
         }
         title = {userPosted}
         titleTypographyProps={{align:"left"}}
@@ -89,9 +85,8 @@ export class PostItemDetail extends Component {
 
 PostItemDetail.propTypes = {
     post: PropTypes.object.isRequired,
-    UI: PropTypes.object.isRequired
+    UI: PropTypes.object.isRequired,
 }
-
 const mapStateToProps = (state) => ({
     post: state.post.post,
     UI: state.UI

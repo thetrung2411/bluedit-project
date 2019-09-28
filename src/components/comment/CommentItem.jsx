@@ -1,8 +1,6 @@
 import React, {Component} from "react";
 import {Typography, Grid} from "@material-ui/core";
 import {Card, CardHeader, CardContent} from "@material-ui/core";
-import UpIcon from "@material-ui/icons/ArrowUpwardTwoTone";
-import Fab from "@material-ui/core/Fab";
 import {CommentItemStyles} from "./CommentItemStyles";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Avatar from "@material-ui/core/Avatar";
@@ -15,17 +13,19 @@ export class CommentItem extends Component{
     return (
         <Grid className = {classes.grid}>
             {comments.map((comment) => {
-                const {body, createdAt, userPosted, commentId} = comment;
+                const {body, createdAt, userPosted, commentId, hidden} = comment;
+                if(hidden === true && userPosted !== userName)
+                {return null}
                 return (
                       <Card className = {classes.paper}>
             <CardHeader 
         avatar={
                 <Avatar>
-                 T
+                {String(userPosted).charAt(0)}
                 </Avatar>
               }
         action={
-            <PostMenu body={body} commentId ={commentId} userName ={userName} userPosted={userPosted} postId = {postId} post={post}/>
+            <PostMenu commentHide={hidden} body={body} commentId ={commentId} userName ={userName} userPosted={userPosted} postId = {postId} post={post}/>
         }
         titleTypographyProps={{align:"left"}}
         title = {userPosted}
@@ -37,7 +37,6 @@ export class CommentItem extends Component{
         </CardContent>
         </Card>
         )})}
-      
         </Grid>
     );
 }    

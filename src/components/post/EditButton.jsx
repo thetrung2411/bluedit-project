@@ -16,26 +16,52 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Create from '@material-ui/icons/Create';
 import TextField from '@material-ui/core/TextField';
+
 class EditButton extends Component{
     state = {
         open: false,
         body: this.props.body,
-        errors: {} 
+        errors: {},
+        disabled: false
       };
+    componentWillReceiveProps(nextProps){
+        if (nextProps.UI.errors){
+          this.setState({
+            errors: nextProps.UI.errors
+          });
+        }
+        if (!nextProps.UI.errors && !nextProps.UI.loading){
+          this.setState({body: ''});
+          this.handleClose();
+        }
+      }
     handleOpen = () => {
       this.setState({open: true});
     }
     handleClose = () => {
-        
       this.setState({open: false})
     }
     handleChange = (event) => {
-        this.setState({[event.target.name]: event.target.value})
-      }
+        this.setState({[event.target.name]: event.target.value}, function(){
+          if(this.state.body.trim() === '' ){
+            this.setState({disabled: true})
+          }
+          else
+          {
+          this.setState({disabled: false})
+        }
+        })
+    }
       handleSubmit = (event) => {
         event.preventDefault();
+        if(this.props.commentId === undefined){
         this.props.editPost(this.props.postId, {body: this.state.body});
-      }
+       }
+        else {
+         this.props.editComment(this.props.postId, this.props.commentId, {body: this.state.body})
+        }
+        
+    }
     render(){
       const {errors} = this.state;
       const {classes} = this.props;
@@ -89,11 +115,10 @@ class EditButton extends Component{
                         variant="contained"
                         color = "primary"
                         onClick={this.handleSubmit}
+                        disabled = {this.state.disabled}
                     >
                         Submit
                     </Button>
-                    
-        
         </DialogActions>
       </Dialog>
       
@@ -103,7 +128,7 @@ class EditButton extends Component{
 }
 
 EditButton.propTypes = {
-    deleteComment: PropTypes.func.isRequired,
+    editComment: PropTypes.func.isRequired,
     editPost: PropTypes.func.isRequired,
     post: PropTypes.object.isRequired,
     postId: PropTypes.string.isRequired
@@ -113,7 +138,7 @@ const mapStateToProps = (state) => ({
     post: state.post.post,
 })
   const mapActionToProps ={ 
-   editPost
+   editPost, editComment
   }
   
 export default connect(mapStateToProps,mapActionToProps)(withStyles(PostLayoutStyles)(EditButton));

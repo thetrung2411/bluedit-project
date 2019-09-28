@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
-
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import MenuList from "@material-ui/core/MenuList";
+import List from "@material-ui/icons/List";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
@@ -20,6 +23,16 @@ import { connect } from "react-redux";
 import { logoutUser, clearMessages } from "../../redux/actions/userActions";
 
 class SignedInAppBar extends Component {
+  state = {
+    anchorEl: null,
+    open: false
+  };
+  handleClick = event => {
+    this.setState({ open: true, anchorEl: event.currentTarget });
+  };
+  handleClose = () => {
+    this.setState({ open: false });
+  };
   handleLogout = () => {
     this.props.logoutUser();
   };
@@ -33,85 +46,80 @@ class SignedInAppBar extends Component {
       classes,
       user: { userDetails }
     } = this.props;
-
     return (
       <div>
-        <AppBar position="static" className={classes.root}>
-          <Toolbar>
-            <Link to="/">
-              <IconButton>
-                <HomeIcon />
-              </IconButton>
+        <Menu
+          id="simple-menu"
+          anchorEl={this.state.anchorEl}
+          open={this.state.open}
+          onClose={this.handleClose}
+          getContentAnchorEl={null}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          transformOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Link to="/post" className={classes.noDecor}>
+            <MenuItem>Your page</MenuItem>
+          </Link>
+          <Link to="/bookmark" className={classes.noDecor}>
+            <MenuItem>Bookmark</MenuItem>
+          </Link>
+          <Link to="/userpage" className={classes.noDecor}>
+            <MenuItem>Userpage</MenuItem>
+          </Link>
+          {userDetails.isAdmin ? (
+            <Link to="/Report" className={classes.noDecor}>
+              <MenuItem>Report</MenuItem>
             </Link>
-            <Typography variant="h5">Bluedit</Typography>
-            <div />
-            <div className={classes.grow}></div>
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput
-                }}
-              />
-            </div>
-            <div className={classes.grow}></div>
-            <div>
-              {userDetails.isAdmin ? (
-                <div>
-                  <Link to="/Report" className={classes.noDecor}>
-                    <Button variant="contained" className={classes.button}>
-                      Report
-                    </Button>
-                  </Link>
-                  <Link to="/Ads" className={classes.noDecor}>
-                    <Button variant="contained" className={classes.button}>
-                      Advertisement
-                    </Button>
-                  </Link>
+          ) : null}
+          <Link to="/subscriptions" className={classes.noDecor}>
+            <MenuItem>Subscriptions</MenuItem>
+          </Link>
+          <Link to="/accountManagement" className={classes.noDecor}>
+            <MenuItem onClick={this.handleClear}>Account</MenuItem>
+          </Link>
+
+          <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+        </Menu>
+
+        <div>
+          <AppBar position="static" className={classes.root}>
+            <Toolbar>
+              <Link to="/">
+                <IconButton>
+                  <HomeIcon />
+                </IconButton>
+              </Link>
+              <Typography variant="h5">Bluedit</Typography>
+              <div />
+              <div className={classes.grow}></div>
+              <div className={classes.search}>
+                <div className={classes.searchIcon}>
+                  <SearchIcon />
                 </div>
-              ) : null}
+                <InputBase
+                  placeholder="Search…"
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput
+                  }}
+                />
+              </div>
+              <div className={classes.grow}></div>
+              <div>
+                <IconButton aria-label="settings" onClick={this.handleClick}>
+                  <List />
+                </IconButton>
+              </div>
 
-              <Link to="/bookmark" className={classes.noDecor}>
-                <Button
-                  variant="contained"
-                  className={classes.button}
-                  onClick={this.handleLogout}
-                >
-                  Bookmark
-                </Button>
-              </Link>
-              <Link to="/accountManagement" className={classes.noDecor}>
-                <Button
-                  variant="contained"
-                  className={classes.button}
-                  onClick={this.handleClear}
-                >
-                  Account
-                </Button>
-              </Link>
-              <Link to="/home" className={classes.noDecor}>
-                <Button
-                  variant="contained"
-                  className={classes.button}
-                  onClick={this.handleLogout}
-                >
-                  Logout
-                </Button>
-              </Link>
-            </div>
-
-            <div>
-              <Avatar>R</Avatar>
-            </div>
-            <div>
-              <Typography align="right">{userDetails.userName}</Typography>
-            </div>
-          </Toolbar>
-        </AppBar>
+              <div>
+                <Avatar>{String(userDetails.userName).charAt(0)}</Avatar>
+              </div>
+              <div>
+                <Typography align="right">{userDetails.userName}</Typography>
+              </div>
+            </Toolbar>
+          </AppBar>
+        </div>
       </div>
     );
   }

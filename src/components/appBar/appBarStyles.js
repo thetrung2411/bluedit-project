@@ -10,7 +10,7 @@ export const appBarStyles = theme => ({
     },
     noDecor: {
         textDecoration: "none",
-        color: "black"
+        color: "white"
     },
     button: {
         backgroundColor: "white",

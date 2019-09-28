@@ -27,7 +27,7 @@ export class PostLayout extends Component {
     const {user} = this.props;
     if (!authenticated) return <Redirect to="/home"/>
     let postMarkUp = !loading ? (
-      posts.map(post => <PostItems userName = {userName} user={user} userDetails={userDetails} post={post} key={post.postId}/>)
+      posts.map(post => <PostItems  userName = {userName} user={user} userDetails={userDetails} post={post} key={post.postId}/>)
     ) : (
       <CircularProgress color="inherit" />
     );
@@ -40,7 +40,7 @@ export class PostLayout extends Component {
             {postMarkUp}
           </Grid>
           <Grid item xs={4}>
-            <RecommendationItem />
+            {/* <RecommendationItem /> */}
           </Grid>
         </Grid>
       </div>

@@ -46,7 +46,7 @@ export const registerUser = (userData, history) => dispatch => {
     });
 };
 
-export const changePassword = (userData, history) => dispatch => {
+export const changePassword = (userData) => dispatch => {
   dispatch({ type: LOADING_UI });
   axiosConfig
     .post("/changePassword", userData)
@@ -66,6 +66,17 @@ export const changePassword = (userData, history) => dispatch => {
       });
     });
 };
+
+export const disableAccount = (history) => dispatch =>{
+  dispatch({type: LOADING_UI});
+  axiosConfig.post("/disableUser")
+    .then(res =>{
+      dispatch({type: CLEAR_ERRORS})
+      dispatch(logoutUser())
+      history.push("/home")
+    })
+    .catch(err => console.log(err));
+}
 
 export const clearMessages = () => dispatch =>{
   dispatch({ type: CLEAR_MESSAGES });
@@ -95,4 +106,16 @@ const setAuthourizationHeader = token => {
   const FBToken = `Bearer ${token}`;
   localStorage.setItem("FBToken", FBToken);
   axiosConfig.defaults.headers.common["Authorization"] = FBToken;
+};
+
+export const changeUserData = (userData) => dispatch =>{
+  dispatch({ type: LOADING_USER });
+  axiosConfig
+    .post("/editProfile", userData)
+    .then(() => {
+      dispatch(getUserData());
+    },
+    console.log(userData)
+    )
+    .catch(err => console.log("edit error"));
 };

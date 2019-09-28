@@ -1,6 +1,4 @@
-const { db, admin } = require("../util/admin");
-const config = require("../util/config");
-const firebase = require("firebase");
+const { db} = require("../util/admin");
 
 exports.comment = (req,res) => {
     if(req.body.body.trim() === ''){
@@ -10,6 +8,7 @@ exports.comment = (req,res) => {
         body: req.body.body,
         postId: req.params.postId,
         userPosted: req.user.userName,
+        hidden: false,
         createdAt: new Date().toISOString() 
       };
       db.doc(`/posts/${req.params.postId}`).get()
@@ -33,6 +32,22 @@ exports.comment = (req,res) => {
           res.status(500).json({error: "Unexpected error"});
       });
 };
+exports.editComment = (req, res) => {
+  if(req.body.body.trim() === ''){
+    return res.status(400).json({body: 'Comment cannot be empty'});
+  }
+  console.log(req.params.commentId)
+  db.doc(`/comments/${req.params.commentId}`)
+  .update({body: req.body.body})
+  .then(() => {
+    res.json({ message: 'Comment updated successfully' });
+  })
+  .catch((err) => {
+      console.error(err);
+      return res.status(500).json({ error: err.code });
+    });
+}
+
 exports.deleteComment = (req, res) => {
   const document = db.doc(`comments/${req.params.commentId}`)
   document
@@ -74,3 +89,28 @@ exports.getAllComments = (req, res) => {
       })
       .catch(err => console.error(err));
   };
+
+  exports.unhideComment = (req, res) => {
+    db.doc(`comments/${req.params.commentId}`)
+    .update({hidden: false})
+    .then(() => {
+      res.json({message: 'Comment is now unhidden'});
+    })
+    .catch((err)=> {
+      console.error(err);
+      return res.status(500).json({error: err.code});
+    })
+  }
+  
+  exports.hideComment = (req, res) => {
+    db.doc(`/comments/${req.params.commentId}`)
+    .update({hidden: true})
+    .then(() => {
+      res.json({message: 'Comment is now hidden'});
+    })
+    .catch((err)=> {
+      console.error(err);
+      return res.status(500).json({error: err.code});
+    })
+  }
+  

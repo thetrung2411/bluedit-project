@@ -5,9 +5,11 @@ import {
     POST_COMMENT,
     POST_BOOKMARK,
     DELETE_COMMENT,
+    EDIT_COMMENT,
     GET_POST,
     DELETE_POST,
-    EDIT_POST
+    EDIT_POST,
+    HIDE_POST
 } from "../types"
 
 const initialState = {
@@ -31,6 +33,14 @@ export default function (state = initialState, action){
             return{
                 ...state,
             }
+        case HIDE_POST: 
+        return{   
+            ...state,
+            posts: [
+                action.payload,
+                ...state.posts
+            ]
+        }
         case GET_POSTS:
             return{
                 ...state,
@@ -74,6 +84,14 @@ export default function (state = initialState, action){
             return{
                 ...state
             }
+        case EDIT_COMMENT:
+                return{
+                    ...state,
+                    post:{
+                        ...state.post,
+                        comments: [action.payload, ...state.post.comments]
+                    }
+                } 
         case POST_BOOKMARK:
                 return{
                     ...state,
