@@ -35,6 +35,11 @@ class searching extends Component {
           <Grid container spacing={3}>
             
             <Grid>
+            <Link to="/test">
+                        <Button>
+                                search
+                        </Button>
+            </Link> 
               {postMarkUp}
             </Grid>
           </Grid>

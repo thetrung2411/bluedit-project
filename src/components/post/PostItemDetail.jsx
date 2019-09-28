@@ -9,15 +9,12 @@ import dayjs from 'dayjs';
 import CommentItem from '../comment/CommentItem';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import {connect} from 'react-redux';
-import {getPost} from '../../redux/actions/postActions';
+import {getPost,clearErrors} from '../../redux/actions/postActions';
 import { PostItemStyles } from './PostItemsStyles';
 import Fab from '@material-ui/core/Fab';
 import QuestionAnswerRounded from '@material-ui/icons/QuestionAnswerRounded'
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import {Card, CardHeader, CardContent, CardActions} from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import MoreIcon from "@material-ui/icons/MoreVert";
@@ -28,13 +25,17 @@ export class PostItemDetail extends Component {
         open: false
     }
     componentDidMount() {
-        this.props.getPost(this.props.postId)
+       if(this.props.openDialog){
+           this.handleOpen();
+       }
     }
     handleOpen = () => {
+        this.props.getPost(this.props.postId);
         this.setState ({open: true});
     }
     handleClose = () => {
         this.setState ({open: false});
+        
     }   
     render(){ 
         const {classes, post: {postId, body, createdAt, commentCount, userPosted, upvoteCount, comments}, UI: {loading}} = this.props;

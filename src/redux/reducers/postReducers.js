@@ -3,6 +3,8 @@ import {
     POST_POST,
     LOADING_DATA,
     POST_COMMENT,
+    POST_BOOKMARK,
+
     GET_POST,
 
 } from "../types"
@@ -27,7 +29,6 @@ export default function (state = initialState, action){
                 loading: false
             };
         case GET_POST:
-            console.log('111',state)
             return{
                 ...state,
                 post: action.payload
@@ -48,6 +49,15 @@ export default function (state = initialState, action){
                     comments: [action.payload, ...state.post.comments]
                 }
             }
+            case POST_BOOKMARK:
+                return{
+                    ...state,
+                    post:{
+                        ...state.post,
+                        bookmarks: [action.payload, ...state.post.bookmarks]
+                    }
+                }
+
         default:
             return state;
 }

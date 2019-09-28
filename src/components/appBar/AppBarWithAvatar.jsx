@@ -16,12 +16,16 @@ import withStyles from "@material-ui/core/styles/withStyles";
 
 ///redux
 import { connect } from "react-redux";
-import { logoutUser } from "../../redux/actions/userActions";
+import { logoutUser, clearMessages } from "../../redux/actions/userActions";
 
 class SignedInAppBar extends Component {
   handleLogout = () => {
     this.props.logoutUser();
   };
+
+  handleClear = () =>{
+    this.props.clearMessages();
+  }
 
   render() {
     const {
@@ -55,6 +59,32 @@ class SignedInAppBar extends Component {
             </div>
             <div className={classes.grow}></div>
             <div>
+              {userDetails.isAdmin ? (
+                <Link to="/Report" className={classes.noDecor}>
+                  <Button variant="contained" className={classes.button}>
+                    Report
+                  </Button>
+                </Link>
+              ) : null}
+
+              <Link to="/bookmark" className={classes.noDecor}>
+                <Button
+                  variant="contained"
+                  className={classes.button}
+                  onClick={this.handleLogout}
+                >
+                  Bookmark
+                </Button>
+              </Link>
+              <Link to="/accountManagement" className={classes.noDecor}>
+                <Button
+                  variant="contained"
+                  className={classes.button}
+                  onClick={this.handleClear}
+                >
+                  Account
+                </Button>
+              </Link>
               <Link to="/home" className={classes.noDecor}>
                 <Button
                   variant="contained"
@@ -62,12 +92,6 @@ class SignedInAppBar extends Component {
                   onClick={this.handleLogout}
                 >
                   Logout
-                </Button>
-              </Link>
-
-              <Link to="/Report" className={classes.noDecor}>
-                <Button variant="contained" className={classes.button}>
-                  Report
                 </Button>
               </Link>
             </div>
@@ -86,7 +110,8 @@ class SignedInAppBar extends Component {
 }
 
 const mapActionToProps = {
-  logoutUser
+  logoutUser,
+  clearMessages
 };
 
 const mapStateToProps = state => ({
