@@ -149,11 +149,6 @@ exports.BlackPosts = (req, res) => {
 };
 
 
-
-
-
-
-
 exports.SearchPost = (req, res) => {
   console.log(999999, req)
   if (req.query.body) {
