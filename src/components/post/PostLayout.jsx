@@ -17,17 +17,17 @@ export class PostLayout extends Component {
   componentDidMount() {
    this.props.getAllPosts();
   }
-  
+ 
   render() {
     const {posts, loading} = this.props.post;
-    const {
-      UI,
-      user: { authenticated }
+    const {userDetails} = this.props.user;
+    const {userName} = this.props.user.userDetails;
+    const { user: { authenticated }
     } = this.props;
-
+    const {user} = this.props;
     if (!authenticated) return <Redirect to="/home"/>
     let postMarkUp = !loading ? (
-      posts.map(post => <PostItems post={post} />)
+      posts.map(post => <PostItems  userName = {userName} user={user} userDetails={userDetails} post={post} key={post.postId}/>)
     ) : (
       <CircularProgress color="inherit" />
     );
@@ -36,11 +36,11 @@ export class PostLayout extends Component {
         <SignedInAppBar />
         <PostButton />
         <Grid container spacing={3}>
-          <Grid container xs={8}>
+          <Grid item xs={8}>
             {postMarkUp}
           </Grid>
           <Grid item xs={4}>
-            <RecommendationItem />
+            {/* <RecommendationItem /> */}
           </Grid>
         </Grid>
       </div>

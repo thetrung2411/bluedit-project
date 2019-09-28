@@ -7,7 +7,8 @@ firebase.initializeApp(config);
 
 const {
   validateSignupData,
-  validateLoginData
+  validateLoginData,
+  validateNewPasswordData
 } = require("../util/dataValidator");
 
 exports.signup = (req, res) => {
@@ -100,24 +101,113 @@ exports.login = (req, res) => {
     //catch any errors and response with a general message
     .catch(err => {
       console.error(err);
-      return res
+      if (err.code === "auth/user-disabled" )
+        return res
+        .status(403)
+        .json({ general: "Account has been disable, please contact Admin" });
+      else return res
         .status(403)
         .json({ general: "Wrong user detail, please try again" });
     });
 };
 
-exports.getCurrentUser = (req,res) =>{
+exports.changeUserPassword = (req, res) => {
+  let userData = {
+    newPassword: req.body.newPassword,
+    confirmPassword: req.body.confirmPassword
+  };
+
+  const { valid, errors } = validateNewPasswordData(userData);
+  if (!valid) return res.status(400).json(errors);
+
+  //change user password by using data from request
+  admin
+    .auth()
+    .updateUser(req.user.uid, {
+      password: userData.newPassword
+    })
+    //response with a message in case of success or return an error
+    .then(() => {
+      return res.json({ general: "Change password successfully" });
+    })
+    .catch(err => {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ general: "Something went wrong, please try again" });
+    });
+};
+
+exports.disableUser = (req, res) => {
+  admin
+    .auth()
+    .updateUser(req.user.uid, {
+      disabled: true
+    })
+    .then(() => {
+      return res.json({ general: "User disabled successfully" });
+    })
+    .catch(err => {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ general: "Something went wrong, please try again" });
+    });
+};
+
+exports.getCurrentUser = (req, res) => {
   let userData = {};
+  //get user detail based on the userName taken from FBAuth
   db.doc(`/users/${req.user.userName}`)
     .get()
-    .then(doc =>{
-      if (doc.exists){
+    .then(doc => {
+      if (doc.exists) {
         userData.userDetails = doc.data();
       }
       return res.json(userData);
     })
-    .catch(err =>{
+    .catch(err => {
       console.error(err);
-      return res.status(500).json({error: err.code})
+      return res.status(500).json({ error: err.code });
+    });
+};
+
+exports.editProfile = (req,res) =>{
+  db.doc(`/users/${req.user.userName}`)
+    .update(req.body)
+    .then(() => {
+      return res.json({ message: 'profile edit successfully' });
+    })
+    .catch((err) => {
+      console.error(err);
+      return res.status(500).json({ error: err.code });
+    });
+}
+
+exports.getAllUsers = (req,res) =>{
+  db
+    .collection("users")
+    .orderBy("userName","desc")
+    .get()
+    .then(
+      data => {
+      let user = [];
+      data.forEach(doc => {
+        user.push({
+          email: doc.data().email,
+          createdAt: doc.data().createdAt,
+          location: doc.data().location,
+          userName: doc.data().userName,
+          phoneNumber: doc.data().phoneNumber,
+          gender: doc.data().gender,
+          dateOfBirth: doc.data().dateOfBirth,
+        });
+      
+      });
+      return res.json(user);
+    }
+    )
+    .catch(err =>{        
+      console.error(err);
     })
 }

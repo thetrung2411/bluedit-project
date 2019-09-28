@@ -35,7 +35,7 @@ export class PostButton extends Component{
  
   handleOpen = () => {
     this.setState({open: true});
-    console.log('clicked')
+
   }
   handleClose = () => {
     // this.props.clearErrors();
@@ -52,7 +52,7 @@ export class PostButton extends Component{
 
   render(){
     const {errors} = this.state;
-    const {classes, UI: {loading}} = this.props;
+    const {classes} = this.props;
     return (
         <div>
           <Fab color="primary" onClick={this.handleOpen}>
@@ -83,6 +83,7 @@ export class PostButton extends Component{
                           error = {errors.body ? true : false}
                           name = "body"
                           onChange = {this.handleChange}
+                          
                         />
                         </form>
                     </DialogContent>

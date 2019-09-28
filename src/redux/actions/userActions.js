@@ -5,7 +5,9 @@ import {
   CLEAR_ERRORS,
   LOADING_UI,
   LOADING_USER,
-  SET_UNAUTHENTICATED
+  SET_UNAUTHENTICATED,
+  SET_MESSAGES,
+  CLEAR_MESSAGES
 } from "../types";
 
 export const loginUser = (userData, history) => dispatch => {
@@ -44,9 +46,46 @@ export const registerUser = (userData, history) => dispatch => {
     });
 };
 
+export const changePassword = (userData) => dispatch => {
+  dispatch({ type: LOADING_UI });
+  axiosConfig
+    .post("/changePassword", userData)
+    .then(res => {
+      dispatch({ type: CLEAR_MESSAGES });
+      dispatch({ type: CLEAR_ERRORS });
+      dispatch({
+        type: SET_MESSAGES,
+        payload: res.data.general
+      });
+    })
+    .catch(err => {
+      dispatch({ type: CLEAR_MESSAGES });
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
+
+export const disableAccount = (history) => dispatch =>{
+  dispatch({type: LOADING_UI});
+  axiosConfig.post("/disableUser")
+    .then(res =>{
+      dispatch({type: CLEAR_ERRORS})
+      dispatch(logoutUser())
+      history.push("/home")
+    })
+    .catch(err => console.log(err));
+}
+
+export const clearMessages = () => dispatch =>{
+  dispatch({ type: CLEAR_MESSAGES });
+}
+
 export const logoutUser = () => dispatch => {
   localStorage.removeItem("FBToken");
   delete axiosConfig.defaults.headers.common["Authorization"];
+  dispatch({ type: CLEAR_MESSAGES });
   dispatch({ type: SET_UNAUTHENTICATED });
 };
 
@@ -67,4 +106,16 @@ const setAuthourizationHeader = token => {
   const FBToken = `Bearer ${token}`;
   localStorage.setItem("FBToken", FBToken);
   axiosConfig.defaults.headers.common["Authorization"] = FBToken;
+};
+
+export const changeUserData = (userData) => dispatch =>{
+  dispatch({ type: LOADING_USER });
+  axiosConfig
+    .post("/editProfile", userData)
+    .then(() => {
+      dispatch(getUserData());
+    },
+    console.log(userData)
+    )
+    .catch(err => console.log("edit error"));
 };

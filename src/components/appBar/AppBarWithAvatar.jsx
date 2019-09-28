@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import MenuList from "@material-ui/core/MenuList";
+import List from "@material-ui/icons/List";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
@@ -16,25 +19,87 @@ import withStyles from "@material-ui/core/styles/withStyles";
 
 ///redux
 import { connect } from "react-redux";
-import { logoutUser } from "../../redux/actions/userActions";
+import { logoutUser, clearMessages } from "../../redux/actions/userActions";
 
 class SignedInAppBar extends Component {
+  state = {
+    anchorEl: null,
+    open: false
+  }
+  handleClick = event => {
+    this.setState({open: true, anchorEl: event.currentTarget})
+  }
+  handleClose = () =>{
+    this.setState({open: false})
+  }
   handleLogout = () => {
     this.props.logoutUser();
   };
+
+  handleClear = () =>{
+    this.props.clearMessages();
+  }
 
   render() {
     const {
       classes,
       user: { userDetails }
     } = this.props;
+      return(
+          <div>
+      
+      <Menu
+      id="simple-menu"
+      anchorEl={this.state.anchorEl}
+      open={this.state.open}
+      onClose={this.handleClose}
+      getContentAnchorEl={null}
+      anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      transformOrigin={{ vertical: "top", horizontal: "center" }}
+      
+    >
+       <Link to="/post" className={classes.noDecor}>
+             <MenuItem   >     
+                  Your page
+             </MenuItem>
+              </Link>
+      <Link to="/bookmark" className={classes.noDecor}>
+      <MenuItem>
+                  Bookmark
+        </MenuItem>
+        </Link>
+        <Link to="/userpage" className={classes.noDecor}>
+        <MenuItem>
+                  Userpage
+              </MenuItem>
+        </Link>
+            {userDetails.isAdmin ? (<Link to="/Report" className={classes.noDecor}>
+              <MenuItem>
+                    Report
+                </MenuItem>
+                </Link>
+              ) : null}
+              <Link to="/subscriptions" className={classes.noDecor}>
+                <MenuItem>
+                Subscriptions
+              </MenuItem>
+              </Link>
+              <Link to="/accountManagement" className={classes.noDecor}>
+            <MenuItem onClick={this.handleClear}> 
+               Account
+              </MenuItem>
+              </Link>
 
-    return (
+            <MenuItem   onClick={this.handleLogout}>     
+                  Logout
+             </MenuItem>
+    </Menu>
+
       <div>
         <AppBar position="static" className={classes.root}>
           <Toolbar>
             <Link to="/">
-              <IconButton classname={classes.button}>
+              <IconButton>
                 <HomeIcon />
               </IconButton>
             </Link>
@@ -55,25 +120,14 @@ class SignedInAppBar extends Component {
             </div>
             <div className={classes.grow}></div>
             <div>
-              <Link to="/home" className={classes.noDecor}>
-                <Button
-                  variant="contained"
-                  className={classes.button}
-                  onClick={this.handleLogout}
-                >
-                  Logout
-                </Button>
-              </Link>
-
-              <Link to="/Report" className={classes.noDecor}>
-                <Button variant="contained" className={classes.button}>
-                  Report
-                </Button>
-              </Link>
+            
+              <IconButton aria-label="settings" onClick={this.handleClick}>
+          <List/>
+      </IconButton>
             </div>
 
             <div>
-              <Avatar>R</Avatar>
+              <Avatar>{String(userDetails.userName).charAt(0)}</Avatar>
             </div>
             <div>
               <Typography align="right">{userDetails.userName}</Typography>
@@ -81,12 +135,14 @@ class SignedInAppBar extends Component {
           </Toolbar>
         </AppBar>
       </div>
+      </div>
     );
   }
 }
 
 const mapActionToProps = {
-  logoutUser
+  logoutUser,
+  clearMessages
 };
 
 const mapStateToProps = state => ({

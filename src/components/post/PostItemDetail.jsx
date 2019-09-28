@@ -1,6 +1,5 @@
 import React, {Component, Fragment} from 'react';
 import CommentField from "../comment/CommentField";
-import {PostLayoutStyles } from "./PostLayoutStyle";
 import ThumbUpAltRoundedIcon from '@material-ui/icons/ThumbUpAltRounded';
 import ThumbDownRoundedIcon from '@material-ui/icons/ThumbDownRounded';
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -14,41 +13,39 @@ import { PostItemStyles } from './PostItemsStyles';
 import Fab from '@material-ui/core/Fab';
 import QuestionAnswerRounded from '@material-ui/icons/QuestionAnswerRounded'
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import {Card, CardHeader, CardContent, CardActions} from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
-import MoreIcon from "@material-ui/icons/MoreVert";
-import IconButton from "@material-ui/core/IconButton";
-import {Typography, Grid, CardMedia} from "@material-ui/core";
+import PostMenu from "./PostMenu";
+import {Typography} from "@material-ui/core";
 export class PostItemDetail extends Component {
     state = {
         open: false
     }
     componentDidMount() {
-        this.props.getPost(this.props.postId)
+       if(this.props.openDialog){
+           this.handleOpen();
+       }
     }
     handleOpen = () => {
+        this.props.getPost(this.props.postId);
         this.setState ({open: true});
     }
     handleClose = () => {
         this.setState ({open: false});
     }   
     render(){ 
-        const {classes, post: {postId, body, createdAt, commentCount, userPosted, upvoteCount, comments}, UI: {loading}} = this.props;
-        const dialogMarkUp = loading ? (<CircularProgress/>) : (<Card className = {classes.paper}>
+        const {classes, post: {postId, body, createdAt, userPosted, upvoteCount, comments}, UI: {loading}, userName, post, hidden} = this.props;
+        
+       const dialogMarkUp = loading ? (<CircularProgress/>) : (<Card className = {classes.paper}>
             <CardHeader 
         avatar={
                 <Avatar >
-                  T
+                 {String(userPosted).charAt(0)}
                 </Avatar>
               }
         action={
-          <IconButton aria-label="settings">
-            <MoreIcon/>
-          </IconButton>
+            <PostMenu hidden={hidden} body={body} userName ={userName} userPosted={userPosted} postId = {postId} post={post}/> 
         }
         title = {userPosted}
         titleTypographyProps={{align:"left"}}
@@ -64,8 +61,8 @@ export class PostItemDetail extends Component {
         <Fab size="small" className ={classes.fab} ><ThumbUpAltRoundedIcon/></Fab>
         <Fab size="small" className ={classes.fab} ><ThumbDownRoundedIcon/></Fab>
         </CardActions>
-        <CommentField postId = {postId}> </CommentField>
-        <CommentItem comments={comments}></CommentItem>
+        <CommentField postId = {postId} post={post}> </CommentField>
+        <CommentItem userName={userName} postId = {postId} comments={comments} key={postId}></CommentItem>
         </Card>); 
     return (
         <Fragment>
@@ -76,7 +73,7 @@ export class PostItemDetail extends Component {
         aria-labelledby="responsive-dialog-title"
         className = {classes.paper}
         maxWidth = "sm"
-        fullWidth = "true"
+        fullWidth
       >
         <DialogContent>{dialogMarkUp}</DialogContent>
         </Dialog>
@@ -87,13 +84,9 @@ export class PostItemDetail extends Component {
 }
 
 PostItemDetail.propTypes = {
-    getPost: PropTypes.func.isRequired,
-    postId: PropTypes.string.isRequired,
-    userPosted: PropTypes.string.isRequired,
     post: PropTypes.object.isRequired,
-    UI: PropTypes.object.isRequired
+    UI: PropTypes.object.isRequired,
 }
-
 const mapStateToProps = (state) => ({
     post: state.post.post,
     UI: state.UI

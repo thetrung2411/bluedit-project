@@ -9,7 +9,24 @@ export const PostItemStyles = theme => ({
         paddingTop: '56.25%', 
       },
     grid: {
-        
        
+    },
+
+    menuItemDelete: {
+        backgroundColor: "#e03f42"
+    },
+    subscribe: {
+        display: 'inlineBlock',
+        marginLeft: 5,
+        padding: 5,
+        background: 'black',
+        color: 'green'
+    },
+    unSubscribe: {
+        display: 'inlineBlock',
+        marginLeft: 5,
+        padding: 5,
+        background: 'black',
+        color: 'red'
     }
 });

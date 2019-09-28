@@ -1,28 +1,42 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import AppBar from "../appBar/appBar";
 import PostItems from "../post/PostItems";
 import Grid from "@material-ui/core/Grid";
 import RecommendationItem from "../post/Recommendation";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import axiosConfig from "../../axiosConfig";
-import { connect } from 'react-redux';
-import { getAllPosts } from '../../redux/actions/postActions';
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 export class HomePageLayout extends Component {
   state = {
     post: null
   };
   componentDidMount() {
-    this.props.getAllPosts();
+    axiosConfig
+      .get("/getAllPosts")
+      .then(res => {
+        console.log(res.data);
+        this.setState({
+          post: res.data
+        });
+      })
+      .catch(err => console.log(err));
   }
-  render() {
 
-    const { post, posts } = this.props;
-    let postMarkUp = post.length ? (
-      post.map(item => <PostItems post={item} />)
-    ) : posts.length ? (
-      posts.map(item => <PostItems post={item} />)
-    ) : <CircularProgress color="inherit" />;
+  render() {
+    const {
+      user: { authenticated }
+    } = this.props;
+
+    if (authenticated) return <Redirect to="/post"/>
+
+    let postMarkUp = this.state.post ? (
+      this.state.post.map(post => <PostItems post={post} key={post.postId}/>)
+    ) : (
+      <CircularProgress color="inherit" />
+    );
     return (
       <div>
         <AppBar />
@@ -39,19 +53,12 @@ export class HomePageLayout extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  console.log('state', state)
-  return {
-    post: state.post.post,
-    posts: state.post.posts,
-  };
+HomePageLayout.propTypes = {
+  user: PropTypes.object.isRequired
 };
 
-const mapActionsToProps = {
-  getAllPosts
-};
+const mapStateToProps = state => ({
+  user: state.user
+});
 
-export default connect(
-  mapStateToProps,
-  mapActionsToProps
-)(HomePageLayout);
+export default connect(mapStateToProps)(HomePageLayout);
