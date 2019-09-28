@@ -120,16 +120,38 @@ export const post = (newPost) => (dispatch) => {
     
 }
 
-export const SearchPost = (body) => (dispatch) => {
-  dispatch({type: LOADING_UI});
-  axiosConfig.get(`/SearchPost/${body}`)
-  .then(res => {
-    dispatch ({
-      type:GET_POST,
-      payload:res.data
-    });
-    dispatch({type: STOP_LOADING_UI})
-  })
-  .catch (err => console.log(err));
+export const SearchPost = (body, name) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  var sql = (body && name) ?
+    `body=${body}&fbname=${name}` :
+    (name) ? `fbname=${name}` :
+      (body) ? `body=${body}` : '';
+  console.log('sql', sql)
+  console.log('body', body)
+  axiosConfig.get(`/searchPost?${sql}`)
+    .then(res => {
+      console.log('ser,', res)
+      dispatch({
+        type: GET_POST,
+        payload: res.data
+      });
+      dispatch({ type: STOP_LOADING_UI })
+    })
+    .catch(err => console.log(err));
+
+}
+
+export const BlackPost = (bname) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  axiosConfig.get(`/blackuser?bname=${bname}`)
+    .then(res => {
+      console.log('ser,', res)
+      dispatch({
+        type: GET_POST,
+        payload: res.data
+      });
+      dispatch({ type: STOP_LOADING_UI })
+    })
+    .catch(err => console.log(err));
 
 }
