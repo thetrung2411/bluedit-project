@@ -6,7 +6,6 @@ import MenuList from "@material-ui/core/MenuList";
 import List from "@material-ui/icons/List";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
-import Menu from "@material-ui/core/Menu";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import InputBase from "@material-ui/core/InputBase";
@@ -68,7 +67,12 @@ class SignedInAppBar extends Component {
           </Link>
           {userDetails.isAdmin ? (
             <Link to="/Report" className={classes.noDecor}>
-              <MenuItem>Report</MenuItem>
+              <MenuItem>Manage Report</MenuItem>
+            </Link>
+          ) : null}
+          {userDetails.isAdmin ? (
+            <Link to="/Ads" className={classes.noDecor}>
+              <MenuItem>Manage Ads</MenuItem>
             </Link>
           ) : null}
           <Link to="/subscriptions" className={classes.noDecor}>
