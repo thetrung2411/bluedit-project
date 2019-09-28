@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
-import AppBar from "../appBar/appBar";
+import AppBar from "./search";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import PostItem from "../post/PostItems";
@@ -34,7 +34,7 @@ class searching extends Component {
           <AppBar />
           <Grid container spacing={3}>
             
-            <Grid>
+            <Grid item xs={7} >
               {postMarkUp}
             </Grid>
           </Grid>
