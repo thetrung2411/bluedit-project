@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import Search from './searching';
+import Search from './Searching';
 import Test from './test';
 import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
