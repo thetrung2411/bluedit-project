@@ -65,6 +65,12 @@ class SignedInAppBar extends Component {
           <Link to="/userpage" className={classes.noDecor}>
             <MenuItem>Userpage</MenuItem>
           </Link>
+          <Link to="/subscriptions" className={classes.noDecor}>
+            <MenuItem>Subscriptions</MenuItem>
+          </Link>
+          <Link to="/accountManagement" className={classes.noDecor}>
+            <MenuItem onClick={this.handleClear}>Account</MenuItem>
+          </Link>
           {userDetails.isAdmin ? (
             <Link to="/Report" className={classes.noDecor}>
               <MenuItem>Manage Report</MenuItem>
@@ -75,13 +81,6 @@ class SignedInAppBar extends Component {
               <MenuItem>Manage Ads</MenuItem>
             </Link>
           ) : null}
-          <Link to="/subscriptions" className={classes.noDecor}>
-            <MenuItem>Subscriptions</MenuItem>
-          </Link>
-          <Link to="/accountManagement" className={classes.noDecor}>
-            <MenuItem onClick={this.handleClear}>Account</MenuItem>
-          </Link>
-
           <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
         </Menu>
 
