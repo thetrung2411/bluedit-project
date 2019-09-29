@@ -32,6 +32,31 @@ exports.uploadAd = (req, res) => {
     });
 };
 
+//Edit an existing ad
+exports.editAd = (req, res) => {
+  if (
+    req.body.name.trim() === "" ||
+    req.body.imageUrl.trim() === "" ||
+    req.body.link.trim() === ""
+  ) {
+    return res.status(400).json({ message: "Must not be empty" });
+  }
+  let newAd = {
+    name: req.body.name,
+    imageUrl: req.body.imageUrl,
+    link: req.body.link
+  };
+  db.doc(`/ads/${req.params.adId}`)
+    .update(newAd)
+    .then(() => {
+      res.json({ message: "Edited successfully" });
+    })
+    .catch(err => {
+      console.error(err);
+      return res.status(500).json({ err: err.code });
+    });
+};
+
 //Get all ads info
 exports.getAllAds = (req, res) => {
   db.collection("ads")
