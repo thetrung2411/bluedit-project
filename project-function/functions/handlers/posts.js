@@ -1,4 +1,4 @@
-const { db} = require("../util/admin");
+const { db } = require("../util/admin");
 
 exports.post = (req, res) => {
   if (req.body.body.trim() === "") {
@@ -9,7 +9,7 @@ exports.post = (req, res) => {
     userPosted: req.user.userName,
     createdAt: new Date().toISOString(),
     commentCount: 0,
-    hidden: false,
+    hidden: false
   };
   db.collection("posts")
     .add(newPost)
@@ -26,20 +26,21 @@ exports.deletePost = (req, res) => {
   const document = db.doc(`/posts/${req.params.postId}`);
   document
     .get()
-    .then((doc) => {
+    .then(doc => {
       if (!doc.exists) {
-        return res.status(404).json({ error: 'Post not found' });
+        return res.status(404).json({ error: "Post not found" });
       }
-      if (doc.data().userPosted !== req.user.userName) {
-        return res.status(403).json({ error: 'Unauthorized' });
+      //Edited by Ria: admin is allowed to delete other user's posts (delete this comment if u want)
+      if (doc.data().userPosted !== req.user.userName && !req.user.isAdmin) {
+        return res.status(403).json({ error: "Unauthorized" });
       } else {
         return document.delete();
       }
     })
     .then(() => {
-      res.json({ message: 'Post deleted successfully' });
+      res.json({ message: "Post deleted successfully" });
     })
-    .catch((err) => {
+    .catch(err => {
       console.error(err);
       return res.status(500).json({ error: err.code });
     });
@@ -58,13 +59,13 @@ exports.getAllPosts = (req, res) => {
           commentCount: doc.data().commentCount,
           hidden: doc.data().hidden,
           createdAt: doc.data().createdAt,
-          userPosted: doc.data().userPosted,
-        });       
+          userPosted: doc.data().userPosted
+        });
       });
-        return res.json(posts);
-      })
-      .catch(err => console.error(err));
-  };
+      return res.json(posts);
+    })
+    .catch(err => console.error(err));
+};
 
 exports.getPost = (req, res) => {
   let postContent = {};
@@ -95,44 +96,44 @@ exports.getPost = (req, res) => {
 };
 
 exports.editPost = (req, res) => {
-  if(req.body.body.trim() === ''){
-    return res.status(400).json({body: 'Post cannot be empty'});
+  if (req.body.body.trim() === "") {
+    return res.status(400).json({ body: "Post cannot be empty" });
   }
-  console.log(req.params.postId)
+  console.log(req.params.postId);
   db.doc(`/posts/${req.params.postId}`)
-  .update({body: req.body.body})
-  .then(() => {
-    res.json({ message: 'Post updated successfully' });
-  })
-  .catch((err) => {
+    .update({ body: req.body.body })
+    .then(() => {
+      res.json({ message: "Post updated successfully" });
+    })
+    .catch(err => {
       console.error(err);
       return res.status(500).json({ error: err.code });
     });
-}
+};
 
 exports.unhidePost = (req, res) => {
   db.doc(`/posts/${req.params.postId}`)
-  .update({hidden: false})
-  .then(() => {
-    res.json({message: 'Post is now unhidden'});
-  })
-  .catch((err)=> {
-    console.error(err);
-    return res.status(500).json({error: err.code});
-  })
-}
+    .update({ hidden: false })
+    .then(() => {
+      res.json({ message: "Post is now unhidden" });
+    })
+    .catch(err => {
+      console.error(err);
+      return res.status(500).json({ error: err.code });
+    });
+};
 
 exports.hidePost = (req, res) => {
   db.doc(`/posts/${req.params.postId}`)
-  .update({hidden: true})
-  .then(() => {
-    res.json({message: 'Post is now hidden'});
-  })
-  .catch((err)=> {
-    console.error(err);
-    return res.status(500).json({error: err.code});
-  })
-}
+    .update({ hidden: true })
+    .then(() => {
+      res.json({ message: "Post is now hidden" });
+    })
+    .catch(err => {
+      console.error(err);
+      return res.status(500).json({ error: err.code });
+    });
+};
 
 exports.getPost1 = (req, res) => {
   let postContent1 = {};
@@ -161,7 +162,6 @@ exports.getPost1 = (req, res) => {
       return res.status(500).json({ error: "Unexpected failure" });
     });
 };
-
 
 exports.searchPost = (req, res) => {
   db.collection("posts")
