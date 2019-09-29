@@ -1,13 +1,13 @@
 const functions = require("firebase-functions");
 const app = require("express")();
 const {signup, login, getCurrentUser,changeUserPassword, editProfile, getAllUsers, disableUser} = require("./handlers/users");
-const {post, getAllPosts, getPost,SearchPost, deletePost, editPost, hidePost, unhidePost, BlockPosts} = require("./handlers/posts");
+const {post, getAllPosts, getPost,SearchPost, deletePost, editPost, hidePost, unhidePost, BlockPosts, getmyposts} = require("./handlers/posts");
 const {comment, getAllComments, deleteComment, editComment, hideComment, unhideComment} = require("./handlers/comments");
 const FBAuth = require("./util/fbAuth");
 const cors = require("cors");
 const {  getAllReports,  getReport,  changeReportStatus,  deleteReport} = require("./handlers/reports");
 const {bookmark,getAllBookmarks,getBookmark,deleteBookmark} = require("./handlers/bookmarks");
-const {getAllSubscribe, unSubscribe} = require("./handlers/subscribe");
+const {getAllSubscribe, unSubscribe , poSubscribe} = require("./handlers/subscribe");
 
 app.use(cors());
 //User route
@@ -15,13 +15,16 @@ app.post("/signup", signup);
 app.post("/login", login);
 app.get("/user", FBAuth, getCurrentUser);
 app.post("/changePassword", FBAuth, changeUserPassword);
+
+//userpage
 app.post("/editProfile", FBAuth, editProfile);
+app.get("/getmypo", getmyposts);
 
 //Subscribe
 app.get("/allSubscribe", getAllSubscribe);
 app.get("/allUsers", getAllUsers);
 app.post("/unSubscribe", unSubscribe);
-app.post("/disableUser", FBAuth, disableUser);
+app.post("/postSubscribe", poSubscribe);
 
 //Comment
 app.post("/post/:postId/comment", FBAuth, comment);

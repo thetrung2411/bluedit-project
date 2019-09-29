@@ -272,3 +272,25 @@ exports.SearchPost = (req, res) => {
       .catch(err => console.error(err));
   }
 };
+
+exports.getmyposts = (req, res) => {
+  db.collection("posts")
+  .where('userPosted',"==",req.query.poname)
+    .orderBy("createdAt", "desc")
+    .get()
+    .then(data => {
+      let posts = [];
+      data.forEach(doc => {
+        posts.push({
+          postId: doc.id,
+          body: doc.data().body,
+          commentCount: doc.data().commentCount,
+          upvoteCount: doc.data().upvoteCount,
+          createdAt: doc.data().createdAt,
+          userPosted: doc.data().userPosted
+        });
+      });
+      return res.json(posts);
+    })
+    .catch(err => console.error(err));
+};

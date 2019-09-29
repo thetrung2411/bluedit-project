@@ -20,6 +20,7 @@ import accountManagement from './components/accountManagement/accountManagement'
 import subscriptions from './components/subscriptions/subscriptions';
 import { userpageLauout } from './components/userpage/userpageLayout';
 import { editProfileLayout } from './components/editProfile/editProfileLayout';
+import { userpostLauout } from './components/userpost/userpostLayout';
 import {
   MuiThemeProvider,
   createMuiTheme,
@@ -71,6 +72,7 @@ class App extends Component {
                 <Route path='/subscriptions' component = {subscriptions}/>
                 <Route path='/userpage' component = {userpageLauout}/>
                 <Route path='/editProfile' component = {editProfileLayout}/>
+                <Route path='/userpost' component = {userpostLauout}/>
                 <Route path='/bookmark' component={bookmark} />
                 <Route path='/searching' component = {searching}/>
                 <Redirect from='/' to='/home' />

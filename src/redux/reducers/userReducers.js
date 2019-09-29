@@ -2,16 +2,18 @@ import {
   SET_USER,
   SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
-  LOADING_USER
+  LOADING_USER,
+  IS_SHOWPAGE
 } from "../types";
 
 const initState = {
   authenticated: false,
   loading: false,
-  userDetails: {}
+  userDetails: {},
+  isshowpage: false
 };
 
-export default function(state = initState, action) {
+export default function (state = initState, action) {
   switch (action.type) {
     case SET_AUTHENTICATED:
       return {
@@ -30,6 +32,11 @@ export default function(state = initState, action) {
       return {
         ...state,
         loading: true
+      };
+    case IS_SHOWPAGE:
+      return {
+        ...state,
+        isshowpage: true
       };
     default:
       return state;

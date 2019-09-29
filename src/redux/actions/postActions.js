@@ -10,6 +10,7 @@ import {
   DELETE_POST, 
   EDIT_POST,
   HIDE_POST,
+  GET_SUBSCRIBE,
 } from "../types";
 import axiosConfig from '../../axiosConfig';
 export const getAllPosts = () => (dispatch) => {
@@ -154,4 +155,21 @@ export const BlockPost = (bname) => (dispatch) => {
     })
     .catch(err => console.log(err));
 
+}
+
+export const postSubscribe = (body) => (dispatch) => {
+  console.log(body);
+
+  dispatch({ type: LOADING_UI });
+  axiosConfig.post('/postSubscribe', body)
+    .then(res => {
+      dispatch({ type: CLEAR_ERRORS });
+    })
+    .then(() => { dispatch(getAllPosts()) })
+    .catch(err => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data
+      })
+    })
 }

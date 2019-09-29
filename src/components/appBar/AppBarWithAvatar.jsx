@@ -68,7 +68,7 @@ class SignedInAppBar extends Component {
                   Bookmark
         </MenuItem>
         </Link>
-        <Link to="/userpage" className={classes.noDecor}>
+        <Link to="/userpost" className={classes.noDecor}>
         <MenuItem>
                   Userpage
               </MenuItem>
