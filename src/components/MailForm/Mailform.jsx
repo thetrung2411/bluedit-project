@@ -1,34 +1,8 @@
 import React, { Component } from "react";
-import Sidebar from "react-sidebar";
-import PropTypes from "prop-types";
-import userImage from "../../assets/hehe.png";
-
-import withStyles from "@material-ui/core/styles/withStyles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import axiosConfig from "../../axiosConfig";
-import { connect } from "react-redux";
-
-const styles = {
-  form: {
-    textAlign: "center"
-  },
-  textField: {
-    textAlign: "center",
-    margin: "20px auto 10px auto"
-  },
-  button: {
-    marginTop: 20,
-    marginBottom: 20
-  },
-  sidebarButton: {
-    marginTop: 90
-  },
-  root: {
-    backgroundImage: `../../assets/UserpageAssets/bgImage.jpg`
-  }
-};
 export class Mailform extends Component {
   state = {
     bio: "",
@@ -149,15 +123,4 @@ export class Mailform extends Component {
   }
 }
 
-Mailform.propTypes = {
-  classes: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
-  UI: PropTypes.object.isRequired
-};
-
-const mapStateToProps = state => ({
-  user: state.user,
-  UI: state.UI
-});
-
-export default connect(mapStateToProps)(withStyles(styles)(Mailform));
+export default Mailform;
