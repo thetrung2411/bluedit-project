@@ -1,8 +1,32 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+
+import withStyles from "@material-ui/core/styles/withStyles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import axiosConfig from "../../axiosConfig";
+import { connect } from "react-redux";
+
+const styles = {
+  form: {
+    textAlign: "center"
+  },
+  textField: {
+    textAlign: "center",
+    margin: "20px auto 10px auto"
+  },
+  button: {
+    marginTop: 20,
+    marginBottom: 20
+  },
+  sidebarButton: {
+    marginTop: 90
+  },
+  root: {
+    backgroundImage: `../../assets/UserpageAssets/bgImage.jpg`
+  }
+};
 export class Mailform extends Component {
   state = {
     bio: "",
@@ -26,7 +50,7 @@ export class Mailform extends Component {
     //   dateOfBirth: this.state.dateOfBirth,
     //   userName: this.state.userName
     axiosConfig
-      .post("/bookmark")
+      .post("/mailform")
       .then(res => {
         console.log(res);
       })
@@ -103,7 +127,7 @@ export class Mailform extends Component {
 
           <tbody>
             <tr>
-              <Link to="/userpage" className={classes.noDecor}>
+              <Link to="/home" className={classes.noDecor}>
                 <Button
                   type="submit"
                   variant="contained"
@@ -123,4 +147,15 @@ export class Mailform extends Component {
   }
 }
 
-export default Mailform;
+Mailform.propTypes = {
+  classes: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  user: state.user,
+  UI: state.UI
+});
+
+export default connect(mapStateToProps)(withStyles(styles)(Mailform));
