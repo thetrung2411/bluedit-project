@@ -15,8 +15,7 @@ exports.uploadAd = (req, res) => {
     name: req.body.name,
     imageUrl: req.body.imageUrl,
     link: req.body.link,
-    uploadAt: new Date().toISOString(),
-    isShowing: true
+    uploadAt: new Date().toISOString()
   };
 
   db.collection("ads")
@@ -70,8 +69,7 @@ exports.getAllAds = (req, res) => {
           name: doc.data().name,
           imageUrl: doc.data().imageUrl,
           link: doc.data().link,
-          uploadAt: doc.data().uploadAt,
-          isShowing: doc.data().isShowing
+          uploadAt: doc.data().uploadAt
         });
       });
       return res.json(ads);
@@ -117,25 +115,6 @@ exports.deleteAd = (req, res) => {
     })
     .catch(err => {
       console.error(err);
-      return res.status(500).json({ error: err.code });
-    });
-};
-
-//Set display to true or false
-exports.setDisplay = (req, res) => {
-  db.doc(`/ads/${req.params.adId}`)
-    .get()
-    .then(doc => {
-      if (!doc.exists) {
-        return res.status(404).json({ error: "Ad not found" });
-      }
-      return doc.ref.update({ isShowing: !doc.data().isShowing });
-    })
-    .then(() => {
-      res.json({ message: "Status changed successfully" });
-    })
-    .catch(err => {
-      console.log(err);
       return res.status(500).json({ error: err.code });
     });
 };
