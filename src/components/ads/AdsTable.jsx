@@ -13,8 +13,9 @@ const head = (
   <TableHead>
     <TableRow>
       <TableCell>Advertisement ID</TableCell>
+      <TableCell>Name</TableCell>
       <TableCell>Uploaded At</TableCell>
-      <TableCell>Display</TableCell>
+      <TableCell>Displaying</TableCell>
       <TableCell></TableCell>
     </TableRow>
   </TableHead>
@@ -27,6 +28,7 @@ const AdTable = props => {
         <TableBody>
           <TableRow>
             <TableCell align="left">{ad.adId}</TableCell>
+            <TableCell align="left">{ad.name}</TableCell>
             <TableCell align="left">{ad.uploadAt}</TableCell>
             <TableCell align="left">{ad.isShowing.toString()}</TableCell>
             <TableCell>
