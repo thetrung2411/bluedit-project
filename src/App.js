@@ -73,7 +73,6 @@ class App extends Component {
                 <Route path='/editProfile' component = {editProfileLayout}/>
                 <Route path='/bookmark' component={bookmark} />
                 <Route path='/searching' component = {searching}/>
-                <Route path='/test' component = {test}/>
                 <Redirect from='/' to='/home' />
               </Switch>
             </div>

@@ -1,7 +1,7 @@
 const functions = require("firebase-functions");
 const app = require("express")();
 const {signup, login, getCurrentUser,changeUserPassword, editProfile, getAllUsers, disableUser} = require("./handlers/users");
-const {post, getAllPosts, getPost,SearchPost, deletePost, editPost, hidePost, unhidePost} = require("./handlers/posts");
+const {post, getAllPosts, getPost,SearchPost, deletePost, editPost, hidePost, unhidePost, BlockPosts} = require("./handlers/posts");
 const {comment, getAllComments, deleteComment, editComment, hideComment, unhideComment} = require("./handlers/comments");
 const FBAuth = require("./util/fbAuth");
 const cors = require("cors");
@@ -38,6 +38,8 @@ app.get("/post/:postId", getPost);
 app.delete("/post/:postId", FBAuth, deletePost);
 app.post("/post/:postId/hide", FBAuth, hidePost);
 app.post("/post/:postId/unhide", FBAuth, unhidePost);
+app.get("/searchPost", SearchPost);
+app.get("/blackuser", BlockPosts);
 //Report
 app.get("/getAllReports", getAllReports);
 app.get("/getReport/:reportId", getReport);
@@ -48,6 +50,5 @@ app.post("/bookmark", FBAuth, bookmark);
 app.get("/getAllBookmarks", getAllBookmarks);
 app.get("/getBookmark/:bookmarkid", getBookmark);
 app.delete("/deleteBookmark/:bookmarkid", deleteBookmark);
-//app.get("/SearchPost/:body", SearchPost);
 
 exports.api = functions.https.onRequest(app);
