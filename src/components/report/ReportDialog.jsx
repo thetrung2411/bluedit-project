@@ -2,6 +2,8 @@ import React, { Fragment } from "react";
 import axiosConfig from "../../axiosConfig";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import AlertDialog from "../report/AlertDialog";
+
 //MUI
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -15,9 +17,7 @@ import { Typography } from "@material-ui/core";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Avatar from "@material-ui/core/Avatar";
 //MUI Icon
-import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined";
 import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
-import AlertDialog from "./AlertDialog";
 
 export default class ReportDialog extends React.Component {
   state = {
@@ -51,9 +51,9 @@ export default class ReportDialog extends React.Component {
       .post(`/changeStatus/${this.props.report.reportId}`)
       .then(res => {
         console.log(res);
+        window.location.reload();
       })
       .catch(err => console.log(err));
-    window.location.reload();
   };
 
   render() {
@@ -66,7 +66,10 @@ export default class ReportDialog extends React.Component {
           avatar={<Avatar>R</Avatar>}
           action={
             <Button>
-              <DeleteForeverOutlinedIcon />
+              <AlertDialog
+                action={"deletePost"}
+                postId={this.props.report.objectId}
+              />
             </Button>
           }
           title={this.state.content.userPosted}

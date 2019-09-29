@@ -33,10 +33,9 @@ export class ReportPage extends Component {
       .delete(`/deleteReport/${reportId}`)
       .then(res => {
         console.log(res.data);
+        window.location.reload();
       })
       .catch(err => console.log(err));
-
-    window.location.reload();
   };
 
   handleSort = sortKey => {

@@ -8,8 +8,6 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
-//import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
-import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined";
 
 const ReportTable = props => {
   const allReports = props.reports.length ? (
@@ -26,7 +24,7 @@ const ReportTable = props => {
             <TableCell align="left">
               <ReportDialog report={report} />
               <AlertDialog
-                action={"delete"}
+                action={"deleteReport"}
                 reportId={report.reportId}
                 handleDelete={props.handleDelete}
               />
