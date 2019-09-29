@@ -33,6 +33,10 @@ app.post("/bookmark", FBAuth, bookmark);
 app.get("/getAllBookmarks", getAllBookmarks);
 app.get("/getBookmark/:bookmarkid", getBookmark);
 app.delete("/deleteBookmark/:bookmarkid", deleteBookmark);
+<<<<<<< HEAD
+=======
+//app.get("/SearchPost/:body", SearchPost);
+>>>>>>> master
 
 exports.api = functions.https.onRequest(app);
 

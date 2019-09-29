@@ -54,6 +54,7 @@ exports.getPost = (req, res) => {
     });
 };
 
+<<<<<<< HEAD
 exports.getAllPosts = (req, res) => {
   db.collection("posts")
     .orderBy("createdAt", "desc")
@@ -73,6 +74,34 @@ exports.getAllPosts = (req, res) => {
       return res.json(posts);
     })
     .catch(err => console.error(err));
+=======
+exports.getPost1 = (req, res) => {
+  let postContent1 = {};
+  db.doc(`/posts/${req.params.postId}`)
+    .get()
+    .then(doc => {
+      if (!doc.exists) {
+        return res.status(404).json({ error: "Post not found" });
+      }
+      postContent1 = doc.data();
+      postContent1.postId = doc.id;
+      return db
+        .collection("bookmarks")
+        .where("postId", "==", req.params.postId)
+        .get();
+    })
+    .then(data => {
+      postContent1.bookmarks = [];
+      data.forEach(doc => {
+        postContent1.bookmarks.push(doc.data());
+      });
+      return res.json(postContent1);
+    })
+    .catch(err => {
+      console.log(err);
+      return res.status(500).json({ error: "Unexpected failure" });
+    });
+>>>>>>> master
 };
 
 exports.searchPost = (req, res) => {
@@ -95,3 +124,27 @@ exports.searchPost = (req, res) => {
     })
     .catch(err => console.error(err));
 };
+<<<<<<< HEAD
+=======
+
+exports.searchPost = (req, res) => {
+  db.collection("posts")
+    .where("body", "==", req.params.body)
+    .get()
+    .then(data => {
+      let posts = [];
+      data.forEach(doc => {
+        posts.push({
+          postId: doc.id,
+          body: doc.data().body,
+          commentCount: doc.data().commentCount,
+          upvoteCount: doc.data().upvoteCount,
+          createdAt: doc.data().createdAt,
+          userPosted: doc.data().userPosted
+        });
+      });
+      return res.json(posts);
+    })
+    .catch(err => console.error(err));
+};
+>>>>>>> master
