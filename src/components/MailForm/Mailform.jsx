@@ -7,7 +7,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-
+import axiosConfig from "../../axiosConfig";
 import { connect } from "react-redux";
 
 const styles = {
@@ -29,26 +29,20 @@ const styles = {
     backgroundImage: `../../assets/UserpageAssets/bgImage.jpg`
   }
 };
-
-class Mailform extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      bio: "",
-      location: "",
-      gender: "",
-      phoneNumber: "",
-      dateOfBirth: "",
-      userName: ""
-    };
-  }
-
+export class Mailform extends Component {
+  state = {
+    bio: "",
+    location: "",
+    gender: "",
+    phoneNumber: "",
+    dateOfBirth: "",
+    userName: ""
+  };
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
   };
-
   handleSubmit = e => {
     // const userData = {
     //   bio: this.state.bio,
@@ -58,15 +52,13 @@ class Mailform extends React.Component {
     //   dateOfBirth: this.state.dateOfBirth,
     //   userName: this.state.userName
     axiosConfig
-      .post("/mailform")
+      .post("/bookmark")
       .then(res => {
         console.log(res);
       })
       .catch(err => console.log(err));
     this.setState({ open: false });
-    };
   };
-
   render() {
     const {
       classes,
@@ -153,8 +145,8 @@ class Mailform extends React.Component {
           </tbody>
         </table>
       </div>
-  )
-}
+    );
+  }
 }
 
 Mailform.propTypes = {
