@@ -4,8 +4,17 @@ const firebase = require("firebase");
 
 //Upload one ad
 exports.uploadAd = (req, res) => {
+  if (
+    req.body.name.trim() === "" ||
+    req.body.imageUrl === "" ||
+    req.body.link === ""
+  ) {
+    return res.status(400).json({ body: "Post cannot be empty" });
+  }
   const newAd = {
-    imageUrl: "http://randomImage.com",
+    name: req.body.name,
+    imageUrl: req.body.imageUrl,
+    link: req.body.link,
     uploadAt: new Date().toISOString(),
     isShowing: true
   };
@@ -32,7 +41,10 @@ exports.getAllAds = (req, res) => {
       let ads = [];
       data.forEach(doc => {
         ads.push({
+          adId: doc.id,
+          name: doc.data().name,
           imageUrl: doc.data().imageUrl,
+          link: doc.data().link,
           uploadAt: doc.data().uploadAt,
           isShowing: doc.data().isShowing
         });
