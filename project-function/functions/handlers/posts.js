@@ -95,8 +95,6 @@ exports.searchPost = (req, res) => {
     })
     .catch(err => console.error(err));
 };
-<<<<<<< HEAD
-=======
 
 exports.searchPost = (req, res) => {
   db.collection("posts")
@@ -118,4 +116,3 @@ exports.searchPost = (req, res) => {
     })
     .catch(err => console.error(err));
 };
->>>>>>> master
