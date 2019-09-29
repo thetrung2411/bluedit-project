@@ -35,7 +35,13 @@ const {
   changeReportStatus,
   deleteReport
 } = require("./handlers/reports");
-const { uploadAd, getAllAds, getAd, deleteAd } = require("./handlers/ads");
+const {
+  uploadAd,
+  getAllAds,
+  getAd,
+  deleteAd,
+  setDisplay
+} = require("./handlers/ads");
 const {
   bookmark,
   getAllBookmarks,
@@ -84,6 +90,7 @@ app.post("/uploadAd", uploadAd);
 app.get("/getAllAds", getAllAds);
 app.get("/getAd/:adId", getAd);
 app.delete("/deleteAd/:adId", deleteAd);
+app.post("/Ad/setDisplay/:adId", setDisplay);
 
 //Bookmark
 app.post("/bookmark", FBAuth, bookmark);

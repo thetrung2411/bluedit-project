@@ -95,3 +95,22 @@ exports.deleteAd = (req, res) => {
       return res.status(500).json({ error: err.code });
     });
 };
+
+//Set display to true or false
+exports.setDisplay = (req, res) => {
+  db.doc(`/ads/${req.params.adId}`)
+    .get()
+    .then(doc => {
+      if (!doc.exists) {
+        return res.status(404).json({ error: "Ad not found" });
+      }
+      return doc.ref.update({ isShowing: !doc.data().isShowing });
+    })
+    .then(() => {
+      res.json({ message: "Status changed successfully" });
+    })
+    .catch(err => {
+      console.log(err);
+      return res.status(500).json({ error: err.code });
+    });
+};
