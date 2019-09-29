@@ -1,5 +1,9 @@
 import React from "react";
-//material ui
+
+//Components
+import AdDialog from "./AdDialog";
+
+//MUI
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
 import TableBody from "@material-ui/core/TableBody";
@@ -32,7 +36,7 @@ const AdTable = props => {
             <TableCell align="left">{ad.uploadAt}</TableCell>
             <TableCell align="left">{ad.isShowing.toString()}</TableCell>
             <TableCell>
-              <Button>View</Button>
+              <AdDialog ad={ad} />
               <Button>
                 <DeleteForeverOutlinedIcon />
               </Button>
