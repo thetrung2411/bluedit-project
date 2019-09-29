@@ -6,6 +6,7 @@ import {
     POST_BOOKMARK,
     DELETE_COMMENT,
     EDIT_COMMENT,
+    HIDE_COMMENT,
     GET_POST,
     DELETE_POST,
     EDIT_POST,
@@ -38,14 +39,6 @@ export default function (state = initialState, action) {
             return {
                 ...state,
             }
-        case HIDE_POST:
-            return {
-                ...state,
-                posts: [
-                    action.payload,
-                    ...state.posts
-                ]
-            }
         case GET_POSTS:
             return {
                 ...state,
@@ -57,6 +50,8 @@ export default function (state = initialState, action) {
                 ...state,
                 post: action.payload
             };
+        case HIDE_POST:
+        case EDIT_POST:
         case POST_POST:
             return {
                 ...state,
@@ -65,14 +60,8 @@ export default function (state = initialState, action) {
                     ...state.posts
                 ]
             }
-        case EDIT_POST:
-            return {
-                ...state,
-                posts: [
-                    action.payload,
-                    ...state.posts
-                ]
-            }
+        case HIDE_COMMENT:
+        case EDIT_COMMENT:
         case POST_COMMENT:
             return {
                 ...state,
@@ -89,14 +78,7 @@ export default function (state = initialState, action) {
             return {
                 ...state
             }
-        case EDIT_COMMENT:
-            return {
-                ...state,
-                post: {
-                    ...state.post,
-                    comments: [action.payload, ...state.post.comments]
-                }
-            }
+       
         case POST_BOOKMARK:
             return {
                 ...state,
