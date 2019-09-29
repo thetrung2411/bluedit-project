@@ -1,21 +1,16 @@
 import React, { Component } from "react";
-import { Typography, Grid } from "@material-ui/core";
-import { Card, CardHeader, CardContent, CardActions } from "@material-ui/core";
+import { Card, CardHeader, CardContent, CardActions, Typography, Grid, Fab, Avatar, Button } from "@material-ui/core";
 import ThumbUpAltRoundedIcon from '@material-ui/icons/ThumbUpAltRounded';
 import ThumbDownRoundedIcon from '@material-ui/icons/ThumbDownRounded';
-import Fab from "@material-ui/core/Fab";
 import { PostItemStyles } from "./PostItemsStyles";
 import withStyles from "@material-ui/core/styles/withStyles";
-import Avatar from "@material-ui/core/Avatar";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import PostItemDetail from "./PostItemDetail";
-import Button from "@material-ui/core/Button";
 import PostMenu from "./PostMenu";
 import { connect } from "react-redux";
 import { setOnSubscribe, getSubscribe, getUnsubscribe } from "./../../redux/actions/subscribeAction";
 export class PostItems extends Component {
-
   renderSubscribe = () => {
     const { classes, subscribes, post } = this.props;
     if (post.issubfg) {
@@ -77,7 +72,7 @@ export class PostItems extends Component {
         <Card className={classes.paper}>
           <CardHeader
             avatar={
-              <Avatar >
+              <Avatar className={classes.avatar }>
                 {String(userPosted).charAt(0)}
               </Avatar>
             }
