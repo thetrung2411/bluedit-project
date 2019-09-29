@@ -1,12 +1,28 @@
 const functions = require("firebase-functions");
 const app = require("express")();
-const {signup, login, getCurrentUser,changeUserPassword} = require("./handlers/users");
-const {post, getAllPosts, getPost,SearchPost} = require("./handlers/posts");
-const {comment, getAllComments} = require("./handlers/comments");
+const {
+  signup,
+  login,
+  getCurrentUser,
+  changeUserPassword
+} = require("./handlers/users");
+const { post, getAllPosts, getPost, SearchPost } = require("./handlers/posts");
+const { comment, getAllComments } = require("./handlers/comments");
 const FBAuth = require("./util/fbAuth");
 const cors = require("cors");
-const {  getAllReports,  getReport,  changeReportStatus,  deleteReport} = require("./handlers/reports");
-const {bookmark,getAllBookmarks,getBookmark,deleteBookmark} = require("./handlers/bookmarks");
+const {
+  getAllReports,
+  getReport,
+  changeReportStatus,
+  deleteReport
+} = require("./handlers/reports");
+const {
+  bookmark,
+  getAllBookmarks,
+  getBookmark,
+  deleteBookmark
+} = require("./handlers/bookmarks");
+const { mailform, getAllMailforms } = require("./handlers/mailforms");
 
 app.use(cors());
 //User route
@@ -33,10 +49,8 @@ app.post("/bookmark", FBAuth, bookmark);
 app.get("/getAllBookmarks", getAllBookmarks);
 app.get("/getBookmark/:bookmarkid", getBookmark);
 app.delete("/deleteBookmark/:bookmarkid", deleteBookmark);
-<<<<<<< HEAD
-=======
 //app.get("/SearchPost/:body", SearchPost);
->>>>>>> master
 
+app.post("/mailform", FBAuth, mailform);
+app.get("/getAllMailforms", getAllMailforms);
 exports.api = functions.https.onRequest(app);
-

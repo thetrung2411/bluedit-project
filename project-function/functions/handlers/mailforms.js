@@ -19,7 +19,7 @@ exports.mailform = (req, res) => {
     });
 };
 
-exports.getAllMailForms = (req, res) => {
+exports.getAllMailforms = (req, res) => {
   db.collection("mailforms")
     .orderBy("createdAt", "desc")
     .get()

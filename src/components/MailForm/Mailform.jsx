@@ -58,7 +58,7 @@ class Mailform extends React.Component {
     //   dateOfBirth: this.state.dateOfBirth,
     //   userName: this.state.userName
     axiosConfig
-      .post("/bookmark")
+      .post("/mailform")
       .then(res => {
         console.log(res);
       })
@@ -153,8 +153,8 @@ class Mailform extends React.Component {
           </tbody>
         </table>
       </div>
-    );
-  }
+  )
+}
 }
 
 Mailform.propTypes = {
