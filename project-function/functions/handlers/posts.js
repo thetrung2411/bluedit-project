@@ -1,9 +1,12 @@
 const { db} = require("../util/admin");
 
+//Post a new post
 exports.post = (req, res) => {
+  //check if the post body is emty or not
   if (req.body.body.trim() === "") {
     return res.status(400).json({ body: "Post cannot be empty" });
   }
+  //Prepare the information contained in the post
   const newPost = {
     body: req.body.body,
     userPosted: req.user.userName,
@@ -11,6 +14,7 @@ exports.post = (req, res) => {
     commentCount: 0,
     hidden: false,
   };
+  //Create a new post in database
   db.collection("posts")
     .add(newPost)
     .then(doc => {
@@ -22,7 +26,9 @@ exports.post = (req, res) => {
     });
 };
 
+//Delete a post in database
 exports.deletePost = (req, res) => {
+  //find the document in the database by the id then delete
   const document = db.doc(`/posts/${req.params.postId}`);
   document
     .get()
@@ -45,6 +51,7 @@ exports.deletePost = (req, res) => {
     });
 };
 
+//Get all the posts from the database
 exports.getAllPosts = (req, res) => {
   db.collection("posts")
     .orderBy("createdAt", "desc")
@@ -66,8 +73,10 @@ exports.getAllPosts = (req, res) => {
       .catch(err => console.error(err));
   };
 
+//Get the specific post from the database
 exports.getPost = (req, res) => {
   let postContent = {};
+  //Find the id of the document in the database then return it
   db.doc(`/posts/${req.params.postId}`)
     .get()
     .then(doc => {
@@ -94,11 +103,14 @@ exports.getPost = (req, res) => {
     });
 };
 
+//Edit the post content
 exports.editPost = (req, res) => {
+  //Check if the new content is emty or not 
   if(req.body.body.trim() === ''){
     return res.status(400).json({body: 'Post cannot be empty'});
   }
   console.log(req.params.postId)
+  //Find the post by its Id to edit it
   db.doc(`/posts/${req.params.postId}`)
   .update({body: req.body.body})
   .then(() => {
@@ -110,7 +122,9 @@ exports.editPost = (req, res) => {
     });
 }
 
+//Unhide the post 
 exports.unhidePost = (req, res) => {
+  //Find the document by id and set its hidden property to false
   db.doc(`/posts/${req.params.postId}`)
   .update({hidden: false})
   .then(() => {
@@ -122,7 +136,9 @@ exports.unhidePost = (req, res) => {
   })
 }
 
+//Hide the post 
 exports.hidePost = (req, res) => {
+  //Find the document by id and set its hidden property to true
   db.doc(`/posts/${req.params.postId}`)
   .update({hidden: true})
   .then(() => {
