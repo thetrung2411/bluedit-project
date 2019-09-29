@@ -25,7 +25,8 @@ describe("Login Component test", () => {
     expect(userReducers(undefined, {})).toEqual({
       authenticated: false,
       loading: false,
-      userDetails: {}
+      userDetails: {},
+      isshowpage: false
     });
   });
 
@@ -64,7 +65,8 @@ describe("Register Component test", () => {
     expect(userReducers(undefined, {})).toEqual({
       authenticated: false,
       loading: false,
-      userDetails: {}
+      userDetails: {},
+      isshowpage: false
     });
   });
 

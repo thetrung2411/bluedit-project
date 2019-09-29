@@ -24,7 +24,9 @@ describe('PostButton Component Test', () => {
             {
                     posts: [],
                     post: {},
-                    loading: false
+                    loading: false,
+                    unSubscribes: [],
+                    subscribes: []
             }
         )
     })
@@ -33,7 +35,9 @@ describe('PostButton Component Test', () => {
             type: types.GET_POSTS,     
         })).toEqual({
             posts: undefined,
-            loading: false
+            loading: false,
+            unSubscribes: undefined,
+            subscribes: undefined
         })
     })
     test('Should return GET_POST state', () => {
@@ -49,7 +53,9 @@ describe('PostButton Component Test', () => {
         })).toEqual({
                 posts: [undefined],
                 post: {},
-                loading: false
+                loading: false,
+                unSubscribes: [],
+                subscribes: []
         })
     })
 })
