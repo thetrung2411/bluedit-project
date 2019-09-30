@@ -1,6 +1,6 @@
 describe('Testing post', function() {
     beforeEach(function (){
-        cy.visit('http://localhost:3000/home')
+        cy.visit('https://asd-bluedit.herokuapp.com/home')
         cy.get('#login').click()
         cy.get('#email').type('test@email.com').should('have.value', 'test@email.com')
         cy.get('#password').type('123456').should('have.value', '123456')
