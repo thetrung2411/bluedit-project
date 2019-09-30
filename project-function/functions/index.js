@@ -17,7 +17,9 @@ const {
   deletePost,
   editPost,
   hidePost,
-  unhidePost
+  unhidePost,
+  BlockPosts,
+  getmyposts
 } = require("./handlers/posts");
 const {
   comment,
@@ -48,7 +50,11 @@ const {
   getBookmark,
   deleteBookmark
 } = require("./handlers/bookmarks");
-const { getAllSubscribe, unSubscribe } = require("./handlers/subscribe");
+const {
+  getAllSubscribe,
+  unSubscribe,
+  poSubscribe
+} = require("./handlers/subscribe");
 
 app.use(cors());
 //User route
@@ -56,13 +62,16 @@ app.post("/signup", signup);
 app.post("/login", login);
 app.get("/user", FBAuth, getCurrentUser);
 app.post("/changePassword", FBAuth, changeUserPassword);
+
+//userpage
 app.post("/editProfile", FBAuth, editProfile);
+app.get("/getmypo", getmyposts);
 
 //Subscribe
 app.get("/allSubscribe", getAllSubscribe);
 app.get("/allUsers", getAllUsers);
 app.post("/unSubscribe", unSubscribe);
-app.post("/disableUser", FBAuth, disableUser);
+app.post("/postSubscribe", poSubscribe);
 
 //Comment
 app.post("/post/:postId/comment", FBAuth, comment);
@@ -79,6 +88,8 @@ app.get("/post/:postId", getPost);
 app.delete("/post/:postId", FBAuth, deletePost);
 app.post("/post/:postId/hide", FBAuth, hidePost);
 app.post("/post/:postId/unhide", FBAuth, unhidePost);
+app.get("/searchPost", SearchPost);
+app.get("/blackuser", BlockPosts);
 //Report
 app.get("/getAllReports", getAllReports);
 app.get("/getReport/:reportId", getReport);
@@ -97,6 +108,5 @@ app.post("/bookmark", FBAuth, bookmark);
 app.get("/getAllBookmarks", getAllBookmarks);
 app.get("/getBookmark/:bookmarkid", getBookmark);
 app.delete("/deleteBookmark/:bookmarkid", deleteBookmark);
-//app.get("/SearchPost/:body", SearchPost);
 
 exports.api = functions.https.onRequest(app);

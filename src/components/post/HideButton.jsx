@@ -1,19 +1,11 @@
 import React, {Component} from 'react';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button, MenuItem, ListItemIcon, ListItemText} from '@material-ui/core';
 import {PostLayoutStyles } from "./PostLayoutStyle";
 import withStyles from "@material-ui/core/styles/withStyles";
-import Button from "@material-ui/core/Button";
 import {connect} from 'react-redux';
 import {hidePost, unhidePost} from '../../redux/actions/postActions';
 import {hideComment, unhideComment} from '../../redux/actions/commentActions';
 import PropTypes from 'prop-types';
-import MenuItem from '@material-ui/core/MenuItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 class HideButton extends Component{
@@ -43,7 +35,6 @@ class HideButton extends Component{
          visibilityButton = (!hidden) ? hideItem : unhideItem
       else
         visibilityButton = (!commentHide) ? hideItem : unhideItem
-      
         return (
             <div>
              {visibilityButton}

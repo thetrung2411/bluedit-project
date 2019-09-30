@@ -1,22 +1,12 @@
 import React, {Component} from 'react';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import {PostLayoutStyles } from "./PostLayoutStyle";
 import withStyles from "@material-ui/core/styles/withStyles";
-import Button from "@material-ui/core/Button";
 import {connect} from 'react-redux';
 import {editPost} from '../../redux/actions/postActions';
 import {editComment} from '../../redux/actions/commentActions';
 import PropTypes from 'prop-types';
-import MenuItem from '@material-ui/core/MenuItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import Create from '@material-ui/icons/Create';
-import TextField from '@material-ui/core/TextField';
-
+import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button, MenuItem, ListItemIcon, ListItemText, TextField} from '@material-ui/core';
 class EditButton extends Component{
     state = {
         open: false,
@@ -67,7 +57,7 @@ class EditButton extends Component{
       const {classes} = this.props;
       return (
             <div>
-              <MenuItem selected classes={{ selected: classes.menuItemDelete }} onClick={this.handleOpen} >
+              <MenuItem  classes={{ selected: classes.menuItemDelete }} onClick={this.handleOpen} >
               <ListItemIcon ><Create/></ListItemIcon> <ListItemText primary="Edit" />
           </MenuItem>
           <Dialog

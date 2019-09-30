@@ -119,3 +119,15 @@ export const changeUserData = (userData) => dispatch =>{
     )
     .catch(err => console.log("edit error"));
 };
+
+export const getmyposts = (userData) => dispatch =>{
+  dispatch({ type: LOADING_USER });
+  axiosConfig
+    .get("/getmypo", userData)
+    .then(() => {
+      dispatch(getUserData());
+    },
+    console.log(userData)
+    )
+    .catch(err => console.log("edit error"));
+};

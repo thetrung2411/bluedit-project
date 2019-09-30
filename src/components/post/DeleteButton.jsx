@@ -1,19 +1,11 @@
 import React, {Component} from 'react';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button, MenuItem, ListItemIcon, ListItemText} from '@material-ui/core';
 import {PostLayoutStyles } from "./PostLayoutStyle";
 import withStyles from "@material-ui/core/styles/withStyles";
-import Button from "@material-ui/core/Button";
 import {connect} from 'react-redux';
 import {deletePost} from '../../redux/actions/postActions';
 import {deleteComment} from '../../redux/actions/commentActions';
 import PropTypes from 'prop-types';
-import MenuItem from '@material-ui/core/MenuItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import Delete from '@material-ui/icons/Delete';
 class DeleteButton extends Component{
     state = {
@@ -21,15 +13,10 @@ class DeleteButton extends Component{
         body: '',
         errors: {} 
       };
-    componentWillReceiveProps(nextProps){
-        
-    }
-
     handleOpen = () => {
       this.setState({openDialog: true});
     }
     handleClose = () => {
-
       this.setState({openDialog: false})
     }
     handleDelete = () => {
@@ -41,11 +28,12 @@ class DeleteButton extends Component{
         this.handleClose();
     }
     render(){
-      const {classes} = this.props;
       return (
             <div>
-              <MenuItem selected classes={{ selected: classes.menuItemDelete }} onClick={this.handleOpen} >
-              <ListItemIcon ><Delete/></ListItemIcon> <ListItemText primary="Delete" />
+              <MenuItem onMouseEnter={(e) => e.target.style.backgroundColor = '#f22f0c'}  
+              onMouseLeave={(e) => e.target.style.backgroundColor = "inherit"}
+              onClick={this.handleOpen} >
+              <ListItemIcon><Delete/></ListItemIcon> <ListItemText primary="Delete" />
           </MenuItem>
           <Dialog
             open={this.state.openDialog}
@@ -66,7 +54,6 @@ class DeleteButton extends Component{
                         </Button>
             </DialogActions>
           </Dialog>
-          
          </div>
         )
     }    

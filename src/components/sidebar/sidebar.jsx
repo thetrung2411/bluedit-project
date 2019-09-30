@@ -97,6 +97,23 @@ class sidebar extends React.Component{
                     <tbody>
                     <tr>
                         <td>
+                            <Link to="/userpost" className= {classes.noDecor}>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                className={classes.button}
+                                >
+                                My Subscribed Post
+                            </Button>
+                            </Link>
+                        </td>
+                    </tr>
+                    </tbody>
+
+                    <tbody>
+                    <tr>
+                        <td>
                         <Link to="/subscriptions" className= {classes.noDecor}>
                             <Button
                                 type="submit"
@@ -121,7 +138,7 @@ class sidebar extends React.Component{
                                 color="primary"
                                 className={classes.button}
                                 >
-                                Post
+                                All Post
                             </Button>
                             </Link>
                         </td>

@@ -8,13 +8,15 @@ export const appBarStyles = theme => ({
     grow: {
         flexGrow: 0.5
     },
+    avatar: {
+        backgroundColor:"#e85d5d"
+    },
     noDecor: {
         textDecoration: "none",
         color: "white"
     },
     button: {
         backgroundColor: "white",
-    
     },
     title: {
         display: "none",
@@ -46,7 +48,9 @@ export const appBarStyles = theme => ({
         alignItems: "center",
         justifyContent: "center"
     },
-    
+    leftSpacing:{
+        marginLeft: "14px"
+    },
     inputInput: {
         paddingTop: theme.spacing(0),
         paddingRight: theme.spacing(0),

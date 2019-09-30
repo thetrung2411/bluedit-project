@@ -10,6 +10,7 @@ import {
   DELETE_POST, 
   EDIT_POST,
   HIDE_POST,
+  GET_SUBSCRIBE,
 } from "../types";
 import axiosConfig from '../../axiosConfig';
 export const getAllPosts = () => (dispatch) => {
@@ -120,16 +121,55 @@ export const post = (newPost) => (dispatch) => {
     
 }
 
-export const SearchPost = (body) => (dispatch) => {
-  dispatch({type: LOADING_UI});
-  axiosConfig.get(`/SearchPost/${body}`)
-  .then(res => {
-    dispatch ({
-      type:GET_POST,
-      payload:res.data
-    });
-    dispatch({type: STOP_LOADING_UI})
-  })
-  .catch (err => console.log(err));
+export const SearchPost = (body, name) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  var sql = (body && name) ?
+    `body=${body}&fbname=${name}` :
+    (name) ? `fbname=${name}` :
+      (body) ? `body=${body}` : '';
+  console.log('sql', sql)
+  console.log('body', body)
+  axiosConfig.get(`/searchPost?${sql}`)
+    .then(res => {
+      console.log('ser,', res)
+      dispatch({
+        type: GET_POST,
+        payload: res.data
+      });
+      dispatch({ type: STOP_LOADING_UI })
+    })
+    .catch(err => console.log(err));
 
+}
+
+export const BlockPost = (bname) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  axiosConfig.get(`/blackuser?bname=${bname}`)
+    .then(res => {
+      console.log('ser,', res)
+      dispatch({
+        type: GET_POST,
+        payload: res.data
+      });
+      dispatch({ type: STOP_LOADING_UI })
+    })
+    .catch(err => console.log(err));
+
+}
+
+export const postSubscribe = (body) => (dispatch) => {
+  console.log(body);
+
+  dispatch({ type: LOADING_UI });
+  axiosConfig.post('/postSubscribe', body)
+    .then(res => {
+      dispatch({ type: CLEAR_ERRORS });
+    })
+    .then(() => { dispatch(getAllPosts()) })
+    .catch(err => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data
+      })
+    })
 }

@@ -8,13 +8,15 @@ import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
 import postReducers from "../../redux/reducers/postReducers";
 import * as types from "../../redux/types";
-import thunk from "redux-thunk"
-
+import thunk from "redux-thunk";
+import PostMenu from "./PostMenu";
+import EditButton from "./EditButton";
+import DeleteButton from "./DeleteButton";
+import HideButton from "./HideButton";
 const mockStore = configureMockStore([thunk]);
 const store = mockStore({});
 
 describe('PostButton Component Test', () => {
-    
     test('Should render without errors', () => {
         const component = shallow(<Provider store ={store}><PostButton/></Provider>);
         expect(component.find(PostButton).length).toBe(1);
@@ -24,7 +26,9 @@ describe('PostButton Component Test', () => {
             {
                     posts: [],
                     post: {},
-                    loading: false
+                    loading: false,
+                    unSubscribes: [],
+                    subscribes: []
             }
         )
     })
@@ -33,7 +37,9 @@ describe('PostButton Component Test', () => {
             type: types.GET_POSTS,     
         })).toEqual({
             posts: undefined,
-            loading: false
+            loading: false,
+            unSubscribes: undefined,
+            subscribes: undefined
         })
     })
     test('Should return GET_POST state', () => {
@@ -49,7 +55,9 @@ describe('PostButton Component Test', () => {
         })).toEqual({
                 posts: [undefined],
                 post: {},
-                loading: false
+                loading: false,
+                unSubscribes: [],
+                subscribes: []
         })
     })
 })
@@ -71,5 +79,34 @@ describe('PostLayout Component Test', () => {
     test('Should render without errors', () => {
         const component = shallow(<Provider store ={store}><PostLayout/></Provider>);
         expect(component.find(PostLayout).length).toBe(1);
+    })
+})
+
+describe('PostMenu Component Test', () => {
+    test('Should render without errors', () => {
+        const component = shallow(<Provider store ={store}><PostMenu/></Provider>);
+        expect(component.find(PostMenu).length).toBe(1);
+    })
+})
+
+
+describe('EditButton Component Test', () => {
+    test('Should render without errors', () => {
+        const component = shallow(<Provider store ={store}><EditButton/></Provider>);
+        expect(component.find(EditButton).length).toBe(1);
+    })
+})
+
+describe('HideButton Component Test', () => {
+    test('Should render without errors', () => {
+        const component = shallow(<Provider store ={store}><HideButton/></Provider>);
+        expect(component.find(HideButton).length).toBe(1);
+    })
+})
+
+describe('DeleteButton Component Test', () => {
+    test('Should render without errors', () => {
+        const component = shallow(<Provider store ={store}><DeleteButton/></Provider>);
+        expect(component.find(DeleteButton).length).toBe(1);
     })
 })

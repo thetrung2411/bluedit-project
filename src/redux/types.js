@@ -26,3 +26,10 @@ export const LOADING_USER = "LOADING_USER";
 
 //Post reducer types
 export const POST_BOOKMARK = 'POST_BOOKMARK';
+
+//subscribe reducer types
+export const GET_SUBSCRIBE = 'GET_SUBSCRIBE';
+export const GET_UNSUBSCRIBE = 'GET_UNSUBSCRIBE';
+export const SET_SUBSCRIBE = 'SET_SUBSCRIBE';
+
+export const IS_SHOWPAGE = 'IS_SHOWPAGE';

@@ -1,18 +1,18 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import MenuList from "@material-ui/core/MenuList";
+import {
+  Menu,
+  MenuItem,
+  IconButton,
+  InputBase,
+  Toolbar,
+  Typography,
+  AppBar,
+  Avatar
+} from "@material-ui/core";
 import List from "@material-ui/icons/List";
-import AppBar from "@material-ui/core/AppBar";
-import Button from "@material-ui/core/Button";
-import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
-import InputBase from "@material-ui/core/InputBase";
 import HomeIcon from "@material-ui/icons/HomeRounded";
 import SearchIcon from "@material-ui/icons/Search";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import { appBarStyles } from "./appBarStyles";
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -115,10 +115,14 @@ class SignedInAppBar extends Component {
               </div>
 
               <div>
-                <Avatar>{String(userDetails.userName).charAt(0)}</Avatar>
+                <Avatar className={classes.avatar}>
+                  {String(userDetails.userName).charAt(0)}
+                </Avatar>
               </div>
               <div>
-                <Typography align="right">{userDetails.userName}</Typography>
+                <Typography align="right" className={classes.leftSpacing}>
+                  {userDetails.userName}
+                </Typography>
               </div>
             </Toolbar>
           </AppBar>

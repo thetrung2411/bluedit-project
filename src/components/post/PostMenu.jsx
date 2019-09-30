@@ -41,9 +41,9 @@ class PostMenu extends Component {
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         transformOrigin={{ vertical: "top", horizontal: "center" }}
       >
-        {deleteButton}
        {hideButton}
-        {editButton}
+       {editButton}
+       {deleteButton}
       </Menu>
             </div>
         )
