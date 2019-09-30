@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 import { disableAccount } from "../../redux/actions/userActions";
+import ConfirmDialog from  "./ConfirmDialog"
 
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -35,7 +36,8 @@ class DisableAccount extends Component {
   render() {
     const {
       classes,
-      UI: { loading }
+      UI: { loading },
+      user: {userDetails}
     } = this.props;
 
     return (
@@ -65,13 +67,16 @@ class DisableAccount extends Component {
             <CircularProgress size={30} className={classes.progress} />
           )}
         </Button>
+        <br/>
+        <ConfirmDialog userName={userDetails.userName}/>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  UI: state.UI
+  UI: state.UI,
+  user: state.user
 });
 
 const mapActionsToProps = {
@@ -79,7 +84,8 @@ const mapActionsToProps = {
 };
 
 DisableAccount.propTypes = {
-  disableAccount: PropTypes.func.isRequired
+  disableAccount: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired
 };
 
 export default connect(
