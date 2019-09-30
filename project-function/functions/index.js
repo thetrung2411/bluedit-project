@@ -66,7 +66,7 @@ app.post("/changePassword", FBAuth, changeUserPassword);
 //userpage
 app.post("/editProfile", FBAuth, editProfile);
 app.get("/getmypo", getmyposts);
-
+app.post("/disableUser", FBAuth, disableUser);
 //Subscribe
 app.get("/allSubscribe", getAllSubscribe);
 app.get("/allUsers", getAllUsers);
