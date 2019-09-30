@@ -39,6 +39,7 @@ const {
 } = require("./handlers/reports");
 const {
   uploadAd,
+  uploadImage,
   editAd,
   getAllAds,
   getAd,
@@ -98,6 +99,7 @@ app.delete("/deleteReport/:reportId", deleteReport);
 
 //Ads
 app.post("/uploadAd", uploadAd);
+app.post("/adImage/:adId", uploadImage);
 app.post("/editAd/:adId", editAd);
 app.get("/getAllAds", getAllAds);
 app.get("/getAd/:adId", getAd);
