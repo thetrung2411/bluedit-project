@@ -15,7 +15,6 @@ export default class NewButton extends React.Component {
     open: false,
     ad: {
       name: "",
-      imageUrl: "",
       link: ""
     }
   };
@@ -47,6 +46,7 @@ export default class NewButton extends React.Component {
   };
 
   render() {
+    //TODO: add upload image
     return (
       <Fragment>
         <Button onClick={this.handleOpen}>New</Button>
@@ -57,14 +57,6 @@ export default class NewButton extends React.Component {
               label="Name"
               name="name"
               value={this.state.ad.name}
-              onChange={this.handleChange}
-              margin="normal"
-            />
-            <br />
-            <TextField
-              label="Image"
-              name="imageUrl"
-              value={this.state.ad.imageUrl}
               onChange={this.handleChange}
               margin="normal"
             />

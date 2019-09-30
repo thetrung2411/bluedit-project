@@ -9,6 +9,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
+import CardMedia from "@material-ui/core/CardMedia";
 
 //MUI Icon
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
@@ -48,14 +49,16 @@ export default class AdDialog extends React.Component {
   };
 
   render() {
+    const adImage = this.props.ad.imageUrl;
     //Show single advertisement in detailed
     let ad = this.props.ad ? (
       <FormControl>
         <DialogTitle>{"Manage Advertisement"}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            <tr>ID: {this.props.ad.adId}</tr>
-            <tr>Uploaded At: {this.props.ad.uploadAt}</tr>
+            <span>ID: {this.props.ad.adId}</span>
+            <br />
+            <span>Uploaded At: {this.props.ad.uploadAt}</span>
           </DialogContentText>
           <TextField
             label="Name"
@@ -63,14 +66,7 @@ export default class AdDialog extends React.Component {
             value={this.state.ad.name}
             onChange={this.handleChange}
             margin="normal"
-          />
-          <br />
-          <TextField
-            label="Image"
-            name="imageUrl"
-            value={this.state.ad.imageUrl}
-            onChange={this.handleChange}
-            margin="normal"
+            fullWidth
           />
           <br />
           <TextField
@@ -79,7 +75,10 @@ export default class AdDialog extends React.Component {
             value={this.state.ad.link}
             onChange={this.handleChange}
             margin="normal"
+            fullWidth
           />
+          {/*TODO: Add upload image*/}
+          <img src={adImage} height="200" align="center" />
         </DialogContent>
         <DialogActions>
           <Button onClick={this.handleClose}>Back</Button>
@@ -92,7 +91,7 @@ export default class AdDialog extends React.Component {
         </DialogActions>
       </FormControl>
     ) : (
-      <p>AD NOT FOUND</p>
+      <DialogContentText>AD NOT FOUND</DialogContentText>
     );
 
     return (
@@ -101,7 +100,7 @@ export default class AdDialog extends React.Component {
           <EditOutlinedIcon />
         </Button>
         <Dialog open={this.state.open} onClose={this.handleClose} maxWidth="md">
-          <DialogContent>{ad}</DialogContent>
+          {ad}
         </Dialog>
       </Fragment>
     );
