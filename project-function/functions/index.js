@@ -37,10 +37,10 @@ const {
 } = require("./handlers/reports");
 const {
   uploadAd,
+  editAd,
   getAllAds,
   getAd,
-  deleteAd,
-  setDisplay
+  deleteAd
 } = require("./handlers/ads");
 const {
   bookmark,
@@ -87,10 +87,10 @@ app.delete("/deleteReport/:reportId", deleteReport);
 
 //Ads
 app.post("/uploadAd", uploadAd);
+app.post("/editAd/:adId", editAd);
 app.get("/getAllAds", getAllAds);
 app.get("/getAd/:adId", getAd);
 app.delete("/deleteAd/:adId", deleteAd);
-app.post("/Ad/setDisplay/:adId", setDisplay);
 
 //Bookmark
 app.post("/bookmark", FBAuth, bookmark);

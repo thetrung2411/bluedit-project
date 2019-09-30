@@ -5,9 +5,11 @@ import { withRouter, Route, Switch } from "react-router-dom";
 
 //Components
 import AdsTable from "./AdsTable";
+import NewButton from "./NewButton";
 
 //MUI
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Button from "@material-ui/core/Button";
 
 export class AdsPage extends Component {
   state = {
@@ -25,9 +27,19 @@ export class AdsPage extends Component {
       .catch(err => console.log(err));
   }
 
+  handleDelete = adId => {
+    axiosConfig
+      .delete(`/deleteAd/${adId}`)
+      .then(res => {
+        console.log(res.data);
+        window.location.reload();
+      })
+      .catch(err => console.log(err));
+  };
+
   render() {
     let showAds = this.state.ads ? (
-      <AdsTable ads={this.state.ads} />
+      <AdsTable ads={this.state.ads} handleDelete={this.handleDelete} />
     ) : (
       <CircularProgress />
     );
@@ -36,7 +48,8 @@ export class AdsPage extends Component {
       <div>
         <AppBarWithAvatar />
         <h1>Advertisements</h1>
-        <p>{showAds}</p>
+        <NewButton />
+        {showAds}
       </div>
     );
   }

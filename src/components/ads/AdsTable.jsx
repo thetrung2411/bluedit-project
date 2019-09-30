@@ -34,10 +34,9 @@ const AdTable = props => {
             <TableCell align="left">{ad.adId}</TableCell>
             <TableCell align="left">{ad.name}</TableCell>
             <TableCell align="left">{ad.uploadAt}</TableCell>
-            <TableCell align="left">{ad.isShowing.toString()}</TableCell>
             <TableCell>
               <AdDialog ad={ad} />
-              <Button>
+              <Button onClick={() => props.handleDelete(ad.adId)}>
                 <DeleteForeverOutlinedIcon />
               </Button>
             </TableCell>

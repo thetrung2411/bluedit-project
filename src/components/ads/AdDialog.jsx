@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import axiosConfig from "../../axiosConfig";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
+
 //MUI
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -9,20 +8,17 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import Switch from "@material-ui/core/Switch";
-import { Card, CardHeader, CardContent } from "@material-ui/core";
-import { Typography } from "@material-ui/core";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Avatar from "@material-ui/core/Avatar";
+import TextField from "@material-ui/core/TextField";
+
 //MUI Icon
-import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined";
-import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
+import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
+import { FormControl } from "@material-ui/core";
 //import AlertDialog from "./AlertDialog";
 
-export default class ReportDialog extends React.Component {
+export default class AdDialog extends React.Component {
   state = {
     open: false,
-    content: null
+    ad: this.props.ad
   };
 
   handleOpen = () => {
@@ -32,52 +28,69 @@ export default class ReportDialog extends React.Component {
     this.setState({ open: false });
   };
 
-  //TODO: modify to setDisplay
-  setProcessed = () => {
+  handleChange = e => {
+    const newAd = { ...this.state.ad };
+    newAd[e.target.name] = e.target.value;
+    this.setState({
+      ad: newAd
+    });
+  };
+
+  handleSubmit = (e, adId) => {
+    e.preventDefault();
     axiosConfig
-      .post(`/changeStatus/${this.props.ad.adId}`)
+      .post(`/editAd/${adId}`, this.state.ad)
       .then(res => {
-        console.log(res);
+        console.log(res.data);
+        window.location.reload();
       })
       .catch(err => console.log(err));
-    window.location.reload();
   };
 
   render() {
-    dayjs.extend(relativeTime);
-
     //Show single advertisement in detailed
     let ad = this.props.ad ? (
-      <div>
+      <FormControl>
         <DialogTitle>{"Manage Advertisement"}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            <tr>Advertisement ID: {this.props.ad.adId}</tr>
-            <tr>Name: {this.props.ad.name}</tr>
+            <tr>ID: {this.props.ad.adId}</tr>
             <tr>Uploaded At: {this.props.ad.uploadAt}</tr>
-            <tr>Image: {this.props.ad.imageUrl}</tr>
-            <tr>Link: {this.props.ad.link}</tr>
-            <tr>Displaying: {this.props.ad.isShowing.toString()}</tr>
           </DialogContentText>
-          <FormControlLabel
-            //TODO: change to setDisplay
-            control={
-              this.props.ad.isShowing === "processed" ? (
-                <Switch checked={true} disabled={true} />
-              ) : (
-                <Switch onChange={this.setProcessed} />
-              )
-            }
-            label="Set as processed"
-            labelPlacement="end"
+          <TextField
+            label="Name"
+            name="name"
+            value={this.state.ad.name}
+            onChange={this.handleChange}
+            margin="normal"
+          />
+          <br />
+          <TextField
+            label="Image"
+            name="imageUrl"
+            value={this.state.ad.imageUrl}
+            onChange={this.handleChange}
+            margin="normal"
+          />
+          <br />
+          <TextField
+            label="Link"
+            name="link"
+            value={this.state.ad.link}
+            onChange={this.handleChange}
+            margin="normal"
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={this.handleClose} color="secondary">
-            Back
+          <Button onClick={this.handleClose}>Back</Button>
+          <Button
+            onClick={e => this.handleSubmit(e, this.state.ad.adId)}
+            color="secondary"
+          >
+            Submit
           </Button>
         </DialogActions>
-      </div>
+      </FormControl>
     ) : (
       <p>AD NOT FOUND</p>
     );
@@ -85,7 +98,7 @@ export default class ReportDialog extends React.Component {
     return (
       <Fragment>
         <Button onClick={this.handleOpen}>
-          <VisibilityOutlinedIcon />
+          <EditOutlinedIcon />
         </Button>
         <Dialog open={this.state.open} onClose={this.handleClose} maxWidth="md">
           <DialogContent>{ad}</DialogContent>

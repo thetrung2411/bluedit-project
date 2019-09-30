@@ -9,7 +9,7 @@ exports.uploadAd = (req, res) => {
     req.body.imageUrl === "" ||
     req.body.link === ""
   ) {
-    return res.status(400).json({ body: "Post cannot be empty" });
+    return res.status(400).json({ body: "Must not be empty" });
   }
   const newAd = {
     name: req.body.name,
