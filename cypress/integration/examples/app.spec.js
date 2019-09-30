@@ -60,7 +60,7 @@ describe('Testing post', function() {
 describe('Testing comment', function() {
  describe('Testing comment delete function', function() {   
     beforeEach(function (){
-        cy.visit('http://localhost:3000/home')  
+        cy.visit('https://asd-bluedit.herokuapp.com/home')  
         cy.get('#login').click()
         cy.get('#email').type('test@email.com').should('have.value', 'test@email.com')
         cy.get('#password').type('123456').should('have.value', '123456')
@@ -85,7 +85,7 @@ describe('Testing comment', function() {
 
  describe('Testing comment hide function', function() {   
     beforeEach(function (){
-        cy.visit('http://localhost:3000/home')  
+        cy.visit('https://asd-bluedit.herokuapp.com/home')  
         cy.get('#login').click()
         cy.get('#email').type('test@email.com').should('have.value', 'test@email.com')
         cy.get('#password').type('123456').should('have.value', '123456')
@@ -110,7 +110,7 @@ describe('Testing comment', function() {
 
  describe('Testing comment edit function', function() {
     beforeEach(function (){
-        cy.visit('http://localhost:3000/home')  
+        cy.visit('https://asd-bluedit.herokuapp.com/home')  
         cy.get('#login').click()
         cy.get('#email').type('test@email.com').should('have.value', 'test@email.com')
         cy.get('#password').type('123456').should('have.value', '123456')
