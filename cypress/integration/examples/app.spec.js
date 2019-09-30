@@ -20,7 +20,7 @@ describe('Testing post', function() {
         
     })
         it('Edit post with non empty body', function(){
-        cy.get('#textField').type('This content is going to be edited').should('have.value', 'This content is going to be editted')
+        cy.get('#textField').type('This content is going to be edited').should('have.value', 'This content is going to be edited')
         cy.get('#submit').click()
         cy.wait(5000)
         cy.get('#postMenu').click()
