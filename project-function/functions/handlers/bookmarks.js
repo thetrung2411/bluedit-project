@@ -6,14 +6,11 @@ exports.bookmark = (req, res) => {
   const newBookmark = {
     /*     createdAt: new Date().toISOString(),
     postheader: req.body,
-    postId: req.params.postId,
+    postId: db.collection('post')
     userName: req.user.userName,
     userPosted: req.params.userPosted */
 
     createdAt: new Date().toISOString(),
-    postheader: "abcabcabc",
-    postId: "wVr66mnV6aZ3y7naJ22D",
-    userPosted: "lokkwing",
     userName: req.user.userName
   };
   db.collection("bookmarks")
@@ -25,7 +22,33 @@ exports.bookmark = (req, res) => {
       res.status(500).json({ error: "Unexpected failure" });
     });
 };
-
+exports.getPost = (req, res) => {
+  let postContent = {};
+  db.doc(`/posts/${req.params.postId}`)
+    .get()
+    .then(doc => {
+      if (!doc.exists) {
+        return res.status(404).json({ error: "Post not found" });
+      }
+      postContent = doc.data();
+      postContent.postId = doc.id;
+      return db
+        .collection("bookmarks")
+        .where("postId", "==", req.params.postId)
+        .get();
+    })
+    .then(data => {
+      postContent.bookmarks = [];
+      data.forEach(doc => {
+        postContent.bookmarks.push(doc.data());
+      });
+      return res.json(postContent);
+    })
+    .catch(err => {
+      console.log(err);
+      return res.status(500).json({ error: "Unexpected failure" });
+    });
+};
 exports.getBookmark = (req, res) => {
   let bookmarkData = {};
   db.doc(`/bookmarks/${req.params.bookmarkId}`)

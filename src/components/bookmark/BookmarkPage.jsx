@@ -78,7 +78,9 @@ export class BookmarkPage extends Component {
       : this.state.bookmarks;
 
     let showBookmarks = this.state.bookmarks ? (
-      <BookmarkTable bookmarks={bookmarks} handleDelete={this.handleDelete} />
+      <BookmarkTable bookmarks={bookmarks} 
+      handleSort={this.handleSort}
+      handleDelete={this.handleDelete} />
     ) : (
       <CircularProgress />
     );
