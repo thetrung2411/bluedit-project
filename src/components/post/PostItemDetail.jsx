@@ -60,8 +60,8 @@ export class PostItemDetail extends Component {
         </Card>); 
     return (
         <Fragment>
-        <Fab size="small" className ={classes.fab} onClick = {this.handleOpen}><QuestionAnswerRounded/></Fab>
-        <Dialog
+        <Fab id="showDetail" size="small" className ={classes.fab} onClick = {this.handleOpen}><QuestionAnswerRounded/></Fab>
+        <Dialog id ="dialog"
         open={this.state.open}
         onClose={this.handleClose}
         aria-labelledby="responsive-dialog-title"

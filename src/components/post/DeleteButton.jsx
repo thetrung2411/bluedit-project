@@ -33,7 +33,7 @@ class DeleteButton extends Component{
               <MenuItem onMouseEnter={(e) => e.target.style.backgroundColor = '#f22f0c'}  
               onMouseLeave={(e) => e.target.style.backgroundColor = "inherit"}
               onClick={this.handleOpen} >
-              <ListItemIcon><Delete/></ListItemIcon> <ListItemText primary="Delete" />
+              <ListItemIcon id='deleteButton'><Delete/></ListItemIcon> <ListItemText primary="Delete" />
           </MenuItem>
           <Dialog
             open={this.state.openDialog}
@@ -46,7 +46,7 @@ class DeleteButton extends Component{
               </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                        <Button variant = "contained" color = "secondary" onClick={this.handleDelete}>
+                        <Button id='submitDelete' variant = "contained" color = "secondary" onClick={this.handleDelete}>
                            Yes
                         </Button>
                         <Button type="submit" variant="contained" color = "primary" onClick={this.handleClose}>

@@ -48,7 +48,7 @@ export class PostButton extends Component{
     const {classes} = this.props;
     return (
         <div>
-          <Fab color="primary" onClick={this.handleOpen}>
+          <Fab id="postButton" color="primary" onClick={this.handleOpen}>
         <EditRounded/>
       </Fab>
       <Dialog
@@ -64,7 +64,7 @@ export class PostButton extends Component{
           </DialogContentText>
                         <form onSubmit ={this.handleSubmit}>
                          <TextField
-                         id="outlined-multiline-flexible"
+                         id="textField"
                           label="Post here"
                           multiline
                           rows = "7"
@@ -91,6 +91,7 @@ export class PostButton extends Component{
                         Cancel
                     </Button>
                     <Button
+                        id='submit'
                         type="submit"
                         fullWidth
                         variant="contained"

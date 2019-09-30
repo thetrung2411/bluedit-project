@@ -29,8 +29,8 @@ class HideButton extends Component{
     render(){
       const {hidden, commentHide} = this.props;
       let visibilityButton;
-      let hideItem = <MenuItem  onClick={this.handleOpen}><ListItemIcon ><Visibility/></ListItemIcon><ListItemText primary="Hide" /></MenuItem>;
-      let unhideItem = <MenuItem  onClick={this.handleOpen}><ListItemIcon ><VisibilityOff/></ListItemIcon><ListItemText primary="Unhide" /></MenuItem>;
+      let hideItem = <MenuItem id="hideButton" onClick={this.handleOpen}><ListItemIcon ><Visibility/></ListItemIcon><ListItemText primary="Hide" /></MenuItem>;
+      let unhideItem = <MenuItem id="hideButton" onClick={this.handleOpen}><ListItemIcon ><VisibilityOff/></ListItemIcon><ListItemText primary="Unhide" /></MenuItem>;
       if(this.props.commentId === undefined)
          visibilityButton = (!hidden) ? hideItem : unhideItem
       else
@@ -49,7 +49,7 @@ class HideButton extends Component{
               </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                        <Button variant = "contained" color = "secondary" onClick={this.handleHide}>
+                        <Button id="submitHide" variant = "contained" color = "secondary" onClick={this.handleHide}>
                            Yes
                         </Button>
                         <Button type="submit" variant="contained" color = "primary" onClick={this.handleClose}>

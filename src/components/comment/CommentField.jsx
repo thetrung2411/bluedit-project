@@ -31,14 +31,16 @@ export class CommentField extends Component{
       const commentFieldMarkUp = authenticated ? (
           <div>
           <form onSubmit = {this.handleSubmit}>
-    <TextField rowsMax="1000" fullWidth variant="outlined" label="Comment here" multiline
+    <TextField id="commentField" rowsMax="1000" fullWidth variant="outlined" label="Comment here" multiline
     onChange = {this.handleChange}
     name = "body"
     error = {errors.body ? true : false}
     value = {this.state.body}
     helperText = {errors.body}
     ></TextField>
-    <Button type="submit"
+    <Button
+    id="submitComment"
+    type="submit"
     fullWidth
     variant="contained"
     color = "primary"
