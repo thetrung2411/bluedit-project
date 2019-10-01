@@ -96,12 +96,12 @@ class ConfirmDialog extends Component {
           <DialogContent>
             Reminder: Disabling account will not delete all of your existing posts. If you wish to delete all of your posts, please do it manually or contact site admin.
             <br/>In order to make sure that you want to disable your account, please
-            type your username {userDetails.userName} below:
+            type your username &quot;{userDetails.userName}&quot; below:
             <form>
               <TextField
                 name="statement"
                 type="text"
-                label="Username"
+                label={userDetails.userName}
                 placeholder="Please type your username here"
                 className={classes.textField}
                 value={this.state.statement}
