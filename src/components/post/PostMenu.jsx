@@ -5,6 +5,8 @@ import React, { Component } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import EditButton from "./EditButton";
+import AddBookmark from "../bookmark/Addbookmark";
+
 class PostMenu extends Component {
     state = {
         anchorEl: null,
@@ -41,9 +43,14 @@ class PostMenu extends Component {
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         transformOrigin={{ vertical: "top", horizontal: "center" }}
       >
+                            <AddBookmark
+                  postId={postId}
+                  userPosted={userPosted}
+                ></AddBookmark>
        {hideButton}
        {editButton}
        {deleteButton}
+            
       </Menu>
             </div>
         )
