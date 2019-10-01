@@ -12,6 +12,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const styles = {
   button: {
@@ -23,6 +24,9 @@ const styles = {
   },
   disableButton: {
     position: "center"
+  },
+  progress: {
+    position: "absolute"
   }
 };
 
@@ -33,6 +37,11 @@ class ConfirmDialog extends Component {
     open: false,
     userName: ""
   };
+
+  handleDisable = () => {
+    this.props.disableAccount(this.props.history);
+    this.handleClose();
+  }
 
   handleOpen = () => {
     this.setState({ open: true, userName: this.props.userName });
@@ -61,7 +70,7 @@ class ConfirmDialog extends Component {
   };
 
   render() {
-    const { classes, user: {userDetails} } = this.props;
+    const { classes, user: {userDetails}, UI: {loading} } = this.props;
 
     return (
       <Fragment>
@@ -70,8 +79,12 @@ class ConfirmDialog extends Component {
           className={classes.button}
           color="secondary"
           onClick={this.handleOpen}
+          disabled={loading}
         >
           I understand and wish to continue
+          {loading && (
+            <CircularProgress size={30} className={classes.progress} />
+          )}
         </Button>
         <Dialog
           open={this.state.open}
@@ -103,6 +116,7 @@ class ConfirmDialog extends Component {
               className={classes.disableButton}
               color="secondary"
               disabled={this.state.disabled}
+              onClick={this.handleDisable}
             >
               Disable Account
             </Button>
@@ -119,7 +133,8 @@ ConfirmDialog.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-    user: state.user
+    user: state.user,
+    UI: state.UI
 })
 
 const mapActionToProps = {

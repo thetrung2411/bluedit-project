@@ -55,20 +55,7 @@ class DisableAccount extends Component {
           To regain access to disabled account, please contact site admin.
         </small>
         <br />
-        <Button
-          variant="contained"
-          onClick={this.handleDisable}
-          className={classes.button}
-          color="secondary"
-          disabled={loading}
-        >
-          Disable Account
-          {loading && (
-            <CircularProgress size={30} className={classes.progress} />
-          )}
-        </Button>
-        <br/>
-        <ConfirmDialog userName={userDetails.userName}/>
+        <ConfirmDialog userName={userDetails.userName} history={this.props.history}/>
       </div>
     );
   }
