@@ -141,10 +141,9 @@ exports.uploadImage = (req, res) => {
     }
     // my.image.png => ['my', 'image', 'png']
     const imageExtension = filename.split(".")[filename.split(".").length - 1];
-    // 32756238461724837.png
-    imageFileName = `${Math.round(
-      Math.random() * 1000000000000
-    ).toString()}.${imageExtension}`;
+    imageFileName = `AD-${req.params.adId}-${Math.round(
+      Math.random() * 1000
+    )}.${imageExtension}`;
     const filepath = path.join(os.tmpdir(), imageFileName);
     imageToBeUploaded = { filepath, mimetype };
     file.pipe(fs.createWriteStream(filepath));
