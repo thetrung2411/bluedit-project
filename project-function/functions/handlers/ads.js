@@ -12,11 +12,11 @@ exports.uploadAd = (req, res) => {
     return res.status(400).json({ body: "Must not be empty" });
   }
 
-  const noImg = "no-img.png";
+  const defaultImg = "AD-default.png";
 
   const newAd = {
     name: req.body.name,
-    imageUrl: `https://firebasestorage.googleapis.com/v0/b/${config.storageBucket}/o/${noImg}?alt=media`,
+    imageUrl: `https://firebasestorage.googleapis.com/v0/b/${config.storageBucket}/o/${defaultImg}?alt=media`,
     link: req.body.link,
     uploadAt: new Date().toISOString()
   };
