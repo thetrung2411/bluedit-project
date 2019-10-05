@@ -63,6 +63,7 @@ app.post("/signup", signup);
 app.post("/login", login);
 app.get("/user", FBAuth, getCurrentUser);
 app.post("/changePassword", FBAuth, changeUserPassword);
+app.post("/disableUser", FBAuth, disableUser);
 
 //userpage
 app.post("/editProfile", FBAuth, editProfile);

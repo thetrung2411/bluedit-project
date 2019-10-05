@@ -29,7 +29,7 @@ class PostMenu extends Component {
     ) : null;
         return(
             <div>
-        <IconButton aria-label="settings" onClick={this.handleClick}>
+        <IconButton id='postMenu' aria-label="settings" onClick={this.handleClick}>
             <MoreIcon />
         </IconButton>
         <Menu

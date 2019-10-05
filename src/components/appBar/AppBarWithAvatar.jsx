@@ -81,7 +81,7 @@ class SignedInAppBar extends Component {
               <MenuItem>Manage Ads</MenuItem>
             </Link>
           ) : null}
-          <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+          <MenuItem id="logout"onClick={this.handleLogout}>Logout</MenuItem>
         </Menu>
 
         <div>
@@ -109,7 +109,7 @@ class SignedInAppBar extends Component {
               </div>
               <div className={classes.grow}></div>
               <div>
-                <IconButton aria-label="settings" onClick={this.handleClick}>
+                <IconButton id="mainMenu" aria-label="settings" onClick={this.handleClick}>
                   <List />
                 </IconButton>
               </div>

@@ -58,7 +58,7 @@ class EditButton extends Component{
       return (
             <div>
               <MenuItem  classes={{ selected: classes.menuItemDelete }} onClick={this.handleOpen} >
-              <ListItemIcon ><Create/></ListItemIcon> <ListItemText primary="Edit" />
+              <ListItemIcon id='editButton'><Create/></ListItemIcon> <ListItemText primary="Edit" />
           </MenuItem>
           <Dialog
         open={this.state.open}
@@ -73,7 +73,7 @@ class EditButton extends Component{
           </DialogContentText>
                         <form onSubmit ={this.handleSubmit}>
                          <TextField
-                         id="outlined-multiline-flexible"
+                          id="editTextField"
                           label="Edit post here"
                           multiline
                           rows = "7"
@@ -91,6 +91,7 @@ class EditButton extends Component{
                     </DialogContent>
                     <DialogActions>
                     <Button
+                        id="cancelEdit"
                         type="submit"
                         fullWidth
                         variant="contained"
@@ -100,6 +101,7 @@ class EditButton extends Component{
                         Cancel
                     </Button>
                     <Button
+                        id="submitEdit"
                         type="submit"
                         fullWidth
                         variant="contained"

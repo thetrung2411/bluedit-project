@@ -16,7 +16,7 @@ export class CommentItem extends Component{
                 if(hidden === true && userPosted !== userName)
                 {return null}
                 return (
-                      <Card className = {classes.paper}>
+                      <Card id="commentItem" className = {classes.paper}>
             <CardHeader 
         avatar={
                 <Avatar className ={classes.avatar}>
