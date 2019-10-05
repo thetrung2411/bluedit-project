@@ -9,12 +9,16 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
-import CardMedia from "@material-ui/core/CardMedia";
 
 //MUI Icon
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import { FormControl } from "@material-ui/core";
 //import AlertDialog from "./AlertDialog";
+
+//TODO: Reformat ad dialog as a card with image on the left and the rest of info on the right
+//TODO: Add upload image when creating new Ad
+//TODO: Add image loading when waiting for res
+//TODO: Load image seperately
 
 export default class AdDialog extends React.Component {
   state = {
@@ -48,6 +52,19 @@ export default class AdDialog extends React.Component {
       .catch(err => console.log(err));
   };
 
+  handleImageUpload = (event, adId) => {
+    const image = event.target.files[0];
+    const formData = new FormData();
+    formData.append("image", image, image.name);
+    console.log(formData);
+    axiosConfig
+      .post(`/adImage/${adId}`, formData)
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => console.log(err));
+  };
+
   render() {
     const adImage = this.props.ad.imageUrl;
     //Show single advertisement in detailed
@@ -77,8 +94,15 @@ export default class AdDialog extends React.Component {
             margin="normal"
             fullWidth
           />
-          {/*TODO: Add upload image*/}
           <img src={adImage} height="200" align="center" />
+          <br />
+          <input
+            type="file"
+            id="adImageUpload"
+            onChange={event =>
+              this.handleImageUpload(event, this.state.ad.adId)
+            }
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={this.handleClose}>Back</Button>
