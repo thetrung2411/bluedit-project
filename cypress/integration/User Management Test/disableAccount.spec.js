@@ -17,6 +17,9 @@ describe("Testing disable user", function() {
   //note: if test fail, it is highly that the current account that being use
   //for testing is already disabled. To fix this, simply create a new account
   //and change the following parameter according to the newly created account.
+  //where #email, type new email
+  //where #password, type new password
+  //where #confirm-statement, type new username there
 
   describe("Testing confirm field and disable button functionality", function() {
     it("Empty confirm field", function() {
