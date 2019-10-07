@@ -127,6 +127,7 @@ class ChangePassword extends Component {
             type="submit"
             variant="contained"
             color="primary"
+            id="changeButton"
             className={classes.button}
             disabled={loading}
           >

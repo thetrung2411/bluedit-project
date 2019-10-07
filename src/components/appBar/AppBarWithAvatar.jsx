@@ -69,7 +69,9 @@ class SignedInAppBar extends Component {
             <MenuItem>Subscriptions</MenuItem>
           </Link>
           <Link to="/accountManagement" className={classes.noDecor}>
-            <MenuItem onClick={this.handleClear}>Account</MenuItem>
+            <MenuItem id="menu-accountMan" onClick={this.handleClear}>
+              Account
+            </MenuItem>
           </Link>
           {userDetails.isAdmin ? (
             <Link to="/Report" className={classes.noDecor}>
@@ -81,9 +83,12 @@ class SignedInAppBar extends Component {
               <MenuItem>Manage Ads</MenuItem>
             </Link>
           ) : null}
-          <MenuItem id="logout"onClick={this.handleLogout}>Logout</MenuItem>
+          <Link to="/home" className={classes.noDecor}>
+            <MenuItem id="logout" onClick={this.handleLogout}>
+              Logout
+            </MenuItem>
+          </Link>
         </Menu>
-
         <div>
           <AppBar position="static" className={classes.root}>
             <Toolbar>
@@ -109,7 +114,11 @@ class SignedInAppBar extends Component {
               </div>
               <div className={classes.grow}></div>
               <div>
-                <IconButton id="mainMenu" aria-label="settings" onClick={this.handleClick}>
+                <IconButton
+                  id="mainMenu"
+                  aria-label="settings"
+                  onClick={this.handleClick}
+                >
                   <List />
                 </IconButton>
               </div>
