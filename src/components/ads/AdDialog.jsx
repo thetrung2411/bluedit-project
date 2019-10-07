@@ -1,29 +1,37 @@
 import React, { Fragment } from "react";
 import axiosConfig from "../../axiosConfig";
+import dayjs from "dayjs";
 
 //MUI
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
+import Tooltip from "@material-ui/core/Tooltip";
+
 import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
+import Typography from "@material-ui/core/Typography";
+import CardMedia from "@material-ui/core/CardMedia";
 
 //MUI Icon
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import { FormControl } from "@material-ui/core";
 //import AlertDialog from "./AlertDialog";
 
-//TODO: Reformat ad dialog as a card with image on the left and the rest of info on the right
 //TODO: Add upload image when creating new Ad
-//TODO: Add image loading when waiting for res
-//TODO: Load image seperately
 
 export default class AdDialog extends React.Component {
   state = {
     open: false,
-    ad: this.props.ad
+    ad: {
+      adId: this.props.ad.adId,
+      name: this.props.ad.name,
+      imageUrl: this.props.ad.imageUrl,
+      link: this.props.ad.link,
+      uploadAt: this.props.ad.uploadAt
+    }
   };
 
   handleOpen = () => {
@@ -47,9 +55,27 @@ export default class AdDialog extends React.Component {
       .post(`/editAd/${adId}`, this.state.ad)
       .then(res => {
         console.log(res.data);
-        window.location.reload();
+        this.setState(
+          {
+            ad: {
+              ...this.state.ad,
+              name: res.data.name,
+              link: res.data.link
+            }
+          },
+          () => {
+            //change the state in AdsPage
+            this.props.handleChangeStateOnEdit(this.state.ad);
+          }
+        );
+        if (window.confirm("Edited successfully")) {
+          this.handleClose();
+        }
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        window.confirm("Oops! Something went wrong. Edit failed.");
+        console.log(err);
+      });
   };
 
   handleImageUpload = (event, adId) => {
@@ -60,59 +86,100 @@ export default class AdDialog extends React.Component {
     axiosConfig
       .post(`/adImage/${adId}`, formData)
       .then(res => {
-        console.log(res.data);
+        console.log(res);
+        this.setState({
+          ad: {
+            ...this.state.ad,
+            imageUrl: res.data
+          }
+        });
+        window.confirm("Image uploaded successfully");
+        console.log(this.state.ad);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        window.confirm("Oops! Something went wrong. Upload failed.");
+        console.log(err);
+      });
   };
 
+  handleChangeImage = () => {
+    const fileInput = document.getElementById("adImageUpload");
+    fileInput.click();
+  };
+  //<CardMedia image={adImage} style={{ height: 200 }} title="Ad Image" />
   render() {
-    const adImage = this.props.ad.imageUrl;
+    const adImage = this.state.ad.imageUrl;
     //Show single advertisement in detailed
-    let ad = this.props.ad ? (
+    let ad = this.state.ad ? (
       <FormControl>
-        <DialogTitle>{"Manage Advertisement"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            <span>ID: {this.props.ad.adId}</span>
-            <br />
-            <span>Uploaded At: {this.props.ad.uploadAt}</span>
-          </DialogContentText>
-          <TextField
-            label="Name"
-            name="name"
-            value={this.state.ad.name}
-            onChange={this.handleChange}
-            margin="normal"
-            fullWidth
-          />
-          <br />
-          <TextField
-            label="Link"
-            name="link"
-            value={this.state.ad.link}
-            onChange={this.handleChange}
-            margin="normal"
-            fullWidth
-          />
-          <img src={adImage} height="200" align="center" />
-          <br />
-          <input
-            type="file"
-            id="adImageUpload"
-            onChange={event =>
-              this.handleImageUpload(event, this.state.ad.adId)
-            }
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={this.handleClose}>Back</Button>
-          <Button
-            onClick={e => this.handleSubmit(e, this.state.ad.adId)}
-            color="secondary"
-          >
-            Submit
-          </Button>
-        </DialogActions>
+        <Card style={{ width: 345 }}>
+          <Tooltip title="Click to change image">
+            <CardMedia
+              image={adImage}
+              style={{ height: 200 }}
+              onClick={this.handleChangeImage}
+            />
+          </Tooltip>
+          <CardContent>
+            <Typography component="div">
+              <TextField
+                label="ID"
+                value={this.state.ad.adId}
+                margin="normal"
+                fullWidth
+                disabled
+              />
+            </Typography>
+            <Typography component="div">
+              <TextField
+                label="Uploaded Date"
+                value={dayjs(this.state.ad.uploadAt).format("DD-MM-YYYY")}
+                margin="normal"
+                fullWidth
+                disabled
+              />
+            </Typography>
+            <Typography component="div">
+              <TextField
+                label="Name"
+                name="name"
+                value={this.state.ad.name}
+                onChange={this.handleChange}
+                margin="normal"
+                fullWidth
+              />
+            </Typography>
+            <Typography component="div">
+              <TextField
+                label="Link"
+                name="link"
+                value={this.state.ad.link}
+                onChange={this.handleChange}
+                margin="normal"
+                fullWidth
+              />
+            </Typography>
+            <Typography>
+              <input
+                type="file"
+                id="adImageUpload"
+                onChange={event =>
+                  this.handleImageUpload(event, this.state.ad.adId)
+                }
+                hidden
+              />
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button onClick={this.handleClose}>Back</Button>
+            <Button
+              onClick={e => this.handleSubmit(e, this.state.ad.adId)}
+              color="secondary"
+            >
+              Submit
+            </Button>
+          </CardActions>
+        </Card>
       </FormControl>
     ) : (
       <DialogContentText>AD NOT FOUND</DialogContentText>
@@ -120,10 +187,12 @@ export default class AdDialog extends React.Component {
 
     return (
       <Fragment>
-        <Button onClick={this.handleOpen}>
-          <EditOutlinedIcon />
-        </Button>
-        <Dialog open={this.state.open} onClose={this.handleClose} maxWidth="md">
+        <Tooltip title="Edit" placement="top">
+          <Button onClick={this.handleOpen}>
+            <EditOutlinedIcon />
+          </Button>
+        </Tooltip>
+        <Dialog open={this.state.open} onClose={this.handleClose}>
           {ad}
         </Dialog>
       </Fragment>

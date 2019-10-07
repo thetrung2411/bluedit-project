@@ -12,7 +12,7 @@ exports.uploadAd = (req, res) => {
     return res.status(400).json({ body: "Must not be empty" });
   }
 
-  const defaultImg = "AD-default.png";
+  const defaultImg = "AD-default.jpg";
 
   const newAd = {
     name: req.body.name,
@@ -36,22 +36,18 @@ exports.uploadAd = (req, res) => {
 
 //Edit an existing ad
 exports.editAd = (req, res) => {
-  if (
-    req.body.name.trim() === "" ||
-    req.body.imageUrl.trim() === "" ||
-    req.body.link.trim() === ""
-  ) {
+  //name and link cannot be empty
+  if (req.body.name.trim() === "" || req.body.link.trim() === "") {
     return res.status(400).json({ message: "Must not be empty" });
   }
   let newAd = {
     name: req.body.name,
-    imageUrl: req.body.imageUrl,
     link: req.body.link
   };
   db.doc(`/ads/${req.params.adId}`)
     .update(newAd)
     .then(() => {
-      res.json({ message: "Edited successfully" });
+      return res.json(newAd);
     })
     .catch(err => {
       console.error(err);
@@ -162,7 +158,8 @@ exports.uploadImage = (req, res) => {
       })
       .then(() => {
         const imageUrl = `https://firebasestorage.googleapis.com/v0/b/${config.storageBucket}/o/${imageFileName}?alt=media`;
-        return db.doc(`/ads/${req.params.adId}`).update({ imageUrl });
+        db.doc(`/ads/${req.params.adId}`).update({ imageUrl });
+        return res.json(imageUrl);
       })
       .then(() => {
         return res.json({ message: "image uploaded successfully" });

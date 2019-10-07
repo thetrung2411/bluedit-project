@@ -9,7 +9,6 @@ import NewButton from "./NewButton";
 
 //MUI
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Button from "@material-ui/core/Button";
 
 export class AdsPage extends Component {
   state = {
@@ -27,19 +26,36 @@ export class AdsPage extends Component {
       .catch(err => console.log(err));
   }
 
-  handleDelete = adId => {
+  handleChangeStateOnEdit = ad => {
+    const newAds = [...this.state.ads];
+    const oldAd = newAds.filter(newAd => newAd.adId === ad.adId);
+    const index = newAds.indexOf(oldAd[0]);
+    newAds[index] = ad;
+    this.setState({ ads: newAds });
+  };
+
+  handleDelete = ad => {
     axiosConfig
-      .delete(`/deleteAd/${adId}`)
+      .delete(`/deleteAd/${ad.adId}`)
       .then(res => {
         console.log(res.data);
-        window.location.reload();
+        const newAds = [...this.state.ads];
+        const index = newAds.indexOf(ad);
+        newAds.splice(index, 1);
+        this.setState({
+          ads: newAds
+        });
       })
       .catch(err => console.log(err));
   };
 
   render() {
     let showAds = this.state.ads ? (
-      <AdsTable ads={this.state.ads} handleDelete={this.handleDelete} />
+      <AdsTable
+        ads={this.state.ads}
+        handleDelete={this.handleDelete}
+        handleChangeState={this.handleChangeState}
+      />
     ) : (
       <CircularProgress />
     );

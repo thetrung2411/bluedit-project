@@ -3,10 +3,10 @@ import axiosConfig from "../../axiosConfig";
 
 //MUI
 import Button from "@material-ui/core/Button";
+import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 
@@ -40,16 +40,20 @@ export default class NewButton extends React.Component {
       .post("/uploadAd", this.state.ad)
       .then(res => {
         console.log(res);
-        window.location.reload();
+        if (window.confirm("New advertisement created successfully.")) {
+          this.handleClose();
+        }
       })
       .catch(err => console.log(err));
   };
 
   render() {
-    //TODO: add upload image
     return (
       <Fragment>
-        <Button onClick={this.handleOpen}>New</Button>
+        <Button onClick={this.handleOpen}>
+          <EditOutlinedIcon />
+          New...
+        </Button>
         <Dialog open={this.state.open} onClose={this.handleClose} maxWidth="md">
           <DialogTitle>{"New Advertisement"}</DialogTitle>
           <DialogContent>
