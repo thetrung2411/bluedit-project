@@ -103,7 +103,7 @@ app.delete("/deleteReport/:reportId", FBAuth, deleteReport);
 app.post("/uploadAd", FBAuth, uploadAd);
 app.post("/adImage/:adId", FBAuth, uploadImage);
 app.post("/editAd/:adId", FBAuth, editAd);
-app.get("/getAllAds", FBAuth, getAllAds);
+app.get("/getAllAds", getAllAds);
 app.get("/getAd/:adId", getAd);
 app.delete("/deleteAd/:adId", FBAuth, deleteAd);
 

@@ -27,6 +27,7 @@ import {
   CssBaseline
 } from "@material-ui/core";
 import { SET_AUTHENTICATED } from "./redux/types";
+import AdUi from "./components/ads/AdUi";
 
 const theme = createMuiTheme({
   palette: {
@@ -57,6 +58,7 @@ class App extends Component {
       <Provider store={store}>
         <MuiThemeProvider theme={theme}>
           <CssBaseline />
+          <AdUi />
           <BrowserRouter>
             <div className="App">
               <Switch>
