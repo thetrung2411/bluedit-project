@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import AppBarWithAvatar from "../appBar/AppBarWithAvatar";
 import axiosConfig from "../../axiosConfig";
 import { withRouter, Route, Switch } from "react-router-dom";
-import AdUi from "./AdUi";
 
 //Components
 import AdsTable from "./AdsTable";
@@ -71,7 +70,6 @@ export class AdsPage extends Component {
     return (
       <div>
         <AppBarWithAvatar />
-        <AdUi />
         <h1>Advertisements</h1>
         <NewButton handleChangeStateOnCreate={this.handleChangeStateOnCreate} />
         {showAds}
