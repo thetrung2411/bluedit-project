@@ -42,6 +42,8 @@ export default class NewButton extends React.Component {
         console.log(res);
         if (window.confirm("New advertisement created successfully.")) {
           this.handleClose();
+          this.props.handleChangeStateOnCreate(res.data);
+          //setStaet: res.data
         }
       })
       .catch(err => console.log(err));

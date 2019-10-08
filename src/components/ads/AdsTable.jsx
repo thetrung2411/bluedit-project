@@ -41,7 +41,7 @@ const AdTable = props => {
             <TableCell>
               <AdDialog
                 ad={ad}
-                handleChangeState={props.handleChangeStateOnEdit}
+                handleChangeStateOnEdit={props.handleChangeStateOnEdit}
               />
               <Tooltip title="Delete" placement="top">
                 <Button

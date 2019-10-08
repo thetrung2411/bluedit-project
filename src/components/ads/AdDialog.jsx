@@ -6,7 +6,6 @@ import dayjs from "dayjs";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import Tooltip from "@material-ui/core/Tooltip";
-
 import DialogContentText from "@material-ui/core/DialogContentText";
 import TextField from "@material-ui/core/TextField";
 import Card from "@material-ui/core/Card";
@@ -18,9 +17,6 @@ import CardMedia from "@material-ui/core/CardMedia";
 //MUI Icon
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import { FormControl } from "@material-ui/core";
-//import AlertDialog from "./AlertDialog";
-
-//TODO: Add upload image when creating new Ad
 
 export default class AdDialog extends React.Component {
   state = {
