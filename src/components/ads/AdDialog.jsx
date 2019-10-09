@@ -13,6 +13,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
 import CardMedia from "@material-ui/core/CardMedia";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 //MUI Icon
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
@@ -27,51 +28,61 @@ export default class AdDialog extends React.Component {
       imageUrl: this.props.ad.imageUrl,
       link: this.props.ad.link,
       uploadAt: this.props.ad.uploadAt
-    }
+    },
+    error: false
   };
 
   handleOpen = () => {
-    this.setState({ open: true });
+    this.setState({ open: true, error: false });
   };
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({ open: false, error: false });
   };
 
   handleChange = e => {
     const newAd = { ...this.state.ad };
     newAd[e.target.name] = e.target.value;
     this.setState({
-      ad: newAd
+      ad: newAd,
+      error: false
     });
   };
 
   handleSubmit = (e, adId) => {
     e.preventDefault();
-    axiosConfig
-      .post(`/editAd/${adId}`, this.state.ad)
-      .then(res => {
-        console.log(res.data);
-        this.setState(
-          {
-            ad: {
-              ...this.state.ad,
-              name: res.data.name,
-              link: res.data.link
+    //Check if name or link is empty, if not, send post request
+    if (this.state.ad.name !== "" && this.state.ad.link !== "") {
+      axiosConfig
+        .post(`/editAd/${adId}`, this.state.ad)
+        .then(res => {
+          console.log(res.data);
+          this.setState(
+            {
+              ad: {
+                ...this.state.ad,
+                name: res.data.name,
+                link: res.data.link
+              }
+            },
+            () => {
+              //change the state in AdsPage
+              this.props.handleChangeStateOnEdit(this.state.ad);
             }
-          },
-          () => {
-            //change the state in AdsPage
-            this.props.handleChangeStateOnEdit(this.state.ad);
+          );
+          if (window.confirm("Edited successfully")) {
+            this.handleClose();
           }
-        );
-        if (window.confirm("Edited successfully")) {
-          this.handleClose();
-        }
-      })
-      .catch(err => {
-        window.confirm("Oops! Something went wrong. Edit failed.");
-        console.log(err);
+        })
+        .catch(err => {
+          window.confirm("Oops! Something went wrong. Edit failed.");
+          console.log(err);
+        });
+    } else {
+      //if name of link is empty, show error
+      this.setState({
+        error: true
       });
+    }
   };
 
   handleImageUpload = (event, adId) => {
@@ -165,6 +176,11 @@ export default class AdDialog extends React.Component {
                 hidden
               />
             </Typography>
+            {this.state.error ? (
+              <FormHelperText error>
+                Name and link must not be empty
+              </FormHelperText>
+            ) : null}
           </CardContent>
           <CardActions>
             <Button onClick={this.handleClose}>Back</Button>

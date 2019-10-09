@@ -9,6 +9,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 export default class NewButton extends React.Component {
   state = {
@@ -16,7 +17,8 @@ export default class NewButton extends React.Component {
     ad: {
       name: "",
       link: ""
-    }
+    },
+    error: false
   };
 
   handleOpen = () => {
@@ -30,23 +32,31 @@ export default class NewButton extends React.Component {
     const newAd = { ...this.state.ad };
     newAd[e.target.name] = e.target.value;
     this.setState({
-      ad: newAd
+      ad: newAd,
+      error: false
     });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    axiosConfig
-      .post("/uploadAd", this.state.ad)
-      .then(res => {
-        console.log(res);
-        if (window.confirm("New advertisement created successfully.")) {
-          this.handleClose();
-          this.props.handleChangeStateOnCreate(res.data);
-          //setStaet: res.data
-        }
-      })
-      .catch(err => console.log(err));
+    //check if inputs are empty. If not, send post request
+    if (this.state.ad.name !== "" && this.state.ad.link !== "") {
+      axiosConfig
+        .post("/uploadAd", this.state.ad)
+        .then(res => {
+          console.log(res);
+          if (window.confirm("New advertisement created successfully.")) {
+            this.handleClose();
+            this.props.handleChangeStateOnCreate(res.data);
+          }
+        })
+        .catch(err => console.log(err));
+    } else {
+      //if name of link is empty, show error
+      this.setState({
+        error: true
+      });
+    }
   };
 
   render() {
@@ -74,6 +84,11 @@ export default class NewButton extends React.Component {
               onChange={this.handleChange}
               margin="normal"
             />
+            {this.state.error ? (
+              <FormHelperText error>
+                Name and link must not be empty
+              </FormHelperText>
+            ) : null}
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose}>Cancle</Button>
