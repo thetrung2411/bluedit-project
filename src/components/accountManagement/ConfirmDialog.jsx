@@ -75,6 +75,7 @@ class ConfirmDialog extends Component {
     return (
       <Fragment>
         <Button
+          id="open-confirm-dialog"
           variant="contained"
           className={classes.button}
           color="secondary"
@@ -99,6 +100,7 @@ class ConfirmDialog extends Component {
             type your username &quot;{userDetails.userName}&quot; below:
             <form>
               <TextField
+                id="confirm-statement"
                 name="statement"
                 type="text"
                 label={userDetails.userName}
@@ -112,6 +114,7 @@ class ConfirmDialog extends Component {
           </DialogContent>
           <DialogActions>
             <Button
+              id="disable-account"
               variant="contained"
               className={classes.disableButton}
               color="secondary"
