@@ -10,55 +10,8 @@ import PostItemDetail from "./PostItemDetail";
 import PostMenu from "./PostMenu";
 import { connect } from "react-redux";
 import { setOnSubscribe, getSubscribe, getUnsubscribe } from "./../../redux/actions/subscribeAction";
+import SubscribeButton from "./SubscrbeButton";
 export class PostItems extends Component {
-  renderSubscribe = () => {
-    const { classes, subscribes, post } = this.props;
-    if (post.issubfg) {
-      return (
-        <Button
-          className={classes.unSubscribe}
-          onClick={() => this.handleUnSubscribe()}
-        >
-          Unsubscribe
-        </Button>
-      )
-    }
-
-    return (
-      <Button
-        className={classes.subscribe}
-        onClick={() => this.handleSubscribe()}
-      >
-        Subscribe
-      </Button>
-    )
-  }
-
-  handleSubscribe = () => {
-    const { post: { postId, subscribe } } = this.props;
-    const obj = {
-      subscriId: this.props.user.userDetails.userId,
-      subscriber: this.props.user.userDetails.userName,
-      userName: this.props.post.userPosted,
-      userId: this.props.post.postId,
-      subscribeAt: dayjs().format('YYYY-MM-DD'),
-    }
-    this.props.setOnSubscribe(obj)
-  }
-
-  handleUnSubscribe = () => {
-    const { post, subscribes } = this.props;
-    var array = [];
-    subscribes.forEach(item => {
-      if (post.userPosted === item.userName) {
-        array.push(item.subscribeID)
-      }
-    })
-    var obj = {
-      userNames: array
-    }
-    this.props.getUnsubscribe(obj)
-  }
 
   render() {
     dayjs.extend(relativeTime)
@@ -82,7 +35,7 @@ export class PostItems extends Component {
             title={
               <div>
                 {userPosted}
-                {this.renderSubscribe()}
+                {!post.isMyPost && <SubscribeButton post={post} userDetails={user.userDetails} subscribes={subscribes}/>}
               </div>
             }
             titleTypographyProps={{ align: "left" }}
@@ -108,13 +61,20 @@ export class PostItems extends Component {
 const mapStateToProps = state => {
   const posts = state.post.posts
   const subscribes = state.post.subscribes
+  const userDetails = state.user.userDetails;
 
   subscribes.forEach(item => {
-    posts.forEach(pitem => {
-      if (pitem.userPosted === item.userName) {
-        pitem.issubfg = true;
+    posts.forEach(postItem => {
+      if (postItem.userPosted === item.userName) {
+        postItem.isSub = true;
       }
     })
+  })
+
+  posts.forEach(postItem => {
+    if (postItem.userPosted === userDetails.userName) {
+      postItem.isMyPost = true;
+    }
   })
 
   return {
@@ -132,5 +92,3 @@ export default connect(
   mapStateToProps,
   mapActionsToProps
 )(withStyles(PostItemStyles)(PostItems));
-
-// export default withStyles(PostItemStyles)(PostItems);
