@@ -22,6 +22,7 @@ import subscriptions from "./components/subscriptions/subscriptions";
 import { userpageLauout } from "./components/userpage/userpageLayout";
 import { editProfileLayout } from "./components/editProfile/editProfileLayout";
 import { userpostLauout } from "./components/userpost/userpostLayout";
+import subscribedUserpage from "./components/subscribedUserpage/subscribedUserpageLayout";
 import {
   MuiThemeProvider,
   createMuiTheme,
@@ -77,6 +78,7 @@ class App extends Component {
                 <Route path="/userpage" component={userpageLauout} />
                 <Route path="/editProfile" component={editProfileLayout} />
                 <Route path="/userpost" component={userpostLauout} />
+                <Route path="/subscribedUserpage" component={subscribedUserpage} />
                 <Route path="/bookmark" component={bookmark} />
                 <Route path="/searching" component={searching} />
                 <Route path="/secretroute" component={enableUserSecretRoute}/>
