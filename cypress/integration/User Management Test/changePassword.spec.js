@@ -10,6 +10,7 @@ describe("Testing change password", function() {
       .should("have.value", "123456789");
     cy.get("#login").click();
     cy.location("pathname", { timeout: 30000 }).should("include", "/post");
+    cy.wait(5000);
     cy.get("#mainMenu").click();
     cy.get("#menu-accountMan").click();
   });
