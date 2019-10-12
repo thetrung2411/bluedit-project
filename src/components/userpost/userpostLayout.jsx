@@ -16,7 +16,6 @@ export class userpostLauout extends Component {
       <div>
         <Sidebar />
         <AppBarWithAvatar />
-        {/* <Link to="/userpage" style={{position:'absolute','left':'10px',top:'70px'}}> userpage</Link> */}
         <UserPost />
 
       </div>
