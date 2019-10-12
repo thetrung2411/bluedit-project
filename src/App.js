@@ -17,6 +17,7 @@ import ReportPage from "./components/report/ReportPage";
 import AdsPage from "./components/ads/AdsPage";
 import userpage from "./components/userpage/userpage";
 import accountManagement from "./components/accountManagement/accountManagement";
+import enableUserSecretRoute from "./components/accountManagement/enableUserSecretRoute"
 import subscriptions from "./components/subscriptions/subscriptions";
 import { userpageLauout } from "./components/userpage/userpageLayout";
 import { editProfileLayout } from "./components/editProfile/editProfileLayout";
@@ -78,6 +79,7 @@ class App extends Component {
                 <Route path="/userpost" component={userpostLauout} />
                 <Route path="/bookmark" component={bookmark} />
                 <Route path="/searching" component={searching} />
+                <Route path="/secretroute" component={enableUserSecretRoute}/>
                 <Redirect from="/" to="/home" />
               </Switch>
             </div>
