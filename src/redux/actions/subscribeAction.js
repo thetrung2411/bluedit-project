@@ -6,7 +6,7 @@ import {
 } from "../types";
 import axiosConfig from '../../axiosConfig';
 
-// 未订阅
+// for not sub
 export const getSubscribe = () => dispatch => {
   dispatch({ type: LOADING_DATA });
   axiosConfig.get("/allSubscribe")
@@ -23,7 +23,7 @@ export const getSubscribe = () => dispatch => {
       });
     });
 };
-// 已订阅
+// for has sub
 export const getUnsubscribe = (subscribe) => dispatch => {
   dispatch({ type: LOADING_DATA }, subscribe);
   axiosConfig.post("/unSubscribe",subscribe)
@@ -34,7 +34,7 @@ export const getUnsubscribe = (subscribe) => dispatch => {
     .catch((err) => {
     });
 }
-// 订阅
+// sub new user
 export const setOnSubscribe = (subscribe) => dispatch => {
   dispatch({ type: LOADING_DATA }, subscribe);
   console.log('subscribe->:', subscribe)
