@@ -15,7 +15,7 @@ export class PostItems extends Component {
 
   render() {
     dayjs.extend(relativeTime)
-    const { classes, post: { hidden, body, createdAt, userPosted, commentCount, upvoteCount, postId }, post } = this.props;
+    const { classes, post: { hidden, body, createdAt, userPosted, commentCount, upvoteCount, postId }, post, user, subscribes} = this.props;
     const { userName } = this.props;
     if (hidden === true && userName !== userPosted) {
       return (null)
