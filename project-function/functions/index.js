@@ -7,7 +7,8 @@ const {
   changeUserPassword,
   editProfile,
   getAllUsers,
-  disableUser
+  disableUser,
+  enableUser
 } = require("./handlers/users");
 const {
   post,
@@ -63,6 +64,7 @@ app.post("/login", login);
 app.get("/user", FBAuth, getCurrentUser);
 app.post("/changePassword", FBAuth, changeUserPassword);
 app.post("/disableUser", FBAuth, disableUser);
+app.post("/enableUser", enableUser)
 
 //userpage
 app.post("/editProfile", FBAuth, editProfile);

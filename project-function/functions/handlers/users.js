@@ -143,7 +143,7 @@ exports.enableUser = (req, res) => {
   admin
     .auth()
     .updateUser(req.body.uid, {
-      disabled: true
+      disabled: false
     })
     .then(() => {
       return res.json({ general: "User enabled successfully" });
