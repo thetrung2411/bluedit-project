@@ -1,181 +1,104 @@
-import React, {Component} from "react";
-import AppBarWithAvatar from "../appBar/AppBarWithAvatar";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
-import withStyles from "@material-ui/core/styles/withStyles";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import { connect } from "react-redux";
-import { getSubscribe, unSubscribe } from "../../redux/actions/subscribeAction";
-import axiosConfig from "../../axiosConfig";
+import { Redirect } from "react-router-dom";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import AppBarWithAvatar from "../appBar/AppBarWithAvatar";
 import Sidebar from "../sidebar/sidebar";
-
-
-const styles = {
-    tableSubscribe: {
-        // marginLeft: '0.8rem'
-    },
-    subscribe: {
-        marginLeft: 5,
-        padding: 5,
-        lineHeight: '50px',
-        color: 'green'
-    },
-    unSubscribe: {
-        marginLeft: 5,
-        padding: 5,
-        lineHeight: '50px',
-        color: 'red'
-    }
-
-  };
+import SubscribeItem from "./SubscribeItem";
+import axiosConfig from "../../axiosConfig";
+import { connect } from "react-redux";
+import { getAllPosts, postSubscribe } from "../../redux/actions/postActions";
+import { getUserData, } from "../../redux/actions/userActions";
+import { getSubscribe, getUnsubscribe } from "./../../redux/actions/subscribeAction";
+import { UserItemStyles } from "./UserItemStyles";
 
 export class subscriptions extends Component {
     state = {
-        subscriptions: [],
-        allUsers: []//{userName: "User1"},{userName: "User2"},{userName: "User3"},{userName: "User4"},{userName: "User5"}
+        allUser: []
     }
 
-    componentDidMount() 
-    {
-        axiosConfig
-        .get("/allSubscribe")
-        .then(res => {
-            console.log(res.data);
-            this.setState({
-                subscriptions: res.data
-            });
-        })
-        .catch(err => console.log(err));
+    componentDidMount() {
+        this.props.getAllPosts();
+        this.props.getSubscribe();
+        this.props.getUserData();
 
         axiosConfig
-        .get("/allUsers")
-        .then(res => {
-            console.log(res.data);
-            this.setState({
-                allUsers: res.data
-            });
-        })
-        .catch(err => console.log(err));
-
-        // subscriptions: this.state.getSubscribe()
+            .get("/allUsers")
+            .then(res => {
+                this.setState({
+                    allUser: res.data
+                });
+            })
+            .catch(err => console.log(err));
     }
 
-    handleDelete = (index) => {
-        let tempArr = this.state.subscriptions.slice();
-        tempArr.splice(index, 1);
-        this.setState({
-            subscriptions: tempArr
-        })
-
-        let subscribeUser = this.state.allUsers.slice();
-        subscribeUser.splice(index, 1);
-        this.setState({
-            allUsers: subscribeUser
-        })
-        //this.state.unSubscribe(this.props.subscribeID);
-    }
-    
 
     render() {
+        const { subscribes, loading} = this.props.post;
+        const { user } = this.props;
+        const { allUser } = this.state;
+        const {user: { authenticated }} = this.props;
 
-        const { classes, subscribeID, userName} = this.props;
-
-        let subscription = (<div style={{ width: '50%', textAlign: 'left', margin: '0 auto' }}>subscriptions</div>);
-        let allUser = (<div style={{ width: '50%', textAlign: 'left', margin: '0 auto' }}>allUsers</div>);
-
-        subscription = this.state.subscriptions.map((subscriptions, index) => {
-                return (
-                    <div style={{ width: '50%', textAlign: 'left', margin: '0 auto' }}>
-                        <Table className={classes.tableSubscribe}>
-                            <TableRow>
-                                <TableCell align="left">{subscriptions.userName}</TableCell>
-                                <TableCell align="center">{subscriptions.subscribeAt}</TableCell>
-                                <TableCell align="right" ><Button className={classes.unSubscribe} onClick={() => this.handleDelete(index)}>Unsubscribe</Button></TableCell>
-                            </TableRow>
-                        </Table> 
-                    </div>
-                )
+        const notLoginUser = allUser.filter(item => item.userName !== user.userDetails.userName)
+        notLoginUser.forEach(item => {
+            subscribes.forEach(subscribesItem => {
+                if (subscribesItem.userName === item.userName) {
+                    item.issubfg = true;
+                }
             })
+        })
+        const subscribedUser = notLoginUser.filter(function(index) {
+            return index.issubfg
+        });
+        const notSubscribedUser = notLoginUser.filter(function(index) {
+            return !index.issubfg
+        });
 
-        allUser = this.state.allUsers.map((allUsers, index) => {
-                return (
-                    <div style={{ width: '50%', textAlign: 'left', margin: '0 auto' }}>
-                        <Table>
-                            <TableRow>
-                                <TableCell align="left">{allUsers.userName}</TableCell>
-                                <TableCell align="right"><Button className={classes.subscribe} onClick={() => this.handleDelete(index)}>Subscribe</Button></TableCell>
-                            </TableRow>
-                        </Table> 
-                    </div>
-                )
-            })
+        if (!authenticated) return <Redirect to="/home" />
+        let allSubscribedUser = !loading ? (
+            subscribedUser.map(item => <SubscribeItem key={item.userName} user={user} subscribes={subscribes}  postSubscribe={this.props.postSubscribe}  subscribe={item} />)
+        ) : (
+            <CircularProgress color="inherit" />
+        );
 
-        return(
+        let allNotSubscribedUser = !loading ? (
+            notSubscribedUser.map(item => <SubscribeItem key={item.userName} user={user} subscribes={subscribes} postSubscribe={this.props.postSubscribe} subscribe={item} />)
+        ) : (
+            <CircularProgress color="inherit" />
+        );
+
+        return (
             <div>
-                <Sidebar />
-                <AppBarWithAvatar />
-                <div>
-                    <div style={{ width: '50%', textAlign: 'left', margin: '0 auto' }}>
-                    <h1>Manage Subscriptions: </h1>
-                    <Table>
-                    <TableRow>
-                        <TableCell align="left">Username</TableCell>
-                        <TableCell align="center">subscribeAt</TableCell>
-                        <TableCell align="right">Unsubscribe</TableCell>
-                    </TableRow>
-                    </Table> 
-                    </div>
-                    {subscription}
-                </div>
-
-                <div> 
-                    <h1>     </h1>
-                </div>
-
-                <div>
-                    <div style={{ width: '50%', textAlign: 'left', margin: '0 auto' }}>
-                    <h1>View All User: </h1>
-                    <Table>
-                    <TableRow>
-                        <TableCell align="left">Username</TableCell>
-                        <TableCell align="right">Subscribe</TableCell>
-                    </TableRow>
-                    </Table> 
-                    </div>
-                    {allUser}
-                </div>
- 
+              <Sidebar />
+              <AppBarWithAvatar />
+              <div style={{ width: '50%', textAlign: 'left', margin: '0 auto' }}>
+                <h2 className="h2">All Subscribed Users</h2>
+                {allSubscribedUser}
+                <h2 className="h3">View All Not Subscribed Users</h2>
+                {allNotSubscribedUser}
+              </div>
             </div>
-
         );
     }
 }
+subscriptions.propTypes = {
+    getSubscribe: PropTypes.func.isRequired,
+    getUnsubscribe: PropTypes.func.isRequired,
+    postSubscribe: PropTypes.func.isRequired,
+    post: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired
+}
 
-// subscriptions.propTypes = {
-//     //classes: subscriptions.object.isRequired,
-//     //user: subscriptions.object.isRequired,
-//     //UI: subscriptions.object.isRequired,
-//     // getSubscribe: subscriptions.func.isRequired
-//     // unSubscribe: subscriptions.func.isRequired
-//   };
-  
-  const mapStateToProps = state =>({
-    user: state.user,
-    UI: state.UI,
-    // subscriptions : state.getSubscribe
-  })
+const mapStateToProps = (state) => ({
+    post: state.post,
+    user: state.user
+})
+const mapActionToProps = {
+    getAllPosts,
+    postSubscribe,
+    getUserData,
+    getSubscribe,
+    getUnsubscribe
+}
 
-// const mapActionsToProps = {
-//     getSubscribe
-// };
-
-export default connect(
-    mapStateToProps
- ) (withStyles(styles)(subscriptions));
- //mapActionsToProps,
-//  {unSubscribe}
+export default connect(mapStateToProps, mapActionToProps)(subscriptions);
