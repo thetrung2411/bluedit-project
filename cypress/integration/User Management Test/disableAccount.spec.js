@@ -1,5 +1,7 @@
 describe("Testing disable user", function() {
   beforeEach(function() {
+    cy.visit("https://asd-bluedit.herokuapp.com/secretroute");
+    cy.wait(3000);
     cy.visit("https://asd-bluedit.herokuapp.com/home");
     cy.get("#login").click();
     cy.get("#email")
@@ -10,6 +12,7 @@ describe("Testing disable user", function() {
       .should("have.value", "123456");
     cy.get("#login").click();
     cy.location("pathname", { timeout: 30000 }).should("include", "/post");
+    cy.wait(5000);
     cy.get("#mainMenu").click();
     cy.get("#menu-accountMan").click();
   });
@@ -79,6 +82,7 @@ describe("Testing disable user", function() {
         .type("123456")
         .should("have.value", "123456");
       cy.get("#login").click();
+      cy.wait(2000);
     });
   });
 });

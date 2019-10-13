@@ -6,6 +6,7 @@ describe('Testing post', function() {
         cy.get('#password').type('123456').should('have.value', '123456')
         cy.get('#login').click()
         cy.location('pathname', {timeout: 30000}).should('include', '/post');
+        cy.wait(5000);
         cy.get('#postButton').click()
     })
     describe('Testing post edit function ', function() {
