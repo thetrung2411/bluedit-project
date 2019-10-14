@@ -24,11 +24,7 @@ class EditButton extends Component{
         errors: {},
         disabled: false
       };
-<<<<<<< HEAD
-    componentWillReceiveProps(nextProps){
-=======
       componentWillReceiveProps(nextProps){
->>>>>>> master
         if (nextProps.UI.errors){
           this.setState({
             errors: nextProps.UI.errors
@@ -46,17 +42,6 @@ class EditButton extends Component{
       this.setState({open: false})
     }
     handleChange = (event) => {
-<<<<<<< HEAD
-        this.setState({[event.target.name]: event.target.value}, function(){
-          if(this.state.body.trim() === '' ){
-            this.setState({disabled: true})
-          }
-          else
-          {
-          this.setState({disabled: false})
-        }
-        })
-=======
         this.setState({[event.target.name]: event.target.value})
         if(this.state.body.trim() === '' ){
           this.setState({disabled: true})
@@ -65,7 +50,6 @@ class EditButton extends Component{
         {
         this.setState({disabled: false})
       }
->>>>>>> master
     }
       handleSubmit = (event) => {
         event.preventDefault();
