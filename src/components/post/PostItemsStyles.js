@@ -14,6 +14,7 @@ export const PostItemStyles = theme => ({
 
     menuItemDelete: {
         backgroundColor: "#e03f42"
+<<<<<<< HEAD
     },
     subscribe: {
         display: 'inlineBlock',
@@ -28,5 +29,7 @@ export const PostItemStyles = theme => ({
         padding: 5,
         background: 'black',
         color: 'red'
+=======
+>>>>>>> master
     }
 });

@@ -12,6 +12,7 @@ import TableRow from '@material-ui/core/TableRow';
 import { connect } from "react-redux";
 import { getSubscribe, unSubscribe } from "../../redux/actions/subscribeAction";
 import axiosConfig from "../../axiosConfig";
+<<<<<<< HEAD
 import Sidebar from "../sidebar/sidebar";
 
 
@@ -31,13 +32,39 @@ const styles = {
         lineHeight: '50px',
         color: 'red'
     }
+=======
+
+
+const styles = {
+    form: {
+      textAlign: "center"
+    },
+    textField: {
+        textAlign: "center",
+        margin: "20px auto 10px auto"
+    },
+    button: {
+      marginTop: 20,
+      marginBottom: 20
+    },
+    sidebarButton: {
+        marginTop: 90
+    },
+    root: {
+        backgroundImage: `../../assets/UserpageAssets/bgImage.jpg`
+        }
+>>>>>>> master
 
   };
 
 export class subscriptions extends Component {
     state = {
+<<<<<<< HEAD
         subscriptions: [],
         allUsers: []//{userName: "User1"},{userName: "User2"},{userName: "User3"},{userName: "User4"},{userName: "User5"}
+=======
+        subscriptions: []
+>>>>>>> master
     }
 
     componentDidMount() 
@@ -51,6 +78,7 @@ export class subscriptions extends Component {
             });
         })
         .catch(err => console.log(err));
+<<<<<<< HEAD
 
         axiosConfig
         .get("/allUsers")
@@ -62,6 +90,8 @@ export class subscriptions extends Component {
         })
         .catch(err => console.log(err));
 
+=======
+>>>>>>> master
         // subscriptions: this.state.getSubscribe()
     }
 
@@ -71,6 +101,7 @@ export class subscriptions extends Component {
         this.setState({
             subscriptions: tempArr
         })
+<<<<<<< HEAD
 
         let subscribeUser = this.state.allUsers.slice();
         subscribeUser.splice(index, 1);
@@ -78,11 +109,15 @@ export class subscriptions extends Component {
             allUsers: subscribeUser
         })
         //this.state.unSubscribe(this.props.subscribeID);
+=======
+        //this.state.unSubscribe();
+>>>>>>> master
     }
     
 
     render() {
 
+<<<<<<< HEAD
         const { classes, subscribeID, userName} = this.props;
 
         let subscription = (<div style={{ width: '50%', textAlign: 'left', margin: '0 auto' }}>subscriptions</div>);
@@ -112,11 +147,30 @@ export class subscriptions extends Component {
                             </TableRow>
                         </Table> 
                     </div>
+=======
+        const { classes } = this.props;
+
+        let subscription = (<div>subscriptions</div>);
+
+        subscription = this.state.subscriptions.map((subscriptions, index) => {
+                return (
+                    <div>
+                        <Table>
+                            <TableRow>
+                                <TableCell align="Center">{subscriptions.userName}</TableCell>
+                                <TableCell align="Center">{subscriptions.subscriptionsType}</TableCell>
+                                <TableCell align="Center">{subscriptions.subscribeAt}</TableCell>
+                                <TableCell align="Center"><Button onClick={() => this.handleDelete(index)}>Unsubscribe</Button></TableCell>
+                            </TableRow>
+                        </Table> 
+                </div>
+>>>>>>> master
                 )
             })
 
         return(
             <div>
+<<<<<<< HEAD
                 <Sidebar />
                 <AppBarWithAvatar />
                 <div>
@@ -150,6 +204,21 @@ export class subscriptions extends Component {
                     {allUser}
                 </div>
  
+=======
+                <AppBarWithAvatar />
+                <div>
+                    <h1>Manage Subscriptions</h1>
+                    <Table>
+                    <TableRow>
+                        <TableCell align="Center">Username</TableCell>
+                        <TableCell align="Center">Subscriptions Type</TableCell>
+                        <TableCell align="Center">subscribeAt</TableCell>
+                        <TableCell align="Center">Unsubscribe</TableCell>
+                    </TableRow>
+                    </Table> 
+                </div>
+                {subscription}
+>>>>>>> master
             </div>
 
         );
@@ -178,4 +247,8 @@ export default connect(
     mapStateToProps
  ) (withStyles(styles)(subscriptions));
  //mapActionsToProps,
+<<<<<<< HEAD
 //  {unSubscribe}
+=======
+//  {unSubscribe}
+>>>>>>> master

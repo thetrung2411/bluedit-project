@@ -46,7 +46,11 @@ export const registerUser = (userData, history) => dispatch => {
     });
 };
 
+<<<<<<< HEAD
 export const changePassword = (userData) => dispatch => {
+=======
+export const changePassword = (userData, history) => dispatch => {
+>>>>>>> master
   dispatch({ type: LOADING_UI });
   axiosConfig
     .post("/changePassword", userData)
@@ -67,6 +71,7 @@ export const changePassword = (userData) => dispatch => {
     });
 };
 
+<<<<<<< HEAD
 export const disableAccount = (history) => dispatch =>{
   dispatch({type: LOADING_UI});
   axiosConfig.post("/disableUser")
@@ -78,6 +83,8 @@ export const disableAccount = (history) => dispatch =>{
     .catch(err => console.log(err));
 }
 
+=======
+>>>>>>> master
 export const clearMessages = () => dispatch =>{
   dispatch({ type: CLEAR_MESSAGES });
 }

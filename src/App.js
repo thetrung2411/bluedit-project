@@ -17,9 +17,12 @@ import ReportPage from './components/report/ReportPage';
 import ReportDetail from './components/report/ReportDetail';
 import userpage from './components/userpage/userpage';
 import accountManagement from './components/accountManagement/accountManagement';
+<<<<<<< HEAD
 import subscriptions from './components/subscriptions/subscriptions';
 import { userpageLauout } from './components/userpage/userpageLayout';
 import { editProfileLayout } from './components/editProfile/editProfileLayout';
+=======
+>>>>>>> master
 import {
   MuiThemeProvider,
   createMuiTheme,
@@ -68,11 +71,18 @@ class App extends Component {
                 <Route path='/post' component={PostLayout} />
                 <Route path='/home' component={HomePageLayout} />
                 <Route path='/report' component={ReportPage} />
+<<<<<<< HEAD
                 <Route path='/subscriptions' component = {subscriptions}/>
                 <Route path='/userpage' component = {userpageLauout}/>
                 <Route path='/editProfile' component = {editProfileLayout}/>
                 <Route path='/bookmark' component={bookmark} />
                 <Route path='/searching' component = {searching}/>
+=======
+                <Route path='/userpage' component={userpage} />
+                <Route path='/bookmark' component={bookmark} />
+                <Route path='/searching' component = {searching}/>
+                <Route path='/test' component = {test}/>
+>>>>>>> master
                 <Redirect from='/' to='/home' />
               </Switch>
             </div>

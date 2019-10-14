@@ -8,7 +8,10 @@ exports.comment = (req,res) => {
         body: req.body.body,
         postId: req.params.postId,
         userPosted: req.user.userName,
+<<<<<<< HEAD
         hidden: false,
+=======
+>>>>>>> master
         createdAt: new Date().toISOString() 
       };
       db.doc(`/posts/${req.params.postId}`).get()

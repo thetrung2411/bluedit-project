@@ -21,9 +21,12 @@ class DeleteButton extends Component{
         body: '',
         errors: {} 
       };
+<<<<<<< HEAD
     componentWillReceiveProps(nextProps){
         
     }
+=======
+>>>>>>> master
 
     handleOpen = () => {
       this.setState({openDialog: true});
@@ -32,12 +35,23 @@ class DeleteButton extends Component{
 
       this.setState({openDialog: false})
     }
+<<<<<<< HEAD
     handleDelete = () => {
         if(this.props.commentId === undefined)
         this.props.deletePost(this.props.postId); 
         else
         this.props.deleteComment(this.props.postId, this.props.commentId)
         
+=======
+    handleDeletePost = () => {
+        if(this.props.commentId === undefined){
+        this.props.deletePost(this.props.postId);
+        }
+        else
+        {
+        this.props.deleteComment(this.props.postId, this.props.commentId)
+        }
+>>>>>>> master
         this.handleClose();
     }
     render(){
@@ -58,7 +72,11 @@ class DeleteButton extends Component{
               </DialogContentText>
                         </DialogContent>
                         <DialogActions>
+<<<<<<< HEAD
                         <Button variant = "contained" color = "secondary" onClick={this.handleDelete}>
+=======
+                        <Button variant = "contained" color = "secondary" onClick={this.handleDeletePost}>
+>>>>>>> master
                            Yes
                         </Button>
                         <Button type="submit" variant="contained" color = "primary" onClick={this.handleClose}>
