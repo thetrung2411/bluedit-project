@@ -59,7 +59,11 @@ const AdTable = props => {
       );
     })
   ) : (
-    <p className="canter">No advertisement found at the moment</p>
+    <TableBody>
+      <TableRow>
+        <TableCell>No advertisement found at the moment</TableCell>
+      </TableRow>
+    </TableBody>
   );
   return (
     <Table>
