@@ -148,6 +148,7 @@ export default class AdDialog extends React.Component {
             </Typography>
             <Typography component="div">
               <TextField
+                id="name"
                 label="Name"
                 name="name"
                 value={this.state.ad.name}
@@ -158,6 +159,7 @@ export default class AdDialog extends React.Component {
             </Typography>
             <Typography component="div">
               <TextField
+                id="link"
                 label="Link"
                 name="link"
                 value={this.state.ad.link}
@@ -177,7 +179,7 @@ export default class AdDialog extends React.Component {
               />
             </Typography>
             {this.state.error ? (
-              <FormHelperText error>
+              <FormHelperText error id="errorMsg">
                 Name and link must not be empty
               </FormHelperText>
             ) : null}
@@ -185,6 +187,7 @@ export default class AdDialog extends React.Component {
           <CardActions>
             <Button onClick={this.handleClose}>Back</Button>
             <Button
+              id="submitBtn"
               onClick={e => this.handleSubmit(e, this.state.ad.adId)}
               color="secondary"
             >
@@ -200,7 +203,7 @@ export default class AdDialog extends React.Component {
     return (
       <Fragment>
         <Tooltip title="Edit" placement="top">
-          <Button onClick={this.handleOpen}>
+          <Button id={`${this.state.ad.name}EditBtn`} onClick={this.handleOpen}>
             <EditOutlinedIcon />
           </Button>
         </Tooltip>

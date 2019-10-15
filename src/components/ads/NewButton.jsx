@@ -62,7 +62,7 @@ export default class NewButton extends React.Component {
   render() {
     return (
       <Fragment>
-        <Button onClick={this.handleOpen}>
+        <Button id="newAdBtn" onClick={this.handleOpen}>
           <EditOutlinedIcon />
           New...
         </Button>
@@ -70,6 +70,7 @@ export default class NewButton extends React.Component {
           <DialogTitle>{"New Advertisement"}</DialogTitle>
           <DialogContent>
             <TextField
+              id="name"
               label="Name"
               name="name"
               value={this.state.ad.name}
@@ -78,6 +79,7 @@ export default class NewButton extends React.Component {
             />
             <br />
             <TextField
+              id="link"
               label="Link"
               name="link"
               value={this.state.ad.link}
@@ -85,14 +87,18 @@ export default class NewButton extends React.Component {
               margin="normal"
             />
             {this.state.error ? (
-              <FormHelperText error>
+              <FormHelperText error id="errorMsg">
                 Name and link must not be empty
               </FormHelperText>
             ) : null}
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose}>Cancle</Button>
-            <Button onClick={this.handleSubmit} color="secondary">
+            <Button
+              id="submitBtn"
+              onClick={this.handleSubmit}
+              color="secondary"
+            >
               Submit
             </Button>
           </DialogActions>

@@ -80,7 +80,7 @@ class SignedInAppBar extends Component {
           ) : null}
           {userDetails.isAdmin ? (
             <Link to="/Ads" className={classes.noDecor}>
-              <MenuItem>Manage Ads</MenuItem>
+              <MenuItem id="adsBtn">Manage Ads</MenuItem>
             </Link>
           ) : null}
           <Link to="/home" className={classes.noDecor}>
