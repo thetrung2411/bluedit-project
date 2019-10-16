@@ -74,7 +74,7 @@ export default class AdUi extends React.Component {
                 }}
               >
                 <Tooltip title="Show another ad" placement="top">
-                  <IconButton>
+                  <IconButton id="changeBtn">
                     <CachedIcon
                       onClick={this.pickAnAd}
                       fontSize="small"
@@ -83,7 +83,7 @@ export default class AdUi extends React.Component {
                   </IconButton>
                 </Tooltip>
                 <Tooltip title="Close" placement="top">
-                  <IconButton>
+                  <IconButton id="closeBtn">
                     <CloseIcon
                       fontSize="small"
                       color="primary"

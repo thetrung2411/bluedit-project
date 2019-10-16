@@ -45,6 +45,7 @@ const AdTable = props => {
               />
               <Tooltip title="Delete" placement="top">
                 <Button
+                  id={`${ad.name}DeleteBtn`}
                   onClick={() => {
                     if (window.confirm("Are you sure to delete this item? "))
                       props.handleDelete(ad);
