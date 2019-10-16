@@ -113,7 +113,7 @@ export default class NewButton extends React.Component {
               />
               {this.state.error ? (
                 <FormHelperText error id="errorMsg">
-                  Name and link must not be empty
+                  Name or link must not be empty
                 </FormHelperText>
               ) : null}
             </CardContent>

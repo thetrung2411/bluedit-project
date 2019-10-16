@@ -12,8 +12,6 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
-
-//import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
 import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined";
 
 const head = (
