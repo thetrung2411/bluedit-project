@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import axiosConfig from "../../axiosConfig";
 import dayjs from "dayjs";
+import AdImage from "./AdImage";
 
 //MUI
 import Button from "@material-ui/core/Button";
@@ -48,6 +49,15 @@ export default class AdDialog extends React.Component {
     });
   };
 
+  handleChangeStateOnUpload = imageUrl => {
+    this.setState({
+      ad: {
+        ...this.state.ad,
+        imageUrl: imageUrl
+      }
+    });
+  };
+
   handleSubmit = (e, adId) => {
     e.preventDefault();
     //Check if name or link is empty, if not, send post request
@@ -78,55 +88,22 @@ export default class AdDialog extends React.Component {
           console.log(err);
         });
     } else {
-      //if name of link is empty, show error
+      //if name or link is empty, show error
       this.setState({
         error: true
       });
     }
   };
 
-  handleImageUpload = (event, adId) => {
-    const image = event.target.files[0];
-    const formData = new FormData();
-    formData.append("image", image, image.name);
-    console.log(formData);
-    axiosConfig
-      .post(`/adImage/${adId}`, formData)
-      .then(res => {
-        console.log(res);
-        this.setState({
-          ad: {
-            ...this.state.ad,
-            imageUrl: res.data
-          }
-        });
-        window.confirm("Image uploaded successfully");
-        console.log(this.state.ad);
-      })
-      .catch(err => {
-        window.confirm("Oops! Something went wrong. Upload failed.");
-        console.log(err);
-      });
-  };
-
-  handleChangeImage = () => {
-    const fileInput = document.getElementById("adImageUpload");
-    fileInput.click();
-  };
-  //<CardMedia image={adImage} style={{ height: 200 }} title="Ad Image" />
   render() {
-    const adImage = this.state.ad.imageUrl;
     //Show single advertisement in detailed
     let ad = this.state.ad ? (
       <FormControl>
         <Card style={{ width: 345 }}>
-          <Tooltip title="Click to change image">
-            <CardMedia
-              image={adImage}
-              style={{ height: 200 }}
-              onClick={this.handleChangeImage}
-            />
-          </Tooltip>
+          <AdImage
+            ad={this.state.ad}
+            handleChangeStateOnUpload={this.handleChangeStateOnUpload}
+          />
           <CardContent>
             <Typography component="div">
               <TextField
@@ -166,16 +143,6 @@ export default class AdDialog extends React.Component {
                 onChange={this.handleChange}
                 margin="normal"
                 fullWidth
-              />
-            </Typography>
-            <Typography>
-              <input
-                type="file"
-                id="adImageUpload"
-                onChange={event =>
-                  this.handleImageUpload(event, this.state.ad.adId)
-                }
-                hidden
               />
             </Typography>
             {this.state.error ? (
