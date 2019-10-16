@@ -117,7 +117,7 @@ export default class AdUi extends React.Component {
               zIndex: 1000
             }}
           >
-            Loading advertisement...
+            <p>Loading advertisement...</p>
             <br />
             <CircularProgress />
           </div>

@@ -1,6 +1,4 @@
 import { exportAllDeclaration } from "@babel/types";
-
-//TODO: change link to heroku
 describe("Testing advertisement management", function() {
   beforeEach(function() {
     cy.visit("https://asd-bluedit.herokuapp.com/home");

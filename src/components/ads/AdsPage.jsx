@@ -64,7 +64,9 @@ export class AdsPage extends Component {
         handleChangeStateOnEdit={this.handleChangeStateOnEdit}
       />
     ) : (
-      <CircularProgress />
+      <div>
+        <CircularProgress />
+      </div>
     );
 
     return (

@@ -67,10 +67,17 @@ const AdTable = props => {
     </TableBody>
   );
   return (
-    <Table>
-      {head}
-      {allAds}
-    </Table>
+    <div
+      style={{
+        width: "80%",
+        margin: "auto"
+      }}
+    >
+      <Table>
+        {head}
+        {allAds}
+      </Table>
+    </div>
   );
 };
 
