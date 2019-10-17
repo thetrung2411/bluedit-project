@@ -110,22 +110,18 @@ class SignedInAppBar extends Component {
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
-              <InputBase
+              <Link to = "/saerching">
+              <Button
                 placeholder="Search…"
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput
-                }}
+                }}              
               />
+              </Link>
             </div>
             <div className={classes.grow}></div>
             <div>
-<<<<<<< HEAD
-            
-              <IconButton aria-label="settings" onClick={this.handleClick}>
-          <List/>
-      </IconButton>
-=======
               {userDetails.isAdmin ? (
                 <Link to="/Report" className={classes.noDecor}>
                   <Button variant="contained" className={classes.button}>
@@ -161,7 +157,6 @@ class SignedInAppBar extends Component {
                   Logout
                 </Button>
               </Link>
->>>>>>> master
             </div>
 
             <div>

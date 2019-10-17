@@ -10,20 +10,12 @@ export const CLEAR_MESSAGES = 'CLEAR_MESSAGES';
 export const POST_COMMENT = 'POST_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
-<<<<<<< HEAD
-export const HIDE_COMMENT = 'HIDE_COMMENT';
-=======
->>>>>>> master
 //Post reducer types
 export const GET_POSTS = 'GET_POSTS';
 export const GET_POST = 'GET_POST';
 export const POST_POST = 'POST_POST';
 export const DELETE_POST = 'DELETE_POST';
 export const EDIT_POST = 'EDIT_POST';
-<<<<<<< HEAD
-export const HIDE_POST = 'HIDE_POST';
-=======
->>>>>>> master
 //User reducer types
 export const SET_AUTHENTICATED = "SET_AUTHENTICATED";
 export const SET_UNAUTHENTICATED = "SET_UNAUTHENTICATED";

@@ -17,11 +17,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import {Card, CardHeader, CardContent, CardActions} from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import PostMenu from "./PostMenu";
-<<<<<<< HEAD
-import {Typography} from "@material-ui/core";
-=======
 import {Typography, Grid, CardMedia} from "@material-ui/core";
->>>>>>> master
 export class PostItemDetail extends Component {
     state = {
         open: false
@@ -32,10 +28,7 @@ export class PostItemDetail extends Component {
        }
     }
     handleOpen = () => {
-<<<<<<< HEAD
-=======
         console.log(this.props.postId)
->>>>>>> master
         this.props.getPost(this.props.postId);
         this.setState ({open: true});
     }
@@ -44,13 +37,8 @@ export class PostItemDetail extends Component {
         
     }   
     render(){ 
-<<<<<<< HEAD
-        const {classes, post: {postId, body, createdAt, userPosted, upvoteCount, comments}, UI: {loading}, userName, post, hidden} = this.props;
-        
-=======
         const {classes, post: {postId, body, createdAt, userPosted, upvoteCount, comments}, UI: {loading}, userName, post} = this.props;
        
->>>>>>> master
        const dialogMarkUp = loading ? (<CircularProgress/>) : (<Card className = {classes.paper}>
             <CardHeader 
         avatar={
@@ -59,12 +47,8 @@ export class PostItemDetail extends Component {
                 </Avatar>
               }
         action={
-<<<<<<< HEAD
-            <PostMenu hidden={hidden} body={body} userName ={userName} userPosted={userPosted} postId = {postId} post={post}/> 
-=======
             <PostMenu body={body} userName ={userName} userPosted={userPosted} postId = {postId} post={post}/>
             
->>>>>>> master
         }
         title = {userPosted}
         titleTypographyProps={{align:"left"}}

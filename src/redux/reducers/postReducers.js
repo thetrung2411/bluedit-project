@@ -8,12 +8,7 @@ import {
     EDIT_COMMENT,
     GET_POST,
     DELETE_POST,
-<<<<<<< HEAD
-    EDIT_POST,
-    HIDE_POST
-=======
     EDIT_POST
->>>>>>> master
 } from "../types"
 
 const initialState = {
@@ -37,17 +32,6 @@ export default function (state = initialState, action){
             return{
                 ...state,
             }
-<<<<<<< HEAD
-        case HIDE_POST: 
-        return{   
-            ...state,
-            posts: [
-                action.payload,
-                ...state.posts
-            ]
-        }
-=======
->>>>>>> master
         case GET_POSTS:
             return{
                 ...state,
