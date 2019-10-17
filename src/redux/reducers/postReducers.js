@@ -6,63 +6,70 @@ import {
     POST_BOOKMARK,
     DELETE_COMMENT,
     EDIT_COMMENT,
+    HIDE_COMMENT,
     GET_POST,
     DELETE_POST,
+<<<<<<< HEAD
     EDIT_POST
+=======
+    EDIT_POST,
+    HIDE_POST,
+    GET_SUBSCRIBE,
+    SET_SUBSCRIBE,
+    GET_UNSUBSCRIBE
+>>>>>>> master
 } from "../types"
 
 const initialState = {
     posts: [],
     post: {},
-    loading: false
+    loading: false,
+    unSubscribes: [],
+    subscribes: [],
 };
 
-export default function (state = initialState, action){
-    switch(action.type){
+export default function (state = initialState, action) {
+    switch (action.type) {
         case LOADING_DATA:
-            return{
+            return {
                 ...state,
                 loading: true
             };
         case DELETE_POST:
             let index = state.posts.findIndex(
-                    (post) => post.postId === action.payload.postId
-                );
+                (post) => post.postId === action.payload.postId
+            );
             state.posts.splice(index, 1);
-            return{
+            return {
                 ...state,
             }
         case GET_POSTS:
-            return{
+            return {
                 ...state,
                 posts: action.payload,
                 loading: false
             };
         case GET_POST:
-            return{
+            return {
                 ...state,
                 post: action.payload
             };
-        case POST_POST:
-            return{
-                ...state,
-                posts: [
-                    action.payload,
-                    ...state.posts
-                ]
-            }
+        case HIDE_POST:
         case EDIT_POST:
-            return{
+        case POST_POST:
+            return {
                 ...state,
                 posts: [
                     action.payload,
                     ...state.posts
                 ]
             }
+        case HIDE_COMMENT:
+        case EDIT_COMMENT:
         case POST_COMMENT:
-            return{
+            return {
                 ...state,
-                post:{
+                post: {
                     ...state.post,
                     comments: [action.payload, ...state.post.comments]
                 }
@@ -71,27 +78,39 @@ export default function (state = initialState, action){
             index = state.posts.post.comments.findIndex(
                 (comment) => comment.commentId === action.commentId && comment.postId === action.payload
             )
-            state.posts.post.comments.splice(index,1)
-            return{
+            state.posts.post.comments.splice(index, 1)
+            return {
                 ...state
             }
-        case EDIT_COMMENT:
-                return{
-                    ...state,
-                    post:{
-                        ...state.post,
-                        comments: [action.payload, ...state.post.comments]
-                    }
-                } 
+       
         case POST_BOOKMARK:
-                return{
-                    ...state,
-                    post:{
-                        ...state.post,
-                        bookmarks: [action.payload, ...state.post.bookmarks]
-                    }
+            return {
+                ...state,
+                post: {
+                    ...state.post,
+                    bookmarks: [action.payload, ...state.post.bookmarks]
                 }
+            }
+        case SET_SUBSCRIBE:
+            return {
+                ...state,
+                post: action.payload,
+                loading: true
+            };
+        case GET_SUBSCRIBE:
+            return {
+                ...state,
+                subscribes: action.payload,
+                loading: false
+            };
+
+        case GET_UNSUBSCRIBE:
+            return {
+                ...state,
+                unSubscribes: action.payload,
+                loading: false
+            };
         default:
             return state;
-}
+    }
 }

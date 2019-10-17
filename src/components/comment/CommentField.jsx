@@ -1,9 +1,9 @@
 import React, {Component} from "react";
-import TextField from "@material-ui/core/TextField";
+import {Button, TextField} from "@material-ui/core";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {postComment} from '../../redux/actions/commentActions';
-import Button from "@material-ui/core/Button";
+
 export class CommentField extends Component{
     state = {
         body: '',
@@ -22,8 +22,6 @@ export class CommentField extends Component{
     }
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log(this.props.postId)
-        console.log(this.state.body)
         this.props.postComment(this.props.postId, {body: this.state.body});
 
     }
@@ -31,15 +29,18 @@ export class CommentField extends Component{
       const {authenticated} = this.props;
       const errors = this.state.errors;
       const commentFieldMarkUp = authenticated ? (
+          <div>
           <form onSubmit = {this.handleSubmit}>
-    <TextField rowsMax="1000" fullWidth variant="outlined" label="Comment here" multiline
+    <TextField id="commentField" rowsMax="1000" fullWidth variant="outlined" label="Comment here" multiline
     onChange = {this.handleChange}
     name = "body"
     error = {errors.body ? true : false}
     value = {this.state.body}
     helperText = {errors.body}
     ></TextField>
-    <Button type="submit"
+    <Button
+    id="submitComment"
+    type="submit"
     fullWidth
     variant="contained"
     color = "primary"
@@ -47,9 +48,11 @@ export class CommentField extends Component{
     Submit
       </Button> 
     </form>
+    </div>
     ) : null
 return commentFieldMarkUp;
       }
+
 }
 CommentField.propTypes = {
     postComment: PropTypes.func.isRequired,

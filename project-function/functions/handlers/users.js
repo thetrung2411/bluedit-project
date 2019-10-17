@@ -101,13 +101,14 @@ exports.login = (req, res) => {
     //catch any errors and response with a general message
     .catch(err => {
       console.error(err);
-      if (err.code === "auth/user-disabled" )
+      if (err.code === "auth/user-disabled")
         return res
-        .status(403)
-        .json({ general: "Account has been disable, please contact Admin" });
-      else return res
-        .status(403)
-        .json({ general: "Wrong user detail, please try again" });
+          .status(403)
+          .json({ general: "Account has been disable, please contact Admin" });
+      else
+        return res
+          .status(403)
+          .json({ general: "Wrong user detail, please try again" });
     });
 };
 
@@ -115,11 +116,11 @@ exports.changeUserPassword = (req, res) => {
   let userData = {
     newPassword: req.body.newPassword,
     confirmPassword: req.body.confirmPassword
-  }
+  };
 
-  const {valid, errors} = validateNewPasswordData(userData);
-  if (!valid) return res.status(400).json(errors)
-  
+  const { valid, errors } = validateNewPasswordData(userData);
+  if (!valid) return res.status(400).json(errors);
+
   //change user password by using data from request
   admin
     .auth()
@@ -132,7 +133,43 @@ exports.changeUserPassword = (req, res) => {
     })
     .catch(err => {
       console.error(err);
-      return res.status(500).json({ general: "Something went wrong, please try again" });
+      return res
+        .status(500)
+        .json({ general: "Something went wrong, please try again" });
+    });
+};
+
+exports.enableUser = (req, res) => {
+  admin
+    .auth()
+    .updateUser(req.body.uid, {
+      disabled: false
+    })
+    .then(() => {
+      return res.json({ general: "User enabled successfully" });
+    })
+    .catch(err => {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ general: "Something went wrong, please try again" });
+    });
+};
+
+exports.disableUser = (req, res) => {
+  admin
+    .auth()
+    .updateUser(req.user.uid, {
+      disabled: true
+    })
+    .then(() => {
+      return res.json({ general: "User disabled successfully" });
+    })
+    .catch(err => {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ general: "Something went wrong, please try again" });
     });
 };
 
@@ -150,5 +187,41 @@ exports.getCurrentUser = (req, res) => {
     .catch(err => {
       console.error(err);
       return res.status(500).json({ error: err.code });
+    });
+};
+
+exports.editProfile = (req, res) => {
+  db.doc(`/users/${req.user.userName}`)
+    .update(req.body)
+    .then(() => {
+      return res.json({ message: "profile edit successfully" });
+    })
+    .catch(err => {
+      console.error(err);
+      return res.status(500).json({ error: err.code });
+    });
+};
+
+exports.getAllUsers = (req, res) => {
+  db.collection("users")
+    .orderBy("userName", "desc")
+    .get()
+    .then(data => {
+      let user = [];
+      data.forEach(doc => {
+        user.push({
+          email: doc.data().email,
+          createdAt: doc.data().createdAt,
+          location: doc.data().location,
+          userName: doc.data().userName,
+          phoneNumber: doc.data().phoneNumber,
+          gender: doc.data().gender,
+          dateOfBirth: doc.data().dateOfBirth
+        });
+      });
+      return res.json(user);
+    })
+    .catch(err => {
+      console.error(err);
     });
 };

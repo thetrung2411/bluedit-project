@@ -20,7 +20,9 @@ describe('CommentField Component Test', () => {
         })).toEqual({
                 posts: [undefined],
                 post: {},
-                loading: false
+                loading: false,
+                unSubscribes: [],
+                subscribes: []
         })
     })
 })

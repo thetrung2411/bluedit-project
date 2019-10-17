@@ -46,7 +46,11 @@ export const registerUser = (userData, history) => dispatch => {
     });
 };
 
+<<<<<<< HEAD
 export const changePassword = (userData, history) => dispatch => {
+=======
+export const changePassword = userData => dispatch => {
+>>>>>>> master
   dispatch({ type: LOADING_UI });
   axiosConfig
     .post("/changePassword", userData)
@@ -67,9 +71,32 @@ export const changePassword = (userData, history) => dispatch => {
     });
 };
 
+<<<<<<< HEAD
 export const clearMessages = () => dispatch =>{
+=======
+export const disableAccount = history => dispatch => {
+  dispatch({ type: LOADING_UI });
+  axiosConfig
+    .post("/disableUser")
+    .then(res => {
+      dispatch({ type: CLEAR_ERRORS });
+      dispatch(logoutUser());
+      history.push("/home");
+    })
+    .catch(err => console.log(err));
+};
+
+export const enableAccount = userData => dispatch => {
+  axiosConfig
+    .post("/enableUser", userData)
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
+};
+
+export const clearMessages = () => dispatch => {
+>>>>>>> master
   dispatch({ type: CLEAR_MESSAGES });
-}
+};
 
 export const logoutUser = () => dispatch => {
   localStorage.removeItem("FBToken");
@@ -97,14 +124,22 @@ const setAuthourizationHeader = token => {
   axiosConfig.defaults.headers.common["Authorization"] = FBToken;
 };
 
-export const changeUserData = (userData) => dispatch =>{
+export const changeUserData = userData => dispatch => {
   dispatch({ type: LOADING_USER });
   axiosConfig
     .post("/editProfile", userData)
     .then(() => {
       dispatch(getUserData());
-    },
-    console.log(userData)
-    )
+    }, console.log(userData))
+    .catch(err => console.log("edit error"));
+};
+
+export const getmyposts = userData => dispatch => {
+  dispatch({ type: LOADING_USER });
+  axiosConfig
+    .get("/getmypo", userData)
+    .then(() => {
+      dispatch(getUserData());
+    }, console.log(userData))
     .catch(err => console.log("edit error"));
 };

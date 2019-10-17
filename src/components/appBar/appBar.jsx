@@ -37,7 +37,7 @@ function HomeAppBar(props) {
           <div className={classes.grow}></div>
           <div>
             <Link to="/Login" className={classes.noDecor}>
-              <Button variant="contained" className={classes.button}>
+              <Button id="login" variant="contained" className={classes.button}>
                 Login
               </Button>
             </Link>

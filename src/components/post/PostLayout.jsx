@@ -9,13 +9,15 @@ import PostButton from "../post/PostButton";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { connect } from "react-redux";
 import { PostLayoutStyles } from "./PostLayoutStyle";
-import { getAllPosts } from "../../redux/actions/postActions";
+import { getAllPosts, postSubscribe} from "../../redux/actions/postActions";
+import { getSubscribe } from "./../../redux/actions/subscribeAction";
 import { Redirect } from "react-router-dom";
 
 export class PostLayout extends Component {
   
   componentDidMount() {
    this.props.getAllPosts();
+   this.props.getSubscribe();
   }
  
   render() {
@@ -27,7 +29,7 @@ export class PostLayout extends Component {
     const {user} = this.props;
     if (!authenticated) return <Redirect to="/home"/>
     let postMarkUp = !loading ? (
-      posts.map(post => <PostItems userName = {userName} user={user} userDetails={userDetails} post={post} key={post.postId}/>)
+      posts.map(post => <PostItems  userName = {userName} user={user} userDetails={userDetails} post={post} key={post.postId} subscribes={this.props.subscribes} postSubscribe={this.props.postSubscribe}/>)
     ) : (
       <CircularProgress color="inherit" />
     );
@@ -49,6 +51,7 @@ export class PostLayout extends Component {
 }
 PostLayout.propTypes = {
   getAllPosts: PropTypes.func.isRequired,
+  postSubscribe: PropTypes.func.isRequired,
   UI: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired
@@ -57,10 +60,13 @@ PostLayout.propTypes = {
 const mapStateToProps = (state) => ({
   UI: state.UI, 
   post: state.post,
+  subscribes: state.post.subscribes,
   user: state.user
 })
 const mapActionToProps ={ 
-  getAllPosts
+  getAllPosts,
+  postSubscribe,
+  getSubscribe
 }
 
 export default connect (mapStateToProps, mapActionToProps)(withStyles(PostLayoutStyles)(PostLayout));

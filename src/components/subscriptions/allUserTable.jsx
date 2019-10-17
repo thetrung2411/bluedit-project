@@ -126,9 +126,7 @@ export class allUserTable extends Component {
 
 allUserTable.propTypes = {
     //classes: subscriptions.object.isRequired,
-    //user: subscriptions.object.isRequired,
-    //UI: subscriptions.object.isRequired,
-    // getSubscribe: subscriptions.func.isRequired
+
   };
   
   const mapStateToProps = state =>({

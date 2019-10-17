@@ -1,13 +1,12 @@
 import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
 import DeleteButton from "./DeleteButton";
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import RemoveRedEye from '@material-ui/icons/RemoveRedEye';
+import HideButton from "./HideButton";
 import React, { Component } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import EditButton from "./EditButton";
+import AddBookmark from "../bookmark/Addbookmark";
+import MenuItem from "@material-ui/core/MenuItem";
 class PostMenu extends Component {
     state = {
         anchorEl: null,
@@ -20,16 +19,19 @@ class PostMenu extends Component {
         this.setState({open: false})
       }
     render(){
-        const {postId , userName, commentId, userPosted, body } = this.props;
+        const {postId , userName, commentId, userPosted, body, hidden, commentHide } = this.props;
         const deleteButton = userPosted === userName ? (
        <DeleteButton commentId={commentId} postId={postId} />
      ) : null;
-     const editButton = userPosted === userName ? (
+       const editButton = userPosted === userName ? (
       <EditButton body={body} postId={postId}  commentId={commentId}></EditButton>
+    ) : null;
+       const hideButton = userPosted === userName ? (
+      <HideButton commentHide={commentHide} hidden={hidden} postId = {postId} commentId={commentId}/>
     ) : null;
         return(
             <div>
-        <IconButton aria-label="settings" onClick={this.handleClick}>
+        <IconButton id='postMenu' aria-label="settings" onClick={this.handleClick}>
             <MoreIcon />
         </IconButton>
         <Menu
@@ -41,9 +43,14 @@ class PostMenu extends Component {
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         transformOrigin={{ vertical: "top", horizontal: "center" }}
       >
-        {deleteButton}
-        <MenuItem  onClick={this.handleClose}><ListItemIcon ><RemoveRedEye/></ListItemIcon><ListItemText primary="Hide" /></MenuItem>
-        {editButton}
+                          <MenuItem><AddBookmark
+                  postId={postId}
+                  userPosted={userPosted}
+                ></AddBookmark></MenuItem>
+       {hideButton}
+       {editButton}
+       {deleteButton}
+            
       </Menu>
             </div>
         )

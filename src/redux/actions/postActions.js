@@ -8,7 +8,13 @@ import {
   GET_POSTS,
   GET_POST, 
   DELETE_POST, 
+<<<<<<< HEAD
   EDIT_POST
+=======
+  EDIT_POST,
+  HIDE_POST,
+  GET_SUBSCRIBE,
+>>>>>>> master
 } from "../types";
 import axiosConfig from '../../axiosConfig';
 export const getAllPosts = () => (dispatch) => {
@@ -65,12 +71,47 @@ export const deletePost = (postId) => (dispatch) => {
   .then(() => {
     dispatch({
       type: DELETE_POST, 
+<<<<<<< HEAD
       payload: postId});
+=======
+      payload: postId
+    });
+>>>>>>> master
   })
   .then(() => {dispatch(getAllPosts())})
   .catch((err) => console.log(err));
 }
 
+<<<<<<< HEAD
+=======
+export const hidePost = (postId) => (dispatch) => {
+  axiosConfig.post(`/post/${postId}/hide`) 
+  .then(res => {
+    dispatch({
+      type: HIDE_POST,
+      payload: postId
+    })
+  })
+  .then(() => {dispatch(getAllPosts())})
+  .catch(err => {
+     console.log(err)
+     })
+}
+
+export const unhidePost = (postId) => (dispatch) => {
+  axiosConfig.post(`/post/${postId}/unhide`) 
+  .then(res => {
+    dispatch({
+      type: HIDE_POST,
+      payload: postId
+    })
+  })
+  .then(() => {dispatch(getAllPosts())})
+  .catch(err => {
+     console.log(err)
+     })
+}
+>>>>>>> master
 export const post = (newPost) => (dispatch) => {
     dispatch({type: LOADING_UI});
     axiosConfig.post('/post', newPost)
@@ -125,4 +166,21 @@ export const BlockPost = (bname) => (dispatch) => {
     })
     .catch(err => console.log(err));
 
+}
+
+export const postSubscribe = (body) => (dispatch) => {
+  console.log(body);
+
+  dispatch({ type: LOADING_UI });
+  axiosConfig.post('/postSubscribe', body)
+    .then(res => {
+      dispatch({ type: CLEAR_ERRORS });
+    })
+    .then(() => { dispatch(getAllPosts()) })
+    .catch(err => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data
+      })
+    })
 }

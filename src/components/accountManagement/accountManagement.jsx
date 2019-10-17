@@ -1,10 +1,7 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import SignedInAppBar from "../appBar/AppBarWithAvatar";
 import ChangePassword from "./ChangePassword"
-import { Redirect } from "react-router-dom";
-
-import { connect } from "react-redux";
+import DisableAccount from "./DisableAccount"
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import Grid from "@material-ui/core/Grid";
@@ -38,6 +35,8 @@ class accountManagement extends Component {
               Account Management
             </Typography>
             <ChangePassword/>
+            <br/>
+            <DisableAccount history={this.props.history}/>
           </Grid>
           <Grid item sm />
         </Grid>
