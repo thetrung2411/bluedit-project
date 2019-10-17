@@ -30,11 +30,12 @@ export class PostItems extends Component {
               </Avatar>
             }
             action={
-              <PostMenu hidden={hidden} body={body} userName={userName} userPosted={userPosted} postId={postId} post={post} subscribes={this.props.subscribes} postSubscribe={this.props.postSubscribe}/>
+              <PostMenu hidden={hidden} body={body} userName={userName} userPosted={userPosted} postId={postId} post={post}/>
             }
             title={
               <div>
                 {userPosted}
+                {!post.isMyPost && <SubscribeButton post={post} userDetails={user.userDetails} subscribes={subscribes}/>}
               </div>
             }
             titleTypographyProps={{ align: "left" }}
