@@ -92,7 +92,7 @@ class SignedInAppBar extends Component {
         <div>
           <AppBar position="static" className={classes.root}>
             <Toolbar>
-              <Link to="/">
+              <Link to="/home">
                 <IconButton>
                   <HomeIcon />
                 </IconButton>

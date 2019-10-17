@@ -16,7 +16,7 @@ function HomeAppBar(props) {
     <div>
       <AppBar position="static" className={classes.root}>
         <Toolbar>
-          <Link to="/">
+          <Link to="/home">
             <IconButton>
               <HomeIcon />
             </IconButton>
