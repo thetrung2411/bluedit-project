@@ -40,15 +40,12 @@
           this.setState({
               blockname: e.target.value
           });
-          if(!e){
-              alert('Empty Input!')
-              return;
-          }
       }
   
       searchHand = () => {
           const { value, name } = this.state;
           if (!value && !name) {
+            alert('Empty Input!')
               return;
           }
           this.props.SearchPost(value.replace(/(^\s*)|(\s*$)/g, ""), name.replace(/(^\s*)|(\s*$)/g, ""));
@@ -57,6 +54,7 @@
       blocknameHand = () => {
           const { blockname } = this.state;
           if (!blockname) {
+              alert('Empty Input!')
               return;
           }
           this.props.BlockPost(blockname.replace(/(^\s*)|(\s*$)/g, ""));
