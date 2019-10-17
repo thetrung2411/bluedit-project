@@ -24,15 +24,15 @@ describe('Search Component Test', () => {
         const component = shallow (<Provider store ={store}><Search/></Provider>);
         expect(component.find(Search).length).toBe(1);
     })
-    // test('Should return initial state', () => {
-    //     expect(postReducers(undefined, {})).toEqual(
-    //         {
-    //                 posts: [],
-    //                 post: {},
-    //                 loading: false
-    //         }
-    //     )
-    // })
+    test('Should return initial state', () => {
+        expect(postReducers(undefined, {})).toEqual(
+            {
+                    posts: [],
+                    post: {},
+                    loading: false
+            }
+        )
+    })
     // test('Should return GET_POSTS state', () => {
     //     expect(postReducers({},{
     //         type: types.GET_POSTS,     
@@ -41,20 +41,20 @@ describe('Search Component Test', () => {
     //         loading: false
     //     })
     // })
-    test('Should return GET_POST state', () => {
-        expect(postReducers({},{
-            type: types.GET_POST,     
-        })).toEqual({
-            post: undefined,
-        })
-    })
-    test('Should return POST_POST state', () => {
-        expect(postReducers(undefined,{
-            type: types.POST_POST,     
-        })).toEqual({
-                posts: [undefined],
-                post: {},
-                loading: false
-        })
-    })
+    // test('Should return GET_POST state', () => {
+    //     expect(postReducers({},{
+    //         type: types.GET_POST,     
+    //     })).toEqual({
+    //         post: undefined,
+    //     })
+    // })
+    // test('Should return POST_POST state', () => {
+    //     expect(postReducers(undefined,{
+    //         type: types.POST_POST,     
+    //     })).toEqual({
+    //             posts: [undefined],
+    //             post: {},
+    //             loading: false
+    //     })
+    // })
 })
