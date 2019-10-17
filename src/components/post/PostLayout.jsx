@@ -9,33 +9,45 @@ import PostButton from "../post/PostButton";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { connect } from "react-redux";
 import { PostLayoutStyles } from "./PostLayoutStyle";
-import { getAllPosts, postSubscribe} from "../../redux/actions/postActions";
+import { getAllPosts, postSubscribe } from "../../redux/actions/postActions";
 import { getSubscribe } from "./../../redux/actions/subscribeAction";
 import { Redirect } from "react-router-dom";
+import AdUi from "../ads/AdUi";
 
 export class PostLayout extends Component {
-  
   componentDidMount() {
-   this.props.getAllPosts();
-   this.props.getSubscribe();
+    this.props.getAllPosts();
+    this.props.getSubscribe();
   }
- 
+
   render() {
-    const {posts, loading} = this.props.post;
-    const {userDetails} = this.props.user;
-    const {userName} = this.props.user.userDetails;
-    const { user: { authenticated }
+    const { posts, loading } = this.props.post;
+    const { userDetails } = this.props.user;
+    const { userName } = this.props.user.userDetails;
+    const {
+      user: { authenticated }
     } = this.props;
-    const {user} = this.props;
-    if (!authenticated) return <Redirect to="/home"/>
+    const { user } = this.props;
+    if (!authenticated) return <Redirect to="/home" />;
     let postMarkUp = !loading ? (
-      posts.map(post => <PostItems  userName = {userName} user={user} userDetails={userDetails} post={post} key={post.postId} subscribes={this.props.subscribes} postSubscribe={this.props.postSubscribe}/>)
+      posts.map(post => (
+        <PostItems
+          userName={userName}
+          user={user}
+          userDetails={userDetails}
+          post={post}
+          key={post.postId}
+          subscribes={this.props.subscribes}
+          postSubscribe={this.props.postSubscribe}
+        />
+      ))
     ) : (
       <CircularProgress color="inherit" />
     );
     return (
       <div>
         <SignedInAppBar />
+        <AdUi />
         <PostButton />
         <Grid container spacing={3}>
           <Grid item xs={8}>
@@ -55,18 +67,21 @@ PostLayout.propTypes = {
   UI: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired
-}
+};
 
-const mapStateToProps = (state) => ({
-  UI: state.UI, 
+const mapStateToProps = state => ({
+  UI: state.UI,
   post: state.post,
   subscribes: state.post.subscribes,
   user: state.user
-})
-const mapActionToProps ={ 
+});
+const mapActionToProps = {
   getAllPosts,
   postSubscribe,
   getSubscribe
-}
+};
 
-export default connect (mapStateToProps, mapActionToProps)(withStyles(PostLayoutStyles)(PostLayout));
+export default connect(
+  mapStateToProps,
+  mapActionToProps
+)(withStyles(PostLayoutStyles)(PostLayout));

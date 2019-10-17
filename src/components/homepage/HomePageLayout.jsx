@@ -8,6 +8,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import axiosConfig from "../../axiosConfig";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import AdUi from "../ads/AdUi";
 
 export class HomePageLayout extends Component {
   state = {
@@ -30,16 +31,17 @@ export class HomePageLayout extends Component {
       user: { authenticated }
     } = this.props;
 
-    if (authenticated) return <Redirect to="/post"/>
+    if (authenticated) return <Redirect to="/post" />;
 
     let postMarkUp = this.state.post ? (
-      this.state.post.map(post => <PostItems post={post} key={post.postId}/>)
+      this.state.post.map(post => <PostItems post={post} key={post.postId} />)
     ) : (
       <CircularProgress color="inherit" />
     );
     return (
       <div>
         <AppBar />
+        <AdUi />
         <Grid container spacing={3}>
           <Grid item xs={8}>
             {postMarkUp}
