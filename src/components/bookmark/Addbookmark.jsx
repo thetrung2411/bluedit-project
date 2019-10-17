@@ -11,8 +11,9 @@ import Button from "@material-ui/core/Button";
 import {connect} from 'react-redux';
 import {postBookmark} from '../../redux/actions/bookmarkAction';
 import PropTypes from 'prop-types';
-
-
+import MenuItem from '@material-ui/core/MenuItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
 export class Addbookmark extends Component {
   state = {
     open: false,
@@ -55,9 +56,7 @@ render(){
   const {classes, UI: {loading},  user: { userDetails }} = this.props;
   return(  
     <div> 
-  <Fab color="primary" onClick={this.handleOpen}>
-    <BookmarkBorderIcon/>
-  </Fab>
+      <MenuItem onClick={this.handleOpen}> <ListItemIcon ><BookmarkBorderIcon/></ListItemIcon> <ListItemText primary="Bookmark" /></MenuItem>
       <Dialog 
       open={this.state.open}
       onClose={this.handleClose}

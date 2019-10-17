@@ -8,11 +8,13 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import axiosConfig from "../../axiosConfig";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-
+import Particles from 'react-particles-js';
+import { positions } from '@material-ui/system';
 export class HomePageLayout extends Component {
   state = {
     post: null
   };
+
   componentDidMount() {
     axiosConfig
       .get("/getAllPosts")
