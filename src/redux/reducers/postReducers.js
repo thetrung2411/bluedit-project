@@ -71,10 +71,6 @@ export default function (state = initialState, action) {
                 }
             }
         case DELETE_COMMENT:
-            index = state.posts.post.comments.findIndex(
-                (comment) => comment.commentId === action.commentId && comment.postId === action.payload
-            )
-            state.posts.post.comments.splice(index, 1)
             return {
                 ...state
             }
