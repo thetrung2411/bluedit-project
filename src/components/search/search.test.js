@@ -13,9 +13,3 @@ describe('Search page Component test', () => {
         expect(component.find(Searching).length).toBe(1);
     })
 })
-describe('Search page Component test', () => {
-    test('Should render without errors', () => {
-        const component = shallow (<Provider store ={store}><Search/></Provider>);
-        expect(component.find(Search).length).toBe(1);
-    })
-})
