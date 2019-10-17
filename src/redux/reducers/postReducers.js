@@ -9,15 +9,11 @@ import {
     HIDE_COMMENT,
     GET_POST,
     DELETE_POST,
-<<<<<<< HEAD
-    EDIT_POST
-=======
     EDIT_POST,
     HIDE_POST,
     GET_SUBSCRIBE,
     SET_SUBSCRIBE,
     GET_UNSUBSCRIBE
->>>>>>> master
 } from "../types"
 
 const initialState = {

@@ -46,11 +46,7 @@ export const registerUser = (userData, history) => dispatch => {
     });
 };
 
-<<<<<<< HEAD
-export const changePassword = (userData, history) => dispatch => {
-=======
 export const changePassword = userData => dispatch => {
->>>>>>> master
   dispatch({ type: LOADING_UI });
   axiosConfig
     .post("/changePassword", userData)
@@ -71,9 +67,6 @@ export const changePassword = userData => dispatch => {
     });
 };
 
-<<<<<<< HEAD
-export const clearMessages = () => dispatch =>{
-=======
 export const disableAccount = history => dispatch => {
   dispatch({ type: LOADING_UI });
   axiosConfig
@@ -94,7 +87,6 @@ export const enableAccount = userData => dispatch => {
 };
 
 export const clearMessages = () => dispatch => {
->>>>>>> master
   dispatch({ type: CLEAR_MESSAGES });
 };
 
