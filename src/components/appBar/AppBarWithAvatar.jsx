@@ -110,13 +110,13 @@ class SignedInAppBar extends Component {
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
-              <Link to = "/saerching">
+              <Link to = "/saerching" className = {classes.noDecor}>
               <Button
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput
-                }}              
+                // placeholder="Search…"
+                // classes={{
+                //   root: classes.inputRoot,
+                //   input: classes.inputInput
+                // }}              
               />
               </Link>
             </div>
