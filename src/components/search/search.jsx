@@ -40,6 +40,10 @@
           this.setState({
               blockname: e.target.value
           });
+          if(!e){
+              alert('Empty Input!')
+              return;
+          }
       }
   
       searchHand = () => {
