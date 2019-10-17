@@ -8,7 +8,6 @@ import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk"
 import * as types from "../../redux/types";
 
-configure({ adapter: new Adapter() });
 const mockStore = configureMockStore([thunk]);
 const store = mockStore({});
 
