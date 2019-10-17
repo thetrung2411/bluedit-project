@@ -100,6 +100,7 @@ describe('Testing comment', function() {
     it('Hide comment', function(){
         cy.get('#dialog').find('#commentField').type('This comment should be hidden').should('have.value', 'This comment should be hidden')
         cy.get('#submitComment').click()
+        cy,wait(5000)
         cy.get('#commentItem').find('#postMenu').click()
         cy.get('#hideButton').click()
         cy.get('#submitHide').click()

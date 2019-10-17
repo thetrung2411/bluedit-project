@@ -15,7 +15,6 @@ import store from "./redux/store";
 import bookmark from "./components/bookmark/BookmarkPage";
 import ReportPage from "./components/report/ReportPage";
 import AdsPage from "./components/ads/AdsPage";
-import userpage from "./components/userpage/userpage";
 import accountManagement from "./components/accountManagement/accountManagement";
 import enableUserSecretRoute from "./components/accountManagement/enableUserSecretRoute";
 import subscriptions from "./components/subscriptions/subscriptions";
@@ -58,7 +57,7 @@ class App extends Component {
       <Provider store={store}>
         <MuiThemeProvider theme={theme}>
           <CssBaseline />
-          <Particles className="particles" />
+          <Particles className="particles"/>
           <BrowserRouter>
             <div className="App">
               <Switch>
@@ -68,7 +67,7 @@ class App extends Component {
                   path="/accountManagement"
                   component={accountManagement}
                 />
-                <Route path="/default" component={DefaultPage} />
+                <Route path="/default" component ={DefaultPage}/>
                 <Route path="/post" component={PostLayout} />
                 <Route path="/home" component={HomePageLayout} />
                 <Route path="/report" component={ReportPage} />
@@ -83,7 +82,7 @@ class App extends Component {
                 />
                 <Route path="/bookmark" component={bookmark} />
                 <Route path="/searching" component={searching} />
-                <Route path="/secretroute" component={enableUserSecretRoute} />
+                <Route path="/secretroute" component={enableUserSecretRoute}/>
                 <Redirect from="/" to="/default" />
               </Switch>
             </div>
