@@ -29,7 +29,16 @@ export default class NewButton extends React.Component {
     this.setState({ open: true });
   };
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({
+      open: false,
+      isSaved: false,
+      ad: {
+        name: "",
+        link: ""
+      },
+      savedAd: null,
+      error: false
+    });
   };
 
   handleChange = e => {
