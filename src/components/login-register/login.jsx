@@ -16,6 +16,7 @@ import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 const styles = {
+  
   typography: {
     useNextVariants: true
   },
@@ -88,6 +89,7 @@ export class login extends Component {
     if (authenticated) return <Redirect to="/post"/>
 
     return (
+    
       <Grid container className={classes.form}>
         <Grid item sm />
         <Grid item sm>
@@ -158,6 +160,7 @@ export class login extends Component {
         </Grid>
         <Grid item sm />
       </Grid>
+ 
     );
   }
 }

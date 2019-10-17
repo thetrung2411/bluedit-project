@@ -1,0 +1,180 @@
+.runB{
+    font-size: 50pt;
+    display: inline-block;
+     position: relative;
+     animation-name: B;  
+     animation-duration: 6s;
+     animation-delay: 5s;
+     animation-fill-mode: forwards; 
+}
+.classP{
+    margin-bottom: 70px;
+    margin-top: 70px
+}
+.noDecor{
+  text-decoration: none;
+  color: white
+}
+.decor .button{
+  text-decoration: none;
+  font-style: italic
+}
+.login{
+  padding-bottom: 50px
+}
+.loginPage-buttonWrapper {
+  padding-top: 30px;
+}
+.button{
+  text-decoration: none;
+  opacity: 0;
+  animation-name: button;
+  animation-duration: 8s;
+  animation-delay: 5s;
+  animation-fill-mode: forwards;
+}
+.runPic{
+    animation-name: picture;
+    animation-duration: 8s;
+    animation-delay: 3s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+    height: 100px;
+    width: 100px;
+    position: relative
+}
+   .runL{
+    font-size: 50pt;
+    display: inline-block;
+   position: relative;
+     animation-name: L;
+     animation-duration: 6s;
+     animation-delay: 1s;
+     animation-fill-mode: forwards;
+  
+   }
+   .runU{
+    position: relative;
+     animation-name: U;
+     animation-duration: 3s;
+     font-size: 50pt;
+     animation-delay: 1s;
+     opacity:0;
+     animation-fill-mode: forwards;
+    
+   }
+   .runE{
+   position: relative;
+     animation-name: E;
+     animation-duration: 6s;
+     font-size: 50pt;
+     animation-delay: 1s;
+     opacity:0;
+     animation-fill-mode: forwards;
+    
+    }
+
+   .runD{
+   position: relative;
+     animation-name: D;
+     animation-duration: 6s;
+     font-size: 50pt;
+     animation-delay: 1s;
+     opacity:0;
+     animation-fill-mode: forwards;
+     
+   }
+   .runI{
+   position: relative;
+     animation-name: I;
+     animation-duration: 6s;
+     font-size: 50pt;
+     animation-delay: 1s;
+     opacity:0;
+     animation-fill-mode: forwards;
+
+   }
+   .runT{
+    font-size: 50pt;
+   position: relative;
+     animation-name: T;
+     animation-duration: 6s;
+     animation-delay: 1s;
+     opacity:0;
+     animation-fill-mode: forwards;
+      
+   }
+   
+   @keyframes B {
+     from {top: 0px;}
+     to{top:60px;}
+     0%   {color:white; left:0px; top:0px; visibility: hidden;}
+     25%  {color:white; left:0px; top:0px; visibility: visible}
+     50%  {color: aqua; left:0px; transform: rotate(90deg); visibility: visible}
+     100% {color: aqua}
+   }
+   @keyframes L {
+     to {top: 60px}
+     0%   {color: white; left:800px; top:600px;}
+     25%  {background-color:none; left:200px; top:0px;}
+     50%  {color:white; left:200px; bottom:500px; visibility: visible}
+     75%  {background-color:none; left:0px; top:50px;}
+     100% {color: aqua}
+   }
+   @keyframes U{
+     to {top: 60px}
+     0%   {color:white; left:200px; bottom:200px;}
+     25%  {background-color:none; left:200px; top:0px;}
+     50%  {color:white; left:200px; top:50px;opacity: 0.4;}
+     75%  {background-color:none; left:0px; top:50px;}
+     100% {color: aqua; opacity: 1}
+   }
+   @keyframes E{
+    to {top: 60px}
+     0%   {background-color:none; left:0px; top:700px;}
+     25%  {background-color:none; left:200px; top:0px; opacity: 0.5;}
+     50%  {background-color:none; left:200px; bottom:500px;}
+     75%  {background-color:none; left:0px; bottom:500px; opacity: 0.7;}
+     100% {color: aqua; opacity: 1}
+   }
+   @keyframes D{
+    to {top: 60px}
+     0%   {background-color:none; left:500px; top:200px;}
+     25%  {background-color:none; left:200px; top:0px;}
+     50%  {background-color:none; left:200px; top:100px; opacity:0.5}
+     75%  {background-color:none; left:0px; top:100px; opacity: 1}
+     100% { opacity: 1}
+   }
+   @keyframes I{
+    to {top: 60px}
+     0%   {background-color:none; left:300px; top:50px;}
+     25%  {background-color:none; left:200px; top:0px; opacity: 0.3}
+     50%  {background-color:none; left:200px; top:100px; opacity: 0.5;}
+     75%  {background-color:none; left:0px; top:100px; opacity: 1;}
+     100% { opacity: 1}
+   }
+   
+   @keyframes T{
+    to {top: 60px}
+     0%   {background-color:none; left:200px; top:700px;}
+     25%  {background-color:none; left:200px; top:0px; opacity:0.5}
+     50%  {background-color:none; left:200px; top:100px;}
+     75%  {background-color:none; left:0px; top:100px; opacity: 1}
+     100% { opacity: 1}
+   }
+
+   @keyframes picture{
+       from{top: 0px}
+       to {top: 100px}
+       0% {opacity: 0; transform: rotate(60deg)}
+       25% {opacity: 0.2; transform: rotate(120deg) }
+       50% {opacity: 0.5; transform: rotate(170deg)}
+       25% {opacity: 0.2; transform: rotate(250deg) }
+       100% {opacity: 1; transform: rotate(360deg) }
+   }
+   @keyframes button{
+    0% {opacity: 0}
+    50% {opacity: 1}
+    75% {opacity: 1 }
+    100% {opacity: 1 }
+}

@@ -43,10 +43,10 @@ class PostMenu extends Component {
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         transformOrigin={{ vertical: "top", horizontal: "center" }}
       >
-                          <MenuItem><AddBookmark
+                         <AddBookmark
                   postId={postId}
                   userPosted={userPosted}
-                ></AddBookmark></MenuItem>
+                ></AddBookmark>
        {hideButton}
        {editButton}
        {deleteButton}

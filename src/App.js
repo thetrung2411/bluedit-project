@@ -10,6 +10,7 @@ import test from "./components/search/test";
 import searching from "./components/search/searching";
 import PostLayout from "./components/post/PostLayout";
 import HomePageLayout from "./components/homepage/HomePageLayout";
+import DefaultPage from "./components/defaultPage/default";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import bookmark from "./components/bookmark/BookmarkPage";
@@ -30,13 +31,12 @@ import {
 } from "@material-ui/core";
 import { SET_AUTHENTICATED } from "./redux/types";
 import AdUi from "./components/ads/AdUi";
-
+import Particles from "react-particles-js";
 const theme = createMuiTheme({
   palette: {
     type: "dark"
   }
 });
-
 //fixed problem: when refresh page, the redux state is wiped out
 //get the token from local storage
 const authToken = localStorage.FBToken;
@@ -60,7 +60,7 @@ class App extends Component {
       <Provider store={store}>
         <MuiThemeProvider theme={theme}>
           <CssBaseline />
-          <AdUi />
+          <Particles className="particles"/>
           <BrowserRouter>
             <div className="App">
               <Switch>
@@ -70,6 +70,7 @@ class App extends Component {
                   path="/accountManagement"
                   component={accountManagement}
                 />
+                <Route path="/default" component ={DefaultPage}/>
                 <Route path="/post" component={PostLayout} />
                 <Route path="/home" component={HomePageLayout} />
                 <Route path="/report" component={ReportPage} />
@@ -82,7 +83,7 @@ class App extends Component {
                 <Route path="/bookmark" component={bookmark} />
                 <Route path="/searching" component={searching} />
                 <Route path="/secretroute" component={enableUserSecretRoute}/>
-                <Redirect from="/" to="/home" />
+                <Redirect from="/" to="/default" />
               </Switch>
             </div>
           </BrowserRouter>
