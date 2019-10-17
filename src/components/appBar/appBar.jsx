@@ -28,7 +28,7 @@ function HomeAppBar(props) {
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
-            <Link to = "searching">
+            <Link to = "/searching">
             <Button 
               placeholder="Search…"
             />
