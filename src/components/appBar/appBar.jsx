@@ -28,13 +28,11 @@ function HomeAppBar(props) {
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
-            <InputBase
+            <Link to = "/searching">
+            <Button 
               placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput
-              }}
             />
+            </Link>
           </div>
           <div className={classes.grow}></div>
           <div>

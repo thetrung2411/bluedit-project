@@ -45,6 +45,7 @@
       searchHand = () => {
           const { value, name } = this.state;
           if (!value && !name) {
+            alert('Empty Input!')
               return;
           }
           this.props.SearchPost(value.replace(/(^\s*)|(\s*$)/g, ""), name.replace(/(^\s*)|(\s*$)/g, ""));
@@ -53,6 +54,7 @@
       blocknameHand = () => {
           const { blockname } = this.state;
           if (!blockname) {
+              alert('Empty Input!')
               return;
           }
           this.props.BlockPost(blockname.replace(/(^\s*)|(\s*$)/g, ""));
@@ -114,14 +116,7 @@
                           </div>
   
   
-                          <div className={classes.grow}></div>
-                          <div>
-                              <Link to="/Login" className={classes.noDecor}>
-                                  <Button variant="contained" className={classes.button}>
-                                      Login
-                          </Button>
-                              </Link>
-                          </div>
+                        
                       </Toolbar>
                   </AppBar>
               </div>
