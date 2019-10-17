@@ -12,27 +12,6 @@ import TableRow from '@material-ui/core/TableRow';
 import { connect } from "react-redux";
 import { getSubscribe, unSubscribe } from "../../redux/actions/subscribeAction";
 import axiosConfig from "../../axiosConfig";
-<<<<<<< HEAD
-import Sidebar from "../sidebar/sidebar";
-
-
-const styles = {
-    tableSubscribe: {
-        // marginLeft: '0.8rem'
-    },
-    subscribe: {
-        marginLeft: 5,
-        padding: 5,
-        lineHeight: '50px',
-        color: 'green'
-    },
-    unSubscribe: {
-        marginLeft: 5,
-        padding: 5,
-        lineHeight: '50px',
-        color: 'red'
-    }
-=======
 
 
 const styles = {
@@ -53,18 +32,12 @@ const styles = {
     root: {
         backgroundImage: `../../assets/UserpageAssets/bgImage.jpg`
         }
->>>>>>> master
 
   };
 
 export class subscriptions extends Component {
     state = {
-<<<<<<< HEAD
-        subscriptions: [],
-        allUsers: []//{userName: "User1"},{userName: "User2"},{userName: "User3"},{userName: "User4"},{userName: "User5"}
-=======
         subscriptions: []
->>>>>>> master
     }
 
     componentDidMount() 
@@ -78,20 +51,6 @@ export class subscriptions extends Component {
             });
         })
         .catch(err => console.log(err));
-<<<<<<< HEAD
-
-        axiosConfig
-        .get("/allUsers")
-        .then(res => {
-            console.log(res.data);
-            this.setState({
-                allUsers: res.data
-            });
-        })
-        .catch(err => console.log(err));
-
-=======
->>>>>>> master
         // subscriptions: this.state.getSubscribe()
     }
 
@@ -101,53 +60,12 @@ export class subscriptions extends Component {
         this.setState({
             subscriptions: tempArr
         })
-<<<<<<< HEAD
-
-        let subscribeUser = this.state.allUsers.slice();
-        subscribeUser.splice(index, 1);
-        this.setState({
-            allUsers: subscribeUser
-        })
-        //this.state.unSubscribe(this.props.subscribeID);
-=======
         //this.state.unSubscribe();
->>>>>>> master
     }
     
 
     render() {
 
-<<<<<<< HEAD
-        const { classes, subscribeID, userName} = this.props;
-
-        let subscription = (<div style={{ width: '50%', textAlign: 'left', margin: '0 auto' }}>subscriptions</div>);
-        let allUser = (<div style={{ width: '50%', textAlign: 'left', margin: '0 auto' }}>allUsers</div>);
-
-        subscription = this.state.subscriptions.map((subscriptions, index) => {
-                return (
-                    <div style={{ width: '50%', textAlign: 'left', margin: '0 auto' }}>
-                        <Table className={classes.tableSubscribe}>
-                            <TableRow>
-                                <TableCell align="left">{subscriptions.userName}</TableCell>
-                                <TableCell align="center">{subscriptions.subscribeAt}</TableCell>
-                                <TableCell align="right" ><Button className={classes.unSubscribe} onClick={() => this.handleDelete(index)}>Unsubscribe</Button></TableCell>
-                            </TableRow>
-                        </Table> 
-                    </div>
-                )
-            })
-
-        allUser = this.state.allUsers.map((allUsers, index) => {
-                return (
-                    <div style={{ width: '50%', textAlign: 'left', margin: '0 auto' }}>
-                        <Table>
-                            <TableRow>
-                                <TableCell align="left">{allUsers.userName}</TableCell>
-                                <TableCell align="right"><Button className={classes.subscribe} onClick={() => this.handleDelete(index)}>Subscribe</Button></TableCell>
-                            </TableRow>
-                        </Table> 
-                    </div>
-=======
         const { classes } = this.props;
 
         let subscription = (<div>subscriptions</div>);
@@ -164,47 +82,11 @@ export class subscriptions extends Component {
                             </TableRow>
                         </Table> 
                 </div>
->>>>>>> master
                 )
             })
 
         return(
             <div>
-<<<<<<< HEAD
-                <Sidebar />
-                <AppBarWithAvatar />
-                <div>
-                    <div style={{ width: '50%', textAlign: 'left', margin: '0 auto' }}>
-                    <h1>Manage Subscriptions: </h1>
-                    <Table>
-                    <TableRow>
-                        <TableCell align="left">Username</TableCell>
-                        <TableCell align="center">subscribeAt</TableCell>
-                        <TableCell align="right">Unsubscribe</TableCell>
-                    </TableRow>
-                    </Table> 
-                    </div>
-                    {subscription}
-                </div>
-
-                <div> 
-                    <h1>     </h1>
-                </div>
-
-                <div>
-                    <div style={{ width: '50%', textAlign: 'left', margin: '0 auto' }}>
-                    <h1>View All User: </h1>
-                    <Table>
-                    <TableRow>
-                        <TableCell align="left">Username</TableCell>
-                        <TableCell align="right">Subscribe</TableCell>
-                    </TableRow>
-                    </Table> 
-                    </div>
-                    {allUser}
-                </div>
- 
-=======
                 <AppBarWithAvatar />
                 <div>
                     <h1>Manage Subscriptions</h1>
@@ -218,7 +100,6 @@ export class subscriptions extends Component {
                     </Table> 
                 </div>
                 {subscription}
->>>>>>> master
             </div>
 
         );
@@ -247,8 +128,4 @@ export default connect(
     mapStateToProps
  ) (withStyles(styles)(subscriptions));
  //mapActionsToProps,
-<<<<<<< HEAD
 //  {unSubscribe}
-=======
-//  {unSubscribe}
->>>>>>> master

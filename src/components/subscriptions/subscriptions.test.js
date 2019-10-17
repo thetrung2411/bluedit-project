@@ -16,16 +16,8 @@ describe('subscriptions Component Test', () => {
         expect(component.exists()).toBe(true);
     });
 
-<<<<<<< HEAD
-//     test('allUser Component', () => {
-//         const component = shallow(<allUser/>);
-//         expect(component.exists()).toBe(true);
-//     });
-})
-=======
     test('allUser Component', () => {
         const component = shallow(<allUser/>);
         expect(component.exists()).toBe(true);
     });
 })
->>>>>>> master
