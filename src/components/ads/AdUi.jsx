@@ -61,7 +61,7 @@ export default class AdUi extends React.Component {
                 position: "fixed",
                 bottom: 0,
                 right: 0,
-                zIndex: 1000
+                zIndex: 1001
               }}
             >
               <div
@@ -70,7 +70,7 @@ export default class AdUi extends React.Component {
                   width: 100,
                   position: "fixed",
                   right: 0,
-                  zIndex: 1001
+                  zIndex: 1000
                 }}
               >
                 <Tooltip title="Show another ad" placement="top">
