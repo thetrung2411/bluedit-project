@@ -11,12 +11,6 @@ import thunk from "redux-thunk";
 const mockStore = configureMockStore([thunk]);
 const store = mockStore({});
 
-describe('Search page Component test', () => {
-    test('Should render without errors', () => {
-        const component = shallow (<Provider store ={store}><Searching/></Provider>);
-        expect(component.find(Searching).length).toBe(1);
-    })
-})
 
 describe('Search Component Test', () => {
     
@@ -62,5 +56,12 @@ describe('Search Component Test', () => {
                 unSubscribes: [],
                 subscribes: []
         })
+    })
+})
+
+describe('Search page Component test', () => {
+    test('Should render without errors', () => {
+        const component = shallow (<Provider store ={store}><Searching/></Provider>);
+        expect(component.find(Searching).length).toBe(1);
     })
 })
