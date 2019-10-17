@@ -17,3 +17,4 @@ describe('Testing search', function() {
         cy.get('#block').click()
         cy.wait(5000);
 })
+})
