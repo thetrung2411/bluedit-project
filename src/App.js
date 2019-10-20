@@ -13,6 +13,7 @@ import DefaultPage from "./components/defaultPage/default";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import bookmark from "./components/bookmark/BookmarkPage";
+import mailForm from "./components/mailForm/mailForm";
 import ReportPage from "./components/report/ReportPage";
 import AdsPage from "./components/ads/AdsPage";
 import accountManagement from "./components/accountManagement/accountManagement";
@@ -81,6 +82,7 @@ class App extends Component {
                   component={subscribedUserpage}
                 />
                 <Route path="/bookmark" component={bookmark} />
+                <Route path="/mailForm" component={mailForm} />
                 <Route path="/searching" component={searching} />
                 <Route path="/secretroute" component={enableUserSecretRoute}/>
                 <Redirect from="/" to="/default" />
