@@ -74,7 +74,6 @@ export default function (state = initialState, action) {
             return {
                 ...state
             }
-       
         case POST_BOOKMARK:
             return {
                 ...state,
